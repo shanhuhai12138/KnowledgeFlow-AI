@@ -20,7 +20,7 @@ export function clearToken() {
  * API 基础地址：容器构建时经 VITE_API_BASE 注入（相对路径 /admin-api 由 nginx 反代）；
  * 本地开发默认直连后端 48080
  */
-export const API_BASE: string = import.meta.env.VITE_API_BASE || 'http://localhost:48080'
+export const API_BASE: string = import.meta.env.VITE_API_BASE ?? 'http://localhost:48080'
 
 const request = axios.create({
   baseURL: API_BASE,
