@@ -42,7 +42,7 @@
   MinIO（文件）    LLM API（DeepSeek 等）
 ```
 
-**语言分工**：Java 负责业务与权限（纯后端管理），Python 负责 AI 编排（检索/生成/Agent），通过 HTTP 通信——模块边界清晰，便于答辩讲解与团队分工。
+**语言分工**：Java 负责业务与权限（纯后端管理），Python 负责 AI 编排（检索/生成/Agent），通过 HTTP 通信
 
 ## 🚀 快速开始
 
