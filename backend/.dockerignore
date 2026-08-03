@@ -1,0 +1,12 @@
+.git
+.gitignore
+**/target
+**/node_modules
+**/.idea
+**/*.iml
+.sql
+docs
+script
+sql
+yudao-ui
+*.log

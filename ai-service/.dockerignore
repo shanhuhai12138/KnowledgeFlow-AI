@@ -1,0 +1,7 @@
+.venv
+.env
+server.log
+server-nokey.log
+__pycache__
+*.pyc
+.git

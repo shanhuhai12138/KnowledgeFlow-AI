@@ -1,0 +1,10 @@
+# KnowledgeFlow AI — Python AI 服务依赖
+# 版本要求：Python 3.11+
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+qdrant-client==1.12.1
+openai==1.59.7
+pydantic-settings==2.7.1
+# T4.3/T4.4 问答与 Agent 工作流使用
+langchain==0.3.14
+langgraph==0.2.62

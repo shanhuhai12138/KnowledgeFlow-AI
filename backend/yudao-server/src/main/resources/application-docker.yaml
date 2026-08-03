@@ -1,0 +1,100 @@
+# KnowledgeFlow 后端 Docker 环境配置（profile=docker，容器 compose 内使用）
+# 容器内用服务名通信：mysql:3306 / redis:6379 / minio:9000 / qdrant:6333（不走宿主映射端口）
+# 启动：compose 注入 SPRING_PROFILES_ACTIVE=docker
+
+server:
+  port: 48080
+
+spring:
+  autoconfigure:
+    exclude:
+      - com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure
+      - org.springframework.boot.autoconfigure.quartz.QuartzAutoConfiguration
+      - org.springframework.ai.vectorstore.qdrant.autoconfigure.QdrantVectorStoreAutoConfiguration
+      - org.springframework.ai.vectorstore.milvus.autoconfigure.MilvusVectorStoreAutoConfiguration
+  datasource:
+    druid:
+      web-stat-filter:
+        enabled: true
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /druid/*
+      filter:
+        stat:
+          enabled: true
+          log-slow-sql: true
+          slow-sql-millis: 100
+    dynamic:
+      druid:
+        initial-size: 1
+        min-idle: 1
+        max-active: 20
+        max-wait: 60000
+      primary: master
+      datasource:
+        master:
+          url: jdbc:mysql://mysql:3306/knowledgeflow?useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&nullCatalogMeansCurrent=true&rewriteBatchedStatements=true
+          username: knowledgeflow
+          password: knowledgeflow
+        slave: # 模拟从库，指向同一实例
+          lazy: true
+          url: jdbc:mysql://mysql:3306/knowledgeflow?useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&rewriteBatchedStatements=true&nullCatalogMeansCurrent=true
+          username: knowledgeflow
+          password: knowledgeflow
+  redis:
+    host: redis
+    port: 6379
+    database: 0
+
+yudao:
+  captcha:
+    enable: false # 容器演示环境关闭验证码
+  security:
+    mock-enable: true
+  access-log:
+    enable: false
+  demo: false
+  minio: # 容器内 MinIO 服务名
+    endpoint: http://minio:9000
+    access-key: minioadmin
+    secret-key: minioadmin
+    bucket: knowledgeflow
+  ai-service: # 容器内 AI 服务名
+    base-url: http://ai-service:8000
+    qdrant-url: http://qdrant:6333
+
+--- #################### 微信公众号、小程序相关配置（与 local 一致，容器版 wx-java 初始化必需） ####################
+wx:
+  mp: # 公众号配置
+    app-id: wxf56b1542b9e85f8a # 测试号（Kongdy 提供的）
+    secret: 496379dcef1ba869e9234de8d598cfd3
+    config-storage:
+      type: RedisTemplate
+      key-prefix: wx
+      http-client-type: HttpComponents # 采用 HttpComponents（HttpClient 5）
+  miniapp: # 小程序配置
+    appid: wxc4598c446f8a9cb3 # 测试号（Kongdy 提供的）
+    secret: 4a1a04e07f6a4a0751b39c3064a92c8b
+    config-storage:
+      type: RedisTemplate
+      key-prefix: wa
+      http-client-type: HttpComponents
+
+justauth:
+  enabled: true
+  type:
+    WECHAT_MINI_PROGRAM: # 微信小程序
+      client-id: ${wx.miniapp.appid}
+      client-secret: ${wx.miniapp.secret}
+      ignore-check-redirect-uri: true
+      ignore-check-state: true
+    WECHAT_MP: # 微信公众号
+      client-id: ${wx.mp.app-id}
+      client-secret: ${wx.mp.secret}
+      ignore-check-redirect-uri: true
+  cache:
+    type: REDIS
+    prefix: 'social_auth_state:'
+    timeout: 24h
+
+debug: false

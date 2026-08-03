@@ -1,0 +1,41 @@
+# ---- 环境与密钥（绝不入库） ----
+.env
+.env.*
+!.env.example
+
+# ---- 日志 ----
+*.log
+
+# ---- IDE / 编辑器 ----
+.idea/
+.vscode/
+*.iml
+
+# ---- 前端 ----
+node_modules/
+dist/
+*.local
+
+# ---- 后端 ----
+target/
+*.class
+
+# ---- Python ----
+.venv/
+__pycache__/
+*.pyc
+
+# ---- 系统 ----
+.DS_Store
+Thumbs.db
+
+# 上游冗余（本项目不使用，瘦身排除）
+backend/.image/
+backend/sql/db2/
+backend/sql/dm/
+backend/sql/highgo/
+backend/sql/kingbase/
+backend/sql/opengauss/
+backend/sql/oracle/
+backend/sql/postgresql/
+backend/sql/sqlserver/

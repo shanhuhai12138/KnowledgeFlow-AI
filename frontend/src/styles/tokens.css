@@ -1,0 +1,104 @@
+/* ============================================================
+   KnowledgeFlow AI — 全局设计令牌（美化版原型实测值，唯一准绳）
+   ============================================================ */
+:root {
+  /* 色板 · 浅色 */
+  --ink: #1c1b1a;
+  --paper: #f5f0ea;
+  --paper-2: #ece5db;
+  --card: #fbfaf6;
+  --vermillion: #213138;      /* 深墨蓝（唯一强调色，原型实测） */
+  --verm-dark: #2e444f;
+  --btn-solid: #213138;
+  --btn-solid-2: #2e444f;
+  --line: #e3ddd2;
+  --line-strong: #c8c0b2;
+  --text-muted: #6e665b;
+  --gold: #a5833e;
+  --success: #1f7a4d;
+  --error: #b0472f;
+  --warning: #a5833e;
+
+  /* 统计带深色（看板） */
+  --dark-bg: #1a1a1a;
+  --dark-fg: #e8e4df;
+
+  /* 圆角 */
+  --btn-radius: 4px;
+  --input-radius: 6px;
+  --card-radius: 12px;
+
+  /* 阴影 */
+  --shadow-card: 0 1px 2px rgba(28, 27, 26, 0.04), 0 10px 28px rgba(28, 27, 26, 0.05);
+  --shadow-hover: 0 2px 4px rgba(28, 27, 26, 0.06), 0 20px 44px rgba(28, 27, 26, 0.11);
+
+  /* 间距 */
+  --sp-snug: 16px;
+  --sp-base: 24px;
+  --sp-comfortable: 32px;
+  --sp-loose: 48px;
+
+  /* 布局尺寸 */
+  --sidebar-w: 240px;
+  --topbar-h: 56px;
+
+  /* ---- Element Plus 令牌桥接（保持生态组件视觉一致） ---- */
+  --el-color-primary: var(--vermillion);
+  --el-color-primary-light-3: var(--verm-dark);
+  --el-color-primary-light-5: var(--verm-dark);
+  --el-color-primary-light-7: var(--verm-dark);
+  --el-color-primary-light-8: #4a5d66;
+  --el-color-primary-light-9: rgba(33, 49, 56, 0.08);
+  --el-color-primary-dark-2: #18262c;
+  --el-color-success: var(--success);
+  --el-color-danger: var(--error);
+  --el-color-warning: var(--warning);
+  --el-border-radius-base: var(--input-radius);
+  --el-border-radius-small: 4px;
+  --el-text-color-primary: var(--ink);
+  --el-text-color-regular: var(--ink);
+  --el-text-color-secondary: var(--text-muted);
+  --el-border-color: var(--line);
+  --el-border-color-light: var(--line);
+  --el-border-color-lighter: var(--line);
+  --el-fill-color-blank: var(--card);
+  --el-fill-color-light: var(--paper-2);
+  --el-bg-color: var(--card);
+  --el-bg-color-overlay: var(--card);
+  --el-font-family: 'Inter', system-ui, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+}
+
+/* 深色模式 */
+[data-theme='dark'] {
+  --paper: #161412;
+  --paper-2: #201d1a;
+  --card: #1c1a17;
+  --ink: #f5f1ea;
+  --line: #38332c;
+  --line-strong: #4a443b;
+  --text-muted: #8e867a;
+  --vermillion: #9fb9c0;
+  --verm-dark: #7da2ab;
+  --btn-solid: #2c4048;
+  --btn-solid-2: #3a525b;
+  --dark-bg: #12100e;
+  --dark-fg: #e8e4df;
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.3), 0 10px 28px rgba(0, 0, 0, 0.35);
+  --shadow-hover: 0 2px 4px rgba(0, 0, 0, 0.35), 0 20px 44px rgba(0, 0, 0, 0.5);
+
+  --el-color-primary: var(--vermillion);
+  --el-color-primary-light-3: var(--verm-dark);
+  --el-color-primary-light-5: var(--verm-dark);
+  --el-color-primary-light-8: #4a5d66;
+  --el-color-primary-light-9: rgba(159, 185, 192, 0.12);
+  --el-text-color-primary: var(--ink);
+  --el-text-color-regular: var(--ink);
+  --el-text-color-secondary: var(--text-muted);
+  --el-border-color: var(--line);
+  --el-border-color-light: var(--line);
+  --el-border-color-lighter: var(--line);
+  --el-fill-color-blank: var(--card);
+  --el-fill-color-light: var(--paper-2);
+  --el-bg-color: var(--card);
+  --el-bg-color-overlay: var(--card);
+}

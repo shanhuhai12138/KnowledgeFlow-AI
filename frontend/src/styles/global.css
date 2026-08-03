@@ -1,0 +1,285 @@
+/* ============================================================
+   KnowledgeFlow AI — 全局基础样式与组件类（照美化版原型）
+   ============================================================ */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+#app {
+  height: 100%;
+}
+
+body {
+  font-family: 'Inter', system-ui, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.6;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+.serif {
+  font-family: 'Noto Serif SC', 'Playfair Display', serif;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+
+h1, h2, h3 {
+  font-family: 'Noto Serif SC', 'Playfair Display', serif;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+
+svg {
+  vertical-align: middle;
+}
+
+a {
+  color: var(--vermillion);
+  text-decoration: none;
+}
+
+/* ---- 按钮 ---- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: var(--btn-radius);
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: none;
+  color: inherit;
+}
+.btn-primary {
+  background: var(--vermillion);
+  color: #fff;
+  box-shadow: var(--shadow-card);
+}
+.btn-primary:hover:not(:disabled) {
+  background: var(--verm-dark);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-hover);
+}
+.btn-secondary {
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--ink);
+}
+.btn-secondary:hover:not(:disabled) {
+  background: var(--paper-2);
+}
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.btn-icon {
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--line);
+  border-radius: var(--btn-radius);
+  background: none;
+  cursor: pointer;
+  color: var(--text-muted);
+  transition: all 0.2s;
+}
+.btn-icon:hover {
+  background: var(--paper-2);
+  color: var(--ink);
+}
+
+/* ---- 表单 ---- */
+.form-input {
+  width: 100%;
+  padding: 12px;
+  border-radius: var(--input-radius);
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: var(--ink);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.form-input:focus {
+  border-color: var(--vermillion);
+  box-shadow: 0 0 0 3px rgba(33, 49, 56, 0.08);
+}
+.form-label {
+  display: block;
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+/* ---- 卡片 ---- */
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--card-radius);
+  padding: var(--sp-comfortable);
+  box-shadow: var(--shadow-card);
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+.card-hover:hover {
+  box-shadow: var(--shadow-hover);
+}
+
+/* ---- 品牌字标 ---- */
+.brand {
+  font-family: 'Syne', 'Noto Serif SC', sans-serif;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+.brand .pd {
+  font-weight: 900;
+}
+
+/* ---- 页面入场 ---- */
+.page-enter {
+  /* 不用 fill-mode: both —— 否则动画结束残留 transform: translateY(0) 会创建 containing block，
+     导致页面内 position: fixed 的模态遮罩相对页面元素定位（只盖半屏）而非视口 */
+  animation: pageIn 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+@keyframes pageIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes rise {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---- 进度条（上传） ---- */
+.progress-bar {
+  height: 4px;
+  background: var(--line);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-top: 8px;
+}
+.progress-fill {
+  height: 100%;
+  background: var(--vermillion);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+/* ---- 焦点环 ---- */
+*:focus-visible {
+  outline: 2px solid var(--vermillion);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ---- 减少动画 ---- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ---- 滚动条（克制） ---- */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--line-strong);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* ---- Markdown 代码块（AI 回答渲染，编辑社论风配色） ---- */
+.ai-content pre.hljs {
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+  border-radius: var(--input-radius);
+  padding: 14px 16px;
+  overflow-x: auto;
+  font-size: 13px;
+  line-height: 1.55;
+  margin: 12px 0;
+}
+.ai-content pre.hljs code {
+  font-family: 'JetBrains Mono', 'Cascadia Code', Consolas, monospace;
+  background: none;
+  padding: 0;
+}
+.ai-content :not(pre) > code {
+  font-family: 'JetBrains Mono', 'Cascadia Code', Consolas, monospace;
+  font-size: 0.9em;
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 1px 5px;
+}
+/* 代码高亮 token 色（贴合墨黑×深墨蓝×金，克制配色） */
+.ai-content .hljs-keyword,
+.ai-content .hljs-selector-tag,
+.ai-content .hljs-literal { color: var(--verm-dark); }
+.ai-content .hljs-string,
+.ai-content .hljs-attr,
+.ai-content .hljs-template-string { color: var(--success); }
+.ai-content .hljs-number,
+.ai-content .hljs-symbol,
+.ai-content .hljs-bullet { color: var(--gold); }
+.ai-content .hljs-title,
+.ai-content .hljs-function,
+.ai-content .hljs-section { color: var(--vermillion); }
+.ai-content .hljs-comment,
+.ai-content .hljs-quote { color: var(--text-muted); font-style: italic; }
+.ai-content .hljs-variable,
+.ai-content .hljs-params { color: var(--ink); }
+.ai-content .hljs-built_in,
+.ai-content .hljs-type,
+.ai-content .hljs-class .hljs-title { color: var(--verm-dark); }
+.ai-content .hljs-meta { color: var(--text-muted); }
+.ai-content table {
+  border-collapse: collapse;
+  margin: 12px 0;
+  width: 100%;
+}
+.ai-content table th,
+.ai-content table td {
+  border: 1px solid var(--line);
+  padding: 8px 12px;
+  font-size: 13px;
+}
+.ai-content table th {
+  background: var(--paper-2);
+}
+.ai-content blockquote {
+  border-left: 3px solid var(--vermillion);
+  margin: 12px 0;
+  padding: 4px 16px;
+  color: var(--text-muted);
+  background: var(--paper-2);
+}
+.ai-content a {
+  color: var(--vermillion);
+  text-decoration: underline;
+}

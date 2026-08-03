@@ -1,0 +1,7 @@
+# AI 服务专属忽略
+.env
+.venv/
+__pycache__/
+*.pyc
+server.log
+server-nokey.log

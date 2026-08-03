@@ -1,0 +1,196 @@
+# ============================================================
+# KnowledgeFlow AI — 全量部署编排（答辩一键启动）
+#
+# 启动：  docker compose up -d --build
+# 访问：  http://localhost:8080  （前端，nginx 反代 /admin-api 与 /ai）
+# 停止：  docker compose down    （保留数据卷）
+# 重置：  docker compose down -v （删除数据卷，慎用）
+#
+# 端口映射（容器内端口不变，宿主映射与本机实测/任务约定一致）：
+#   MySQL   3307 -> 3306   Redis  6380 -> 6379
+#   MinIO   9000/9001      Qdrant 6333/6334
+#   backend 48080          ai-service 8000      frontend 8080 -> 80
+# 容器间通信一律用服务名 + 容器内端口（backend 连 mysql:3306，不走 3307）
+# ============================================================
+
+name: knowledgeflow
+
+services:
+  mysql:
+    image: mysql:8
+    container_name: knowledgeflow-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-knowledgeflow}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-knowledgeflow}
+      MYSQL_USER: ${MYSQL_USER:-knowledgeflow}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-knowledgeflow}
+      TZ: Asia/Shanghai
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      # 首启自动执行：建表 + 演示知识库/文档记录（T5）
+      - ./seed/mysql-init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -uroot -p$$MYSQL_ROOT_PASSWORD --silent"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+    networks:
+      - knowledgeflow
+
+  redis:
+    image: redis:7-alpine
+    container_name: knowledgeflow-redis
+    ports:
+      - "6380:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - knowledgeflow
+
+  minio:
+    image: minio/minio
+    container_name: knowledgeflow-minio
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-minioadmin}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-minioadmin}
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - minio_data:/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - knowledgeflow
+
+  qdrant:
+    image: qdrant/qdrant
+    container_name: knowledgeflow-qdrant
+    ports:
+      - "6333:6333"
+      - "6334:6334"
+    volumes:
+      - qdrant_data:/qdrant/storage
+    healthcheck:
+      test: ["CMD-SHELL", "bash -c 'exec 3<>/dev/tcp/127.0.0.1/6333 && echo ok'"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - knowledgeflow
+
+  # ---------- 应用服务 ----------
+
+  backend:
+    build:
+      context: ../backend
+    container_name: knowledgeflow-backend
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      CONFIG_SECRET: ${CONFIG_SECRET:-}
+      TZ: Asia/Shanghai
+    ports:
+      - "48080:48080"
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+      qdrant:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "bash -c 'exec 3<>/dev/tcp/127.0.0.1/48080 && echo ok'"]
+      interval: 15s
+      timeout: 5s
+      retries: 10
+      start_period: 60s
+    networks:
+      - knowledgeflow
+
+  ai-service:
+    build:
+      context: ../ai-service
+    container_name: knowledgeflow-ai
+    environment:
+      QDRANT_URL: http://qdrant:6333
+      LLM_API_KEY: ${LLM_API_KEY:-} # 密钥经 compose 注入，不进镜像（见 .env）
+      LLM_MODEL: ${LLM_MODEL:-}
+    ports:
+      - "8000:8000"
+    depends_on:
+      qdrant:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/ai/health', timeout=5)"]
+      interval: 15s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    networks:
+      - knowledgeflow
+
+  frontend:
+    build:
+      context: ..
+      dockerfile: frontend/Dockerfile
+    container_name: knowledgeflow-frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+      ai-service:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1/"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+    networks:
+      - knowledgeflow
+
+  # 一次性种子灌入：走真实 /ai/ingest 将 5 篇演示文档向量化（Qdrant 空时自动执行，幂等）
+  seed:
+    image: knowledgeflow-ai-service:latest # 复用 ai-service 镜像（同一次 build 产物）
+    build:
+      context: ../ai-service
+    container_name: knowledgeflow-seed
+    volumes:
+      - ./seed:/seed:ro
+    working_dir: /seed
+    command: ["python", "/seed/run_seed.py", "--ai", "http://ai-service:8000", "--no-db-update"]
+    restart: "no"
+    depends_on:
+      ai-service:
+        condition: service_healthy
+      mysql:
+        condition: service_healthy
+    networks:
+      - knowledgeflow
+
+volumes:
+  mysql_data:
+  redis_data:
+  minio_data:
+  qdrant_data:
+
+networks:
+  knowledgeflow:
+    driver: bridge

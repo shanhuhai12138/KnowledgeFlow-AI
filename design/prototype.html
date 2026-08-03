@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KnowledgeFlow AI - 企业级智能知识库</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800;900&family=Noto+Serif+SC:wght@400;600;700;900&family=Playfair+Display:wght@600;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1C1B1A;--paper:#F5F0EA;--paper-2:#ECE5DB;--card:#FBFAF6;--vermillion:#213138;--verm-dark:#2E444F;--btn-solid:#213138;--btn-solid-2:#2E444F;--line:#E3DDD2;--line-strong:#C8C0B2;--text-muted:#6E665B;--gold:#A5833E;--success:#1F7A4D;--error:#B0472F;--warning:#A5833E;--btn-radius:4px;--input-radius:6px;--card-radius:12px;--dark-bg:#1A1A1A;--dark-fg:#E8E4DF;--shadow-card:0 1px 2px rgba(28,27,26,.04),0 10px 28px rgba(28,27,26,.05);--shadow-hover:0 2px 4px rgba(28,27,26,.06),0 20px 44px rgba(28,27,26,.11);--sp-snug:16px;--sp-base:24px;--sp-comfortable:32px;--sp-loose:48px;}
+[data-theme="dark"]{--paper:#161412;--paper-2:#201D1A;--card:#1C1A17;--ink:#F5F1EA;--line:#38332C;--text-muted:#8E867A;--vermillion:#9FB9C0;--verm-dark:#7DA2AB;--btn-solid:#2C4048;--btn-solid-2:#3A525B;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Inter',system-ui,'PingFang SC','Microsoft YaHei',sans-serif;background:var(--paper);color:var(--ink);line-height:1.6;min-height:100vh;}
+.serif{font-family:'Noto Serif SC','Playfair Display',serif;letter-spacing:-0.02em;font-weight:700;}
+h1,h2,h3{font-family:'Noto Serif SC','Playfair Display',serif;letter-spacing:-0.02em;font-weight:700;}
+button,input,select,textarea{font-family:inherit;font-size:inherit;}
+svg{vertical-align:middle;}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border:none;border-radius:var(--btn-radius);font-weight:600;cursor:pointer;transition:all .2s ease;}
+.btn-primary{background:var(--vermillion);color:#fff;box-shadow:var(--shadow-card);}
+.btn-primary:hover:not(:disabled){background:var(--verm-dark);transform:translateY(-1px);box-shadow:var(--shadow-hover);}
+.btn-secondary{background:transparent;border:1px solid var(--line);color:var(--ink);}
+.btn-secondary:hover{background:var(--paper-2);}
+.btn:disabled{opacity:.5;cursor:not-allowed;}
+.btn-icon{width:32px;height:32px;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:var(--btn-radius);background:none;cursor:pointer;color:var(--text-muted);transition:all .2s;}
+.btn-icon:hover{background:var(--paper-2);color:var(--ink);}
+.form-input{width:100%;padding:12px;border-radius:var(--input-radius);border:1px solid var(--line);background:var(--card);color:var(--ink);outline:none;transition:border-color .2s,box-shadow .2s;}
+.form-input:focus{border-color:var(--vermillion);box-shadow:0 0 0 3px rgba(33,49,56,.08);}
+.form-label{display:block;font-size:12px;color:var(--text-muted);margin-bottom:8px;font-weight:600;}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--card-radius);padding:var(--sp-comfortable);box-shadow:var(--shadow-card);transition:box-shadow .3s,transform .3s;}
+.card:hover{box-shadow:var(--shadow-hover);}
+.page-enter{animation:pageIn .55s cubic-bezier(0.22,1,0.36,1) both;}
+@keyframes pageIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+@keyframes cardIn{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+@keyframes rise{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+/* 品牌字标——Syne 无衬线字标，Velar 式电影感 */
+.brand{font-family:'Syne','Noto Serif SC',sans-serif;letter-spacing:-0.02em;font-weight:700;}
+.brand .pd{font-weight:900;}
+/* 打字机预加载器 */
+#preloader{position:fixed;inset:0;z-index:100;background:#213138;display:flex;align-items:center;justify-content:center;}
+#preloader-text{display:flex;align-items:center;font-family:'Syne',sans-serif;font-size:2.6rem;color:#fff;letter-spacing:-0.02em;line-height:1;}
+#preloader-text .w span{opacity:0;transition:opacity .15s ease;font-weight:700;}
+#preloader-text .w span.pd{font-weight:900;}
+#preloader-cursor{display:inline-block;width:3px;height:1.1em;border-radius:999px;background:#fff;margin-left:3px;animation:blink .7s step-end infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
+#preloader.lifted{transform:translateY(-100%);transition:transform 1.5s cubic-bezier(0.45,0,0.15,1);}
+#preloader.done{display:none !important;}
+/* 登录页：左侧编辑感面板入场 */
+.login-eyebrow{font-family:'Syne',sans-serif;font-size:12px;font-weight:700;letter-spacing:0.28em;text-transform:uppercase;color:var(--vermillion);margin-bottom:18px;opacity:0;}
+body.ready .login-eyebrow{animation:rise .6s cubic-bezier(0.22,1,0.36,1) .05s both;}
+.login-panel .login-headline{opacity:0;}
+body.ready .login-panel .login-headline{animation:rise .7s cubic-bezier(0.22,1,0.36,1) .12s both;}
+.login-panel .login-sub{opacity:0;}
+body.ready .login-panel .login-sub{animation:rise .7s cubic-bezier(0.22,1,0.36,1) .2s both;}
+.login-features > .card{opacity:0;}
+body.ready .login-features > .card{animation:rise .7s cubic-bezier(0.22,1,0.36,1) both;}
+body.ready .login-features > .card:nth-child(1){animation-delay:.3s;}
+body.ready .login-features > .card:nth-child(2){animation-delay:.38s;}
+body.ready .login-features > .card:nth-child(3){animation-delay:.46s;}
+body.ready .login-features > .card:nth-child(4){animation-delay:.54s;}
+.login-form-card{opacity:0;}
+body.ready .login-form-card{animation:rise .8s cubic-bezier(0.22,1,0.36,1) .5s both;}
+/* 侧栏：顶部深青品牌带（Velar 预加载配色） */
+#sidebar > div:first-child{background:#213138;color:#F5F0EA;--ink:#F5F0EA;--text-muted:rgba(245,240,234,.62);--line:rgba(245,240,234,.12);}
+#sidebar > div:first-child .brand{color:#F5F0EA;}
+/* 顶栏：编辑感渐变装饰线 */
+main > header::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--vermillion),transparent);opacity:.9;}
+main > header{position:sticky;}
+/* 侧栏导航 hover */
+#nav-chat,#nav-documents,#nav-kb,#nav-analytics{position:relative;}
+#nav-chat:hover,#nav-documents:hover,#nav-kb:hover,#nav-analytics:hover{background:color-mix(in oklab,var(--vermillion) 8%,transparent);}
+/* 分析看板：深色统计带（Velar 近黑段） */
+#page-analytics #stats-grid .card{background:var(--dark-bg);border-color:#2A2A2A;color:var(--dark-fg);box-shadow:0 10px 32px rgba(0,0,0,.22);--text-muted:rgba(232,228,223,.55);--error:#E2725B;--success:#57B889;animation:cardIn .55s cubic-bezier(0.22,1,0.36,1) both;}
+#page-analytics #stats-grid .card:nth-child(1){animation-delay:.04s;}
+#page-analytics #stats-grid .card:nth-child(2){animation-delay:.12s;}
+#page-analytics #stats-grid .card:nth-child(3){animation-delay:.2s;}
+#page-analytics #stats-grid .card:nth-child(4){animation-delay:.28s;}
+#page-analytics #stats-grid .card > div:last-child{font-family:'Syne','Inter',sans-serif;font-size:clamp(30px,3.2vw,46px) !important;font-weight:800;letter-spacing:-0.02em;line-height:1.12;font-variant-numeric:tabular-nums;}
+#page-analytics #stats-grid .card:hover{box-shadow:0 16px 44px rgba(0,0,0,.3);}
+.toast{position:fixed;bottom:24px;right:24px;background:var(--ink);color:var(--card);padding:12px 24px;border-radius:var(--btn-radius);font-size:14px;z-index:9999;animation:toast-in .3s ease;}
+@keyframes toast-in{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+.hidden{display:none!important;}
+.loading-dots::after{content:'.';animation:dots 1.5s steps(4,end) infinite;}
+@keyframes dots{0%,20%{color:transparent;}40%{color:var(--vermillion);}60%,100%{color:var(--ink);}}
+/* 响应式 */
+@media (max-width:1024px){
+  aside:first-of-type{width:200px;}
+  #page-chat{flex-direction:column;height:auto;}
+  #page-chat aside{width:100%;height:auto;max-height:200px;border-right:none;border-bottom:1px solid var(--line);}
+}
+@media (max-width:768px){
+  body{font-size:14px;}
+  aside:first-of-type{display:none;}
+  main{width:100%;}
+  header{padding:0 16px;}
+  #content-area{padding:16px;}
+  #page-chat{flex-direction:column;}
+  #page-chat aside{width:100%;max-height:160px;}
+  .card{padding:16px;}
+  h1,h2,h3{font-size:25px;}
+  .login-brand{display:none;}
+  #login-page > div{flex-direction:column !important;}
+  #login-page > div > div:last-child{width:100% !important;}
+  #stats-grid{grid-template-columns:repeat(2,1fr) !important;}
+  #charts-row{grid-template-columns:1fr !important;}
+  #bottom-charts{grid-template-columns:1fr !important;}
+  .upload-dropzone{padding:32px !important;}
+}
+@media (max-width:480px){
+  #stats-grid{grid-template-columns:1fr !important;}
+}
+/* 上传进度条 */
+.progress-bar{height:4px;background:var(--line);border-radius:2px;overflow:hidden;margin-top:8px;}
+.progress-fill{height:100%;background:var(--vermillion);border-radius:2px;transition:width .3s ease;}
+/* 移动端菜单按钮 */
+.menu-toggle{display:none;background:none;border:none;cursor:pointer;padding:8px;color:var(--text-muted);}
+@media (max-width:1024px){
+  .menu-toggle{display:block;}
+}
+/* 焦点环 */
+*:focus-visible{outline:2px solid var(--vermillion);outline-offset:2px;border-radius:4px;}
+/* 减少动画 */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:0.01ms !important;transition-duration:0.01ms !important;}
+}
+</style>
+</head>
+<body>
+<div id="preloader" aria-hidden="true"><div id="preloader-text"><span class="w"></span><span id="preloader-cursor"></span></div></div>
+<div id="app">
+<!-- LOGIN PAGE -->
+<div id="login-page" class="page-enter">
+<div style="display:flex;min-height:100vh;">
+<div style="width:45%;background:var(--paper-2);display:flex;flex-direction:column;justify-content:center;padding:var(--sp-loose);position:relative;" class="login-panel">
+<div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--vermillion),transparent);"></div>
+<div class="login-eyebrow brand">KNOWLEDGEFLOW<span class="pd">.</span></div>
+<h1 class="serif login-headline" style="font-size:48px;font-weight:900;line-height:1.05;letter-spacing:-0.02em;margin-bottom:var(--sp-comfortable);">让企业知识<br>开口说话</h1>
+<p class="login-sub" style="font-size:20px;color:var(--text-muted);margin-bottom:var(--sp-loose);line-height:1.6;">基于自有知识库的精准问答 · 全生命周期管理 · 数据安全隔离</p>
+<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:var(--sp-base);margin-top:var(--sp-loose);" class="login-features">
+<div class="card" style="transition:all .3s;"><div style="font-weight:700;margin-bottom:4px;">RAG智能问答</div><div style="font-size:12px;color:var(--text-muted);">基于自有知识库的精准回答</div></div>
+<div class="card" style="transition:all .3s;"><div style="font-weight:700;margin-bottom:4px;">自动化管理</div><div style="font-size:12px;color:var(--text-muted);">文档上传、解析、索引自动化</div></div>
+<div class="card" style="transition:all .3s;"><div style="font-weight:700;margin-bottom:4px;">数据分析看板</div><div style="font-size:12px;color:var(--text-muted);">洞察知识使用频率与热度</div></div>
+<div class="card" style="transition:all .3s;"><div style="font-weight:700;margin-bottom:4px;">多租户隔离</div><div style="font-size:12px;color:var(--text-muted);">严谨的权限与多租户隔离</div></div>
+</div>
+</div>
+<div style="width:55%;display:flex;align-items:center;justify-content:center;padding:var(--sp-loose);">
+<div class="card login-form-card" style="width:100%;max-width:420px;">
+<div style="display:flex;gap:0;margin-bottom:var(--sp-comfortable);border-bottom:1px solid var(--line);">
+<button id="login-tab" onclick="switchAuth(true)" style="flex:1;padding:12px;text-align:center;cursor:pointer;border:none;background:none;color:var(--text-muted);font-weight:600;position:relative;">登录<div id="login-tab-indicator" style="position:absolute;bottom:-1px;left:0;right:0;height:2px;background:var(--vermillion);"></div></button>
+<button id="register-tab" onclick="switchAuth(false)" style="flex:1;padding:12px;text-align:center;cursor:pointer;border:none;background:none;color:var(--text-muted);font-weight:600;">注册</button>
+</div>
+<form onsubmit="return doLogin(event)">
+<div style="margin-bottom:var(--sp-base);"><label class="form-label">用户名</label><input class="form-input" id="username" placeholder="请输入用户名" required></div>
+<div id="email-group" class="hidden" style="margin-bottom:var(--sp-base);"><label class="form-label">邮箱地址</label><input class="form-input" id="email" type="email" placeholder="example@corp.com"></div>
+<div style="margin-bottom:var(--sp-base);"><label class="form-label">密码</label><input class="form-input" id="password" type="password" placeholder="请输入密码" required></div>
+<div id="login-options" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--sp-comfortable);font-size:12px;color:var(--text-muted);">
+<label style="display:flex;align-items:center;gap:6px;cursor:pointer;"><input type="checkbox" checked> 记住我</label>
+<a href="#" onclick="showToast('功能演示中');return false;">忘记密码？</a>
+</div>
+<button type="submit" class="btn btn-primary" style="width:100%;padding:12px;" id="submit-btn">登录</button>
+<button type="button" class="btn btn-secondary" style="width:100%;margin-top:12px;display:none;" id="demo-btn" onclick="fillDemo()">体验账号一键填充 (admin / 123456)</button>
+</form>
+<p style="margin-top:var(--sp-comfortable);text-align:center;font-size:12px;color:var(--text-muted);">© 2026 KnowledgeFlow AI · 企业级智能知识库</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- APP LAYOUT -->
+<div id="app-layout" class="hidden" style="display:flex;min-height:100vh;">
+<!-- Mobile menu button -->
+<button class="menu-toggle" onclick="toggleMobileMenu()" style="position:fixed;top:8px;left:8px;z-index:100;" id="menu-btn">
+<svg width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+</button>
+<!-- Sidebar -->
+<aside id="sidebar" style="width:240px;background:var(--paper-2);border-right:1px solid var(--line);display:flex;flex-direction:column;position:fixed;left:0;top:0;bottom:0;z-index:50;transition:transform .3s ease;">
+<div style="padding:var(--sp-comfortable);border-bottom:1px solid var(--line);">
+<div class="brand" style="font-size:25px;letter-spacing:-0.02em;">KnowledgeFlow<span class="pd">.</span></div>
+<div style="font-size:12px;color:var(--text-muted);margin-top:4px;">企业级智能知识库</div>
+</div>
+<nav style="flex:1;padding:12px 0;">
+<div onclick="switchTab('chat')" id="nav-chat" style="display:flex;align-items:center;gap:12px;padding:12px 24px;cursor:pointer;border-right:3px solid transparent;transition:all .2s;">
+<svg width="20" height="20" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+<span style="font-weight:500;">智能问答</span>
+</div>
+<div onclick="switchTab('documents')" id="nav-documents" style="display:flex;align-items:center;gap:12px;padding:12px 24px;cursor:pointer;border-right:3px solid transparent;transition:all .2s;">
+<svg width="20" height="20" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+<span style="font-weight:500;">文档管理</span>
+</div>
+<div onclick="switchTab('kb')" id="nav-kb" style="display:flex;align-items:center;gap:12px;padding:12px 24px;cursor:pointer;border-right:3px solid transparent;transition:all .2s;">
+<svg width="20" height="20" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><path stroke-linecap="round" stroke-linejoin="round" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/></svg>
+<span style="font-weight:500;">知识库</span>
+</div>
+<div onclick="switchTab('analytics')" id="nav-analytics" style="display:flex;align-items:center;gap:12px;padding:12px 24px;cursor:pointer;border-right:3px solid transparent;transition:all .2s;">
+<svg width="20" height="20" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+<span style="font-weight:500;">分析看板</span>
+</div>
+</nav>
+<div style="padding:var(--sp-comfortable);border-top:1px solid var(--line);">
+<div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+<div style="width:40px;height:40px;border-radius:6px;background:var(--btn-solid);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;">A</div>
+<div><div style="font-weight:600;" id="user-name">Admin User</div><div style="font-size:12px;color:var(--text-muted);">系统管理员</div></div>
+</div>
+<button onclick="doLogout()" class="btn btn-secondary" style="width:100%;padding:12px;">退出登录</button>
+</div>
+</aside>
+
+<!-- Main -->
+<main style="flex:1;display:flex;flex-direction:column;overflow:hidden;margin-left:240px;transition:margin .3s ease;" id="main-content">
+<header style="height:56px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 32px;background:var(--paper);position:sticky;top:0;z-index:10;">
+<nav style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text-muted);">
+<span>首页</span><span>/</span><span id="page-title">智能问答</span>
+</nav>
+<div style="display:flex;align-items:center;gap:16px;">
+<button onclick="toggleTheme()" title="切换主题" class="btn-icon" style="border:none;">
+<svg id="theme-icon" width="20" height="20" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+</button>
+<button onclick="showToast('暂无新通知')" title="通知" class="btn-icon" style="border:none;">
+<svg width="20" height="20" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+</button>
+</div>
+</header>
+<div style="flex:1;overflow-y:auto;padding:32px;" id="content-area">
+<!-- CHAT PAGE -->
+<div id="page-chat" class="page-enter" style="display:flex;height:calc(100vh - 56px);">
+<aside style="width:280px;background:var(--paper-2);border-right:1px solid var(--line);display:flex;flex-direction:column;">
+<button onclick="createSession()" style="width:100%;padding:12px;border-radius:6px;border:1px solid var(--line);background:var(--btn-solid);color:#fff;cursor:pointer;font-weight:600;margin-bottom:16px;">
+<svg width="16" height="16" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" style="vertical-align:-3px;margin-right:4px;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>新建会话
+</button>
+<div id="session-list" style="flex:1;overflow-y:auto;padding:12px 12px 0;"></div>
+</aside>
+<div style="flex:1;display:flex;flex-direction:column;">
+<div style="height:56px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 32px;">
+<div style="font-weight:600;" id="chat-title">API 鉴权问题</div>
+<button onclick="clearChat()" class="btn btn-secondary" style="font-size:12px;padding:8px 16px;">清空对话</button>
+</div>
+<div id="messages-area" style="flex:1;overflow-y:auto;padding:32px;"></div>
+<div style="border-top:1px solid var(--line);padding:32px;background:var(--paper);">
+<div style="max-width:800px;margin:0 auto;">
+<textarea id="input-text" class="form-input" placeholder="请输入您的问题… (Enter 发送，Shift+Enter 换行)" rows="3" style="resize:none;background:var(--card);"></textarea>
+<div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px;padding-top:12px;border-top:1px solid var(--line);">
+<div style="display:flex;gap:8px;">
+<button onclick="showToast('文件选择器已打开')" title="上传附件" class="btn-icon"><svg width="18" height="18" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg></button>
+<button onclick="showToast('语音识别已启动')" title="语音输入" class="btn-icon"><svg width="18" height="18" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11a7 7 0 01-14 0M12 3v8m0 0v8m0-8h4m-4 0H8"/></svg></button>
+</div>
+<button onclick="sendMessage()" id="send-btn" class="btn btn-primary" style="padding:12px 24px;">发送问题
+<svg width="16" height="16" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" style="margin-left:4px;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- DOCUMENTS PAGE -->
+<div id="page-documents" class="page-enter hidden" style="height:100%;">
+<h1 class="serif" style="font-size:39px;margin-bottom:16px;">文档管理</h1>
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:32px;flex-wrap:wrap;gap:12px;">
+<div style="font-size:12px;color:var(--text-muted);" id="doc-count">15 个文档</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;">
+<button onclick="refreshDocs()" class="btn btn-secondary"><svg width="16" height="16" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" style="margin-right:4px;"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>刷新</button>
+<button onclick="batchDelete()" class="btn btn-secondary" id="batch-delete-btn" disabled><svg width="16" height="16" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" style="margin-right:4px;"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>批量删除</button>
+<button onclick="renderUploadModal()" class="btn btn-primary"><svg width="16" height="16" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" style="margin-right:4px;"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>上传文档</button>
+</div>
+</div>
+<div style="display:flex;gap:16px;align-items:center;background:var(--paper-2);border:1px solid var(--line);border-radius:var(--card-radius);padding:12px;margin-bottom:var(--sp-comfortable);flex-wrap:wrap;">
+<div style="display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:6px;padding:8px 12px;flex:1;min-width:200px;">
+<svg width="16" height="16" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+<input type="text" id="doc-search" class="form-input" style="border:none;background:none;flex:1;padding:0;" placeholder="搜索文档名称…" oninput="filterDocs()">
+</div>
+<select id="filter-kb" class="form-input" style="border:1px solid var(--line);border-radius:6px;padding:8px 12px;min-width:120px;" onchange="filterDocs()"><option value="all">所有知识库</option><option value="kb1">产品手册库</option><option value="kb2">研发技术文档</option><option value="kb3">人力资源政策</option></select>
+<select id="filter-type" class="form-input" style="border:1px solid var(--line);border-radius:6px;padding:8px 12px;min-width:100px;" onchange="filterDocs()"><option value="all">所有格式</option><option value="pdf">PDF</option><option value="docx">Word</option><option value="md">Markdown</option></select>
+<select id="filter-status" class="form-input" style="border:1px solid var(--line);border-radius:6px;padding:8px 12px;min-width:100px;" onchange="filterDocs()"><option value="all">所有状态</option><option value="processed">已就绪</option><option value="processing">处理中</option><option value="failed">失败</option></select>
+</div>
+<div class="card" style="overflow:hidden;box-shadow:var(--shadow-card);">
+<table style="width:100%;border-collapse:collapse;">
+<thead><tr style="border-bottom:1px solid var(--line);background:var(--paper-2);">
+<th style="width:40px;padding:12px 24px;text-align:left;"><input type="checkbox" id="select-all" onchange="toggleSelectAll()"></th>
+<th style="padding:12px 24px;text-align:left;font-size:12px;color:var(--text-muted);text-transform:uppercase;">文档名称</th>
+<th style="padding:12px 24px;text-align:left;font-size:12px;color:var(--text-muted);text-transform:uppercase;">所属知识库</th>
+<th style="padding:12px 24px;text-align:left;font-size:12px;color:var(--text-muted);text-transform:uppercase;">大小 / 页数</th>
+<th style="padding:12px 24px;text-align:left;font-size:12px;color:var(--text-muted);text-transform:uppercase;">上传人</th>
+<th style="padding:12px 24px;text-align:left;font-size:12px;color:var(--text-muted);text-transform:uppercase;">状态</th>
+<th style="padding:12px 24px;text-align:left;font-size:12px;color:var(--text-muted);text-transform:uppercase;">创建时间</th>
+<th style="padding:12px 24px;text-align:left;font-size:12px;color:var(--text-muted);text-transform:uppercase;">更新时间</th>
+<th style="width:120px;padding:12px 24px;text-align:left;font-size:12px;color:var(--text-muted);text-transform:uppercase;">操作</th>
+</tr></thead>
+<tbody id="doc-table-body"></tbody>
+</table>
+</div>
+<div style="display:flex;justify-content:space-between;align-items:center;margin-top:16px;font-size:12px;color:var(--text-muted);">
+<span id="doc-pager-info">显示 1 到 15 条，共 15 条记录</span>
+<div style="display:flex;gap:8px;">
+<button class="btn btn-secondary" disabled style="opacity:.5;font-size:12px;padding:8px 16px;">上一页</button>
+<button class="btn btn-primary" style="font-size:12px;padding:8px 16px;">1</button>
+<button class="btn btn-secondary" style="font-size:12px;padding:8px 16px;">2</button>
+<button class="btn btn-secondary" style="font-size:12px;padding:8px 16px;">下一页</button>
+</div>
+</div>
+</div>
+
+<!-- KB PAGE -->
+<div id="page-kb" class="page-enter hidden" style="height:100%;">
+<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:32px;flex-wrap:wrap;gap:16px;">
+<div><h1 class="serif" style="font-size:39px;margin-bottom:8px;">知识库管理</h1><p style="color:var(--text-muted);">管理您的企业知识库，设置成员访问权限及同步策略。</p></div>
+<button onclick="renderKbModal()" class="btn btn-primary"><svg width="16" height="16" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" style="margin-right:4px;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>新建知识库</button>
+</div>
+<div style="position:relative;margin-bottom:32px;">
+<svg width="18" height="18" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--text-muted);"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+<input type="text" id="kb-search" class="form-input" style="padding-left:40px;background:var(--paper-2);" placeholder="搜索知识库名称或描述…" oninput="filterKbs()">
+</div>
+<div id="kb-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:32px;"></div>
+</div>
+
+<!-- ANALYTICS PAGE -->
+<div id="page-analytics" class="page-enter hidden" style="height:100%;">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:32px;flex-wrap:wrap;gap:16px;">
+<h1 class="serif" style="font-size:39px;margin-bottom:0;">分析看板</h1>
+<button onclick="showToast('报表导出中…')" class="btn btn-secondary"><svg width="16" height="16" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" style="margin-right:4px;"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>导出报表</button>
+</div>
+<div id="stats-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:32px;margin-bottom:32px;"></div>
+<div style="display:grid;grid-template-columns:2fr 1fr;gap:32px;margin-bottom:32px;" id="charts-row"></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;" id="bottom-charts"></div>
+</div>
+</div>
+</main>
+</div>
+
+<!-- UPLOAD MODAL -->
+<div id="upload-modal" class="hidden" style="position:fixed;inset:0;background:rgba(10,10,10,.5);display:flex;align-items:center;justify-content:center;z-index:1000;" onclick="if(event.target===this)document.getElementById('upload-modal').classList.add('hidden');">
+<div class="card" style="width:100%;max-width:560px;">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--sp-comfortable);">
+<h3 class="serif" style="font-size:18px;">上传文档至知识库</h3>
+<button onclick="document.getElementById('upload-modal').classList.add('hidden')" class="btn-icon"><svg width="20" height="20" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg></button>
+</div>
+<div onclick="document.getElementById('upload-modal').classList.add('hidden')" style="border:2px dashed var(--line);border-radius:var(--card-radius);padding:64px;text-align:center;cursor:pointer;transition:all .3s;background:var(--paper-2);">
+<svg width="48" height="48" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" style="color:var(--text-muted);margin-bottom:12px;"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+<div style="font-weight:600;margin-bottom:8px;">点击或拖拽文件到此处上传</div>
+<div style="font-size:12px;color:var(--text-muted);">支持 PDF, DOCX, TXT, MD 格式，单个文件最大 50MB</div>
+</div>
+<div id="upload-progress" class="hidden" style="margin-top:16px;">
+<div style="display:flex;justify-content:space-between;font-size:12px;color:var(--text-muted);margin-bottom:4px;"><span id="upload-filename">正在上传...</span><span id="upload-percent">0%</span></div>
+<div class="progress-bar"><div class="progress-fill" id="upload-fill" style="width:0%;"></div></div>
+</div>
+<div style="display:flex;gap:12px;margin-top:var(--sp-comfortable);justify-content:flex-end;">
+<button onclick="document.getElementById('upload-modal').classList.add('hidden')" class="btn btn-secondary" style="padding:12px 24px;">取消</button>
+<button onclick="startUpload()" id="upload-submit-btn" class="btn btn-primary" style="padding:12px 24px;">开始处理</button>
+</div>
+</div>
+</div>
+
+<!-- CREATE KB MODAL -->
+<div id="kb-modal" class="hidden" style="position:fixed;inset:0;background:rgba(10,10,10,.5);display:flex;align-items:center;justify-content:center;z-index:1000;" onclick="if(event.target===this)document.getElementById('kb-modal').classList.add('hidden');">
+<div class="card" style="width:100%;max-width:480px;">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--sp-comfortable);">
+<h3 class="serif" style="font-size:18px;">新建知识库</h3>
+<button onclick="document.getElementById('kb-modal').classList.add('hidden')" class="btn-icon"><svg width="20" height="20" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg></button>
+</div>
+<div style="display:flex;flex-direction:column;gap:var(--sp-comfortable);">
+<div><label class="form-label">名称</label><input type="text" id="new-kb-name" class="form-input" placeholder="如：研发技术文档"></div>
+<div><label class="form-label">描述</label><textarea id="new-kb-desc" class="form-input" rows="3" placeholder="简单描述一下知识库的用途…" style="resize:vertical;"></textarea></div>
+<div><label class="form-label">可见性</label>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+<label style="display:flex;align-items:center;gap:12px;padding:12px;background:var(--paper-2);border:1px solid var(--line);border-radius:6px;cursor:pointer;"><input type="radio" name="kb-vis" value="false" checked style="accent-color:var(--vermillion);"><div><div style="font-weight:600;margin-bottom:2px;">团队共享</div><div style="font-size:11px;color:var(--text-muted);">所有人可见</div></div></label>
+<label style="display:flex;align-items:center;gap:12px;padding:12px;background:var(--paper-2);border:1px solid var(--line);border-radius:6px;cursor:pointer;"><input type="radio" name="kb-vis" value="true" style="accent-color:var(--vermillion);"><div><div style="font-weight:600;margin-bottom:2px;">私有库</div><div style="font-size:11px;color:var(--text-muted);">仅选定人员可见</div></div></label>
+</div>
+</div>
+</div>
+<div style="display:flex;gap:12px;margin-top:var(--sp-comfortable);justify-content:flex-end;">
+<button onclick="document.getElementById('kb-modal').classList.add('hidden')" class="btn btn-secondary" style="padding:12px 24px;">取消</button>
+<button onclick="addKB()" class="btn btn-primary" style="padding:12px 24px;">确认创建</button>
+</div>
+</div>
+</div>
+
+<!-- TOAST -->
+<div id="toast" class="hidden" style="position:fixed;bottom:24px;right:24px;background:var(--ink);color:var(--card);padding:12px 24px;border-radius:var(--btn-radius);font-size:14px;z-index:9999;"></div>
+
+<script>
+// MOCK DATA - 符合契约的数据结构
+var kbs = [
+  {id:'kb1',name:'产品手册库',description:'公司产品所有手册和文档，包括操作指南、API文档等',documentCount:15,memberCount:8,updatedAt:'2026-07-30',isPrivate:false},
+  {id:'kb2',name:'研发技术文档',description:'内部研发技术规范、架构设计与 API 接口文档',documentCount:23,memberCount:12,updatedAt:'2026-07-29',isPrivate:false},
+  {id:'kb3',name:'人力资源政策',description:'公司人事管理制度、员工手册与绩效考核规范',documentCount:8,memberCount:5,updatedAt:'2026-07-28',isPrivate:true},
+  {id:'kb4',name:'财务报销指南',description:'财务报销流程、差旅标准及相关财务制度',documentCount:5,memberCount:3,updatedAt:'2026-07-27',isPrivate:true},
+  {id:'kb5',name:'客户服务规范',description:'客服培训材料、应答技巧与满意度管理规范',documentCount:12,memberCount:10,updatedAt:'2026-07-26',isPrivate:false}
+];
+// Document: {id, kbId, kbName, filename, fileType, fileSize(Long), pageCount, status, uploader, tags[], createdAt, updatedAt}
+var documents = [
+  {id:'d1',kbId:'kb1',kbName:'产品手册库',filename:'2026产品需求规格说明书.pdf',fileType:'pdf',fileSize:2621440,pageCount:45,status:'processed',uploader:'张伟',tags:['需求','产品'],createdAt:'2026-07-15',updatedAt:'2026-07-30'},
+  {id:'d2',kbId:'kb1',kbName:'产品手册库',filename:'用户操作手册_v3.docx',fileType:'docx',fileSize:1258291,pageCount:32,status:'processing',uploader:'李娜',tags:['操作','手册'],createdAt:'2026-07-20',updatedAt:'2026-07-29'},
+  {id:'d3',kbId:'kb1',kbName:'产品手册库',filename:'API接口文档_v2.md',fileType:'md',fileSize:466944,pageCount:15,status:'processed',uploader:'王强',tags:['API','技术'],createdAt:'2026-07-18',updatedAt:'2026-07-28'},
+  {id:'d4',kbId:'kb1',kbName:'产品手册库',filename:'季度产品复盘.pdf',fileType:'pdf',fileSize:3250586,pageCount:28,status:'failed',uploader:'赵敏',tags:['复盘','报告'],createdAt:'2026-07-12',updatedAt:'2026-07-27'},
+  {id:'d5',kbId:'kb2',kbName:'研发技术文档',filename:'微服务架构设计.docx',fileType:'docx',fileSize:2936012,pageCount:56,status:'processed',uploader:'陈磊',tags:['架构','设计'],createdAt:'2026-07-10',updatedAt:'2026-07-30'},
+  {id:'d6',kbId:'kb2',kbName:'研发技术文档',filename:'数据库设计规范.md',fileType:'md',fileSize:184320,pageCount:12,status:'processed',uploader:'刘洋',tags:['数据库','规范'],createdAt:'2026-07-14',updatedAt:'2026-07-29'},
+  {id:'d7',kbId:'kb2',kbName:'研发技术文档',filename:'前端组件库文档.pdf',fileType:'pdf',fileSize:4404019,pageCount:89,status:'processing',uploader:'孙芳',tags:['前端','组件'],createdAt:'2026-07-16',updatedAt:'2026-07-28'},
+  {id:'d8',kbId:'kb2',kbName:'研发技术文档',filename:'安全加固指南.docx',fileType:'docx',fileSize:1011712,pageCount:24,status:'processed',uploader:'周涛',tags:['安全','指南'],createdAt:'2026-07-11',updatedAt:'2026-07-27'},
+  {id:'d9',kbId:'kb3',kbName:'人力资源政策',filename:'员工手册_v3.docx',fileType:'docx',fileSize:1572864,pageCount:42,status:'processed',uploader:'吴静',tags:['人事','制度'],createdAt:'2026-07-08',updatedAt:'2026-07-30'},
+  {id:'d10',kbId:'kb3',kbName:'人力资源政策',filename:'绩效考核管理办法.pdf',fileType:'pdf',fileSize:911360,pageCount:18,status:'processed',uploader:'郑华',tags:['绩效','考核'],createdAt:'2026-07-09',updatedAt:'2026-07-29'},
+  {id:'d11',kbId:'kb4',kbName:'财务报销指南',filename:'差旅报销标准.pdf',fileType:'pdf',fileSize:327680,pageCount:8,status:'processed',uploader:'钱明',tags:['财务','报销'],createdAt:'2026-07-07',updatedAt:'2026-07-28'},
+  {id:'d12',kbId:'kb5',kbName:'客户服务规范',filename:'客服应答技巧.md',fileType:'md',fileSize:122880,pageCount:6,status:'processed',uploader:'何方',tags:['客服','技巧'],createdAt:'2026-07-06',updatedAt:'2026-07-27'},
+  {id:'d13',kbId:'kb5',kbName:'客户服务规范',filename:'常见问题解答汇总.docx',fileType:'docx',fileSize:2202009,pageCount:67,status:'processed',uploader:'林涛',tags:['客服','FAQ'],createdAt:'2026-07-05',updatedAt:'2026-07-26'},
+  {id:'d14',kbId:'kb5',kbName:'客户服务规范',filename:'客户满意度调查报告.pptx',fileType:'pptx',fileSize:5557453,pageCount:25,status:'pending',uploader:'黄丽',tags:['调查','报告'],createdAt:'2026-07-04',updatedAt:'2026-07-25'},
+  {id:'d15',kbId:'kb2',kbName:'研发技术文档',filename:'季度技术复盘.md',fileType:'md',fileSize:286720,pageCount:10,status:'processed',uploader:'徐杰',tags:['技术','复盘'],createdAt:'2026-07-03',updatedAt:'2026-07-24'}
+];
+// ChatSession: {id, title, kbName, createdAt, updatedAt}
+var sessions = [
+  {id:'s1',title:'API 鉴权问题',kbName:'产品手册库',createdAt:'2026-07-30T10:30:00',updatedAt:'2026-07-30T10:35:00'},
+  {id:'s2',title:'最新产品功能',kbName:'产品手册库',createdAt:'2026-07-29T14:20:00',updatedAt:'2026-07-29T14:45:00'},
+  {id:'s3',title:'新员工入职流程',kbName:'人力资源政策',createdAt:'2026-07-28T09:15:00',updatedAt:'2026-07-28T09:30:00'}
+];
+// Message: {id, role, content, sources:[{documentId, documentName, page, score}], confidence, rating, createdAt}
+var messages = [
+  {id:'m1',role:'user',content:'如何重置公司账号密码？',createdAt:'2026-07-30T10:30:00'},
+  {id:'m2',role:'assistant',content:'公司账号重置流程如下：请访问内网门户的「账号管理中心」，点击「密码重置」按钮，接收验证码后设置新密码。如有异常请联系IT帮助台。',sources:[{documentId:'d9',documentName:'员工手册_v3.docx',page:24,score:95}],confidence:95,rating:null,createdAt:'2026-07-30T10:31:00'},
+  {id:'m3',role:'user',content:'Q3销售目标达成情况如何？',createdAt:'2026-07-30T10:32:00'},
+  {id:'m4',role:'assistant',content:'根据第三季度销售报告显示，Q3整体销售额达到 1.25 亿元，完成年度目标的 62.5%，同比增长 18%。主要增长点来自华东和华南地区市场。',sources:[{documentId:'d1',documentName:'季度销售分析报告.pdf',page:5,score:88},{documentId:'d5',documentName:'市场拓展计划书.docx',page:12,score:82}],confidence:88,rating:null,createdAt:'2026-07-30T10:33:00'}
+];
+
+var currentSessionId = 's1';
+var selectedIds = [];
+var isStreaming = false;
+var isDark = false;
+var uploadProgress = 0;
+var uploadTimer = null;
+
+// AUTH FUNCTIONS
+function switchAuth(login) {
+  var loginTab = document.getElementById('login-tab');
+  var registerTab = document.getElementById('register-tab');
+  var indicator = document.getElementById('login-tab-indicator');
+  var emailGroup = document.getElementById('email-group');
+  var loginOptions = document.getElementById('login-options');
+  var demoBtn = document.getElementById('demo-btn');
+  loginTab.classList.toggle('active', login);
+  registerTab.classList.toggle('active', !login);
+  indicator.style.display = login ? 'block' : 'none';
+  emailGroup.classList.toggle('hidden', login);
+  loginOptions.classList.toggle('hidden', !login);
+  demoBtn.style.display = login ? 'block' : 'none';
+}
+
+function doLogin(e) {
+  if(e) e.preventDefault();
+  var username = document.getElementById('username').value;
+  if(!username) return false;
+  var btn = document.getElementById('submit-btn');
+  btn.disabled = true;
+  btn.textContent = '登录中...';
+  setTimeout(function() {
+    document.getElementById('login-page').classList.add('hidden');
+    document.getElementById('app-layout').classList.remove('hidden');
+    document.getElementById('app-layout').style.display = 'flex';
+    btn.disabled = false;
+    btn.textContent = '登录';
+    switchTab('chat');
+    renderSessions();
+    renderMessages();
+    renderDocs();
+    renderKbs();
+    renderAnalytics();
+  }, 1000);
+  return false;
+}
+
+function fillDemo() {
+  document.getElementById('username').value = 'admin';
+  document.getElementById('password').value = '123456';
+  doLogin();
+}
+
+function doLogout() {
+  document.getElementById('app-layout').classList.add('hidden');
+  document.getElementById('app-layout').style.display = '';
+  document.getElementById('login-page').classList.remove('hidden');
+  document.getElementById('username').value = '';
+  document.getElementById('password').value = '';
+}
+
+// THEME
+function toggleTheme() {
+  isDark = !isDark;
+  document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+  var icon = document.getElementById('theme-icon');
+  if(isDark) {
+    icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>';
+  } else {
+    icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>';
+  }
+}
+
+// NAVIGATION
+function switchTab(tab) {
+  var tabs = ['chat','documents','kb','analytics'];
+  tabs.forEach(function(t) {
+    var page = document.getElementById('page-' + t);
+    if(page) page.classList.add('hidden');
+    var nav = document.getElementById('nav-' + t);
+    if(nav) nav.style.borderRightColor = 'transparent';
+  });
+  var activePage = document.getElementById('page-' + tab);
+  if(activePage) {
+    activePage.classList.remove('hidden');
+    activePage.classList.add('page-enter');
+  }
+  var activeNav = document.getElementById('nav-' + tab);
+  if(activeNav) activeNav.style.borderRightColor = 'var(--vermillion)';
+  var titles = {chat:'智能问答',documents:'文档管理',kb:'知识库管理',analytics:'分析看板'};
+  document.getElementById('page-title').textContent = titles[tab] || '首页';
+  if(tab === 'chat') renderMessages();
+  if(tab === 'documents') renderDocs();
+  if(tab === 'kb') renderKbs();
+  if(tab === 'analytics') renderAnalytics();
+}
+
+// CHAT FUNCTIONS
+function renderSessions() {
+  var list = document.getElementById('session-list');
+  list.innerHTML = '';
+  sessions.forEach(function(s) {
+    var div = document.createElement('div');
+    div.style.cssText = 'padding:12px;margin-bottom:8px;border-radius:10px;cursor:pointer;transition:all .2s;border:1px solid transparent;background:' + (s.id === currentSessionId ? 'var(--card)' : 'transparent') + ';';
+    var timeStr = s.updatedAt ? new Date(s.updatedAt).toLocaleTimeString('zh', {hour:'2-digit', minute:'2-digit'}) : '刚刚';
+    div.innerHTML = '<div style="font-weight:600;margin-bottom:4px;">' + s.title + '</div><div style="display:flex;justify-content:space-between;font-size:12px;color:var(--text-muted);"><span style="font-size:11px;color:var(--vermillion);background:rgba(33,49,56,.08);padding:2px 6px;border-radius:999px;">' + s.kbName + '</span><span>' + timeStr + '</span></div>';
+    div.onclick = function() { setCurrentSession(s.id); };
+    list.appendChild(div);
+  });
+}
+
+function setCurrentSession(id) {
+  currentSessionId = id;
+  var session = sessions.find(function(s) { return s.id === id; });
+  if(session) document.getElementById('chat-title').textContent = session.title;
+  renderSessions();
+  renderMessages();
+}
+
+function createSession() {
+  var id = 's' + Date.now();
+  var now = new Date().toISOString();
+  sessions.unshift({id:id, title:'新对话 ' + new Date().toLocaleTimeString('zh', {hour:'2-digit', minute:'2-digit'}), kbName:'产品手册库', createdAt:now, updatedAt:now});
+  setCurrentSession(id);
+  document.getElementById('messages-area').innerHTML = '';
+}
+
+function clearChat() {
+  messages = [];
+  renderMessages();
+  showToast('对话已清空');
+}
+
+function renderMessages() {
+  var area = document.getElementById('messages-area');
+  if(messages.length === 0) {
+    area.innerHTML = '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;text-align:center;color:var(--text-muted);"><div style="width:64px;height:64px;border-radius:50%;background:rgba(33,49,56,.08);display:flex;align-items:center;justify-content:center;margin-bottom:32px;color:var(--vermillion);"><svg width="32" height="32" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg></div><h3 style="font-size:25px;color:var(--ink);margin-bottom:8px;font-family:\'Noto Serif SC\',serif;">下午好，有什么我可以帮您的？</h3><p style="margin-bottom:32px;">您可以基于知识库提问，或尝试以下热门话题：</p><div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;max-width:600px;width:100%;">' +
+    ['如何重置公司账号密码？','最新的产品需求规格是什么？','Q3 销售目标达成情况如何？','关于远程办公的最新规定'].map(function(q) { return '<button onclick="sendQuick(\''+q+'\')" style="padding:12px;border:1px solid var(--line);border-radius:10px;background:var(--paper-2);cursor:pointer;text-align:left;font-size:12px;">' + q + '</button>'; }).join('') +
+    '</div></div>';
+    return;
+  }
+  area.innerHTML = '';
+  messages.forEach(function(m) {
+    var row = document.createElement('div');
+    row.style.cssText = 'display:flex;margin-bottom:32px;' + (m.role === 'user' ? 'justify-content:flex-end;' : 'justify-content:flex-start;');
+    var bubble = document.createElement('div');
+    bubble.style.cssText = 'max-width:75%;padding:24px;border-radius:10px;line-height:1.6;' + (m.role === 'user' ? 'background:var(--ink);color:var(--card);border-bottom-right-radius:2px;' : 'background:var(--card);border:1px solid var(--line);border-top-left-radius:2px;position:relative;');
+    
+    if(m.role === 'assistant') {
+      var aiTag = document.createElement('div');
+      aiTag.style.cssText = 'position:absolute;top:0;left:0;font-family:\'Noto Serif SC\',serif;font-size:11px;color:var(--text-muted);letter-spacing:-0.01em;padding:4px 10px;background:var(--card);border:1px solid var(--line);border-radius:0 0 4px 0;';
+      aiTag.textContent = 'AI 答复';
+      bubble.appendChild(aiTag);
+    }
+    
+    var content = document.createElement('p');
+    content.style.marginBottom = '8px';
+    content.textContent = m.content;
+    bubble.appendChild(content);
+    
+    if(m.confidence) {
+      var conf = document.createElement('div');
+      conf.style.cssText = 'display:inline-flex;align-items:center;gap:4px;background:rgba(31,122,77,.1);color:var(--success);padding:4px 8px;border-radius:999px;font-size:12px;margin-top:8px;';
+      conf.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4"/></svg>置信度 ' + m.confidence + '%';
+      bubble.appendChild(conf);
+    }
+    
+    if(m.sources && m.sources.length) {
+      var sourcesBlock = document.createElement('div');
+      sourcesBlock.style.cssText = 'margin-top:16px;padding-top:12px;border-top:1px solid var(--line);';
+      sourcesBlock.innerHTML = '<div style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text-muted);margin-bottom:12px;"><svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>引用来源 (' + m.sources.length + ')</div>';
+      var cards = document.createElement('div');
+      cards.style.cssText = 'display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;margin-top:8px;';
+      m.sources.forEach(function(src) {
+        var card = document.createElement('div');
+        card.style.cssText = 'background:var(--paper-2);border:1px solid var(--line);border-radius:6px;padding:12px;position:relative;cursor:pointer;';
+        card.onclick = function() { showToast('跳转至文档: ' + src.documentName); };
+        card.innerHTML = '<div style="position:absolute;top:-8px;right:-8px;background:var(--btn-solid);color:white;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;">' + src.page + '</div><div style="font-weight:600;margin-bottom:4px;font-size:14px;padding-right:20px;">' + src.documentName + '</div><div style="font-size:12px;color:var(--text-muted);display:flex;justify-content:space-between;"><span>第 ' + src.page + ' 页</span><span style="color:var(--success);">相似度 ' + src.score + '%</span></div>';
+        cards.appendChild(card);
+      });
+      sourcesBlock.appendChild(cards);
+      bubble.appendChild(sourcesBlock);
+    }
+    
+    if(m.role === 'assistant') {
+      var actions = document.createElement('div');
+      actions.style.cssText = 'display:flex;gap:8px;margin-top:16px;padding-top:12px;border-top:1px solid var(--line);opacity:0;transition:opacity .3s;';
+      actions.innerHTML = '<button class="btn-icon" title="点赞" onclick="rateMsg(\''+m.id+'\',\'up\')"><svg width="16" height="16" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><path stroke-linecap="round" stroke-linejoin="round" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"/></svg></button><button class="btn-icon" title="点踩" onclick="rateMsg(\''+m.id+'\',\'down\')"><svg width="16" height="16" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><path stroke-linecap="round" stroke-linejoin="round" d="M10 14H5.236a2 2 0 01-1.789-2.894l3.5-7A2 2 0 018.736 3h4.018c.163 0 .326.02.485.06L17 4m-7 10v2a2 2 0 002 2h.095c.5 0 .905-.405.905-.905 0-.714.211-1.412.608-2.006L17 13V4m-7 10h2"/></svg></button><button class="btn-icon" title="复制" onclick="copyMsg(this)"><svg width="16" height="16" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg></button><button class="btn-icon" style="color:var(--vermillion);" title="查看原文" onclick="showToast(\'跳转至原文档\')"><svg width="16" height="16" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg> 查看原文</button>';
+      bubble.appendChild(actions);
+      bubble.onmouseenter = function() { actions.style.opacity = '1'; };
+      bubble.onmouseleave = function() { actions.style.opacity = '0'; };
+    }
+    row.appendChild(bubble);
+    area.appendChild(row);
+  });
+  area.scrollTop = area.scrollHeight;
+}
+
+function rateMsg(msgId, rating) {
+  var msg = messages.find(function(m) { return m.id === msgId; });
+  if(msg) {
+    msg.rating = rating;
+    showToast(rating === 'up' ? '已点赞' : '已点踩');
+  }
+}
+
+function copyMsg(btn) {
+  var text = btn.closest('div[style*="opacity"]').parentElement.querySelector('p').textContent;
+  if(navigator.clipboard) {
+    navigator.clipboard.writeText(text);
+    showToast('已复制到剪贴板');
+  }
+}
+
+function sendQuick(q) {
+  document.getElementById('input-text').value = q;
+  sendMessage();
+}
+
+function sendMessage() {
+  if(isStreaming) return;
+  var input = document.getElementById('input-text');
+  var text = input.value.trim();
+  if(!text) return;
+  
+  messages.push({id:'u'+Date.now(), role:'user', content:text, createdAt:new Date().toISOString()});
+  input.value = '';
+  renderMessages();
+  
+  isStreaming = true;
+  var btn = document.getElementById('send-btn');
+  btn.disabled = true;
+  btn.textContent = '思考中...';
+  
+  var response = '这是一个很好的问题！让我在知识库中查找相关信息。';
+  var sources = null;
+  var confidence = null;
+  
+  if(text.toLowerCase().includes('api') || text.toLowerCase().includes('鉴权')) {
+    response = '最新的 API V2 接口支持 OAuth2 鉴权配置。请参考 API 接口文档中的认证章节进行设置，配置文件路径为 /etc/api/oauth2.yaml。';
+    sources = [{documentId:'d3',documentName:'API接口文档_v2.md',page:2,score:98}];
+    confidence = 92;
+  } else if(text.toLowerCase().includes('销售') || text.toLowerCase().includes('q3')) {
+    response = '根据第三季度销售报告显示，Q3整体销售额达到 1.25 亿元，完成年度目标的 62.5%，同比增长 18%。主要增长点来自华东和华南地区市场。';
+    sources = [{documentId:'d1',documentName:'季度销售分析报告.pdf',page:5,score:88},{documentId:'d5',documentName:'市场拓展计划书.docx',page:12,score:82}];
+    confidence = 88;
+  } else if(text.toLowerCase().includes('密码') || text.toLowerCase().includes('重置')) {
+    response = '公司账号重置流程：请访问内网门户的「账号管理中心」，点击「密码重置」按钮，接收验证码后设置新密码。如有异常请联系IT帮助台。';
+    sources = [{documentId:'d9',documentName:'员工手册_v3.docx',page:24,score:95}];
+    confidence = 95;
+  }
+  
+  var assistantMsg = {id:'a'+Date.now(), role:'assistant', content:'', sources:sources, confidence:confidence, rating:null, createdAt:new Date().toISOString()};
+  messages.push(assistantMsg);
+  
+  var i = 0;
+  var iv = setInterval(function() {
+    if(i < response.length) {
+      assistantMsg.content = response.substring(0, i+1);
+      renderMessages();
+      i++;
+    } else {
+      clearInterval(iv);
+      isStreaming = false;
+      btn.disabled = false;
+      btn.innerHTML = '发送问题<svg width="16" height="16" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" style="margin-left:4px;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>';
+    }
+  }, 30);
+}
+
+// DOCUMENT FUNCTIONS
+function renderDocs() {
+  var tbody = document.getElementById('doc-table-body');
+  var search = document.getElementById('doc-search').value.toLowerCase();
+  var filterKb = document.getElementById('filter-kb').value;
+  var filterType = document.getElementById('filter-type').value;
+  var filterStatus = document.getElementById('filter-status').value;
+  
+  var filtered = documents.filter(function(d) {
+    if(filterKb !== 'all' && d.kbId !== filterKb) return false;
+    if(filterType !== 'all' && d.fileType !== filterType) return false;
+    if(filterStatus !== 'all' && d.status !== filterStatus) return false;
+    if(search && !d.filename.toLowerCase().includes(search)) return false;
+    return true;
+  });
+  
+  tbody.innerHTML = '';
+  filtered.forEach(function(d) {
+    var tr = document.createElement('tr');
+    tr.style.cssText = 'border-bottom:1px solid var(--line);cursor:pointer;transition:background .2s;';
+    tr.onmouseover = function() { tr.style.background = 'var(--paper-2)'; };
+    tr.onmouseout = function() { tr.style.background = ''; };
+    tr.innerHTML = '<td style="padding:12px 24px;"><input type="checkbox" ' + (selectedIds.includes(d.id) ? 'checked' : '') + ' onchange="toggleDoc(\''+d.id+'\')"></td><td style="padding:12px 24px;"><div style="display:flex;align-items:center;gap:12px;"><div style="width:36px;height:36px;border-radius:6px;background:var(--paper-2);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--vermillion);"><svg width="18" height="18" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></div><div><div style="font-weight:600;max-width:240px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' + d.filename + '</div><div style="display:flex;gap:4px;margin-top:4px;">' + d.tags.map(function(t) { return '<span style="font-size:10px;padding:2px 8px;background:var(--paper-2);border:1px solid var(--line);border-radius:4px;color:var(--text-muted);">' + t + '</span>'; }).join('') + '</div></div></div></td><td style="padding:12px 24px;">' + d.kbName + '</td><td style="padding:12px 24px;color:var(--text-muted);font-variant-numeric:tabular-nums;">' + formatFileSize(d.fileSize) + ' / ' + d.pageCount + 'P</td><td style="padding:12px 24px;font-size:12px;">' + (d.uploader || '-') + '</td><td style="padding:12px 24px;"><span style="display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:999px;font-size:12px;font-weight:600;' + getStatusStyle(d.status) + '"><span style="width:8px;height:8px;border-radius:50%;background:' + getStatusColor(d.status) + ';display:inline-block;"></span>' + getStatusLabel(d.status) + '</span></td><td style="padding:12px 24px;color:var(--text-muted);font-size:12px;">' + formatDate(d.createdAt) + '</td><td style="padding:12px 24px;color:var(--text-muted);font-size:12px;">' + formatDate(d.updatedAt) + '</td><td style="padding:12px 24px;"><div style="display:flex;gap:4px;"><button class="btn-icon" title="查看" onclick="showToast(\'预览: '+d.filename+'\')"><svg width="16" height="16" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg></button><button class="btn-icon" title="下载" onclick="showToast(\'下载: '+d.filename+'\')"><svg width="16" height="16" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></button><button class="btn-icon" title="删除" style="color:var(--error);" onclick="deleteDoc(\''+d.id+'\')"><svg width="16" height="16" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg></button></div></td>';
+    tbody.appendChild(tr);
+  });
+  
+  document.getElementById('doc-count').textContent = filtered.length + ' 个文档';
+  document.getElementById('doc-pager-info').textContent = '显示 1 到 ' + filtered.length + ' 条，共 ' + filtered.length + ' 条记录';
+}
+
+function filterDocs() { renderDocs(); }
+
+function formatFileSize(bytes) {
+  if(!bytes) return '0 B';
+  var units = ['B','KB','MB','GB'];
+  var i = 0;
+  while(bytes >= 1024 && i < units.length - 1) { bytes /= 1024; i++; }
+  return bytes.toFixed(1) + ' ' + units[i];
+}
+
+function getStatusStyle(s) {
+  if(s === 'processed' || s === 'ready') return 'background:rgba(31,122,77,.1);color:var(--success);';
+  if(s === 'processing') return 'background:rgba(33,49,56,.08);color:var(--vermillion);';
+  if(s === 'failed') return 'background:rgba(199,54,42,.1);color:var(--error);';
+  return 'background:var(--paper-2);color:var(--text-muted);';
+}
+
+function getStatusColor(s) {
+  if(s === 'processed' || s === 'ready') return 'var(--success)';
+  if(s === 'processing') return 'var(--vermillion)';
+  if(s === 'failed') return 'var(--error)';
+  return 'var(--text-muted)';
+}
+
+function getStatusLabel(s) {
+  if(s === 'processed' || s === 'ready') return '已就绪';
+  if(s === 'processing') return '处理中';
+  if(s === 'failed') return '失败';
+  return '待处理';
+}
+
+function formatDate(d) {
+  if(!d) return '-';
+  var dt = new Date(d);
+  return dt.toLocaleDateString('zh-CN').replace(/\//g, '-');
+}
+
+function toggleDoc(id) {
+  var idx = selectedIds.indexOf(id);
+  if(idx > -1) selectedIds.splice(idx, 1);
+  else selectedIds.push(id);
+  document.getElementById('batch-delete-btn').disabled = selectedIds.length === 0;
+}
+
+function toggleSelectAll() {
+  var checked = document.getElementById('select-all').checked;
+  selectedIds = checked ? documents.map(function(d) { return d.id; }) : [];
+  renderDocs();
+  document.getElementById('batch-delete-btn').disabled = selectedIds.length === 0;
+}
+
+function deleteDoc(id) {
+  documents = documents.filter(function(d) { return d.id !== id; });
+  renderDocs();
+  showToast('文档已删除');
+}
+
+function batchDelete() {
+  if(selectedIds.length === 0) return;
+  documents = documents.filter(function(d) { return !selectedIds.includes(d.id); });
+  selectedIds = [];
+  renderDocs();
+  document.getElementById('batch-delete-btn').disabled = true;
+  showToast('批量删除完成');
+}
+
+function refreshDocs() { showToast('文档列表已刷新'); }
+
+// KB FUNCTIONS
+function renderKbs() {
+  var grid = document.getElementById('kb-grid');
+  var search = document.getElementById('kb-search') ? document.getElementById('kb-search').value.toLowerCase() : '';
+  
+  var filtered = kbs.filter(function(k) {
+    return k.name.toLowerCase().includes(search) || k.description.toLowerCase().includes(search);
+  });
+  
+  grid.innerHTML = '';
+  filtered.forEach(function(kb) {
+    var card = document.createElement('div');
+    card.className = 'card';
+    card.style.cssText = 'transition:all .3s;cursor:pointer;';
+    card.onmouseenter = function() { this.style.boxShadow = 'var(--shadow-hover)'; this.style.transform = 'translateY(-2px)'; };
+    card.onmouseleave = function() { this.style.boxShadow = 'var(--shadow-card)'; this.style.transform = 'translateY(0)'; };
+    
+    var badgeBg = kb.isPrivate ? 'rgba(185,138,47,.1)' : 'rgba(31,122,77,.1)';
+    var badgeColor = kb.isPrivate ? 'var(--gold)' : 'var(--success)';
+    var lockPath = kb.isPrivate ? 'M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z' : 'M3.055 11H5a2 2 0 011 1v1a2 2 0 01-1 1H3.055a2 2 0 00-2 2v6a2 2 0 002 2h.458A10.002 10.002 0 0012 21a10.002 10.002 0 009.487-5.542h.459a2 2 0 002-2v-6a2 2 0 00-2-2H17a2 2 0 01-2-2V7a2 2 0 012-2h1.586a2 2 0 011.705.949l1.414 1.414a1 1 0 00.707.293h.707';
+    
+    card.innerHTML = '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:32px;"><div style="width:48px;height:48px;border-radius:12px;background:var(--paper-2);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--ink);"><svg width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><path stroke-linecap="round" stroke-linejoin="round" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/></svg></div><div style="display:flex;align-items:center;gap:8px;"><span style="display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:999px;font-size:11px;font-weight:600;background:' + badgeBg + ';color:' + badgeColor + ';"><svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><path stroke-linecap="round" stroke-linejoin="round" d="' + lockPath + '"/></svg>' + (kb.isPrivate ? '私有' : '共享') + '</span><button class="btn-icon" style="padding:4px;"><svg width="18" height="18" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v.01M12 12v.01M12 19v.01"/></svg></button></div></div><h3 style="font-size:18px;font-weight:700;margin:24px 0 16px;">' + kb.name + '</h3><p style="font-size:14px;color:var(--text-muted);line-height:1.6;margin-bottom:24px;max-height:64px;overflow:hidden;">' + kb.description + '</p><div style="display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--text-muted);padding-top:24px;border-top:1px solid var(--line);"><div style="display:flex;align-items:center;gap:8px;"><svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg><span>' + kb.documentCount + '</span></div><div style="display:flex;align-items:center;gap:8px;"><svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-12 0v1z"/></svg><span>' + kb.memberCount + '</span></div><span style="font-size:11px;margin-left:auto;">更新于 ' + kb.updatedAt + '</span></div>';
+    grid.appendChild(card);
+  });
+}
+
+function filterKbs() { renderKbs(); }
+
+function renderUploadModal() {
+  document.getElementById('upload-modal').classList.remove('hidden');
+  document.getElementById('upload-progress').classList.add('hidden');
+  document.getElementById('upload-submit-btn').disabled = false;
+  uploadProgress = 0;
+}
+
+function startUpload() {
+  var progress = document.getElementById('upload-progress');
+  var fill = document.getElementById('upload-fill');
+  var percent = document.getElementById('upload-percent');
+  var btn = document.getElementById('upload-submit-btn');
+  
+  progress.classList.remove('hidden');
+  btn.disabled = true;
+  
+  uploadProgress = 0;
+  if(uploadTimer) clearInterval(uploadTimer);
+  
+  uploadTimer = setInterval(function() {
+    uploadProgress += Math.random() * 15;
+    if(uploadProgress >= 100) {
+      uploadProgress = 100;
+      clearInterval(uploadTimer);
+      setTimeout(function() {
+        document.getElementById('upload-modal').classList.add('hidden');
+        showToast('文档上传成功');
+      }, 500);
+    }
+    fill.style.width = uploadProgress + '%';
+    percent.textContent = Math.round(uploadProgress) + '%';
+  }, 200);
+}
+
+function renderKbModal() {
+  document.getElementById('kb-modal').classList.remove('hidden');
+}
+
+function addKB() {
+  var name = document.getElementById('new-kb-name').value.trim();
+  if(!name) { showToast('请输入知识库名称'); return; }
+  var desc = document.getElementById('new-kb-desc').value.trim();
+  var isPrivate = document.querySelector('input[name="kb-vis"]:checked').value === 'true';
+  var now = new Date().toISOString().split('T')[0];
+  kbs.unshift({id:'kb'+Date.now(), name:name, description:desc||'', documentCount:0, memberCount:1, updatedAt:now, isPrivate:isPrivate});
+  document.getElementById('kb-modal').classList.add('hidden');
+  renderKbs();
+  showToast('知识库创建成功');
+}
+
+// ANALYTICS
+function renderAnalytics() {
+  var stats = [
+    {label:'总查询次数', value:'12,840', change:'+12%', up:true},
+    {label:'文档向量化', value:'458', change:'+5%', up:true},
+    {label:'活跃知识库', value:'24', change:'0%', up:true},
+    {label:'平均响应时间', value:'1.2s', change:'-15%', up:false}
+  ];
+  var trends = [{date:'07-24',count:120},{date:'07-25',count:150},{date:'07-26',count:140},{date:'07-27',count:180},{date:'07-28',count:210},{date:'07-29',count:230},{date:'07-30',count:250}];
+  // popularDocs: {name, count}
+  var popularDocs = [{name:'API接口文档_v2.md',count:1240},{name:'2026年度培训计划.pptx',count:850},{name:'离职流程与交接规范.docx',count:620}];
+  var docTypes = [{type:'PDF',count:150},{type:'DOCX',count:80},{type:'MD',count:120}];
+  // recentQueries: {query, kbName, tookMs, time}
+  var recentQueries = [{query:'如何配置 OAuth2 鉴权？',kbName:'产品手册库',tookMs:45,time:'刚刚'},{query:'差旅报销标准是什么？',kbName:'财务报销指南',tookMs:32,time:'5分钟前'},{query:'远程办公周三需要到岗吗？',kbName:'人力资源政策',tookMs:28,time:'12分钟前'}];
+  // LLM usage data for dual-axis chart
+  var llmUsage = [{date:'07-24',calls:120,tokens:45000},{date:'07-25',calls:150,tokens:52000},{date:'07-26',calls:140,tokens:48000},{date:'07-27',calls:180,tokens:62000},{date:'07-28',calls:210,tokens:71000},{date:'07-29',calls:230,tokens:78000},{date:'07-30',calls:250,tokens:85000}];
+  
+  var statsGrid = document.getElementById('stats-grid');
+  statsGrid.innerHTML = '';
+  stats.forEach(function(s) {
+    var card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = '<div style="font-size:12px;color:var(--text-muted);margin-bottom:8px;">' + s.label + '</div><div style="font-size:12px;margin-bottom:8px;display:flex;align-items:center;gap:4px;' + (s.up ? 'color:var(--success)' : 'color:var(--error)') + ';"><svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><path stroke-linecap="round" stroke-linejoin="round" d="' + (s.up ? 'M5 15l7-7 7 7' : 'M19 9l-7 7-7-7') + '"/></svg>' + s.change + '</div><div style="font-size:31px;font-weight:700;font-variant-numeric:tabular-nums;">' + s.value + '</div>';
+    statsGrid.appendChild(card);
+  });
+  
+  var chartsRow = document.getElementById('charts-row');
+  chartsRow.innerHTML = '';
+  
+  // Trend chart (dual-axis: calls + tokens)
+  var trendCard = document.createElement('div');
+  trendCard.className = 'card';
+  trendCard.innerHTML = '<div style="font-size:16px;font-weight:700;display:flex;align-items:center;gap:8px;margin-bottom:16px;"><svg width="18" height="18" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" style="color:var(--vermillion);"><path stroke-linecap="round" stroke-linejoin="round" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"/></svg>7日搜索趋势</div><div style="display:flex;align-items:center;gap:16px;margin-bottom:16px;font-size:11px;"><span style="display:flex;align-items:center;gap:4px;"><span style="width:12px;height:12px;background:var(--vermillion);border-radius:2px;display:inline-block;"></span>查询次数</span><span style="display:flex;align-items:center;gap:4px;"><span style="width:12px;height:12px;background:var(--success);border-radius:2px;display:inline-block;"></span>Token消耗(K)</span></div><div style="height:200px;display:flex;align-items:flex-end;gap:8px;padding-bottom:8px;border-bottom:1px solid var(--line);margin-bottom:8px;">' + trends.map(function(t, i) { return '<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;"><div style="display:flex;align-items:flex-end;gap:2px;height:160px;"><div style="width:40%;background:var(--vermillion);border-radius:2px 2px 0 0;height:' + (t.count/300*100) + '%;"></div><div style="width:40%;background:var(--success);border-radius:2px 2px 0 0;height:' + (llmUsage[i].tokens/100/100*100) + '%;"></div></div><span style="font-size:10px;color:var(--text-muted);">' + t.date + '</span></div>'; }).join('') + '</div>';
+  chartsRow.appendChild(trendCard);
+  
+  // Pie chart
+  var pieCard = document.createElement('div');
+  pieCard.className = 'card';
+  pieCard.innerHTML = '<div style="font-size:16px;font-weight:700;display:flex;align-items:center;gap:8px;margin-bottom:32px;"><svg width="18" height="18" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" style="color:var(--vermillion);"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>文档类型分布</div><div style="width:180px;height:180px;border-radius:50%;border:14px solid var(--paper-2);margin:0 auto 32px;position:relative;display:flex;align-items:center;justify-content:center;"><div style="position:absolute;text-align:center;"><div style="font-size:25px;font-weight:700;">1.2K</div><div style="font-size:12px;color:var(--text-muted);">总计</div></div></div><div style="display:flex;flex-direction:column;gap:8px;">' + docTypes.map(function(t, i) { return '<div style="display:flex;justify-content:space-between;align-items:center;font-size:12px;"><div style="display:flex;align-items:center;gap:8px;"><div style="width:8px;height:8px;border-radius:50%;background:' + (i===0?'var(--vermillion)':i===1?'var(--success)':'var(--gold)') + ';"></div><span>' + t.type + '</span></div><span style="font-weight:600;">' + t.count + '</span></div>'; }).join('') + '</div>';
+  chartsRow.appendChild(pieCard);
+  
+  var bottomCharts = document.getElementById('bottom-charts');
+  bottomCharts.innerHTML = '';
+  
+  // Recent queries
+  var queryCard = document.createElement('div');
+  queryCard.className = 'card';
+  queryCard.innerHTML = '<div style="padding:16px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;"><div style="font-size:16px;font-weight:700;display:flex;align-items:center;gap:8px;"><svg width="18" height="18" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" style="color:var(--vermillion);"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>最近查询</div><a href="#" onclick="showToast(\'查看全部查询\');return false;" style="font-size:12px;color:var(--vermillion);">查看全部</a></div><div>' + recentQueries.map(function(q) { return '<div style="padding:16px;border-bottom:1px solid var(--line);cursor:pointer;transition:background .2s;" onmouseover="this.style.background=\'var(--paper-2)\'" onmouseout="this.style.background=\'\'"><div style="font-weight:600;margin-bottom:4px;">"' + q.query + '"</div><div style="display:flex;align-items:center;gap:8px;font-size:11px;color:var(--text-muted);"><span style="background:rgba(33,49,56,.08);color:var(--vermillion);padding:2px 6px;border-radius:999px;font-size:10px;">' + q.kbName + '</span><span><svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" style="vertical-align:-2px;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> ' + q.time + ' · ' + q.tookMs + 'ms</span></div></div>'; }).join('') + '</div>';
+  bottomCharts.appendChild(queryCard);
+  
+  // Popular docs
+  var popCard = document.createElement('div');
+  popCard.className = 'card';
+  popCard.innerHTML = '<div style="padding:16px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;"><div style="font-size:16px;font-weight:700;display:flex;align-items:center;gap:8px;"><svg width="18" height="18" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" style="color:var(--vermillion);"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>热门阅读排行</div><a href="#" onclick="showToast(\'查看详情\');return false;" style="font-size:12px;color:var(--vermillion);">详情</a></div><div style="padding:16px;">' + popularDocs.map(function(d) { return '<div style="margin-bottom:16px;"><div style="display:flex;justify-content:space-between;margin-bottom:4px;font-size:12px;"><span style="font-weight:600;max-width:70%;overflow:hidden;text-overflow:ellipsis;">' + d.name + '</span><span style="color:var(--text-muted);font-variant-numeric:tabular-nums;">' + d.count + ' 次</span></div><div style="height:4px;background:var(--paper-2);border-radius:2px;overflow:hidden;"><div style="height:100%;background:var(--vermillion);border-radius:2px;transition:width .5s;" style="width:' + (d.count/1240*100) + '%"></div></div></div>'; }).join('') + '</div>';
+  bottomCharts.appendChild(popCard);
+}
+
+// TOAST
+function showToast(msg) {
+  var toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.classList.remove('hidden');
+  setTimeout(function() { toast.classList.add('hidden'); }, 2500);
+}
+
+// Mobile menu
+function toggleMobileMenu() {
+  var sidebar = document.getElementById('sidebar');
+  var main = document.getElementById('main-content');
+  sidebar.classList.toggle('mobile-open');
+  if(sidebar.classList.contains('mobile-open')) {
+    sidebar.style.transform = 'translateX(0)';
+    main.style.marginLeft = '0';
+  } else {
+    sidebar.style.transform = 'translateX(-100%)';
+    main.style.marginLeft = '240px';
+  }
+}
+
+// INIT
+document.addEventListener('keydown', function(e) {
+  if(e.key === 'Enter' && !e.shiftKey && document.activeElement === document.getElementById('input-text')) {
+    e.preventDefault();
+    sendMessage();
+  }
+});
+
+// Mobile sidebar initial state
+(function() {
+  var sidebar = document.getElementById('sidebar');
+  if(window.innerWidth <= 1024) {
+    sidebar.style.transform = 'translateX(-100%)';
+  }
+  window.addEventListener('resize', function() {
+    if(window.innerWidth > 1024) {
+      sidebar.style.transform = 'translateX(0)';
+      document.getElementById('main-content').style.marginLeft = '240px';
+    } else {
+      if(!sidebar.classList.contains('mobile-open')) {
+        sidebar.style.transform = 'translateX(-100%)';
+      }
+      document.getElementById('main-content').style.marginLeft = '0';
+    }
+  });
+})();
+
+// ==== 电影感预加载器（打字机 + 升起，纯视觉新增）====
+(function() {
+  var pre = document.getElementById('preloader');
+  var word = document.getElementById('preloader-text').querySelector('.w');
+  var cursor = document.getElementById('preloader-cursor');
+  if(!pre || !word) return;
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var full = 'KnowledgeFlow.';
+  full.split('').forEach(function(ch) {
+    var s = document.createElement('span');
+    s.textContent = ch;
+    if(ch === '.') s.className = 'pd';
+    word.appendChild(s);
+  });
+  var letters = [].slice.call(word.children);
+  if(reduced) { document.body.classList.add('ready'); pre.classList.add('done'); return; }
+  var CHAR = 110, START = 500, EXTRA = 650;
+  var LIFT_AT = START + letters.length * CHAR + EXTRA;
+  setTimeout(function() {
+    letters.forEach(function(s, i) { setTimeout(function() { s.style.opacity = '1'; }, i * CHAR); });
+  }, START);
+  setTimeout(function() { cursor.style.display = 'none'; }, LIFT_AT - 150);
+  setTimeout(function() { document.body.classList.add('ready'); pre.classList.add('lifted'); }, LIFT_AT);
+  setTimeout(function() { pre.classList.add('done'); }, LIFT_AT + 1900);
+})();
+
+// ==== 分析看板统计数字滚动（滚动入场触发，纯视觉新增）====
+(function() {
+  var grid = document.getElementById('stats-grid');
+  if(!grid || !('IntersectionObserver' in window)) return;
+  if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var done = new WeakSet();
+  function parse(s) {
+    var m = /^([\d,]+(?:\.\d+)?)(.*)$/.exec((s || '').trim());
+    if(!m) return null;
+    return { num: parseFloat(m[1].replace(/,/g, '')), dec: (m[1].split('.')[1] || '').length, suffix: m[2], raw: m[1] };
+  }
+  function fmt(v, p) {
+    var s = v.toFixed(p.dec);
+    if(p.dec === 0) s = s.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    return s + p.suffix;
+  }
+  function animate(el) {
+    var p = parse(el.textContent);
+    if(!p || done.has(el)) return;
+    done.add(el);
+    var t0 = null;
+    function frame(ts) {
+      if(!t0) t0 = ts;
+      var t = Math.min(1, (ts - t0) / 2000);
+      var e = 1 - Math.pow(1 - t, 3);
+      el.textContent = fmt(p.num * e, p);
+      if(t < 1) requestAnimationFrame(frame);
+      else el.textContent = p.raw + p.suffix;
+    }
+    requestAnimationFrame(frame);
+  }
+  var io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(en) { if(en.isIntersecting) { animate(en.target); io.unobserve(en.target); } });
+  }, { threshold: 0.3 });
+  function arm() {
+    var els = grid.querySelectorAll(':scope > .card > div:last-child');
+    for(var i = 0; i < els.length; i++) if(!done.has(els[i])) io.observe(els[i]);
+  }
+  arm();
+  if(window.MutationObserver) new MutationObserver(arm).observe(grid, { childList: true });
+})();
+</script>
+</body>
+</html>
