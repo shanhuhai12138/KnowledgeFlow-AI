@@ -93,44 +93,24 @@ cd frontend && npm install && npm run dev
 
 > Key 以 AES 加密存储（`CONFIG_SECRET` 环境变量派生密钥），**永不明文回显**，仅管理员可配置。
 
-## 📸 截图（演示素材清单）
+## 📸 界面预览
 
-> 建议在 1440px 宽的浏览器窗口截图，存入 `docs/screenshots/`，文件名按下表；截图后上方图片自动显示。
+<p align="center"><img src="docs/screenshots/login.svg" width="56%" alt="登录页开场动画"></p>
 
-| 文件 | 页面 | 展示内容 | 操作 |
-|------|------|----------|------|
-| `login.png` | 登录页 | 编辑社论风品牌区 + 开场动画署名 `- by shanhuhai12138` | 打开 `http://localhost:8080` |
-| `chat.png` ★ | 智能问答 | 流式回答 + 引用来源卡片 + 置信度 | 登录后「智能问答」问「代码评审流程是什么？」 |
-| `documents.png` | 文档管理 | 种子文档列表 + 状态徽标（已就绪/处理中） | 左侧「文档管理」 |
-| `kb.png` | 知识库 | 知识库卡片 + 成员管理（金庸人物：令狐冲/黄蓉…） | 「知识库」→ 打开知识库 → 成员管理 |
-| `analytics.png` | 分析看板 | 统计卡数字滚动 + 7 日趋势 + 文档类型分布 | 「分析看板」 |
-| `dark-chat.png`（可选） | 任意页 | 深色模式 | 顶栏切换深色后再截一张 |
+<p align="center">
+  <img src="docs/screenshots/login.png" width="45%" alt="登录页" />
+  <img src="docs/screenshots/chat.png" width="45%" alt="智能问答 · 流式回答与引用来源" />
+</p>
 
-**登录页开场动画**（SVG 动效，GitHub 支持渲染 SMIL 动画；效果与真实开场一致）：
+<p align="center">
+  <img src="docs/screenshots/documents.png" width="45%" alt="文档管理" />
+  <img src="docs/screenshots/kb.png" width="45%" alt="知识库与成员管理" />
+</p>
 
-<img src="docs/screenshots/login.svg" width="560" alt="登录页开场动画（KnowledgeFlow. 逐字浮现 + 标语 + 署名）">
-
-### 界面预览
-
-<img src="docs/screenshots/login.png" width="560" alt="登录页">
-<img src="docs/screenshots/chat.png" width="560" alt="智能问答（流式回答 + 引用来源）">
-<img src="docs/screenshots/documents.png" width="560" alt="文档管理">
-<img src="docs/screenshots/kb.png" width="560" alt="知识库与成员管理">
-<img src="docs/screenshots/analytics.png" width="560" alt="分析看板">
-
-*深色模式：顶栏可切换，`dark-chat.png` 见 `docs/screenshots/`。*
-
-## ▶️ 5 分钟演示流程（答辩/展示用）
-
-> 日常体验用 **http://localhost:5173**（开发模式，`cd frontend && npm run dev`）；`http://localhost:8080` 是 Docker 部署版（答辩/交付演示用），两者功能一致。
-
-1. 打开 `http://localhost:5173`（电影感开场动画，右下角 `- by shanhuhai12138`）
-2. 登录 `admin / admin123`（登录页有「一键填入」）
-3. **智能问答**：问「代码评审流程是什么？」→ 展示流式打字机 + 引用来源卡片 + 置信度；再追问一句验证多轮上下文
-4. **文档管理**：展示预置的 5 篇种子文档（已就绪状态），上传新文档看 `处理中 → 已就绪` 流转
-5. **知识库**：打开「软件开发团队知识库」→ 成员管理，成员是金庸笔下的经典人物
-6. **分析看板**：统计卡 + 真实图表
-7. （加分）**AI 设置**：管理员可配置模型 API Key，测试连接一键验证链路
+<p align="center">
+  <img src="docs/screenshots/analytics.png" width="45%" alt="分析看板" />
+  <img src="docs/screenshots/dark-chat.png" width="45%" alt="深色模式" />
+</p>
 
 ## 🧰 技术栈
 
@@ -150,7 +130,7 @@ cd frontend && npm install && npm run dev
 ## 🤝 致谢
 
 - 后端基座：[RuoYi-Vue-Pro](https://gitee.com/zhijiantianya/ruoyi-vue-pro)（认证/RBAC/代码生成器）
-- RAG 分块器参考：[regent](https://github.com/)（中文感知递归分块）
+- RAG 分块器参考：[regent](https://github.com/shanhuhai12138/regent)（中文感知递归分块）
 - 前端视觉：编辑社论风（Editorial）设计体系
 
 ## 📄 License
