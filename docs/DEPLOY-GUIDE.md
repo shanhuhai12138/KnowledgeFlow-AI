@@ -32,6 +32,8 @@ git clone https://github.com/shanhuhai12138/KnowledgeFlow-AI.git
 cd KnowledgeFlow-AI
 ```
 
+> 💡 `git clone` 会自动创建 `KnowledgeFlow-AI` 文件夹并把整个项目（含 `deploy`、`backend`、`frontend` 等）下载进去，**不用手动建任何文件夹**。执行完 `cd KnowledgeFlow-AI` 进入它即可。
+
 ## 第 3 步：配置环境变量（默认值即可跑）
 
 ```bash
