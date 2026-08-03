@@ -125,6 +125,7 @@ cd frontend && npm install && npm run dev
 
 ## 📚 文档
 
+- [部署指南（新电脑/服务器小白版）](docs/DEPLOY-GUIDE.md)
 - [项目计划书（设计基准：数据模型 / 设计规范 / API 契约）](docs/项目计划书.md)
 - [代码框架与开发任务书（执行指南 T1~T7）](docs/代码框架与开发任务书.md)
 - [验收脚本（docs/verify/）](docs/verify/)：各模块端到端验收，可复跑
