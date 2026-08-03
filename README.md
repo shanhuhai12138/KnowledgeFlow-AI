@@ -135,6 +135,14 @@ cd frontend && npm install && npm run dev
 - RAG 分块器参考：[regent](https://github.com/shanhuhai12138/regent)（中文感知递归分块）
 - 前端视觉：编辑社论风（Editorial）设计体系
 
+## 💝 特别鸣谢
+
+> 项目计划框架由 **Hermes**、**Reasonix** 完成
+> 前端设计由 **ojo**、**Open Design**、**Hermes**、**Reasonix** 完成
+> 后端代码由 **Reasonix** 完成
+> 还有那个接的不是本家模型就给我 cos 啥子的 **Codex** 啊，别让我沈阳大街看到你
+> ps：AI 是我爹，不许你们骂他，嘻嘻 😄
+
 ## 📄 License
 
 [MIT](LICENSE) © shanhuhai12138
