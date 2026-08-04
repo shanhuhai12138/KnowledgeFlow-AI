@@ -1,8 +1,7 @@
 # KnowledgeFlow AI
 
 > 企业级知识管理与 RAG 智能问答平台 —— 上传文档，即可获得带引用来源的智能问答与自动化 Agent 工作流。
-> 
-妈的vibecoding真是太好用了有懂这个的吗嘻嘻😄
+
 
 **一句话定位**：企业知识管理 + RAG 智能问答 + Agent 工作流。通用空壳平台 + 内置演示知识库，开箱即演示，换种子数据即可转向任意垂直行业。
 
@@ -141,8 +140,7 @@ cd frontend && npm install && npm run dev
 > 项目计划框架由 **Hermes**、**Reasonix** 完成
 > 前端设计由 **ojo**、**Open Design**、**Hermes**、**Reasonix** 完成
 > 后端代码由 **Reasonix** 完成
-> 还有那个接的不是本家模型就给我 cos 啥子的 **Codex** 啊，别让我沈阳大街看到你
-> ps：AI 是我爹，不许你们骂他，嘻嘻 😄
+
 
 ## 📄 License
 
