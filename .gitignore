@@ -1,3 +1,5 @@
+# KnowledgeFlow AI — 根目录 .gitignore
+
 # ---- 环境与密钥（绝不入库） ----
 .env
 .env.*
@@ -12,30 +14,24 @@
 *.iml
 
 # ---- 前端 ----
-node_modules/
-dist/
-*.local
+frontend/node_modules/
+frontend/dist/
 
 # ---- 后端 ----
-target/
-*.class
+backend/target/
+backend/*.class
+backend/.flattened-pom.xml
+backend/*/.flattened-pom.xml
 
 # ---- Python ----
-.venv/
-__pycache__/
-*.pyc
+ai-service/.venv/
+ai-service/__pycache__/
+ai-service/*.pyc
 
 # ---- 系统 ----
 .DS_Store
 Thumbs.db
 
-# 上游冗余（本项目不使用，瘦身排除）
-backend/.image/
-backend/sql/db2/
-backend/sql/dm/
-backend/sql/highgo/
-backend/sql/kingbase/
-backend/sql/opengauss/
-backend/sql/oracle/
-backend/sql/postgresql/
-backend/sql/sqlserver/
+# ---- 构建产物 ----
+backend/yudao-ui.bak/
+backend/scripts/
