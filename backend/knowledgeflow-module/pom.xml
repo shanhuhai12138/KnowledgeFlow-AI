@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>cn.knowledgeflow.boot</groupId>
+        <artifactId>yudao</artifactId>
+        <version>${revision}</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>knowledgeflow-module</artifactId>
+    <name>${project.artifactId}</name>
+    <description>KnowledgeFlow 知识库模块：知识库 CRUD、成员管理、可见性（多租户隔离）</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>cn.knowledgeflow.boot</groupId>
+            <artifactId>knowledgeflow-spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.knowledgeflow.boot</groupId>
+            <artifactId>knowledgeflow-spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.knowledgeflow.boot</groupId>
+            <artifactId>knowledgeflow-spring-boot-starter-mybatis</artifactId>
+        </dependency>
+        <!-- Redis（Streams 消息队列 doc-pipeline，DR-7） -->
+        <dependency>
+            <groupId>cn.knowledgeflow.boot</groupId>
+            <artifactId>knowledgeflow-spring-boot-starter-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.knowledgeflow.boot</groupId>
+            <artifactId>knowledgeflow-spring-boot-starter-biz-tenant</artifactId>
+        </dependency>
+        <!-- 依赖 system 模块：成员管理需校验用户存在（AdminUserApi） -->
+        <dependency>
+            <groupId>cn.knowledgeflow.boot</groupId>
+            <artifactId>knowledgeflow-module-system</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <!-- MinIO 对象存储（文档文件，DR-8） -->
+        <dependency>
+            <groupId>io.minio</groupId>
+            <artifactId>minio</artifactId>
+        </dependency>
+        <!-- 文档文本解析（T2.5：PDF/DOCX） -->
+        <dependency>
+            <groupId>org.apache.pdfbox</groupId>
+            <artifactId>pdfbox</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.knowledgeflow.boot</groupId>
+            <artifactId>knowledgeflow-spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+</project>

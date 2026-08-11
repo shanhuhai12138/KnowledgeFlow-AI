@@ -1,46 +1,46 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>cn.iocoder.boot</groupId>
-    <artifactId>yudao</artifactId>
+    <groupId>cn.knowledgeflow.boot</groupId>
+    <artifactId>knowledgeflow</artifactId>
     <version>${revision}</version>
     <packaging>pom</packaging>
     <modules>
-        <module>yudao-dependencies</module>
-        <module>yudao-framework</module>
+        <module>knowledgeflow-dependencies</module>
+        <module>knowledgeflow-framework</module>
         <!-- Server 主项目 -->
-        <module>yudao-server</module>
+        <module>knowledgeflow-server</module>
         <!-- 各种 module 拓展 -->
-        <module>yudao-module-system</module>
-        <module>yudao-module-infra</module>
+        <module>knowledgeflow-module-system</module>
+        <module>knowledgeflow-module-infra</module>
         <!-- KnowledgeFlow 知识库模块（T2.2 起） -->
-        <module>yudao-module-knowledge</module>
-<!--        <module>yudao-module-member</module>-->
-<!--        <module>yudao-module-bpm</module>-->
-<!--        <module>yudao-module-report</module>-->
-<!--        <module>yudao-module-mp</module>-->
-<!--        <module>yudao-module-pay</module>-->
-<!--        <module>yudao-module-mall</module>-->
-<!--        <module>yudao-module-crm</module>-->
-<!--        <module>yudao-module-erp</module>-->
-<!--        <module>yudao-module-iot</module>-->
-<!--        <module>yudao-module-mes</module>-->
-<!--        <module>yudao-module-wms</module>-->
-<!--        <module>yudao-module-im</module>-->
-<!-- 请参考 https://doc.iocoder.cn/ai/build/ 文档，完成 AI 模块的启动！！！ -->
-<!--        <module>yudao-module-ai</module>-->
+        <module>knowledgeflow-module</module>
+<module>knowledgeflow-module-member</module>
+<module>knowledgeflow-module-bpm</module>
+<module>knowledgeflow-module-report</module>
+<module>knowledgeflow-module-mp</module>
+<module>knowledgeflow-module-pay</module>
+<module>knowledgeflow-module-mall</module>
+<module>knowledgeflow-module-crm</module>
+<module>knowledgeflow-module-erp</module>
+<module>knowledgeflow-module-iot</module>
+<module>knowledgeflow-module-mes</module>
+<module>knowledgeflow-module-wms</module>
+<module>knowledgeflow-module-im</module>
+<module>knowledgeflow-module-ai</module>
+<!--        <module>knowledgeflow-module-ai</module>-->
     </modules>
 
     <name>${project.artifactId}</name>
     <description>芋道项目基础脚手架</description>
-    <url>https://github.com/YunaiV/ruoyi-vue-pro</url>
+    <url>https://github.com/shanhuhai12138/KnowledgeFlow-AI</url>
 
     <properties>
-        <revision>2026.07-jdk8-SNAPSHOT</revision>
+        <revision>1.0.0</revision>
         <!-- Maven 相关 -->
-        <java.version>1.8</java.version>
+        <java.version>17</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <maven-surefire-plugin.version>3.5.3</maven-surefire-plugin.version>
@@ -48,7 +48,7 @@
         <flatten-maven-plugin.version>1.7.2</flatten-maven-plugin.version>
         <!-- maven-surefire-plugin 暂时无法通过 bom 的依赖读取（兼容老版本 IDEA 2024 及以前版本） -->
         <lombok.version>1.18.42</lombok.version>
-        <spring.boot.version>2.7.18</spring.boot.version>
+        <spring.boot.version>3.2.5</spring.boot.version>
         <mapstruct.version>1.6.3</mapstruct.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
@@ -56,8 +56,8 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>cn.iocoder.boot</groupId>
-                <artifactId>yudao-dependencies</artifactId>
+                <groupId>cn.knowledgeflow.boot</groupId>
+                <artifactId>knowledgeflow-dependencies</artifactId>
                 <version>${revision}</version>
                 <type>pom</type>
                 <scope>import</scope>

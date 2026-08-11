@@ -1,8 +1,8 @@
-"""LangGraph Agent 工作流 — 「文档分析工作流」（T4.4，差异化亮点）。
+"""LangGraph Agent 工作流 — 「文档分析工作流」。
 
 图结构：START → retrieve → summarize → classify → report(人工确认门) → END
 条件分支：retrieve 结果为空 → not_found（跳过 summarize/classify/report）
-human-in-the-loop：report 生成前 interrupt 暂停，等待人工 approve/reject（LangGraph 原生机制 + InMemorySaver checkpoint）。
+human-in-the-loop：report 生成前 interrupt 暂停，等待人工 approve/reject（显式等待，Worker 线程阻塞）。
 
 步骤记录（steps）与 SSE 事件：通过 AgentRunStore 共享（节点内写入步骤 + 事件队列）。
 """
@@ -33,8 +33,7 @@ class AgentState(TypedDict, total=False):
     classification: str
     report: str
     approved: bool
-    step_name: str  # 当前步骤（事件推送用）
-    # 内部字段（图内传递，不对外暴露；仅存字符串保证 checkpointer 可序列化）
+    step_name: str
     _run_id: str
     _api_key: str
 
@@ -65,7 +64,7 @@ class RunInfo:
 
 
 class AgentRunStore:
-    """内存 run 存储（单机演示；生产可换 Redis）。"""
+    """内存 run 存储（单机演示；生产环境应替换为 Redis 持久化）。"""
 
     def __init__(self):
         self._runs: Dict[str, RunInfo] = {}
@@ -97,10 +96,6 @@ class AgentRunStore:
 store = AgentRunStore()
 
 
-def _step(run_id: str, name: str) -> "timer":
-    return _StepTimer(run_id, name)
-
-
 class _StepTimer:
     """节点耗时计时 + 步骤落库。"""
 
@@ -115,6 +110,10 @@ class _StepTimer:
         ms = int((time.perf_counter() - self.start) * 1000)
         store.get(self.run_id).steps[-1].update(
             status=status, durationMs=ms, inputSummary=input_summary[:200], outputSummary=output_summary[:500])
+
+
+def _step(run_id: str, name: str) -> _StepTimer:
+    return _StepTimer(run_id, name)
 
 
 def _trunc(text: str, n: int = 120) -> str:
@@ -195,6 +194,7 @@ def _not_found(state: AgentState) -> AgentState:
 
 # ==================== 图 ====================
 
+
 def _route_after_retrieve(state: AgentState) -> str:
     return "summarize" if state.get("results") else "not_found"
 
@@ -220,6 +220,7 @@ def build_agent_graph():
 
 # ==================== 对外 API（供 routers/agent.py 使用） ====================
 
+
 def start_agent_run(session_id: str, kb_id: str, query: str, api_key: str):
     """启动工作流（后台线程执行，interrupt 处暂停）。返回 RunInfo。"""
     run = store.create(session_id, kb_id, query)
@@ -231,10 +232,9 @@ def start_agent_run(session_id: str, kb_id: str, query: str, api_key: str):
                 {"query": query, "kbId": kb_id, "sessionId": session_id,
                  "_run_id": run.run_id, "_api_key": api_key},
             )
-            # 正常结束（含 rejected/not_found）
             if store.get(run.run_id).status in ("running", "awaiting_approval"):
                 store.set_status(run.run_id, "done")
-        except Exception as e:  # 其余异常
+        except Exception as e:
             store.get(run.run_id).error = str(e)
             store.set_status(run.run_id, "error")
 

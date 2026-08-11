@@ -79,7 +79,7 @@ docker compose ps         # 等 7 个服务全部 (healthy)
 
 ```bash
 # 后端（本机需 JDK 21 + Maven）
-cd backend && mvn install -DskipTests -pl yudao-server -am && java -jar yudao-server/target/yudao-server.jar
+cd backend && mvn install -DskipTests -pl knowledgeflow-server -am && java -jar knowledgeflow-server/target/knowledgeflow-server.jar
 
 # AI 服务（本机需 Python 3.11）
 cd ai-service && pip install -r requirements.txt && uvicorn main:app --port 8000
