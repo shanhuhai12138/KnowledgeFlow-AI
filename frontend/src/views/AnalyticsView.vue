@@ -106,6 +106,80 @@ async function loadAll() {
   }
 }
 
+// ---------- 导出报表（CSV） ----------
+const exporting = ref(false)
+
+function exportCSV() {
+  if (exporting.value) return
+  exporting.value = true
+  try {
+    // 生成 CSV 数据
+    const headers = ['时间', '查询次数', '平均耗时(ms)', '命中率']
+    const rows = trend.value.map(t => [
+      t.date || t.time,
+      t.count,
+      t.avgTime || '-',
+      t.hitRate ? `${(t.hitRate * 100).toFixed(1)}%` : '-',
+    ])
+
+    // 添加汇总行
+    if (overview.value) {
+      rows.push([])
+      rows.push(['汇总统计', '', '', ''])
+      rows.push(['总文档数', overview.value.documentCount || 0, '', ''])
+      rows.push(['总查询次数', overview.value.queryCount || 0, '', ''])
+      rows.push(['LLM 调用次数', overview.value.llmCallCount || 0, '', ''])
+      rows.push(['活跃知识库数', overview.value.kbCount || 0, '', ''])
+    }
+
+    // 添加文档类型数据
+    if (docTypes.value.length) {
+      rows.push([])
+      rows.push(['文档类型分布', '', '', ''])
+      rows.push(['类型', '数量', '占比', ''])
+      docTypes.value.forEach(d => {
+        const pct = overview.value?.documentCount
+          ? `${(d.count / overview.value.documentCount * 100).toFixed(1)}%`
+          : '-'
+        rows.push([d.type || d.name, d.count, pct, ''])
+      })
+    }
+
+    // 添加热门查询
+    if (hot.value.length) {
+      rows.push([])
+      rows.push(['热门查询 TOP 10', '', '', ''])
+      rows.push(['排名', '查询词', '次数', ''])
+      hot.value.slice(0, 10).forEach((h, i) => {
+        rows.push([String(i + 1), h.query, h.count, ''])
+      })
+    }
+
+    // 转换为 CSV 字符串
+    const csvContent = [headers, ...rows]
+      .map(row => row.map(cell => `"${String(cell ?? '').replace(/"/g, '""')}"`).join(','))
+      .join('\n')
+
+    // 添加 BOM 以支持 Excel 打开
+    const BOM = '\uFEFF'
+    const blob = new Blob([BOM + csvContent], { type: 'text/csv;charset=utf-8;' })
+    const url = URL.createObjectURL(blob)
+    const link = document.createElement('a')
+    link.href = url
+    link.download = `知识库报表_${new Date().toISOString().slice(0, 10)}.csv`
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+    URL.revokeObjectURL(url)
+
+    ElMessage.success('报表导出成功')
+  } catch (error: any) {
+    ElMessage.error(`导出失败: ${error?.message || '未知错误'}`)
+  } finally {
+    exporting.value = false
+  }
+}
+
 // ---------- 折线图（SVG，lieflat 单色：深墨蓝折线 + 细线坐标网格，无渐变） ----------
 const hoverIdx = ref(-1)
 const W = 640
@@ -188,12 +262,12 @@ onMounted(loadAll)
             <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
           </svg>刷新
         </button>
-        <button class="btn btn-secondary" @click="ElMessage.info('报表导出功能开发中…')">
+        <button class="btn btn-secondary" @click="exportCSV" :disabled="exporting">
           <svg width="16" height="16" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none">
             <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-          </svg>导出报表
+          </svg>
+          {{ exporting ? '导出中…' : '导出报表' }}
         </button>
-      </div>
     </div>
 
     <!-- 统计卡（深色带 + 数字滚动） -->

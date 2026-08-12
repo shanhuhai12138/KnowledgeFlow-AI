@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // 顶栏：面包屑 + 全局搜索 + 深浅色切换 + 通知 + 头像下拉（照任务书 T3.1）
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { ElDropdown, ElDropdownMenu, ElDropdownItem, ElMessage } from 'element-plus'
 import { useThemeStore } from '@/stores/theme'
@@ -13,6 +13,66 @@ const auth = useAuthStore()
 
 const title = computed(() => (route.meta.title as string) || '智能问答')
 const searchText = ref('')
+
+// ---------- 通知 ----------
+const notifVisible = ref(false)
+const notifLoading = ref(false)
+const notifications = ref<Array<{ id: number; type: 'doc' | 'member' | 'system'; title: string; content: string; time: string; read: boolean }>>([])
+const unreadCount = ref(0)
+
+interface Notif {
+  id: number
+  type: 'doc' | 'member' | 'system'
+  title: string
+  content: string
+  time: string
+  read: boolean
+}
+
+async function loadNotifications() {
+  notifLoading.value = true
+  try {
+    // 模拟通知数据（后端通知 API 待实现）
+    await new Promise(r => setTimeout(r, 500))
+    notifications.value = [
+      { id: 1, type: 'doc', title: '文档处理完成', content: '「开发环境搭建SOP.md」已成功向量化', time: '10分钟前', read: false },
+      { id: 2, type: 'member', title: '成员变更', content: 'admin 已将您添加为「技术文档库」成员', time: '1小时前', read: false },
+      { id: 3, type: 'system', title: '系统更新', content: 'KnowledgeFlow AI v2.0 已发布', time: '2小时前', read: true },
+    ]
+    unreadCount.value = notifications.value.filter(n => !n.read).length
+  } catch {
+    notifications.value = []
+  } finally {
+    notifLoading.value = false
+  }
+}
+
+function markRead(id: number) {
+  const n = notifications.value.find(x => x.id === id)
+  if (n) n.read = true
+  unreadCount.value = notifications.value.filter(x => !x.read).length
+}
+
+function markAllRead() {
+  notifications.value.forEach(n => n.read = true)
+  unreadCount.value = 0
+}
+
+function removeNotif(id: number) {
+  notifications.value = notifications.value.filter(n => n.id !== id)
+  unreadCount.value = notifications.value.filter(n => !n.read).length
+}
+
+function getNotifIcon(type: string) {
+  const icons: Record<string, string> = {
+    doc: '📄',
+    member: '👤',
+    system: '⚙️',
+  }
+  return icons[type] || '🔔'
+}
+
+onMounted(loadNotifications)
 
 function onSearch() {
   const kw = searchText.value.trim()
@@ -60,12 +120,36 @@ function onCommand(cmd: string) {
         </svg>
       </button>
 
-      <!-- 通知按钮暂时隐藏（功能开发中） -->
-      <!-- <button class="btn-icon plain" title="通知" @click="ElMessage.info('暂无新通知')">
+      <button class="btn-icon plain" title="通知" @click="notifVisible = !notifVisible">
         <svg width="20" height="20" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none">
           <path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
         </svg>
-      </button> -->
+        <span v-if="unreadCount > 0" class="notif-badge">{{ unreadCount > 9 ? '9+' : unreadCount }}</span>
+      </button>
+
+      <!-- 通知面板 -->
+      <div v-if="notifVisible" class="notif-panel" @click.stop>
+        <div class="notif-header">
+          <span class="notif-title">通知</span>
+          <button class="notif-clear" @click="markAllRead" :disabled="unreadCount === 0">全部已读</button>
+        </div>
+        <div class="notif-list">
+          <div v-if="notifLoading" class="notif-loading">加载中…</div>
+          <div v-else-if="!notifications.length" class="notif-empty">暂无通知</div>
+          <div v-for="n in notifications" :key="n.id" class="notif-item" :class="{ read: n.read }" @click="markRead(n.id)">
+            <div class="notif-icon">{{ getNotifIcon(n.type) }}</div>
+            <div class="notif-body">
+              <div class="notif-title-text">{{ n.title }}</div>
+              <div class="notif-content">{{ n.content }}</div>
+              <div class="notif-time">{{ n.time }}</div>
+            </div>
+            <button class="notif-del" @click="removeNotif(n.id)">✕</button>
+          </div>
+        </div>
+        <div class="notif-footer">
+          <button class="btn btn-secondary btn-full" @click="notifVisible = false">关闭</button>
+        </div>
+      </div>
 
       <el-dropdown trigger="click" @command="onCommand">
         <button class="avatar-btn" title="用户菜单">
@@ -107,6 +191,168 @@ function onCommand(cmd: string) {
   height: 3px;
   background: linear-gradient(90deg, transparent, var(--vermillion), transparent);
   opacity: 0.9;
+}
+
+/* ---------- 通知徽章 ---------- */
+.notif-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  border-radius: 9px;
+  background: var(--vermillion);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 18px;
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+/* ---------- 通知面板 ---------- */
+.notif-panel {
+  position: absolute;
+  top: calc(var(--topbar-h) - 4px);
+  right: 80px;
+  width: 360px;
+  max-height: 480px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+  overflow: hidden;
+}
+
+.notif-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+.notif-header .notif-title {
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--ink);
+}
+
+.notif-clear {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  color: var(--vermillion);
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.notif-clear:hover:not(:disabled) {
+  background: color-mix(in oklab, var(--vermillion) 8%, transparent);
+}
+
+.notif-clear:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.notif-list {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 60px;
+}
+
+.notif-loading,
+.notif-empty {
+  padding: 32px 16px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.notif-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--line);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.notif-item:hover {
+  background: color-mix(in oklab, var(--vermillion) 4%, transparent);
+}
+
+.notif-item.read {
+  opacity: 0.6;
+}
+
+.notif-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+  width: 28px;
+  text-align: center;
+}
+
+.notif-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.notif-title-text {
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+
+.notif-content {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.4;
+  margin-bottom: 6px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.notif-time {
+  font-size: 12px;
+  color: var(--text-quiet);
+}
+
+.notif-del {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-muted);
+  font-size: 14px;
+  padding: 4px;
+  border-radius: 4px;
+  flex-shrink: 0;
+  transition: all 0.15s;
+}
+
+.notif-del:hover {
+  color: var(--vermillion);
+  background: color-mix(in oklab, var(--vermillion) 10%, transparent);
+}
+
+.notif-footer {
+  padding: 12px 16px;
+  border-top: 1px solid var(--line);
+}
+
+.btn-full {
+  width: 100%;
 }
 .breadcrumb {
   display: flex;
