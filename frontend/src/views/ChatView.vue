@@ -50,7 +50,10 @@ hljs.registerLanguage('ruby', ruby)
 hljs.registerLanguage('dockerfile', dockerfile)
 import { chatStream } from '@/api/chat'
 import { getKbPageApi } from '@/api/kb'
+import { uploadDocumentApi } from '@/api/document'
+import { API_BASE } from '@/api/request'
 import type { ChatMessage, ChatSession, KnowledgeBase } from '@/types'
+import { useRouter } from 'vue-router'
 
 const route = useRoute()
 
@@ -362,6 +365,37 @@ watch(
 function fmtTime(t: number | string) {
   return dayjs(t).format('HH:mm')
 }
+
+// ---------- 文档跳转与预览 ----------
+function jumpToDocument(source: { documentId: number | string }) {
+  const router = useRouter()
+  router.push({ path: '/documents', query: { docId: String(source.documentId) } })
+}
+
+function viewOriginal(source: { documentId: number | string }) {
+  const token = localStorage.getItem('kf_access_token') || ''
+  const url = `${API_BASE}/admin-api/knowledge/document/download?id=${source.documentId}&token=${token}`
+  window.open(url, '_blank')
+}
+
+const fileInputRef = ref<HTMLInputElement | null>(null)
+function triggerFileUpload() {
+  fileInputRef.value?.click()
+}
+
+async function handleFileUpload(event: Event) {
+  const file = (event.target as HTMLInputElement).files?.[0]
+  if (!file || !currentKbId.value) {
+    ElMessage.warning('请先选择知识库')
+    return
+  }
+  try {
+    await uploadDocumentApi(currentKbId.value, file, 'chat-upload')
+    ElMessage.success('文件已上传，正在处理…')
+  } catch (error: any) {
+    ElMessage.error(error?.message || '上传失败')
+  }
+}
 </script>
 
 <template>
@@ -462,7 +496,7 @@ function fmtTime(t: number | string) {
                   v-for="(src, i) in m.sources"
                   :key="i"
                   class="source-card"
-                  @click="ElMessage.info(`跳转至文档: ${src.documentName}`)"
+                  @click="jumpToDocument(src)"
                 >
                   <span class="page-badge">{{ src.page }}</span>
                   <div class="source-name">{{ src.documentName }}</div>
@@ -490,7 +524,7 @@ function fmtTime(t: number | string) {
                   <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
                 </svg>
               </button>
-              <button class="btn-icon source-link" title="查看原文" @click="ElMessage.info('跳转至原文档')">
+              <button class="btn-icon source-link" title="查看原文" @click="viewOriginal(src)">
                 <svg width="16" height="16" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                 </svg>
@@ -516,13 +550,21 @@ function fmtTime(t: number | string) {
           ></textarea>
           <div class="input-footer">
             <div class="input-tools">
-              <button class="btn-icon" title="上传附件" @click="ElMessage.info('文件选择器已打开')">
+              <button class="btn-icon" title="上传附件" @click="triggerFileUpload">
                 <svg width="18" height="18" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                   <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                 </svg>
               </button>
-              <button class="btn-icon" title="语音输入" @click="ElMessage.info('语音识别已启动')">
+              <!-- 隐藏的文件输入 -->
+              <input
+                ref="fileInputRef"
+                type="file"
+                accept=".pdf,.docx,.txt,.md"
+                style="display:none"
+                @change="handleFileUpload"
+              />
+              <button class="btn-icon" title="语音输入" style="display:none">
                 <svg width="18" height="18" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M19 11a7 7 0 01-14 0M12 3v8m0 0v8m0-8h4m-4 0H8" />
                 </svg>

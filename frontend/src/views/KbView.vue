@@ -158,8 +158,9 @@ async function loadMembers() {
   try {
     const data = await listKbMembersApi(memberKb.value.id)
     members.value = data?.list || []
-  } catch {
+  } catch (error) {
     members.value = []
+    console.error('加载成员失败:', error)
   }
 }
 
@@ -175,10 +176,11 @@ async function submitAddMember() {
     addVisible.value = false
     addUserId.value = undefined
     addRole.value = 'VIEWER'
-    loadMembers()
-    loadKbs()
-  } catch {
-    /* toast 已处理 */
+    await loadMembers()
+    await loadKbs()
+  } catch (error: any) {
+    const msg = error?.response?.data?.message || error?.message || '添加成员失败'
+    ElMessage.error(msg)
   } finally {
     adding.value = false
   }
@@ -193,10 +195,11 @@ async function removeMember(m: KbMember) {
   try {
     await removeKbMemberApi(m.id)
     ElMessage.success('已移除')
-    loadMembers()
-    loadKbs()
-  } catch {
-    /* toast 已处理 */
+    await loadMembers()
+    await loadKbs()
+  } catch (error: any) {
+    const msg = error?.response?.data?.message || error?.message || '移除成员失败'
+    ElMessage.error(msg)
   }
 }
 
