@@ -1,7 +1,7 @@
-cn.iocoder.yudao.framework.apilog.config.YudaoApiLogAutoConfiguration
-cn.iocoder.yudao.framework.jackson.config.YudaoJacksonAutoConfiguration
-cn.iocoder.yudao.framework.swagger.config.YudaoSwaggerAutoConfiguration
-cn.iocoder.yudao.framework.web.config.YudaoWebAutoConfiguration
-cn.iocoder.yudao.framework.xss.config.YudaoXssAutoConfiguration
-cn.iocoder.yudao.framework.banner.config.YudaoBannerAutoConfiguration
-cn.iocoder.yudao.framework.encrypt.config.YudaoApiEncryptAutoConfiguration
+﻿cn.knowledgeflow.framework.apilog.config.YudaoApiLogAutoConfiguration
+cn.knowledgeflow.framework.jackson.config.YudaoJacksonAutoConfiguration
+cn.knowledgeflow.framework.swagger.config.YudaoSwaggerAutoConfiguration
+cn.knowledgeflow.framework.web.config.YudaoWebAutoConfiguration
+cn.knowledgeflow.framework.xss.config.YudaoXssAutoConfiguration
+cn.knowledgeflow.framework.banner.config.YudaoBannerAutoConfiguration
+cn.knowledgeflow.framework.encrypt.config.YudaoApiEncryptAutoConfiguration

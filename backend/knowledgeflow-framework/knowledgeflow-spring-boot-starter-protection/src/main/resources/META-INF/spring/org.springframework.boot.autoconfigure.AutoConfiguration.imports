@@ -1,4 +1,4 @@
-cn.iocoder.yudao.framework.idempotent.config.YudaoIdempotentConfiguration
-cn.iocoder.yudao.framework.lock4j.config.YudaoLock4jConfiguration
-cn.iocoder.yudao.framework.ratelimiter.config.YudaoRateLimiterConfiguration
-cn.iocoder.yudao.framework.signature.config.YudaoApiSignatureAutoConfiguration
+﻿cn.knowledgeflow.framework.idempotent.config.YudaoIdempotentConfiguration
+cn.knowledgeflow.framework.lock4j.config.YudaoLock4jConfiguration
+cn.knowledgeflow.framework.ratelimiter.config.YudaoRateLimiterConfiguration
+cn.knowledgeflow.framework.signature.config.YudaoApiSignatureAutoConfiguration

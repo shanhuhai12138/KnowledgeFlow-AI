@@ -1,2 +1,2 @@
-cn.iocoder.yudao.framework.redis.config.YudaoRedisAutoConfiguration
-cn.iocoder.yudao.framework.redis.config.YudaoCacheAutoConfiguration
+﻿cn.knowledgeflow.framework.redis.config.YudaoRedisAutoConfiguration
+cn.knowledgeflow.framework.redis.config.YudaoCacheAutoConfiguration

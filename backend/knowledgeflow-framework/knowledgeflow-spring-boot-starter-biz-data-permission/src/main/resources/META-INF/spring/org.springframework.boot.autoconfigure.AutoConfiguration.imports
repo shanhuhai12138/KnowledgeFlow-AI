@@ -1,2 +1,2 @@
-cn.iocoder.yudao.framework.datapermission.config.YudaoDataPermissionAutoConfiguration
-cn.iocoder.yudao.framework.datapermission.config.YudaoDeptDataPermissionAutoConfiguration
+﻿cn.knowledgeflow.framework.datapermission.config.YudaoDataPermissionAutoConfiguration
+cn.knowledgeflow.framework.datapermission.config.YudaoDeptDataPermissionAutoConfiguration
