@@ -216,7 +216,7 @@ public class DocumentServiceImpl implements DocumentService {
     public String getDocumentContent(Long id) {
         DocumentDO document = getDocument(id);
         try (GetObjectResponse object = downloadDocument(id)) {
-            return DocumentContentParser.parse(object.getObjectContent(), document.getFileType());
+            return DocumentContentParser.parse(object, document.getFileType());
         } catch (Exception e) {
             log.error("[getDocumentContent][获取内容失败 documentId({})]", id, e);
             throw exception(KNOWLEDGE_DOCUMENT_NOT_EXISTS);
