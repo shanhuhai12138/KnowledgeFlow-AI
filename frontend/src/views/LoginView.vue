@@ -27,6 +27,10 @@ function fillDemo() {
   doSubmit()
 }
 
+function handleForgotPassword() {
+  ElMessage.info('请联系系统管理员重置密码')
+}
+
 async function doSubmit() {
   const u = username.value.trim()
   if (!u) {
@@ -121,7 +125,7 @@ onMounted(() => {
             </div>
             <div v-if="mode === 'login'" class="login-options">
               <label class="remember"><input v-model="remember" type="checkbox" /> 记住我</label>
-              <a href="#" @click.prevent="ElMessage.info('功能演示中')">忘记密码？</a>
+              <a href="#" @click.prevent="handleForgotPassword">忘记密码？</a>
             </div>
             <button type="submit" class="btn btn-primary submit-btn" :disabled="loading">
               {{ loading ? (mode === 'login' ? '登录中...' : '注册中...') : mode === 'login' ? '登录' : '注册' }}
