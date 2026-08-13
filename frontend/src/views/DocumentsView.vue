@@ -9,6 +9,7 @@ import {
   downloadUrl,
   getDocumentPageApi,
   uploadDocumentApi,
+  getContentApi,
 } from '@/api/document'
 import { getKbPageApi } from '@/api/kb'
 import type { DocumentItem, KnowledgeBase } from '@/types'
@@ -256,9 +257,28 @@ async function startUpload() {
 // ---------- 预览抽屉 ----------
 const previewVisible = ref(false)
 const previewDoc = ref<DocumentItem | null>(null)
-function openPreview(d: DocumentItem) {
+const previewContent = ref('')
+const previewLoading = ref(false)
+const previewError = ref('')
+
+async function openPreview(d: DocumentItem) {
   previewDoc.value = d
   previewVisible.value = true
+  previewContent.value = ''
+  previewError.value = ''
+  previewLoading.value = true
+  try {
+    const res = await getContentApi(d.id)
+    if (res?.code === 0 && res?.data) {
+      previewContent.value = res.data.content
+    } else {
+      previewError.value = res?.message || '获取内容失败'
+    }
+  } catch (e: any) {
+    previewError.value = e?.message || '获取内容失败'
+  } finally {
+    previewLoading.value = false
+  }
 }
 function downloadDoc(d: DocumentItem) {
   window.open(downloadUrl(d.id), '_blank')
@@ -472,6 +492,7 @@ onMounted(async () => {
           <span class="meta-item">知识库：{{ previewDoc.kbName }}</span>
           <span class="meta-item">大小：{{ fmtSize(previewDoc.fileSize) }}</span>
           <span class="meta-item">页数：{{ previewDoc.pageCount || '-' }}</span>
+          <span class="meta-item">类型：{{ previewDoc.fileType?.toUpperCase() }}</span>
         </div>
         <div class="preview-actions">
           <button class="btn btn-secondary" @click="downloadDoc(previewDoc)">
@@ -480,7 +501,30 @@ onMounted(async () => {
             </svg>下载原文件
           </button>
         </div>
-        <iframe v-if="previewVisible" :src="downloadUrl(previewDoc.id)" class="preview-iframe" title="文档预览"></iframe>
+        <!-- 加载状态 -->
+        <div v-if="previewLoading" class="preview-loading">
+          <div class="loading-spinner"></div>
+          <span>正在解析文档内容...</span>
+        </div>
+        <!-- 错误状态 -->
+        <div v-else-if="previewError" class="preview-error">
+          <svg width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+          </svg>
+          <span>{{ previewError }}</span>
+        </div>
+        <!-- 文档内容 -->
+        <div v-else-if="previewContent" class="preview-content">
+          <pre>{{ previewContent }}</pre>
+        </div>
+        <!-- 空状态 -->
+        <div v-else class="preview-empty">
+          <svg width="48" height="48" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+          <span>文档内容暂不可用</span>
+          <p>该文档可能尚未处理完成或格式不支持预览</p>
+        </div>
       </div>
     </el-drawer>
   </div>
@@ -785,6 +829,82 @@ input[type='checkbox'] {
   border-radius: var(--input-radius);
   background: #fff;
   min-height: 400px;
+}
+
+/* 预览内容 */
+.preview-loading,
+.preview-error,
+.preview-content,
+.preview-empty {
+  padding: 24px;
+  text-align: center;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.preview-loading {
+  color: var(--text-muted);
+}
+
+.preview-loading .loading-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--line);
+  border-top-color: var(--vermillion);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.preview-error {
+  color: var(--error);
+}
+
+.preview-error svg {
+  opacity: 0.6;
+}
+
+.preview-content {
+  text-align: left;
+  width: 100%;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.preview-content pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  font-family: 'Consolas', 'Monaco', monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text-primary);
+  background: var(--paper-2);
+  padding: 16px;
+  border-radius: var(--input-radius);
+  border: 1px solid var(--line);
+}
+
+.preview-empty {
+  color: var(--text-muted);
+}
+
+.preview-empty span {
+  display: block;
+  color: var(--text-secondary);
+  font-size: 14px;
+  margin-top: 12px;
+}
+
+.preview-empty p {
+  color: var(--text-muted);
+  font-size: 12px;
 }
 
 @media (max-width: 768px) {

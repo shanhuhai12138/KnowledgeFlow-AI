@@ -106,6 +106,13 @@ public class DocumentController {
         }
     }
 
+    @GetMapping("/content")
+    @Operation(summary = "获取文档内容（用于预览）")
+    @Parameter(name = "id", description = "文档编号", required = true, example = "1")
+    public CommonResult<String> getDocumentContent(@RequestParam("id") Long id) {
+        return success(documentService.getDocumentContent(id));
+    }
+
     // ==================== DO → VO（契约字段映射） ====================
 
     private PageResult<DocumentRespVO> convertPage(PageResult<DocumentDO> pageResult) {

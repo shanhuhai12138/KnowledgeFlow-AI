@@ -48,4 +48,12 @@ public interface DocumentService {
      */
     GetObjectResponse downloadDocument(Long id);
 
+    /**
+     * 获取文档内容（用于预览）
+     *
+     * @param id 文档编号
+     * @return 文档全文内容
+     */
+    String getDocumentContent(Long id);
+
 }

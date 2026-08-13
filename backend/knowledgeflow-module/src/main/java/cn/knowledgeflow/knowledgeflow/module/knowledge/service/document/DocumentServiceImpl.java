@@ -15,6 +15,7 @@ import cn.knowledgeflow.module.knowledge.enums.document.DocumentStatusEnum;
 import cn.knowledgeflow.module.knowledge.framework.ai.AiServiceProperties;
 import cn.knowledgeflow.module.knowledge.framework.minio.MinioProperties;
 import cn.knowledgeflow.module.knowledge.service.kb.KnowledgeBaseService;
+import cn.knowledgeflow.module.knowledge.service.document.parser.DocumentContentParser;
 import io.minio.GetObjectArgs;
 import io.minio.GetObjectResponse;
 import io.minio.MinioClient;
@@ -207,6 +208,17 @@ public class DocumentServiceImpl implements DocumentService {
                     .bucket(minioProperties.getBucket()).object(document.getObjectName()).build());
         } catch (Exception e) {
             log.error("[downloadDocument][下载失败 documentId({})]", id, e);
+            throw exception(KNOWLEDGE_DOCUMENT_NOT_EXISTS);
+        }
+    }
+
+    @Override
+    public String getDocumentContent(Long id) {
+        DocumentDO document = getDocument(id);
+        try (GetObjectResponse object = downloadDocument(id)) {
+            return DocumentContentParser.parse(object, document.getFileType());
+        } catch (Exception e) {
+            log.error("[getDocumentContent][获取内容失败 documentId({})]", id, e);
             throw exception(KNOWLEDGE_DOCUMENT_NOT_EXISTS);
         }
     }

@@ -56,3 +56,11 @@ export function downloadUrl(id: number) {
   // API_BASE：dev 直连 48080；容器版为相对路径由 nginx 反代（部署到任意机器可用）
   return `${API_BASE}/admin-api/knowledge/document/download?id=${id}&token=${token}`
 }
+
+/** 获取文档内容（预览）：GET /admin-api/knowledge/document/content?id= */
+export function getContentApi(id: number) {
+  return request.get<unknown, { code: number; data: { content: string; fileType: string } }>(
+    '/admin-api/knowledge/document/content',
+    { params: { id } }
+  )
+}
