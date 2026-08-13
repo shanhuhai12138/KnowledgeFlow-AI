@@ -116,22 +116,40 @@ public class HttpUtils {
     }
 
     public static String replaceUrlQuery(String url, String key, String value) {
-        UrlBuilder builder = UrlBuilder.of(url, Charset.defaultCharset());
-        // 先移除；再添加
-        builder.getQuery().remove(key);
-        builder.addQuery(key, value);
-        return builder.build();
+        // 使用标准 Java API 处理 URL query
+        java.net.URI uri = java.net.URI.create(url);
+        String query = uri.getQuery();
+        StringBuilder sb = new StringBuilder();
+        sb.append(uri.getScheme()).append("://").append(uri.getHost());
+        if (uri.getPort() > 0) sb.append(":").append(uri.getPort());
+        sb.append(uri.getPath());
+        if (query != null && !query.isEmpty()) {
+            sb.append("?");
+            String[] pairs = query.split("&");
+            boolean first = true;
+            for (String pair : pairs) {
+                String[] kv = pair.split("=", 2);
+                if (kv[0].equals(key)) continue; // 跳过要替换的 key
+                if (!first) sb.append("&");
+                sb.append(pair);
+                first = false;
+            }
+            sb.append("&").append(key).append("=").append(value);
+        } else {
+            sb.append("?").append(key).append("=").append(value);
+        }
+        if (uri.getFragment() != null) sb.append("#").append(uri.getFragment());
+        return sb.toString();
     }
 
     public static String removeUrlQuery(String url) {
-        if (!StrUtil.contains(url, '?')) {
-            return url;
-        }
-        UrlBuilder builder = UrlBuilder.of(url, Charset.defaultCharset());
-        // 移除 query、fragment
-        builder.setQuery(null);
-        builder.setFragment(null);
-        return builder.build();
+        java.net.URI uri = java.net.URI.create(url);
+        StringBuilder sb = new StringBuilder();
+        sb.append(uri.getScheme()).append("://").append(uri.getHost());
+        if (uri.getPort() > 0) sb.append(":").append(uri.getPort());
+        sb.append(uri.getPath());
+        if (uri.getFragment() != null) sb.append("#").append(uri.getFragment());
+        return sb.toString();
     }
 
     /**
