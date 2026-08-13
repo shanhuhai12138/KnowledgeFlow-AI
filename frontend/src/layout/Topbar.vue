@@ -20,15 +20,6 @@ const notifLoading = ref(false)
 const notifications = ref<Array<{ id: number; type: 'doc' | 'member' | 'system'; title: string; content: string; time: string; read: boolean }>>([])
 const unreadCount = ref(0)
 
-interface Notif {
-  id: number
-  type: 'doc' | 'member' | 'system'
-  title: string
-  content: string
-  time: string
-  read: boolean
-}
-
 async function loadNotifications() {
   notifLoading.value = true
   try {
