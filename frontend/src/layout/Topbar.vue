@@ -2,7 +2,7 @@
 // 顶栏：面包屑 + 全局搜索 + 深浅色切换 + 通知 + 头像下拉（照任务书 T3.1）
 import { computed, onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { ElDropdown, ElDropdownMenu, ElDropdownItem, ElMessage } from 'element-plus'
+import { ElDropdown, ElDropdownMenu, ElDropdownItem } from 'element-plus'
 import { useThemeStore } from '@/stores/theme'
 import { useAuthStore } from '@/stores/auth'
 
