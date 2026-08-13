@@ -114,12 +114,10 @@ function exportCSV() {
   exporting.value = true
   try {
     // 生成 CSV 数据
-    const headers = ['时间', '查询次数', '平均耗时(ms)', '命中率']
+    const headers = ['日期', '查询次数']
     const rows = trend.value.map(t => [
-      t.date || t.time,
+      t.date,
       t.count,
-      t.avgTime || '-',
-      t.hitRate ? `${(t.hitRate * 100).toFixed(1)}%` : '-',
     ])
 
     // 添加汇总行
@@ -141,7 +139,7 @@ function exportCSV() {
         const pct = overview.value?.documentCount
           ? `${(d.count / overview.value.documentCount * 100).toFixed(1)}%`
           : '-'
-        rows.push([d.type || d.name, d.count, pct, ''])
+        rows.push([d.type, d.count, pct, ''])
       })
     }
 
