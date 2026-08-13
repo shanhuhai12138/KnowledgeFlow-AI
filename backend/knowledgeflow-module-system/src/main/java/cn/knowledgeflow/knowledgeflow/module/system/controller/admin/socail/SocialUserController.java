@@ -19,7 +19,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 import java.util.List;
 
 import static cn.knowledgeflow.framework.common.pojo.CommonResult.success;

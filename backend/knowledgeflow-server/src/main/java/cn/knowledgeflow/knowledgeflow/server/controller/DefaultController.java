@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.security.PermitAll;
-import jakarta.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequest;
 
 import static cn.knowledgeflow.framework.common.exception.enums.GlobalErrorCodeConstants.NOT_IMPLEMENTED;
 

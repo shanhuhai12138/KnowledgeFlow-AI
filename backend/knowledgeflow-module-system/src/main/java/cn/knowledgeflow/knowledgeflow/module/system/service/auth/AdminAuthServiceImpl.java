@@ -37,7 +37,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import jakarta.validation.Validator;
+import javax.validation.Validator;
 import java.util.Objects;
 
 import static cn.knowledgeflow.framework.common.exception.util.ServiceExceptionUtil.exception;

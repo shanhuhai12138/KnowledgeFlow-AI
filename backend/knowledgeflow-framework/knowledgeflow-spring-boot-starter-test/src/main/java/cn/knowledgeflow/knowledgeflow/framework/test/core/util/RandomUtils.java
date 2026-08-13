@@ -9,7 +9,7 @@ import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 import uk.co.jemos.podam.common.AttributeStrategy;
 
-import jakarta.validation.constraints.Email;
+import javax.validation.constraints.Email;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 import java.math.BigDecimal;

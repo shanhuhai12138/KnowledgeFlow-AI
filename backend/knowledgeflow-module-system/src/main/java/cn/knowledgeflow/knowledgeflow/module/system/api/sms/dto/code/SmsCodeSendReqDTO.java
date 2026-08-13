@@ -5,8 +5,8 @@ import cn.knowledgeflow.framework.common.validation.Mobile;
 import cn.knowledgeflow.module.system.enums.sms.SmsSceneEnum;
 import lombok.Data;
 
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 /**
  * 短信验证码的发送 Request DTO

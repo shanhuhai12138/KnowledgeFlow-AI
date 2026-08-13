@@ -16,7 +16,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 import java.util.Comparator;
 import java.util.List;
 

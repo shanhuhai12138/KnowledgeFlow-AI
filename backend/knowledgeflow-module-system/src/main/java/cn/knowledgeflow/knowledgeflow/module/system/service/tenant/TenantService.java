@@ -8,7 +8,7 @@ import cn.knowledgeflow.module.system.dal.dataobject.tenant.TenantDO;
 import cn.knowledgeflow.module.system.service.tenant.handler.TenantInfoHandler;
 import cn.knowledgeflow.module.system.service.tenant.handler.TenantMenuHandler;
 
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Set;
 

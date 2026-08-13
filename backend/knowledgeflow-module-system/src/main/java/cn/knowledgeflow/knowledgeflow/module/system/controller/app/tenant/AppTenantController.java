@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.annotation.security.PermitAll;
-import jakarta.validation.constraints.Pattern;
+import javax.validation.constraints.Pattern;
 
 import static cn.knowledgeflow.framework.common.pojo.CommonResult.success;
 

@@ -5,7 +5,7 @@ import cn.knowledgeflow.module.infra.controller.admin.file.vo.file.FileCreateReq
 import cn.knowledgeflow.module.infra.controller.admin.file.vo.file.FilePageReqVO;
 import cn.knowledgeflow.module.infra.controller.admin.file.vo.file.FilePresignedUrlRespVO;
 import cn.knowledgeflow.module.infra.dal.dataobject.file.FileDO;
-import jakarta.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotEmpty;
 
 import java.util.List;
 

@@ -2,7 +2,7 @@ package cn.knowledgeflow.module.infra.service.db;
 
 import cn.knowledgeflow.module.infra.controller.admin.db.vo.DataSourceConfigSaveReqVO;
 import cn.knowledgeflow.module.infra.dal.dataobject.db.DataSourceConfigDO;
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 
 import java.util.List;
 

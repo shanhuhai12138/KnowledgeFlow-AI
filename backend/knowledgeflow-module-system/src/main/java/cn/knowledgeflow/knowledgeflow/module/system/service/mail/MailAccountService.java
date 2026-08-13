@@ -5,7 +5,7 @@ import cn.knowledgeflow.module.system.controller.admin.mail.vo.account.MailAccou
 import cn.knowledgeflow.module.system.controller.admin.mail.vo.account.MailAccountSaveReqVO;
 import cn.knowledgeflow.module.system.dal.dataobject.mail.MailAccountDO;
 
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 import java.util.List;
 
 /**

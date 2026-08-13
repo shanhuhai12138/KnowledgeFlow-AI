@@ -2,7 +2,7 @@ package cn.knowledgeflow.module.system.api.social.dto;
 
 import lombok.Data;
 
-import jakarta.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotEmpty;
 
 /**
  * 获取小程序码 Request DTO

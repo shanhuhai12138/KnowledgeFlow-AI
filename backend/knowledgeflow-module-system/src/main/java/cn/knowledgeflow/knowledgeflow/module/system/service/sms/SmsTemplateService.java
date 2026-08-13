@@ -5,7 +5,7 @@ import cn.knowledgeflow.module.system.controller.admin.sms.vo.template.SmsTempla
 import cn.knowledgeflow.module.system.controller.admin.sms.vo.template.SmsTemplateSaveReqVO;
 import cn.knowledgeflow.module.system.dal.dataobject.sms.SmsTemplateDO;
 
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 

@@ -11,7 +11,7 @@ import org.dromara.core.trans.vo.VO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-import jakarta.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
 
 @Schema(description = "管理后台 - 操作日志 Response VO")

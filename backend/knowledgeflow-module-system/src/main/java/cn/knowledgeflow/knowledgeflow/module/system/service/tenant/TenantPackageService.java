@@ -5,7 +5,7 @@ import cn.knowledgeflow.module.system.controller.admin.tenant.vo.packages.Tenant
 import cn.knowledgeflow.module.system.controller.admin.tenant.vo.packages.TenantPackageSaveReqVO;
 import cn.knowledgeflow.module.system.dal.dataobject.tenant.TenantPackageDO;
 
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 import java.util.List;
 
 /**

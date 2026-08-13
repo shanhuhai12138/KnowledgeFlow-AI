@@ -11,7 +11,7 @@ import cn.knowledgeflow.module.system.controller.admin.user.vo.user.UserImportRe
 import cn.knowledgeflow.module.system.controller.admin.user.vo.user.UserPageReqVO;
 import cn.knowledgeflow.module.system.controller.admin.user.vo.user.UserSaveReqVO;
 import cn.knowledgeflow.module.system.dal.dataobject.user.AdminUserDO;
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 import org.springframework.lang.Nullable;
 
 import java.util.Collection;

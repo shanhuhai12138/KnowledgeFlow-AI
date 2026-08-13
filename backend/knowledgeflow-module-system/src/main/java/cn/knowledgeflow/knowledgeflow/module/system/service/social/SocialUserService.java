@@ -8,7 +8,7 @@ import cn.knowledgeflow.module.system.controller.admin.socail.vo.user.SocialUser
 import cn.knowledgeflow.module.system.dal.dataobject.social.SocialUserDO;
 import cn.knowledgeflow.module.system.enums.social.SocialTypeEnum;
 
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 import java.util.List;
 
 /**

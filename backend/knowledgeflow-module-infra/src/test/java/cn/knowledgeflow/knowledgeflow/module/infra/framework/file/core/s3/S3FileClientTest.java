@@ -8,7 +8,7 @@ import cn.knowledgeflow.module.infra.framework.file.core.client.s3.S3FileClientC
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import jakarta.validation.Validation;
+import javax.validation.Validation;
 
 import static org.junit.jupiter.api.Assertions.*;
 

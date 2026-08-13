@@ -5,7 +5,7 @@ import cn.knowledgeflow.module.system.api.sms.dto.code.SmsCodeValidateReqDTO;
 import cn.knowledgeflow.module.system.api.sms.dto.code.SmsCodeSendReqDTO;
 import cn.knowledgeflow.module.system.api.sms.dto.code.SmsCodeUseReqDTO;
 
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 
 /**
  * 短信验证码 API 接口

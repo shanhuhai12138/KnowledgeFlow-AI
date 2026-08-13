@@ -5,7 +5,7 @@ import cn.knowledgeflow.module.system.controller.admin.notify.vo.template.Notify
 import cn.knowledgeflow.module.system.controller.admin.notify.vo.template.NotifyTemplateSaveReqVO;
 import cn.knowledgeflow.module.system.dal.dataobject.notify.NotifyTemplateDO;
 
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 

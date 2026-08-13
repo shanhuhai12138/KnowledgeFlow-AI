@@ -5,8 +5,8 @@ import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.URL;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Size;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Size;
 
 
 @Schema(description = "管理后台 - 用户个人信息更新 Request VO")

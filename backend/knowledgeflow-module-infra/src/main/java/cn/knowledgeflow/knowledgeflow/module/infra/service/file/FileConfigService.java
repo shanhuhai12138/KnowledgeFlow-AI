@@ -5,7 +5,7 @@ import cn.knowledgeflow.module.infra.controller.admin.file.vo.config.FileConfigP
 import cn.knowledgeflow.module.infra.controller.admin.file.vo.config.FileConfigSaveReqVO;
 import cn.knowledgeflow.module.infra.dal.dataobject.file.FileConfigDO;
 import cn.knowledgeflow.module.infra.framework.file.core.client.FileClient;
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 
 import java.util.List;
 

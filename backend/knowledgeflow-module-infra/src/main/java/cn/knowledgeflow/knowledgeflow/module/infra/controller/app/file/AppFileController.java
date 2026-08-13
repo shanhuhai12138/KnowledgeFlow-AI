@@ -18,7 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.annotation.security.PermitAll;
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 
 import static cn.knowledgeflow.framework.common.pojo.CommonResult.success;
 

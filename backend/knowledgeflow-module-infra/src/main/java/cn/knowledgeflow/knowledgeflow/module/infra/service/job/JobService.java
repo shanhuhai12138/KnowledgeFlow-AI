@@ -4,7 +4,7 @@ import cn.knowledgeflow.framework.common.pojo.PageResult;
 import cn.knowledgeflow.module.infra.controller.admin.job.vo.job.JobPageReqVO;
 import cn.knowledgeflow.module.infra.controller.admin.job.vo.job.JobSaveReqVO;
 import cn.knowledgeflow.module.infra.dal.dataobject.job.JobDO;
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 import org.quartz.SchedulerException;
 
 import java.util.List;

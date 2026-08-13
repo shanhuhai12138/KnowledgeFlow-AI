@@ -3,7 +3,7 @@ package cn.knowledgeflow.framework.common.biz.system.logger;
 import cn.knowledgeflow.framework.common.biz.system.logger.dto.OperateLogCreateReqDTO;
 import org.springframework.scheduling.annotation.Async;
 
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 
 /**
  * 操作日志 API 接口

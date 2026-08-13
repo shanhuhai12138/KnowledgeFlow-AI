@@ -2,7 +2,7 @@ package cn.knowledgeflow.module.system.api.message.user;
 
 import lombok.Data;
 
-import jakarta.validation.constraints.NotNull;
+import javax.validation.constraints.NotNull;
 
 /**
  * 管理员用户资料（昵称 / 头像）变更消息

@@ -3,7 +3,7 @@ package cn.knowledgeflow.module.infra.controller.admin.file.vo.file;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-import jakarta.validation.constraints.NotNull;
+import javax.validation.constraints.NotNull;
 
 @Schema(description = "管理后台 - 文件创建 Request VO")
 @Data

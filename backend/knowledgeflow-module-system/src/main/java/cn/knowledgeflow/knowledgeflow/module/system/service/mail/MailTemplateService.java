@@ -5,7 +5,7 @@ import cn.knowledgeflow.module.system.controller.admin.mail.vo.template.MailTemp
 import cn.knowledgeflow.module.system.controller.admin.mail.vo.template.MailTemplateSaveReqVO;
 import cn.knowledgeflow.module.system.dal.dataobject.mail.MailTemplateDO;
 
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 

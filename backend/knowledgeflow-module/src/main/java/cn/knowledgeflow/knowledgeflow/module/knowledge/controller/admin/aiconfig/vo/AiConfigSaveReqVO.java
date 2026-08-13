@@ -3,7 +3,7 @@ package cn.knowledgeflow.module.knowledge.controller.admin.aiconfig.vo;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-import jakarta.validation.constraints.Size;
+import javax.validation.constraints.Size;
 
 /**
  * AI 配置保存 Request VO（T7）

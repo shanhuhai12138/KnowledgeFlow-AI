@@ -4,7 +4,7 @@ import cn.knowledgeflow.framework.common.pojo.PageResult;
 import cn.knowledgeflow.module.infra.controller.admin.config.vo.ConfigPageReqVO;
 import cn.knowledgeflow.module.infra.controller.admin.config.vo.ConfigSaveReqVO;
 import cn.knowledgeflow.module.infra.dal.dataobject.config.ConfigDO;
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 
 import java.util.List;
 

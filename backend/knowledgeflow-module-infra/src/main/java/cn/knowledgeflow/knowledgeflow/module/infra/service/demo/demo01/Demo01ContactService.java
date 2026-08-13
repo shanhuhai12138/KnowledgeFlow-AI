@@ -4,7 +4,7 @@ import cn.knowledgeflow.framework.common.pojo.PageResult;
 import cn.knowledgeflow.module.infra.controller.admin.demo.demo01.vo.Demo01ContactPageReqVO;
 import cn.knowledgeflow.module.infra.controller.admin.demo.demo01.vo.Demo01ContactSaveReqVO;
 import cn.knowledgeflow.module.infra.dal.dataobject.demo.demo01.Demo01ContactDO;
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 
 import java.util.List;
 

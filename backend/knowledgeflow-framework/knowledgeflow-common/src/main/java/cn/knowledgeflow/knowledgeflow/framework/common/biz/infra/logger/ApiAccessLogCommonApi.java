@@ -3,7 +3,7 @@ package cn.knowledgeflow.framework.common.biz.infra.logger;
 import cn.knowledgeflow.framework.common.biz.infra.logger.dto.ApiAccessLogCreateReqDTO;
 import org.springframework.scheduling.annotation.Async;
 
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 
 /**
  * API 访问日志的 API 接口

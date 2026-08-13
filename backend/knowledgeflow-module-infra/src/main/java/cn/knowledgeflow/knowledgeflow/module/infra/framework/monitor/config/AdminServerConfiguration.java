@@ -17,7 +17,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
-import jakarta.servlet.DispatcherType;
+import javax.servlet.DispatcherType;
 
 /**
  * Spring Boot Admin Server 配置

@@ -5,7 +5,7 @@ import cn.knowledgeflow.module.system.controller.admin.permission.vo.role.RolePa
 import cn.knowledgeflow.module.system.controller.admin.permission.vo.role.RoleSaveReqVO;
 import cn.knowledgeflow.module.system.dal.dataobject.permission.RoleDO;
 
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;

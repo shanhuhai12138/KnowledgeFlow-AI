@@ -3,8 +3,8 @@ package cn.knowledgeflow.module.infra.controller.admin.codegen.vo;
 import cn.knowledgeflow.module.infra.controller.admin.codegen.vo.column.CodegenColumnSaveReqVO;
 import cn.knowledgeflow.module.infra.controller.admin.codegen.vo.table.CodegenTableSaveReqVO;
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.util.List;

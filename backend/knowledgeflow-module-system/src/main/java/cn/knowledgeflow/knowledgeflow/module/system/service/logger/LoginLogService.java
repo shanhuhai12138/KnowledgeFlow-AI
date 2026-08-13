@@ -5,7 +5,7 @@ import cn.knowledgeflow.module.system.api.logger.dto.LoginLogCreateReqDTO;
 import cn.knowledgeflow.module.system.controller.admin.logger.vo.loginlog.LoginLogPageReqVO;
 import cn.knowledgeflow.module.system.dal.dataobject.logger.LoginLogDO;
 
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 
 /**
  * 登录日志 Service 接口

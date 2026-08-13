@@ -4,7 +4,7 @@ import cn.knowledgeflow.framework.common.exception.ServiceException;
 import cn.knowledgeflow.module.system.api.social.dto.SocialUserBindReqDTO;
 import cn.knowledgeflow.module.system.api.social.dto.SocialUserRespDTO;
 import cn.knowledgeflow.module.system.api.social.dto.SocialUserUnbindReqDTO;
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 
 /**
  * 社交用户的 API 接口

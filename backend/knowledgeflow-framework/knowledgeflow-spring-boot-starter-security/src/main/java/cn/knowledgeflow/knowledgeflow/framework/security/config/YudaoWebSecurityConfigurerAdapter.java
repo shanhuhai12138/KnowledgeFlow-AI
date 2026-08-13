@@ -30,7 +30,7 @@ import org.springframework.web.util.pattern.PathPattern;
 
 import javax.annotation.Resource;
 import javax.annotation.security.PermitAll;
-import jakarta.servlet.DispatcherType;
+import javax.servlet.DispatcherType;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;

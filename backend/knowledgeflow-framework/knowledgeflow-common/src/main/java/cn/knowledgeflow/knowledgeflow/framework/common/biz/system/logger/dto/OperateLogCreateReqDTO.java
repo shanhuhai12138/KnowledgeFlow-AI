@@ -3,8 +3,8 @@ package cn.knowledgeflow.framework.common.biz.system.logger.dto;
 import cn.knowledgeflow.framework.common.enums.UserTypeEnum;
 import lombok.Data;
 
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 /**
  * 系统操作日志 Create Request DTO

@@ -6,9 +6,9 @@ import cn.knowledgeflow.framework.common.util.servlet.ServletUtils;
 import cn.knowledgeflow.framework.web.core.util.WebFrameworkUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import jakarta.servlet.FilterChain;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import javax.servlet.FilterChain;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import static cn.knowledgeflow.framework.common.exception.enums.GlobalErrorCodeConstants.DEMO_DENY;
 

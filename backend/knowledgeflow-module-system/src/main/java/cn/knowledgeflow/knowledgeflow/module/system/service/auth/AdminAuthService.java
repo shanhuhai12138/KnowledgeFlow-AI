@@ -3,7 +3,7 @@ package cn.knowledgeflow.module.system.service.auth;
 import cn.knowledgeflow.module.system.controller.admin.auth.vo.*;
 import cn.knowledgeflow.module.system.dal.dataobject.user.AdminUserDO;
 
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 
 /**
  * 管理后台的认证 Service 接口
