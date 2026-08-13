@@ -1,2 +1,2 @@
-﻿org.springframework.boot.env.EnvironmentPostProcessor=\
+org.springframework.boot.env.EnvironmentPostProcessor=\
   cn.knowledgeflow.framework.mybatis.config.IdTypeEnvironmentPostProcessor

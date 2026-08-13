@@ -1,4 +1,4 @@
-﻿cn.knowledgeflow.framework.idempotent.config.YudaoIdempotentConfiguration
+cn.knowledgeflow.framework.idempotent.config.YudaoIdempotentConfiguration
 cn.knowledgeflow.framework.lock4j.config.YudaoLock4jConfiguration
 cn.knowledgeflow.framework.ratelimiter.config.YudaoRateLimiterConfiguration
 cn.knowledgeflow.framework.signature.config.YudaoApiSignatureAutoConfiguration

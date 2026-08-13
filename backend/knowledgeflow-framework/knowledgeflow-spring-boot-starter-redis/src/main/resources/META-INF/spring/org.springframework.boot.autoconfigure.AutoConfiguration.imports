@@ -1,2 +1,2 @@
-﻿cn.knowledgeflow.framework.redis.config.YudaoRedisAutoConfiguration
+cn.knowledgeflow.framework.redis.config.YudaoRedisAutoConfiguration
 cn.knowledgeflow.framework.redis.config.YudaoCacheAutoConfiguration

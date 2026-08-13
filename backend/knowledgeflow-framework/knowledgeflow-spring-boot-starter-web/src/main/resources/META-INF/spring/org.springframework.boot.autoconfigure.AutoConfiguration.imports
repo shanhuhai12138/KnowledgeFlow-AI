@@ -1,4 +1,4 @@
-﻿cn.knowledgeflow.framework.apilog.config.YudaoApiLogAutoConfiguration
+cn.knowledgeflow.framework.apilog.config.YudaoApiLogAutoConfiguration
 cn.knowledgeflow.framework.jackson.config.YudaoJacksonAutoConfiguration
 cn.knowledgeflow.framework.swagger.config.YudaoSwaggerAutoConfiguration
 cn.knowledgeflow.framework.web.config.YudaoWebAutoConfiguration

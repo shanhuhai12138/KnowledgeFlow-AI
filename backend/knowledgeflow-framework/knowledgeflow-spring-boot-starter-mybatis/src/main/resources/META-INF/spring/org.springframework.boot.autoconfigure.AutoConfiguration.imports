@@ -1,3 +1,3 @@
-﻿cn.knowledgeflow.framework.datasource.config.YudaoDataSourceAutoConfiguration
+cn.knowledgeflow.framework.datasource.config.YudaoDataSourceAutoConfiguration
 cn.knowledgeflow.framework.mybatis.config.YudaoMybatisAutoConfiguration
 cn.knowledgeflow.framework.translate.config.YudaoTranslateAutoConfiguration
