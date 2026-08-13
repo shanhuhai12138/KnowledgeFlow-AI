@@ -272,10 +272,10 @@ async function openPreview(d: DocumentItem) {
     if (res?.code === 0 && res?.data) {
       previewContent.value = res.data.content
     } else {
-      previewError.value = res?.message || '获取内容失败'
+      previewError.value = '获取内容失败'
     }
-  } catch (e: any) {
-    previewError.value = e?.message || '获取内容失败'
+  } catch {
+    previewError.value = '获取内容失败'
   } finally {
     previewLoading.value = false
   }
@@ -821,14 +821,6 @@ input[type='checkbox'] {
 }
 .preview-actions {
   margin-bottom: 16px;
-}
-.preview-iframe {
-  flex: 1;
-  width: 100%;
-  border: 1px solid var(--line);
-  border-radius: var(--input-radius);
-  background: #fff;
-  min-height: 400px;
 }
 
 /* 预览内容 */
