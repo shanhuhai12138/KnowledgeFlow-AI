@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.tenant.core.web;
+package cn.knowledgeflow.framework.tenant.core.web;
 
 import cn.hutool.core.util.ObjUtil;
 import cn.knowledgeflow.framework.common.exception.enums.GlobalErrorCodeConstants;

@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.controller.admin.captcha;
+package cn.knowledgeflow.module.system.controller.admin.captcha;
 
 import cn.hutool.core.util.StrUtil;
 import cn.knowledgeflow.framework.common.util.servlet.ServletUtils;

@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.controller.admin.codegen.vo;
+package cn.knowledgeflow.module.infra.controller.admin.codegen.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;

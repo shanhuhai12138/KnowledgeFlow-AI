@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.controller.admin.dict.vo.data;
+package cn.knowledgeflow.module.system.controller.admin.dict.vo.data;
 
 import cn.knowledgeflow.framework.common.enums.CommonStatusEnum;
 import cn.knowledgeflow.framework.common.pojo.PageParam;

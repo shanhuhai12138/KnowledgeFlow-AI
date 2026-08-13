@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.xss.core.filter;
+package cn.knowledgeflow.framework.xss.core.filter;
 
 import cn.knowledgeflow.framework.xss.config.XssProperties;
 import cn.knowledgeflow.framework.xss.core.clean.XssCleaner;

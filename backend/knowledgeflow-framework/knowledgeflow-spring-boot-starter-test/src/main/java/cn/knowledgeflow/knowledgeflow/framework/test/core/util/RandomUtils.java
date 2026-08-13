@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.test.core.util;
+package cn.knowledgeflow.framework.test.core.util;
 
 import cn.hutool.core.date.LocalDateTimeUtil;
 import cn.hutool.core.util.ArrayUtil;

@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.server.controller;
+package cn.knowledgeflow.server.controller;
 
 import cn.knowledgeflow.framework.common.pojo.CommonResult;
 import cn.knowledgeflow.framework.common.util.servlet.ServletUtils;

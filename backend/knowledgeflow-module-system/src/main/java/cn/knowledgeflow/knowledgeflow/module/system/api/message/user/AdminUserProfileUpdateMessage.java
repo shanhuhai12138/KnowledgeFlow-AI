@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.api.message.user;
+package cn.knowledgeflow.module.system.api.message.user;
 
 import lombok.Data;
 

@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.service.job;
+package cn.knowledgeflow.module.infra.service.job;
 
 import cn.knowledgeflow.framework.common.pojo.PageResult;
 import cn.knowledgeflow.module.infra.controller.admin.job.vo.job.JobPageReqVO;

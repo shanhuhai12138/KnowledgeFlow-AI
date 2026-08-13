@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.security.core.handler;
+package cn.knowledgeflow.framework.security.core.handler;
 
 import cn.knowledgeflow.framework.common.exception.enums.GlobalErrorCodeConstants;
 import cn.knowledgeflow.framework.common.pojo.CommonResult;

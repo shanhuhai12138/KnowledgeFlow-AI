@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.controller.admin.db;
+package cn.knowledgeflow.module.infra.controller.admin.db;
 
 import cn.knowledgeflow.framework.common.pojo.CommonResult;
 import cn.knowledgeflow.framework.common.util.object.BeanUtils;

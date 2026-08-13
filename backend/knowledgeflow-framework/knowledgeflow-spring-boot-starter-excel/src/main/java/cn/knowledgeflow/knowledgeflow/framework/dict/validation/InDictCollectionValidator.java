@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.dict.validation;
+package cn.knowledgeflow.framework.dict.validation;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.knowledgeflow.framework.dict.core.DictFrameworkUtils;

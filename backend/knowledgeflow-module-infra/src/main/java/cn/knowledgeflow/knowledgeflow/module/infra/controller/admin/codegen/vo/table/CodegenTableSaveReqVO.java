@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.controller.admin.codegen.vo.table;
+package cn.knowledgeflow.module.infra.controller.admin.codegen.vo.table;
 
 import cn.hutool.core.util.ObjectUtil;
 import cn.knowledgeflow.module.infra.enums.codegen.CodegenSceneEnum;

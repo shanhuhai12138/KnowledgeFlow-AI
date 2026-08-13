@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.api.logger.dto;
+package cn.knowledgeflow.module.system.api.logger.dto;
 
 import lombok.Data;
 

@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.controller.admin.auth.vo;
+package cn.knowledgeflow.module.system.controller.admin.auth.vo;
 
 import cn.knowledgeflow.framework.common.validation.InEnum;
 import cn.knowledgeflow.framework.common.validation.Mobile;

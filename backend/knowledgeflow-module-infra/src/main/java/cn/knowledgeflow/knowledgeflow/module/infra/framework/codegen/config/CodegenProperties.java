@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.framework.codegen.config;
+package cn.knowledgeflow.module.infra.framework.codegen.config;
 
 import cn.knowledgeflow.module.infra.enums.codegen.CodegenFrontTypeEnum;
 import cn.knowledgeflow.module.infra.enums.codegen.CodegenVOTypeEnum;

@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.controller.admin.notice;
+package cn.knowledgeflow.module.system.controller.admin.notice;
 
 import cn.hutool.core.lang.Assert;
 import cn.knowledgeflow.framework.common.enums.UserTypeEnum;

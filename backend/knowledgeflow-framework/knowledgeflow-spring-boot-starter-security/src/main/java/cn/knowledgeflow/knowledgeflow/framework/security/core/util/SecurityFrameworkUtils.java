@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.security.core.util;
+package cn.knowledgeflow.framework.security.core.util;
 
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.ObjUtil;

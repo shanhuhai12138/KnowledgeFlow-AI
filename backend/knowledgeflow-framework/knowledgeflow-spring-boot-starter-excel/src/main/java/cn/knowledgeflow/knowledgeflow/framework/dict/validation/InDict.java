@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.dict.validation;
+package cn.knowledgeflow.framework.dict.validation;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;

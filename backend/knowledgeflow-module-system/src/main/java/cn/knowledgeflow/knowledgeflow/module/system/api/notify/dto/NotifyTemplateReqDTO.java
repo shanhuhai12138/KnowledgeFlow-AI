@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.api.notify.dto;
+package cn.knowledgeflow.module.system.api.notify.dto;
 
 import cn.knowledgeflow.framework.common.enums.CommonStatusEnum;
 import cn.knowledgeflow.framework.common.validation.InEnum;

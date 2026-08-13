@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.controller.admin.file;
+package cn.knowledgeflow.module.infra.controller.admin.file;
 
 import cn.knowledgeflow.framework.common.pojo.CommonResult;
 import cn.knowledgeflow.framework.common.pojo.PageResult;

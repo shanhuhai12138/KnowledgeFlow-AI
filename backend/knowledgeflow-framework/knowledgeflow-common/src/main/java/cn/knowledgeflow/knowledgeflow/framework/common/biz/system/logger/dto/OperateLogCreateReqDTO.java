@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.common.biz.system.logger.dto;
+package cn.knowledgeflow.framework.common.biz.system.logger.dto;
 
 import cn.knowledgeflow.framework.common.enums.UserTypeEnum;
 import lombok.Data;

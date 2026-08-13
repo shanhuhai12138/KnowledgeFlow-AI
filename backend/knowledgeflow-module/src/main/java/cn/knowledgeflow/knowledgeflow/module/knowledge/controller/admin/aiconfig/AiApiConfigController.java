@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.knowledge.controller.admin.aiconfig;
+package cn.knowledgeflow.module.knowledge.controller.admin.aiconfig;
 
 import cn.knowledgeflow.framework.common.pojo.CommonResult;
 import cn.knowledgeflow.module.knowledge.controller.admin.aiconfig.vo.AiConfigRespVO;

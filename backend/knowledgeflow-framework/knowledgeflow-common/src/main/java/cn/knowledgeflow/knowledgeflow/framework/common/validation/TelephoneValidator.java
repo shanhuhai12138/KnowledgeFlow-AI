@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.common.validation;
+package cn.knowledgeflow.framework.common.validation;
 
 import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.util.PhoneUtil;

@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.common.biz.system.oauth2;
+package cn.knowledgeflow.framework.common.biz.system.oauth2;
 
 import cn.knowledgeflow.framework.common.biz.system.oauth2.dto.OAuth2AccessTokenCheckRespDTO;
 import cn.knowledgeflow.framework.common.biz.system.oauth2.dto.OAuth2AccessTokenCreateReqDTO;

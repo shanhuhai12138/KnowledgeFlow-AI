@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.api.sms.dto.code;
+package cn.knowledgeflow.module.system.api.sms.dto.code;
 
 import cn.knowledgeflow.framework.common.validation.InEnum;
 import cn.knowledgeflow.framework.common.validation.Mobile;

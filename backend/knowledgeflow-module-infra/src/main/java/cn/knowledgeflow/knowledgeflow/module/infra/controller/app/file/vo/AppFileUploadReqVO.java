@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.controller.app.file.vo;
+package cn.knowledgeflow.module.infra.controller.app.file.vo;
 
 import cn.knowledgeflow.module.infra.controller.admin.file.vo.file.FileUploadReqVO;
 import com.fasterxml.jackson.annotation.JsonIgnore;

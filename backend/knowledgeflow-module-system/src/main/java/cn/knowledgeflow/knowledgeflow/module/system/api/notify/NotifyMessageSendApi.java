@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.api.notify;
+package cn.knowledgeflow.module.system.api.notify;
 
 import cn.knowledgeflow.module.system.api.notify.dto.NotifySendSingleToUserReqDTO;
 

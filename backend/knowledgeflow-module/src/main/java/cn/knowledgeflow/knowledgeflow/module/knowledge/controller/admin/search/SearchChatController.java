@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.knowledge.controller.admin.search;
+package cn.knowledgeflow.module.knowledge.controller.admin.search;
 
 import cn.knowledgeflow.framework.common.pojo.CommonResult;
 import cn.knowledgeflow.framework.security.core.util.SecurityFrameworkUtils;

@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.api.mail.dto;
+package cn.knowledgeflow.module.system.api.mail.dto;
 
 import lombok.Data;
 

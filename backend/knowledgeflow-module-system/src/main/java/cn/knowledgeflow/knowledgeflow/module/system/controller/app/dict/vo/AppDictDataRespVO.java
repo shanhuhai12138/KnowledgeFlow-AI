@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.controller.app.dict.vo;
+package cn.knowledgeflow.module.system.controller.app.dict.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;

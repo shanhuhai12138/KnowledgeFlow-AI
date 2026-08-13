@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.controller.admin.notify.vo.template;
+package cn.knowledgeflow.module.system.controller.admin.notify.vo.template;
 
 import cn.knowledgeflow.framework.common.enums.CommonStatusEnum;
 import cn.knowledgeflow.framework.common.validation.InEnum;

@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.controller.admin.user.vo.user;
+package cn.knowledgeflow.module.system.controller.admin.user.vo.user;
 
 import cn.knowledgeflow.framework.common.enums.CommonStatusEnum;
 import cn.knowledgeflow.framework.common.validation.InEnum;

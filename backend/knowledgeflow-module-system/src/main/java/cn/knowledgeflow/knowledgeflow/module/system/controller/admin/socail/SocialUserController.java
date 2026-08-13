@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.controller.admin.socail;
+package cn.knowledgeflow.module.system.controller.admin.socail;
 
 import cn.knowledgeflow.framework.common.enums.UserTypeEnum;
 import cn.knowledgeflow.framework.common.pojo.CommonResult;

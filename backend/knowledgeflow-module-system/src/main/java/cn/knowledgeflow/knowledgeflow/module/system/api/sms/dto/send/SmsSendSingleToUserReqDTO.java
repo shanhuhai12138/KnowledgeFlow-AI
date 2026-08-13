@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.api.sms.dto.send;
+package cn.knowledgeflow.module.system.api.sms.dto.send;
 
 import cn.knowledgeflow.framework.common.validation.Mobile;
 import lombok.Data;

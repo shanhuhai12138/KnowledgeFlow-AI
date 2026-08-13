@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.knowledge.controller.admin.search.vo;
+package cn.knowledgeflow.module.knowledge.controller.admin.search.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;

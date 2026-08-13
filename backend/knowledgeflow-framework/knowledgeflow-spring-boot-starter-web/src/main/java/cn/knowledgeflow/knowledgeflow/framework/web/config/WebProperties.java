@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.web.config;
+package cn.knowledgeflow.framework.web.config;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

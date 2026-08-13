@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.signature.core;
+package cn.knowledgeflow.framework.signature.core;
 
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.IdUtil;

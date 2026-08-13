@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.service.social;
+package cn.knowledgeflow.module.system.service.social;
 
 import cn.knowledgeflow.framework.common.exception.ServiceException;
 import cn.knowledgeflow.framework.common.pojo.PageResult;

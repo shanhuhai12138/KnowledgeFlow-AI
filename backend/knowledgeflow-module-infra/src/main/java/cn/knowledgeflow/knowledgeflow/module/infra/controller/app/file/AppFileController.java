@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.controller.app.file;
+package cn.knowledgeflow.module.infra.controller.app.file;
 
 import cn.hutool.core.io.IoUtil;
 import cn.knowledgeflow.framework.common.pojo.CommonResult;

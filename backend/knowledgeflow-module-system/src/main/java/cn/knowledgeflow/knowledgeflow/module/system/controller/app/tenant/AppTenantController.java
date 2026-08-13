@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.controller.app.tenant;
+package cn.knowledgeflow.module.system.controller.app.tenant;
 
 import cn.knowledgeflow.framework.common.enums.CommonStatusEnum;
 import cn.knowledgeflow.framework.common.pojo.CommonResult;

@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.controller.admin.permission.vo.permission;
+package cn.knowledgeflow.module.system.controller.admin.permission.vo.permission;
 
 import cn.knowledgeflow.framework.common.validation.InEnum;
 import cn.knowledgeflow.module.system.enums.permission.DataScopeEnum;

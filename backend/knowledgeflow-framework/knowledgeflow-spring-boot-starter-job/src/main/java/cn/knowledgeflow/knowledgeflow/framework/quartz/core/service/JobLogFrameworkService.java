@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.quartz.core.service;
+package cn.knowledgeflow.framework.quartz.core.service;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;

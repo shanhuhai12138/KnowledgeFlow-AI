@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.common.biz.system.logger;
+package cn.knowledgeflow.framework.common.biz.system.logger;
 
 import cn.knowledgeflow.framework.common.biz.system.logger.dto.OperateLogCreateReqDTO;
 import org.springframework.scheduling.annotation.Async;

@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.common.util.http;
+package cn.knowledgeflow.framework.common.util.http;
 
 import cn.hutool.core.codec.Base64;
 import cn.hutool.core.net.url.UrlBuilder;

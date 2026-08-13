@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.framework.sms.core.property;
+package cn.knowledgeflow.module.system.framework.sms.core.property;
 
 import cn.knowledgeflow.module.system.framework.sms.core.enums.SmsChannelEnum;
 import lombok.Data;

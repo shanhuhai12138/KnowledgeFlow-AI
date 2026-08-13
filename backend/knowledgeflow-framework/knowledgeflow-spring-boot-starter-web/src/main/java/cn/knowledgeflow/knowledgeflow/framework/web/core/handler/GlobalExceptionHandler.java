@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.web.core.handler;
+package cn.knowledgeflow.framework.web.core.handler;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.exceptions.ExceptionUtil;

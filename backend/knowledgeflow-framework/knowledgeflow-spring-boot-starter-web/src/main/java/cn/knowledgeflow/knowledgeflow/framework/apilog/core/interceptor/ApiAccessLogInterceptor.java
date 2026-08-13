@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.apilog.core.interceptor;
+package cn.knowledgeflow.framework.apilog.core.interceptor;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.io.FileUtil;

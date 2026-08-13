@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.operatelog.core.service;
+package cn.knowledgeflow.framework.operatelog.core.service;
 
 import cn.knowledgeflow.framework.common.biz.system.logger.OperateLogCommonApi;
 import cn.knowledgeflow.framework.common.biz.system.logger.dto.OperateLogCreateReqDTO;

@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.swagger.config;
+package cn.knowledgeflow.framework.swagger.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

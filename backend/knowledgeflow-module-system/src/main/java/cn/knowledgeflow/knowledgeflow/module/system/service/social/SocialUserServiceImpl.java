@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.service.social;
+package cn.knowledgeflow.module.system.service.social;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.lang.Assert;

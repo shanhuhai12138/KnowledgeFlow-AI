@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.common.util.servlet;
+package cn.knowledgeflow.framework.common.util.servlet;
 
 import cn.hutool.core.io.IoUtil;
 import cn.hutool.core.util.StrUtil;

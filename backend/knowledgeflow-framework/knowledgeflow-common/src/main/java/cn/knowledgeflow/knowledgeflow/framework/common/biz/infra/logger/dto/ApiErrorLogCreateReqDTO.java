@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.common.biz.infra.logger.dto;
+package cn.knowledgeflow.framework.common.biz.infra.logger.dto;
 
 import lombok.Data;
 

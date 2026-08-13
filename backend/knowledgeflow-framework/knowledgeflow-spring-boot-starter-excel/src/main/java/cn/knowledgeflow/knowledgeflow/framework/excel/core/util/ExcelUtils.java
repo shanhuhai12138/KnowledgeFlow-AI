@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.excel.core.util;
+package cn.knowledgeflow.framework.excel.core.util;
 
 import cn.idev.excel.FastExcelFactory;
 import cn.idev.excel.converters.longconverter.LongStringConverter;
