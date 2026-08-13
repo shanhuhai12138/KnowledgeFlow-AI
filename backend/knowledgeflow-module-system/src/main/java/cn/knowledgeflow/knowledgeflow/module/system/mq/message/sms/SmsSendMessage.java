@@ -1,9 +1,9 @@
-package cn.knowledgeflow.module.system.mq.message.sms;
+﻿package cn.knowledgeflow.module.system.mq.message.sms;
 
 import cn.knowledgeflow.framework.common.core.KeyValue;
 import lombok.Data;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 import java.util.List;
 
 /**

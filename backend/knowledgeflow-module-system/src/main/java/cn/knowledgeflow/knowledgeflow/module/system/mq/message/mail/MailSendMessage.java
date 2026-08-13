@@ -1,9 +1,9 @@
-package cn.knowledgeflow.module.system.mq.message.mail;
+﻿package cn.knowledgeflow.module.system.mq.message.mail;
 
 import lombok.Data;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import java.io.File;
 import java.util.Collection;
 

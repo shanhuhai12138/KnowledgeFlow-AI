@@ -1,8 +1,8 @@
-package cn.knowledgeflow.module.system.api.sms;
+﻿package cn.knowledgeflow.module.system.api.sms;
 
 import cn.knowledgeflow.module.system.api.sms.dto.send.SmsSendSingleToUserReqDTO;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 /**
  * 短信发送 API 接口

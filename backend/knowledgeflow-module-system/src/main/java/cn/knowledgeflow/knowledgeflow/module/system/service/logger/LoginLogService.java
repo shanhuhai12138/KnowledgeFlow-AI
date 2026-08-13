@@ -1,11 +1,11 @@
-package cn.knowledgeflow.module.system.service.logger;
+﻿package cn.knowledgeflow.module.system.service.logger;
 
 import cn.knowledgeflow.framework.common.pojo.PageResult;
 import cn.knowledgeflow.module.system.api.logger.dto.LoginLogCreateReqDTO;
 import cn.knowledgeflow.module.system.controller.admin.logger.vo.loginlog.LoginLogPageReqVO;
 import cn.knowledgeflow.module.system.dal.dataobject.logger.LoginLogDO;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 /**
  * 登录日志 Service 接口

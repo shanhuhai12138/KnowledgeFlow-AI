@@ -1,8 +1,8 @@
-package cn.knowledgeflow.framework.common.biz.infra.logger.dto;
+﻿package cn.knowledgeflow.framework.common.biz.infra.logger.dto;
 
 import lombok.Data;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 /**

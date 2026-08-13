@@ -1,4 +1,4 @@
-package cn.knowledgeflow.module.system.controller.admin.captcha;
+﻿package cn.knowledgeflow.module.system.controller.admin.captcha;
 
 import cn.hutool.core.util.StrUtil;
 import cn.knowledgeflow.framework.common.util.servlet.ServletUtils;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.annotation.security.PermitAll;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 @Tag(name = "管理后台 - 验证码")
 @RestController("adminCaptchaController")

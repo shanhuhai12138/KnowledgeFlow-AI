@@ -1,4 +1,4 @@
-package cn.knowledgeflow.module.infra.framework.file.core.client.s3;
+﻿package cn.knowledgeflow.module.infra.framework.file.core.client.s3;
 
 import cn.hutool.core.util.StrUtil;
 import cn.knowledgeflow.module.infra.framework.file.core.client.FileClientConfig;
@@ -6,8 +6,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.hibernate.validator.constraints.URL;
 
-import javax.validation.constraints.AssertTrue;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.AssertTrue;
+import jakarta.validation.constraints.NotNull;
 
 /**
  * S3 文件客户端的配置类

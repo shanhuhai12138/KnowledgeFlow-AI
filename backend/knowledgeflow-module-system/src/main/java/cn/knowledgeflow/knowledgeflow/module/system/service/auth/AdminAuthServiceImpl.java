@@ -1,4 +1,4 @@
-package cn.knowledgeflow.module.system.service.auth;
+﻿package cn.knowledgeflow.module.system.service.auth;
 
 import cn.hutool.core.util.ObjectUtil;
 import cn.knowledgeflow.framework.common.enums.CommonStatusEnum;
@@ -37,7 +37,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import javax.validation.Validator;
+import jakarta.validation.Validator;
 import java.util.Objects;
 
 import static cn.knowledgeflow.framework.common.exception.util.ServiceExceptionUtil.exception;

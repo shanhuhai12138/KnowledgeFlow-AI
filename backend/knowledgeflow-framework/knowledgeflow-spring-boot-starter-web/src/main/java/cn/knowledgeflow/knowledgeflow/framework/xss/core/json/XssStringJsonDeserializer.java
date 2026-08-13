@@ -1,4 +1,4 @@
-package cn.knowledgeflow.framework.xss.core.json;
+﻿package cn.knowledgeflow.framework.xss.core.json;
 
 import cn.knowledgeflow.framework.common.util.servlet.ServletUtils;
 import cn.knowledgeflow.framework.xss.config.XssProperties;
@@ -11,7 +11,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.PathMatcher;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 /**

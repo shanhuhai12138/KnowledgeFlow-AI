@@ -1,4 +1,4 @@
-package cn.knowledgeflow.module.infra.service.demo.demo03.erp;
+﻿package cn.knowledgeflow.module.infra.service.demo.demo03.erp;
 
 import cn.knowledgeflow.framework.common.pojo.PageParam;
 import cn.knowledgeflow.framework.common.pojo.PageResult;
@@ -7,7 +7,7 @@ import cn.knowledgeflow.module.infra.controller.admin.demo.demo03.erp.vo.Demo03S
 import cn.knowledgeflow.module.infra.dal.dataobject.demo.demo03.Demo03CourseDO;
 import cn.knowledgeflow.module.infra.dal.dataobject.demo.demo03.Demo03GradeDO;
 import cn.knowledgeflow.module.infra.dal.dataobject.demo.demo03.Demo03StudentDO;
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 import java.util.List;
 

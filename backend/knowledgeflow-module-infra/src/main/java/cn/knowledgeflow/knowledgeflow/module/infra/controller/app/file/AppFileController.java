@@ -1,4 +1,4 @@
-package cn.knowledgeflow.module.infra.controller.app.file;
+﻿package cn.knowledgeflow.module.infra.controller.app.file;
 
 import cn.hutool.core.io.IoUtil;
 import cn.knowledgeflow.framework.common.pojo.CommonResult;
@@ -18,7 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.annotation.security.PermitAll;
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 import static cn.knowledgeflow.framework.common.pojo.CommonResult.success;
 

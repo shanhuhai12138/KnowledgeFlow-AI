@@ -1,4 +1,4 @@
-package cn.knowledgeflow.module.system.controller.admin.permission;
+﻿package cn.knowledgeflow.module.system.controller.admin.permission;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.knowledgeflow.framework.common.pojo.CommonResult;
@@ -15,7 +15,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.util.Set;
 
 import static cn.knowledgeflow.framework.common.pojo.CommonResult.success;

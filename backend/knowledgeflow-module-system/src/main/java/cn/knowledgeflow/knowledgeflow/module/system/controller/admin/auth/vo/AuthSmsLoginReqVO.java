@@ -1,4 +1,4 @@
-package cn.knowledgeflow.module.system.controller.admin.auth.vo;
+﻿package cn.knowledgeflow.module.system.controller.admin.auth.vo;
 
 import cn.knowledgeflow.framework.common.validation.Mobile;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -7,7 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotEmpty;
 
 @Schema(description = "管理后台 - 短信验证码的登录 Request VO")
 @Data

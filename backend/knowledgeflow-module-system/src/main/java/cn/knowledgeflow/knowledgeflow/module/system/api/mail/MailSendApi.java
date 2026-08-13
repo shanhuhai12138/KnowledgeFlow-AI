@@ -1,8 +1,8 @@
-package cn.knowledgeflow.module.system.api.mail;
+﻿package cn.knowledgeflow.module.system.api.mail;
 
 import cn.knowledgeflow.module.system.api.mail.dto.MailSendSingleToUserReqDTO;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 /**
  * 邮箱发送 API 接口

@@ -1,4 +1,4 @@
-package cn.knowledgeflow.module.infra.framework.file.core.s3;
+﻿package cn.knowledgeflow.module.infra.framework.file.core.s3;
 
 import cn.hutool.core.io.resource.ResourceUtil;
 import cn.hutool.core.util.IdUtil;
@@ -8,7 +8,7 @@ import cn.knowledgeflow.module.infra.framework.file.core.client.s3.S3FileClientC
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import javax.validation.Validation;
+import jakarta.validation.Validation;
 
 import static org.junit.jupiter.api.Assertions.*;
 

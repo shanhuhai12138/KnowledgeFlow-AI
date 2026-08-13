@@ -1,12 +1,12 @@
-package cn.knowledgeflow.module.system.controller.admin.user.vo.profile;
+﻿package cn.knowledgeflow.module.system.controller.admin.user.vo.profile;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.URL;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Size;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Size;
 
 
 @Schema(description = "管理后台 - 用户个人信息更新 Request VO")

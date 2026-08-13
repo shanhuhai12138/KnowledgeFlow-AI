@@ -1,4 +1,4 @@
-package cn.knowledgeflow.module.system.controller.admin.user;
+﻿package cn.knowledgeflow.module.system.controller.admin.user;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
@@ -25,8 +25,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;

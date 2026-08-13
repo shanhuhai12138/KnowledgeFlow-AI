@@ -1,4 +1,4 @@
-package cn.knowledgeflow.framework.tenant.core.web;
+﻿package cn.knowledgeflow.framework.tenant.core.web;
 
 import cn.hutool.core.util.ObjUtil;
 import cn.knowledgeflow.framework.common.exception.enums.GlobalErrorCodeConstants;
@@ -12,8 +12,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.servlet.HandlerInterceptor;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import static cn.knowledgeflow.framework.common.exception.util.ServiceExceptionUtil.exception0;
 

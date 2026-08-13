@@ -1,10 +1,10 @@
-package cn.knowledgeflow.framework.common.biz.system.oauth2.dto;
+﻿package cn.knowledgeflow.framework.common.biz.system.oauth2.dto;
 
 import cn.knowledgeflow.framework.common.enums.UserTypeEnum;
 import cn.knowledgeflow.framework.common.validation.InEnum;
 import lombok.Data;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.List;
 

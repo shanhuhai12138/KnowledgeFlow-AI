@@ -1,11 +1,11 @@
-package cn.knowledgeflow.module.system.service.sms;
+﻿package cn.knowledgeflow.module.system.service.sms;
 
 import cn.knowledgeflow.framework.common.pojo.PageResult;
 import cn.knowledgeflow.module.system.controller.admin.sms.vo.template.SmsTemplatePageReqVO;
 import cn.knowledgeflow.module.system.controller.admin.sms.vo.template.SmsTemplateSaveReqVO;
 import cn.knowledgeflow.module.system.dal.dataobject.sms.SmsTemplateDO;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.util.List;
 import java.util.Map;
 

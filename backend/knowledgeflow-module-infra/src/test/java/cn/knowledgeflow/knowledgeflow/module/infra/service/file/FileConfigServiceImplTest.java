@@ -1,4 +1,4 @@
-package cn.knowledgeflow.module.infra.service.file;
+﻿package cn.knowledgeflow.module.infra.service.file;
 
 import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.date.LocalDateTimeUtil;
@@ -21,7 +21,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 
 import javax.annotation.Resource;
-import javax.validation.Validator;
+import jakarta.validation.Validator;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Map;

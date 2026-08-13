@@ -1,10 +1,10 @@
-package cn.knowledgeflow.module.infra.service.job;
+﻿package cn.knowledgeflow.module.infra.service.job;
 
 import cn.knowledgeflow.framework.common.pojo.PageResult;
 import cn.knowledgeflow.module.infra.controller.admin.job.vo.job.JobPageReqVO;
 import cn.knowledgeflow.module.infra.controller.admin.job.vo.job.JobSaveReqVO;
 import cn.knowledgeflow.module.infra.dal.dataobject.job.JobDO;
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import org.quartz.SchedulerException;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package cn.knowledgeflow.module.system.service.sms;
+﻿package cn.knowledgeflow.module.system.service.sms;
 
 import cn.knowledgeflow.framework.common.pojo.PageResult;
 import cn.knowledgeflow.module.system.controller.admin.sms.vo.channel.SmsChannelPageReqVO;
@@ -6,7 +6,7 @@ import cn.knowledgeflow.module.system.controller.admin.sms.vo.channel.SmsChannel
 import cn.knowledgeflow.module.system.dal.dataobject.sms.SmsChannelDO;
 import cn.knowledgeflow.module.system.framework.sms.core.client.SmsClient;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.util.List;
 
 /**

@@ -1,4 +1,4 @@
-package cn.knowledgeflow.module.system.controller.admin.oauth2;
+﻿package cn.knowledgeflow.module.system.controller.admin.oauth2;
 
 import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.ArrayUtil;
@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.annotation.security.PermitAll;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;

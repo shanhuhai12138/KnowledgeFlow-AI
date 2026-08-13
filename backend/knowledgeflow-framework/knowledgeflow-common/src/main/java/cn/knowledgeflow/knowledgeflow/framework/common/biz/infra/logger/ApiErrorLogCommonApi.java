@@ -1,9 +1,9 @@
-package cn.knowledgeflow.framework.common.biz.infra.logger;
+﻿package cn.knowledgeflow.framework.common.biz.infra.logger;
 
 import cn.knowledgeflow.framework.common.biz.infra.logger.dto.ApiErrorLogCreateReqDTO;
 import org.springframework.scheduling.annotation.Async;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 /**
  * API 错误日志的 API 接口

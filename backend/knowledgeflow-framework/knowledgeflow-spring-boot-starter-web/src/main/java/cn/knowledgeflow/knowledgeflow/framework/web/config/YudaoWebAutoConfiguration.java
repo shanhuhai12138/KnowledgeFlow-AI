@@ -1,4 +1,4 @@
-package cn.knowledgeflow.framework.web.config;
+﻿package cn.knowledgeflow.framework.web.config;
 
 import cn.hutool.core.util.StrUtil;
 import cn.knowledgeflow.framework.common.biz.infra.logger.ApiErrorLogCommonApi;
@@ -28,7 +28,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
-import javax.servlet.Filter;
+import jakarta.servlet.Filter;
 import java.util.Map;
 import java.util.function.Predicate;
 

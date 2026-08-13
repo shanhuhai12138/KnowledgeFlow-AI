@@ -1,11 +1,11 @@
-package cn.knowledgeflow.module.system.framework.sms.core.property;
+﻿package cn.knowledgeflow.module.system.framework.sms.core.property;
 
 import cn.knowledgeflow.module.system.framework.sms.core.enums.SmsChannelEnum;
 import lombok.Data;
 import org.springframework.validation.annotation.Validated;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 /**
  * 短信渠道配置类

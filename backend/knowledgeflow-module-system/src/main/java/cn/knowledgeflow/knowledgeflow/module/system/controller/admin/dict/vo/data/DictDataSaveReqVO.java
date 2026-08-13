@@ -1,13 +1,13 @@
-package cn.knowledgeflow.module.system.controller.admin.dict.vo.data;
+﻿package cn.knowledgeflow.module.system.controller.admin.dict.vo.data;
 
 import cn.knowledgeflow.framework.common.enums.CommonStatusEnum;
 import cn.knowledgeflow.framework.common.validation.InEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Schema(description = "管理后台 - 字典数据创建/修改 Request VO")
 @Data

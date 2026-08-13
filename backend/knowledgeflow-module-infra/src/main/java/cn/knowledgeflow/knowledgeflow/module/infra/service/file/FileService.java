@@ -1,11 +1,11 @@
-package cn.knowledgeflow.module.infra.service.file;
+﻿package cn.knowledgeflow.module.infra.service.file;
 
 import cn.knowledgeflow.framework.common.pojo.PageResult;
 import cn.knowledgeflow.module.infra.controller.admin.file.vo.file.FileCreateReqVO;
 import cn.knowledgeflow.module.infra.controller.admin.file.vo.file.FilePageReqVO;
 import cn.knowledgeflow.module.infra.controller.admin.file.vo.file.FilePresignedUrlRespVO;
 import cn.knowledgeflow.module.infra.dal.dataobject.file.FileDO;
-import javax.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotEmpty;
 
 import java.util.List;
 

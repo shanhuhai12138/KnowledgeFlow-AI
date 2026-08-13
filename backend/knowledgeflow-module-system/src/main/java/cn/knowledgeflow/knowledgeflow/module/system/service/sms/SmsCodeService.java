@@ -1,11 +1,11 @@
-package cn.knowledgeflow.module.system.service.sms;
+﻿package cn.knowledgeflow.module.system.service.sms;
 
 import cn.knowledgeflow.framework.common.exception.ServiceException;
 import cn.knowledgeflow.module.system.api.sms.dto.code.SmsCodeValidateReqDTO;
 import cn.knowledgeflow.module.system.api.sms.dto.code.SmsCodeSendReqDTO;
 import cn.knowledgeflow.module.system.api.sms.dto.code.SmsCodeUseReqDTO;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 /**
  * 短信验证码 Service 接口

@@ -1,4 +1,4 @@
-package cn.knowledgeflow.module.system.controller.admin.auth.vo;
+﻿package cn.knowledgeflow.module.system.controller.admin.auth.vo;
 
 import cn.knowledgeflow.framework.common.validation.InEnum;
 import cn.knowledgeflow.framework.common.validation.Mobile;
@@ -9,8 +9,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 @Schema(description = "管理后台 - 发送手机验证码 Request VO")
 @Data

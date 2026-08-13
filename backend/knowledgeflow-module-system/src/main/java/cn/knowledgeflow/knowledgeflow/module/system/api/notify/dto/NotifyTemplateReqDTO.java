@@ -1,11 +1,11 @@
-package cn.knowledgeflow.module.system.api.notify.dto;
+﻿package cn.knowledgeflow.module.system.api.notify.dto;
 
 import cn.knowledgeflow.framework.common.enums.CommonStatusEnum;
 import cn.knowledgeflow.framework.common.validation.InEnum;
 import lombok.Data;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 @Data
 public class NotifyTemplateReqDTO {

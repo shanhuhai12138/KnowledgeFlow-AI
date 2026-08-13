@@ -1,4 +1,4 @@
-package cn.knowledgeflow.module.system.controller.admin.user.vo.user;
+﻿package cn.knowledgeflow.module.system.controller.admin.user.vo.user;
 
 import cn.hutool.core.util.ObjectUtil;
 import cn.knowledgeflow.framework.common.validation.Mobile;
@@ -11,7 +11,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.*;
+import jakarta.validation.constraints.*;
 import java.util.Set;
 
 @Schema(description = "管理后台 - 用户创建/修改 Request VO")

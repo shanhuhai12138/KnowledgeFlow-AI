@@ -1,4 +1,4 @@
-package cn.knowledgeflow.module.system.service.mail;
+﻿package cn.knowledgeflow.module.system.service.mail;
 
 import cn.hutool.core.util.ObjUtil;
 import cn.hutool.core.util.ReUtil;
@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import javax.annotation.Resource;
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;

@@ -1,12 +1,12 @@
-package cn.knowledgeflow.module.infra.controller.admin.demo.demo03.normal.vo;
+﻿package cn.knowledgeflow.module.infra.controller.admin.demo.demo03.normal.vo;
 
 import cn.knowledgeflow.module.infra.dal.dataobject.demo.demo03.Demo03CourseDO;
 import cn.knowledgeflow.module.infra.dal.dataobject.demo.demo03.Demo03GradeDO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.List;
 

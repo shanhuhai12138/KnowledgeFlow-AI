@@ -1,4 +1,4 @@
-package cn.knowledgeflow.module.system.controller.admin.mail;
+﻿package cn.knowledgeflow.module.system.controller.admin.mail;
 
 import cn.knowledgeflow.framework.common.pojo.CommonResult;
 import cn.knowledgeflow.framework.common.pojo.PageResult;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 import static cn.knowledgeflow.framework.common.pojo.CommonResult.success;
 

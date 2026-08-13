@@ -1,4 +1,4 @@
-package cn.knowledgeflow.module.system.controller.admin.sms;
+﻿package cn.knowledgeflow.module.system.controller.admin.sms;
 
 import cn.knowledgeflow.framework.common.pojo.CommonResult;
 import cn.knowledgeflow.framework.common.pojo.PageResult;
@@ -16,7 +16,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.util.Comparator;
 import java.util.List;
 

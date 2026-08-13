@@ -1,6 +1,6 @@
-package cn.knowledgeflow.module.infra.api.file;
+﻿package cn.knowledgeflow.module.infra.api.file;
 
-import javax.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotEmpty;
 
 /**
  * 文件 API 接口

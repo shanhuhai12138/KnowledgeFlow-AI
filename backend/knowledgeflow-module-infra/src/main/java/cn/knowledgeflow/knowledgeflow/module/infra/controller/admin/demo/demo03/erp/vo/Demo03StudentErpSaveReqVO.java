@@ -1,10 +1,10 @@
-package cn.knowledgeflow.module.infra.controller.admin.demo.demo03.erp.vo;
+﻿package cn.knowledgeflow.module.infra.controller.admin.demo.demo03.erp.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Schema(description = "管理后台 - 学生新增/修改 Request VO")

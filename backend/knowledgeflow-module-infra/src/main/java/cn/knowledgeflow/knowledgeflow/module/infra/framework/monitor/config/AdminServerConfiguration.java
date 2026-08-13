@@ -1,4 +1,4 @@
-package cn.knowledgeflow.module.infra.framework.monitor.config;
+﻿package cn.knowledgeflow.module.infra.framework.monitor.config;
 
 import de.codecentric.boot.admin.server.config.EnableAdminServer;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,7 +17,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
-import javax.servlet.DispatcherType;
+import jakarta.servlet.DispatcherType;
 
 /**
  * Spring Boot Admin Server 配置

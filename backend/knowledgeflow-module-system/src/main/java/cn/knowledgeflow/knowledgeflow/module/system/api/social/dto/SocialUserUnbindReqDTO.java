@@ -1,4 +1,4 @@
-package cn.knowledgeflow.module.system.api.social.dto;
+﻿package cn.knowledgeflow.module.system.api.social.dto;
 
 import cn.knowledgeflow.framework.common.enums.UserTypeEnum;
 import cn.knowledgeflow.framework.common.validation.InEnum;
@@ -7,8 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 /**
  * 社交绑定 Request DTO，使用 code 授权码

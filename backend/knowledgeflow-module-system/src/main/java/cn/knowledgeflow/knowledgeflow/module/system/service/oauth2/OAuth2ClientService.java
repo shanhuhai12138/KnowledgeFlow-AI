@@ -1,11 +1,11 @@
-package cn.knowledgeflow.module.system.service.oauth2;
+﻿package cn.knowledgeflow.module.system.service.oauth2;
 
 import cn.knowledgeflow.framework.common.pojo.PageResult;
 import cn.knowledgeflow.module.system.controller.admin.oauth2.vo.client.OAuth2ClientPageReqVO;
 import cn.knowledgeflow.module.system.controller.admin.oauth2.vo.client.OAuth2ClientSaveReqVO;
 import cn.knowledgeflow.module.system.dal.dataobject.oauth2.OAuth2ClientDO;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.util.Collection;
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package cn.knowledgeflow.module.infra.framework.file.core.utils;
+﻿package cn.knowledgeflow.module.infra.framework.file.core.utils;
 
 import cn.hutool.core.io.IoUtil;
 import cn.hutool.core.util.StrUtil;
@@ -9,7 +9,7 @@ import org.apache.tika.Tika;
 import org.apache.tika.mime.MimeTypeException;
 import org.apache.tika.mime.MimeTypes;
 
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**

@@ -1,4 +1,4 @@
-package cn.knowledgeflow.module.system.controller.admin.socail.vo.user;
+﻿package cn.knowledgeflow.module.system.controller.admin.socail.vo.user;
 
 import cn.knowledgeflow.framework.common.validation.InEnum;
 import cn.knowledgeflow.module.system.enums.social.SocialTypeEnum;
@@ -8,8 +8,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 @Schema(description = "管理后台 - 取消社交绑定 Request VO")
 @Data

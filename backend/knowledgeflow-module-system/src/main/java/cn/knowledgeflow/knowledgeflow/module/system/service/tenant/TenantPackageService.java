@@ -1,11 +1,11 @@
-package cn.knowledgeflow.module.system.service.tenant;
+﻿package cn.knowledgeflow.module.system.service.tenant;
 
 import cn.knowledgeflow.framework.common.pojo.PageResult;
 import cn.knowledgeflow.module.system.controller.admin.tenant.vo.packages.TenantPackagePageReqVO;
 import cn.knowledgeflow.module.system.controller.admin.tenant.vo.packages.TenantPackageSaveReqVO;
 import cn.knowledgeflow.module.system.dal.dataobject.tenant.TenantPackageDO;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.util.List;
 
 /**

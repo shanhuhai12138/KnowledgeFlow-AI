@@ -1,4 +1,4 @@
-package cn.knowledgeflow.framework.test.core.util;
+﻿package cn.knowledgeflow.framework.test.core.util;
 
 import cn.hutool.core.date.LocalDateTimeUtil;
 import cn.hutool.core.util.ArrayUtil;
@@ -9,7 +9,7 @@ import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 import uk.co.jemos.podam.common.AttributeStrategy;
 
-import javax.validation.constraints.Email;
+import jakarta.validation.constraints.Email;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 import java.math.BigDecimal;

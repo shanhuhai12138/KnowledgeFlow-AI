@@ -1,4 +1,4 @@
-package cn.knowledgeflow.module.system.controller.admin.sms;
+﻿package cn.knowledgeflow.module.system.controller.admin.sms;
 
 import cn.knowledgeflow.framework.common.pojo.CommonResult;
 import cn.knowledgeflow.framework.common.util.servlet.ServletUtils;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.annotation.security.PermitAll;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import static cn.knowledgeflow.framework.common.pojo.CommonResult.success;
 

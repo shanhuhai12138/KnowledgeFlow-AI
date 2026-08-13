@@ -1,4 +1,4 @@
-package cn.knowledgeflow.module.infra.framework.codegen.config;
+﻿package cn.knowledgeflow.module.infra.framework.codegen.config;
 
 import cn.knowledgeflow.module.infra.enums.codegen.CodegenFrontTypeEnum;
 import cn.knowledgeflow.module.infra.enums.codegen.CodegenVOTypeEnum;
@@ -6,8 +6,8 @@ import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.validation.annotation.Validated;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import java.util.Collection;
 
 @ConfigurationProperties(prefix = "yudao.codegen")

@@ -1,11 +1,11 @@
-package cn.knowledgeflow.module.system.service.permission;
+﻿package cn.knowledgeflow.module.system.service.permission;
 
 import cn.knowledgeflow.framework.common.pojo.PageResult;
 import cn.knowledgeflow.module.system.controller.admin.permission.vo.role.RolePageReqVO;
 import cn.knowledgeflow.module.system.controller.admin.permission.vo.role.RoleSaveReqVO;
 import cn.knowledgeflow.module.system.dal.dataobject.permission.RoleDO;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;

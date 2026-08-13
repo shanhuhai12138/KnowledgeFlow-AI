@@ -1,4 +1,4 @@
-package cn.knowledgeflow.module.system.controller.app.tenant;
+﻿package cn.knowledgeflow.module.system.controller.app.tenant;
 
 import cn.knowledgeflow.framework.common.enums.CommonStatusEnum;
 import cn.knowledgeflow.framework.common.pojo.CommonResult;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.annotation.security.PermitAll;
-import javax.validation.constraints.Pattern;
+import jakarta.validation.constraints.Pattern;
 
 import static cn.knowledgeflow.framework.common.pojo.CommonResult.success;
 

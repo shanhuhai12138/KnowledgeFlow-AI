@@ -1,4 +1,4 @@
-package cn.knowledgeflow.module.system.controller.admin.oauth2;
+﻿package cn.knowledgeflow.module.system.controller.admin.oauth2;
 
 import cn.hutool.core.collection.ListUtil;
 import cn.hutool.core.date.LocalDateTimeUtil;
@@ -26,7 +26,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;

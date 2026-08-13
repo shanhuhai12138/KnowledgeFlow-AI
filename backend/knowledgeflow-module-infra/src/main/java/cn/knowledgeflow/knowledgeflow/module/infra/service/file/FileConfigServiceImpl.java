@@ -1,4 +1,4 @@
-package cn.knowledgeflow.module.infra.service.file;
+﻿package cn.knowledgeflow.module.infra.service.file;
 
 import cn.hutool.core.io.resource.ResourceUtil;
 import cn.hutool.core.util.IdUtil;
@@ -18,7 +18,7 @@ import cn.knowledgeflow.module.infra.framework.file.core.enums.FileStorageEnum;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import javax.annotation.Resource;
-import javax.validation.Validator;
+import jakarta.validation.Validator;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

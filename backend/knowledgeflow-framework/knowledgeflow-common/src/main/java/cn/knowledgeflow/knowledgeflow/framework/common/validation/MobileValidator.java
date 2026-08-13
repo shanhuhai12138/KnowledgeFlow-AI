@@ -1,10 +1,10 @@
-package cn.knowledgeflow.framework.common.validation;
+﻿package cn.knowledgeflow.framework.common.validation;
 
 import cn.hutool.core.util.StrUtil;
 import cn.knowledgeflow.framework.common.util.validation.ValidationUtils;
 
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
 
 public class MobileValidator implements ConstraintValidator<Mobile, String> {
 

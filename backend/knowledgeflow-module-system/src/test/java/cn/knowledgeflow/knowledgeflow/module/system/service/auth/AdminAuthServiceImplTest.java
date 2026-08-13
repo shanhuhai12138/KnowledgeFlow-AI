@@ -1,4 +1,4 @@
-package cn.knowledgeflow.module.system.service.auth;
+﻿package cn.knowledgeflow.module.system.service.auth;
 
 import cn.hutool.core.util.ReflectUtil;
 import cn.knowledgeflow.framework.common.enums.CommonStatusEnum;
@@ -27,8 +27,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 
 import javax.annotation.Resource;
-import javax.validation.Validation;
-import javax.validation.Validator;
+import jakarta.validation.Validation;
+import jakarta.validation.Validator;
 
 import static cn.hutool.core.util.RandomUtil.randomEle;
 import static cn.knowledgeflow.framework.test.core.util.AssertUtils.assertPojoEquals;

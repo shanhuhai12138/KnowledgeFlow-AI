@@ -1,4 +1,4 @@
-package cn.knowledgeflow.module.knowledge.controller.admin.document;
+﻿package cn.knowledgeflow.module.knowledge.controller.admin.document;
 
 import cn.hutool.core.io.IoUtil;
 import cn.knowledgeflow.framework.common.pojo.CommonResult;
@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;

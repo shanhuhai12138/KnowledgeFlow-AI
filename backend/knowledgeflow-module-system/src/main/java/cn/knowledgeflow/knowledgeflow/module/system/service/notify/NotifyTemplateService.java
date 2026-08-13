@@ -1,11 +1,11 @@
-package cn.knowledgeflow.module.system.service.notify;
+﻿package cn.knowledgeflow.module.system.service.notify;
 
 import cn.knowledgeflow.framework.common.pojo.PageResult;
 import cn.knowledgeflow.module.system.controller.admin.notify.vo.template.NotifyTemplatePageReqVO;
 import cn.knowledgeflow.module.system.controller.admin.notify.vo.template.NotifyTemplateSaveReqVO;
 import cn.knowledgeflow.module.system.dal.dataobject.notify.NotifyTemplateDO;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.util.List;
 import java.util.Map;
 

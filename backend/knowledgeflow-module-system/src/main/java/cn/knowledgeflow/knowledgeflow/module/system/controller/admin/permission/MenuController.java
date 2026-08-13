@@ -1,4 +1,4 @@
-package cn.knowledgeflow.module.system.controller.admin.permission;
+﻿package cn.knowledgeflow.module.system.controller.admin.permission;
 
 import cn.knowledgeflow.framework.common.enums.CommonStatusEnum;
 import cn.knowledgeflow.framework.common.pojo.CommonResult;
@@ -17,7 +17,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.util.Comparator;
 import java.util.List;
 

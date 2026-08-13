@@ -1,4 +1,4 @@
-package cn.knowledgeflow.framework.signature.core.aop;
+﻿package cn.knowledgeflow.framework.signature.core.aop;
 
 import cn.hutool.core.lang.Assert;
 import cn.hutool.core.map.MapUtil;
@@ -17,7 +17,7 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import java.util.Map;
 import java.util.Objects;
 import java.util.SortedMap;

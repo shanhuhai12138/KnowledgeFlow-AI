@@ -1,10 +1,10 @@
-package cn.knowledgeflow.module.system.api.social.dto;
+﻿package cn.knowledgeflow.module.system.api.social.dto;
 
 import cn.knowledgeflow.framework.common.enums.UserTypeEnum;
 import lombok.Data;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import java.util.HashMap;
 import java.util.Map;
 

@@ -1,4 +1,4 @@
-package cn.knowledgeflow.module.system.service.social;
+﻿package cn.knowledgeflow.module.system.service.social;
 
 import cn.binarywang.wx.miniapp.bean.WxMaPhoneNumberInfo;
 import cn.knowledgeflow.framework.common.pojo.PageResult;
@@ -14,7 +14,7 @@ import me.chanjar.weixin.common.bean.WxJsapiSignature;
 import me.chanjar.weixin.common.bean.subscribemsg.TemplateInfo;
 import me.zhyd.oauth.model.AuthUser;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.util.List;
 
 /**

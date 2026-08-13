@@ -1,4 +1,4 @@
-package cn.knowledgeflow.module.system.service.social;
+﻿package cn.knowledgeflow.module.system.service.social;
 
 import cn.knowledgeflow.framework.common.exception.ServiceException;
 import cn.knowledgeflow.framework.common.pojo.PageResult;
@@ -8,7 +8,7 @@ import cn.knowledgeflow.module.system.controller.admin.socail.vo.user.SocialUser
 import cn.knowledgeflow.module.system.dal.dataobject.social.SocialUserDO;
 import cn.knowledgeflow.module.system.enums.social.SocialTypeEnum;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.util.List;
 
 /**

@@ -1,4 +1,4 @@
-package cn.knowledgeflow.framework.operatelog.core.service;
+﻿package cn.knowledgeflow.framework.operatelog.core.service;
 
 import cn.knowledgeflow.framework.common.biz.system.logger.OperateLogCommonApi;
 import cn.knowledgeflow.framework.common.biz.system.logger.dto.OperateLogCreateReqDTO;
@@ -11,7 +11,7 @@ import com.mzt.logapi.service.ILogRecordService;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**

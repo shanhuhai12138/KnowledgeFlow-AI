@@ -1,4 +1,4 @@
-package cn.knowledgeflow.framework.security.config;
+﻿package cn.knowledgeflow.framework.security.config;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.knowledgeflow.framework.security.core.filter.TokenAuthenticationFilter;
@@ -30,7 +30,7 @@ import org.springframework.web.util.pattern.PathPattern;
 
 import javax.annotation.Resource;
 import javax.annotation.security.PermitAll;
-import javax.servlet.DispatcherType;
+import jakarta.servlet.DispatcherType;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;

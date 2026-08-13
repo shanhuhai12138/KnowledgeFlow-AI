@@ -1,4 +1,4 @@
-package cn.knowledgeflow.module.system.controller.admin.permission.vo.role;
+﻿package cn.knowledgeflow.module.system.controller.admin.permission.vo.role;
 
 import cn.knowledgeflow.framework.excel.core.annotations.DictFormat;
 import cn.knowledgeflow.framework.excel.core.convert.DictConvert;
@@ -8,7 +8,7 @@ import cn.idev.excel.annotation.ExcelProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-import javax.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 import java.util.Set;
 

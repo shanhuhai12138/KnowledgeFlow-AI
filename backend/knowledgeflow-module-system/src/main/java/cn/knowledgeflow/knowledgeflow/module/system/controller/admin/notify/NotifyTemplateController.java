@@ -1,4 +1,4 @@
-package cn.knowledgeflow.module.system.controller.admin.notify;
+﻿package cn.knowledgeflow.module.system.controller.admin.notify;
 
 import cn.knowledgeflow.framework.common.enums.CommonStatusEnum;
 import cn.knowledgeflow.framework.common.enums.UserTypeEnum;
@@ -21,7 +21,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.util.List;
 
 import static cn.knowledgeflow.framework.common.pojo.CommonResult.success;

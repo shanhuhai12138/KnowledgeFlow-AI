@@ -1,4 +1,4 @@
-package cn.knowledgeflow.module.knowledge.controller.admin.search;
+﻿package cn.knowledgeflow.module.knowledge.controller.admin.search;
 
 import cn.knowledgeflow.framework.common.pojo.CommonResult;
 import cn.knowledgeflow.framework.security.core.util.SecurityFrameworkUtils;
@@ -27,8 +27,8 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;

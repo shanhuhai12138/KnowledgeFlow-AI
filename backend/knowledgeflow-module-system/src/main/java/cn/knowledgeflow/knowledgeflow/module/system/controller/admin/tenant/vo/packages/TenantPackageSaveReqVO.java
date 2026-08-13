@@ -1,12 +1,12 @@
-package cn.knowledgeflow.module.system.controller.admin.tenant.vo.packages;
+﻿package cn.knowledgeflow.module.system.controller.admin.tenant.vo.packages;
 
 import cn.knowledgeflow.framework.common.enums.CommonStatusEnum;
 import cn.knowledgeflow.framework.common.validation.InEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import java.util.Set;
 
 @Schema(description = "管理后台 - 租户套餐创建/修改 Request VO")

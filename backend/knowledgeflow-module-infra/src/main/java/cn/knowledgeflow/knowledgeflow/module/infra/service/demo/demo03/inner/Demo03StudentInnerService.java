@@ -1,4 +1,4 @@
-package cn.knowledgeflow.module.infra.service.demo.demo03.inner;
+﻿package cn.knowledgeflow.module.infra.service.demo.demo03.inner;
 
 import cn.knowledgeflow.framework.common.pojo.PageResult;
 import cn.knowledgeflow.module.infra.controller.admin.demo.demo03.inner.vo.Demo03StudentInnerPageReqVO;
@@ -6,7 +6,7 @@ import cn.knowledgeflow.module.infra.controller.admin.demo.demo03.inner.vo.Demo0
 import cn.knowledgeflow.module.infra.dal.dataobject.demo.demo03.Demo03CourseDO;
 import cn.knowledgeflow.module.infra.dal.dataobject.demo.demo03.Demo03GradeDO;
 import cn.knowledgeflow.module.infra.dal.dataobject.demo.demo03.Demo03StudentDO;
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 import java.util.List;
 

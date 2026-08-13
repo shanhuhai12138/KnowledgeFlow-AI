@@ -1,4 +1,4 @@
-package cn.knowledgeflow.framework.common.util.http;
+﻿package cn.knowledgeflow.framework.common.util.http;
 
 import cn.hutool.core.codec.Base64;
 import cn.hutool.core.net.url.UrlBuilder;
@@ -11,7 +11,7 @@ import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.web.util.UriUtils;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import java.net.URI;
 import java.net.URLDecoder;
 import java.net.URLEncoder;

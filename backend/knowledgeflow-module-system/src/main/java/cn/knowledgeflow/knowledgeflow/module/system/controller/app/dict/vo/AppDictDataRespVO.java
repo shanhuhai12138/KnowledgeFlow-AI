@@ -1,12 +1,12 @@
-package cn.knowledgeflow.module.system.controller.app.dict.vo;
+﻿package cn.knowledgeflow.module.system.controller.app.dict.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Schema(description = "用户 App - 字典数据信息 Response VO")
 @Data

@@ -1,4 +1,4 @@
-package cn.knowledgeflow.module.system.service.tenant;
+﻿package cn.knowledgeflow.module.system.service.tenant;
 
 import cn.knowledgeflow.framework.common.pojo.PageResult;
 import cn.knowledgeflow.framework.tenant.core.context.TenantContextHolder;
@@ -8,7 +8,7 @@ import cn.knowledgeflow.module.system.dal.dataobject.tenant.TenantDO;
 import cn.knowledgeflow.module.system.service.tenant.handler.TenantInfoHandler;
 import cn.knowledgeflow.module.system.service.tenant.handler.TenantMenuHandler;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.util.List;
 import java.util.Set;
 

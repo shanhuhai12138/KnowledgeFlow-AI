@@ -1,10 +1,10 @@
-package cn.knowledgeflow.framework.dict.validation;
+﻿package cn.knowledgeflow.framework.dict.validation;
 
 import cn.hutool.core.util.StrUtil;
 import cn.knowledgeflow.framework.dict.core.DictFrameworkUtils;
 
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
 import java.util.List;
 
 public class InDictValidator implements ConstraintValidator<InDict, Object> {

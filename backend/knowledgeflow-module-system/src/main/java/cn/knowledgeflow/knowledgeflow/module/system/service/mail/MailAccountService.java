@@ -1,11 +1,11 @@
-package cn.knowledgeflow.module.system.service.mail;
+﻿package cn.knowledgeflow.module.system.service.mail;
 
 import cn.knowledgeflow.framework.common.pojo.PageResult;
 import cn.knowledgeflow.module.system.controller.admin.mail.vo.account.MailAccountPageReqVO;
 import cn.knowledgeflow.module.system.controller.admin.mail.vo.account.MailAccountSaveReqVO;
 import cn.knowledgeflow.module.system.dal.dataobject.mail.MailAccountDO;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.util.List;
 
 /**
