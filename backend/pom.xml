@@ -17,20 +17,6 @@
         <module>knowledgeflow-module-infra</module>
         <!-- KnowledgeFlow 知识库模块（T2.2 起） -->
         <module>knowledgeflow-module</module>
-<module>knowledgeflow-module-member</module>
-<module>knowledgeflow-module-bpm</module>
-<module>knowledgeflow-module-report</module>
-<module>knowledgeflow-module-mp</module>
-<module>knowledgeflow-module-pay</module>
-<module>knowledgeflow-module-mall</module>
-<module>knowledgeflow-module-crm</module>
-<module>knowledgeflow-module-erp</module>
-<module>knowledgeflow-module-iot</module>
-<module>knowledgeflow-module-mes</module>
-<module>knowledgeflow-module-wms</module>
-<module>knowledgeflow-module-im</module>
-<module>knowledgeflow-module-ai</module>
-<!--        <module>knowledgeflow-module-ai</module>-->
     </modules>
 
     <name>${project.artifactId}</name>
