@@ -270,12 +270,12 @@ yudao:
       enable: true
       api-key: ${WEB_SEARCH_API_KEY:sk-xxxx}
 
---- #################### 芋道相关配置 ####################
+--- #################### 基础配置 #################### ---
 
 yudao:
   info:
     version: 1.0.0
-    base-package: cn.iocoder.yudao
+    base-package: cn.knowledgeflow
   web:
     admin-ui:
       url: http://dashboard.yudao.iocoder.cn # Admin 管理后台 UI 的地址
