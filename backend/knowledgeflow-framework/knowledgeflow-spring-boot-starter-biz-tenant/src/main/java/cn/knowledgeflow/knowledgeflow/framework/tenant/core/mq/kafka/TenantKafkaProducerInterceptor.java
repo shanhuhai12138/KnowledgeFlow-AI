@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.tenant.core.mq.kafka;
+package cn.knowledgeflow.framework.tenant.core.mq.kafka;
 
 import cn.hutool.core.util.ReflectUtil;
 import cn.knowledgeflow.framework.tenant.core.context.TenantContextHolder;

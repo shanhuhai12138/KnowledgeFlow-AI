@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.knowledge.service.document;
+package cn.knowledgeflow.module.knowledge.service.document;
 
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.IdUtil;

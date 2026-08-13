@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.datapermission.core.rule.dept;
+package cn.knowledgeflow.framework.datapermission.core.rule.dept;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ReflectUtil;

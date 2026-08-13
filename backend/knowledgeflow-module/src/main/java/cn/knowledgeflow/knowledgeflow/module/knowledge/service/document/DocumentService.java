@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.knowledge.service.document;
+package cn.knowledgeflow.module.knowledge.service.document;
 
 import cn.knowledgeflow.framework.common.pojo.PageResult;
 import cn.knowledgeflow.module.knowledge.controller.admin.document.vo.DocumentPageReqVO;

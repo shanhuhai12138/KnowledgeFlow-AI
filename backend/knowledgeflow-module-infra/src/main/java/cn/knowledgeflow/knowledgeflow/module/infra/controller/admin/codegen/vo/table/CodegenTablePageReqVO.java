@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.controller.admin.codegen.vo.table;
+package cn.knowledgeflow.module.infra.controller.admin.codegen.vo.table;
 
 import cn.knowledgeflow.framework.common.pojo.PageParam;
 import io.swagger.v3.oas.annotations.media.Schema;

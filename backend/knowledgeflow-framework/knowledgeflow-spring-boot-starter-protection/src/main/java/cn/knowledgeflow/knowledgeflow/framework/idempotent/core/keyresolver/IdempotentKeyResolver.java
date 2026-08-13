@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.idempotent.core.keyresolver;
+package cn.knowledgeflow.framework.idempotent.core.keyresolver;
 
 import cn.knowledgeflow.framework.idempotent.core.annotation.Idempotent;
 import org.aspectj.lang.JoinPoint;

@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.framework.file.core.client.sftp;
+package cn.knowledgeflow.module.infra.framework.file.core.client.sftp;
 
 import cn.knowledgeflow.module.infra.framework.file.core.client.FileClientConfig;
 import lombok.Data;

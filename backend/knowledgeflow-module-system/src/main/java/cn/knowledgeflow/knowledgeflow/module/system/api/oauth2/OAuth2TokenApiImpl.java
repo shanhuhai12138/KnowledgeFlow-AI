@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.api.oauth2;
+package cn.knowledgeflow.module.system.api.oauth2;
 
 import cn.knowledgeflow.framework.common.biz.system.oauth2.OAuth2TokenCommonApi;
 import cn.knowledgeflow.framework.common.util.object.BeanUtils;

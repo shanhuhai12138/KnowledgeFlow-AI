@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.api.permission.dto;
+package cn.knowledgeflow.module.system.api.permission.dto;
 
 import cn.knowledgeflow.framework.common.enums.CommonStatusEnum;
 import lombok.Data;

@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.common.util.json;
+package cn.knowledgeflow.framework.common.util.json;
 
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;

@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.quartz.config;
+package cn.knowledgeflow.framework.quartz.config;
 
 import com.alibaba.ttl.TtlRunnable;
 import org.springframework.beans.BeansException;

@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.controller.admin.notify.vo.template;
+package cn.knowledgeflow.module.system.controller.admin.notify.vo.template;
 
 import cn.knowledgeflow.framework.common.pojo.PageParam;
 import io.swagger.v3.oas.annotations.media.Schema;

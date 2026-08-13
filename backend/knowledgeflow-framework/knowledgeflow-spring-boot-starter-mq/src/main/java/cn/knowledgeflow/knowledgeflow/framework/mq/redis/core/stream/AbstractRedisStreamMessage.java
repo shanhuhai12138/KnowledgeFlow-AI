@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.mq.redis.core.stream;
+package cn.knowledgeflow.framework.mq.redis.core.stream;
 
 import cn.knowledgeflow.framework.mq.redis.core.message.AbstractRedisMessage;
 import com.fasterxml.jackson.annotation.JsonIgnore;

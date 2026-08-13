@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.dal.dataobject.notify;
+package cn.knowledgeflow.module.system.dal.dataobject.notify;
 
 import cn.knowledgeflow.framework.common.enums.UserTypeEnum;
 import cn.knowledgeflow.framework.mybatis.core.dataobject.BaseDO;

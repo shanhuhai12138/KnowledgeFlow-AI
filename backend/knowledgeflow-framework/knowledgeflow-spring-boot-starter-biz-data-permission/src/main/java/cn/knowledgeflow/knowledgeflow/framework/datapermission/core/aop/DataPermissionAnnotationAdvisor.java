@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.datapermission.core.aop;
+package cn.knowledgeflow.framework.datapermission.core.aop;
 
 import cn.knowledgeflow.framework.datapermission.core.annotation.DataPermission;
 import lombok.EqualsAndHashCode;

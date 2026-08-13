@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.framework.file.core.sftp;
+package cn.knowledgeflow.module.infra.framework.file.core.sftp;
 
 import cn.hutool.core.io.resource.ResourceUtil;
 import cn.hutool.core.util.IdUtil;

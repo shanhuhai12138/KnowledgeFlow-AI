@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.excel.core.annotations;
+package cn.knowledgeflow.framework.excel.core.annotations;
 
 import java.lang.annotation.*;
 

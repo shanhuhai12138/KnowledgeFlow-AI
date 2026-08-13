@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.service.oauth2;
+package cn.knowledgeflow.module.system.service.oauth2;
 
 import cn.knowledgeflow.framework.common.pojo.PageResult;
 import cn.knowledgeflow.module.system.controller.admin.oauth2.vo.client.OAuth2ClientPageReqVO;

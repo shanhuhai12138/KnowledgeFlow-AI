@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.datapermission.config;
+package cn.knowledgeflow.framework.datapermission.config;
 
 import cn.knowledgeflow.framework.datapermission.core.aop.DataPermissionAnnotationAdvisor;
 import cn.knowledgeflow.framework.datapermission.core.db.DataPermissionRuleHandler;

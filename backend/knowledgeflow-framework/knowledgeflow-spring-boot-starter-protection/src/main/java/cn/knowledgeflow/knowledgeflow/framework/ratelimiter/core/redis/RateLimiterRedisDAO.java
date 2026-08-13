@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.ratelimiter.core.redis;
+package cn.knowledgeflow.framework.ratelimiter.core.redis;
 
 import lombok.AllArgsConstructor;
 import org.redisson.api.*;

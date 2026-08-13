@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.controller.admin.config;
+package cn.knowledgeflow.module.infra.controller.admin.config;
 
 import cn.knowledgeflow.framework.apilog.core.annotation.ApiAccessLog;
 import cn.knowledgeflow.framework.common.pojo.CommonResult;

@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.knowledge.framework.minio;
+package cn.knowledgeflow.module.knowledge.framework.minio;
 
 import io.minio.BucketExistsArgs;
 import io.minio.MakeBucketArgs;

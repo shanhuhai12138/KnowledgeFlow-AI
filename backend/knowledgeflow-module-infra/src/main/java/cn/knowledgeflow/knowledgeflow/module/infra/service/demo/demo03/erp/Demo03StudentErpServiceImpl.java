@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.service.demo.demo03.erp;
+package cn.knowledgeflow.module.infra.service.demo.demo03.erp;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.knowledgeflow.framework.common.pojo.PageParam;

@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.common.util.io;
+package cn.knowledgeflow.framework.common.util.io;
 
 import cn.hutool.core.io.IORuntimeException;
 import cn.hutool.core.io.IoUtil;

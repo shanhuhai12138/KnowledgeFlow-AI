@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.common.validation;
+package cn.knowledgeflow.framework.common.validation;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.knowledgeflow.framework.common.core.ArrayValuable;

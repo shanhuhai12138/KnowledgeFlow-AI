@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.framework.file.core.client.s3;
+package cn.knowledgeflow.module.infra.framework.file.core.client.s3;
 
 import cn.hutool.core.util.StrUtil;
 import cn.knowledgeflow.module.infra.framework.file.core.client.FileClientConfig;

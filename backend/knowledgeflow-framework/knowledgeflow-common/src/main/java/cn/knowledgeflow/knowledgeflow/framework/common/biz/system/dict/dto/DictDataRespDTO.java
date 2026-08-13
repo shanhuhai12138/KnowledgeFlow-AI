@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.common.biz.system.dict.dto;
+package cn.knowledgeflow.framework.common.biz.system.dict.dto;
 
 import cn.knowledgeflow.framework.common.enums.CommonStatusEnum;
 import lombok.Data;

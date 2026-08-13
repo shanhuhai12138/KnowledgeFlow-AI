@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.common.biz.system.tenant;
+package cn.knowledgeflow.framework.common.biz.system.tenant;
 
 import java.util.List;
 

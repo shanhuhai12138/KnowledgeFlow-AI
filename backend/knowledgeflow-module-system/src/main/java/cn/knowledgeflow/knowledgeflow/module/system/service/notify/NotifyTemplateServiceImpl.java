@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.service.notify;
+package cn.knowledgeflow.module.system.service.notify;
 
 import cn.hutool.core.util.ReUtil;
 import cn.hutool.core.util.StrUtil;

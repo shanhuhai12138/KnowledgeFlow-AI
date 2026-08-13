@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.api.permission;
+package cn.knowledgeflow.module.system.api.permission;
 
 import cn.knowledgeflow.framework.common.biz.system.permission.PermissionCommonApi;
 

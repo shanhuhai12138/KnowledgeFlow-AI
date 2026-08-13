@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.desensitize.core.regex.handler;
+package cn.knowledgeflow.framework.desensitize.core.regex.handler;
 
 import cn.knowledgeflow.framework.common.util.spring.SpringExpressionUtils;
 import cn.knowledgeflow.framework.desensitize.core.base.handler.DesensitizationHandler;

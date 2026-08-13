@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.knowledge.controller.admin.stat;
+package cn.knowledgeflow.module.knowledge.controller.admin.stat;
 
 import cn.knowledgeflow.framework.common.pojo.CommonResult;
 import cn.knowledgeflow.module.knowledge.controller.admin.stat.vo.StatOverviewRespVO;

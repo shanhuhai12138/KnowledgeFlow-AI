@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.dal.mysql.social;
+package cn.knowledgeflow.module.system.dal.mysql.social;
 
 import cn.knowledgeflow.framework.mybatis.core.mapper.BaseMapperX;
 import cn.knowledgeflow.framework.mybatis.core.query.LambdaQueryWrapperX;

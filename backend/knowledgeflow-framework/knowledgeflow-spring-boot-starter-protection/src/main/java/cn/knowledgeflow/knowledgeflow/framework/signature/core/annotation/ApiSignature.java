@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.signature.core.annotation;
+package cn.knowledgeflow.framework.signature.core.annotation;
 
 import cn.knowledgeflow.framework.common.exception.enums.GlobalErrorCodeConstants;
 

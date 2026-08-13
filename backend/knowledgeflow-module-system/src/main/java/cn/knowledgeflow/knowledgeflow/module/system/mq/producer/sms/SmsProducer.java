@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.mq.producer.sms;
+package cn.knowledgeflow.module.system.mq.producer.sms;
 
 import cn.knowledgeflow.framework.common.core.KeyValue;
 import cn.knowledgeflow.module.system.mq.message.sms.SmsSendMessage;

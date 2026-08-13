@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.service.codegen;
+package cn.knowledgeflow.module.infra.service.codegen;
 
 import cn.hutool.core.collection.ListUtil;
 import cn.hutool.core.map.MapUtil;

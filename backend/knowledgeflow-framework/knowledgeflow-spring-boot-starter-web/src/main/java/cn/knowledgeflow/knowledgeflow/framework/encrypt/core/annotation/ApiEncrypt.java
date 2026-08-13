@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.encrypt.core.annotation;
+package cn.knowledgeflow.framework.encrypt.core.annotation;
 
 import java.lang.annotation.*;
 

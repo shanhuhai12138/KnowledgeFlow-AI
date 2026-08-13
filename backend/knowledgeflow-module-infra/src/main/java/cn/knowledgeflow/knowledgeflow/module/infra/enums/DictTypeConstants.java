@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.enums;
+package cn.knowledgeflow.module.infra.enums;
 
 /**
  * Infra 字典类型的枚举类

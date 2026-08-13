@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.quartz.core.enums;
+package cn.knowledgeflow.framework.quartz.core.enums;
 
 /**
  * Quartz Job Data 的 key 枚举

@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.knowledge.service.task;
+package cn.knowledgeflow.module.knowledge.service.task;
 
 /**
  * 运行时治理与资源清理（T6）

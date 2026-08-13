@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.websocket.core.sender.rabbitmq;
+package cn.knowledgeflow.framework.websocket.core.sender.rabbitmq;
 
 import lombok.Data;
 

@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.mybatis.core.util;
+package cn.knowledgeflow.framework.mybatis.core.util;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.lang.func.Func1;

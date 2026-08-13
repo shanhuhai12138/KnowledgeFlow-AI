@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.framework.file.config;
+package cn.knowledgeflow.module.infra.framework.file.config;
 
 import cn.knowledgeflow.module.infra.framework.file.core.client.FileClientFactory;
 import cn.knowledgeflow.module.infra.framework.file.core.client.FileClientFactoryImpl;

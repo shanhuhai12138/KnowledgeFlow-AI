@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.api.tenant;
+package cn.knowledgeflow.module.system.api.tenant;
 
 import cn.knowledgeflow.framework.common.biz.system.tenant.TenantCommonApi;
 import cn.knowledgeflow.module.system.service.tenant.TenantService;

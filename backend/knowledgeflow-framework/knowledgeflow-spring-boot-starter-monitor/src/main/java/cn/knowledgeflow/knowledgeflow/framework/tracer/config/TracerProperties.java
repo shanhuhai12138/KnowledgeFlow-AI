@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.tracer.config;
+package cn.knowledgeflow.framework.tracer.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

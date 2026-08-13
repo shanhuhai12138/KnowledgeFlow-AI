@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.mybatis.core.type;
+package cn.knowledgeflow.framework.mybatis.core.type;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.knowledgeflow.framework.common.util.string.StrUtils;

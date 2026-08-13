@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.websocket.core.security;
+package cn.knowledgeflow.framework.websocket.core.security;
 
 import cn.knowledgeflow.framework.security.core.LoginUser;
 import cn.knowledgeflow.framework.security.core.filter.TokenAuthenticationFilter;

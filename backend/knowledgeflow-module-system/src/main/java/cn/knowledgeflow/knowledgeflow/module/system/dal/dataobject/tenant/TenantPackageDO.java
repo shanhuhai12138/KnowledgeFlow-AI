@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.dal.dataobject.tenant;
+package cn.knowledgeflow.module.system.dal.dataobject.tenant;
 
 import cn.knowledgeflow.framework.common.enums.CommonStatusEnum;
 import cn.knowledgeflow.framework.mybatis.core.dataobject.BaseDO;

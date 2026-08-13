@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.common.util.string;
+package cn.knowledgeflow.framework.common.util.string;
 
 import cn.hutool.core.text.StrPool;
 import cn.hutool.core.util.ArrayUtil;

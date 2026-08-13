@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.convert.oauth2;
+package cn.knowledgeflow.module.system.convert.oauth2;
 
 import cn.hutool.core.date.LocalDateTimeUtil;
 import cn.knowledgeflow.framework.common.core.KeyValue;

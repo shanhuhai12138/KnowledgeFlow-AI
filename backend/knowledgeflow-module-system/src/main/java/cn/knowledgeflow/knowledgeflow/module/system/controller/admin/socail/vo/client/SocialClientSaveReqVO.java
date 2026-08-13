@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.controller.admin.socail.vo.client;
+package cn.knowledgeflow.module.system.controller.admin.socail.vo.client;
 
 import cn.hutool.core.util.StrUtil;
 import cn.knowledgeflow.framework.common.enums.CommonStatusEnum;

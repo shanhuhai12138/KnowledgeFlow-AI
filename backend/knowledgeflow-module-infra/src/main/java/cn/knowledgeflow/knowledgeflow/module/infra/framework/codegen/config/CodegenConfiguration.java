@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.framework.codegen.config;
+package cn.knowledgeflow.module.infra.framework.codegen.config;
 
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;

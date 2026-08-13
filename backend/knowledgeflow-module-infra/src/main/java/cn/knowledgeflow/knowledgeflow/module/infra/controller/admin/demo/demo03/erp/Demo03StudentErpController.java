@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.controller.admin.demo.demo03.erp;
+package cn.knowledgeflow.module.infra.controller.admin.demo.demo03.erp;
 
 import cn.knowledgeflow.framework.apilog.core.annotation.ApiAccessLog;
 import cn.knowledgeflow.framework.common.pojo.CommonResult;

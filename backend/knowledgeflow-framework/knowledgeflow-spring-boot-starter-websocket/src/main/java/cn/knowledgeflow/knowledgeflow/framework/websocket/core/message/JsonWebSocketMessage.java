@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.websocket.core.message;
+package cn.knowledgeflow.framework.websocket.core.message;
 
 import cn.knowledgeflow.framework.websocket.core.listener.WebSocketMessageListener;
 import lombok.Data;

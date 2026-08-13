@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.common.util.number;
+package cn.knowledgeflow.framework.common.util.number;
 
 import cn.hutool.core.math.Money;
 import cn.hutool.core.util.NumberUtil;

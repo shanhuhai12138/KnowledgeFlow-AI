@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.apilog.config;
+package cn.knowledgeflow.framework.apilog.config;
 
 import cn.knowledgeflow.framework.apilog.core.filter.ApiAccessLogFilter;
 import cn.knowledgeflow.framework.apilog.core.interceptor.ApiAccessLogInterceptor;

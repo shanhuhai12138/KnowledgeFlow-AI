@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.security.core.service;
+package cn.knowledgeflow.framework.security.core.service;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.knowledgeflow.framework.common.biz.system.permission.PermissionCommonApi;

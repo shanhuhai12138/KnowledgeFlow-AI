@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.api.logger;
+package cn.knowledgeflow.module.system.api.logger;
 
 import cn.knowledgeflow.module.system.api.logger.dto.LoginLogCreateReqDTO;
 import cn.knowledgeflow.module.system.service.logger.LoginLogService;

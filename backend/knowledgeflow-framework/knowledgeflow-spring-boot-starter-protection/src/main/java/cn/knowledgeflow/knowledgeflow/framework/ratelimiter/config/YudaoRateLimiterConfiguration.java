@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.ratelimiter.config;
+package cn.knowledgeflow.framework.ratelimiter.config;
 
 import cn.knowledgeflow.framework.ratelimiter.core.aop.RateLimiterAspect;
 import cn.knowledgeflow.framework.ratelimiter.core.keyresolver.RateLimiterKeyResolver;

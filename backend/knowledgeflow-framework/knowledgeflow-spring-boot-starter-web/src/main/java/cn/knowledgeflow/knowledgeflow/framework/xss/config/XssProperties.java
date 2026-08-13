@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.xss.config;
+package cn.knowledgeflow.framework.xss.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

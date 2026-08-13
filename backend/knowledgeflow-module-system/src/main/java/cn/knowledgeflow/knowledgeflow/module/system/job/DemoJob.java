@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.job;
+package cn.knowledgeflow.module.system.job;
 
 import cn.knowledgeflow.framework.quartz.core.handler.JobHandler;
 import cn.knowledgeflow.framework.tenant.core.context.TenantContextHolder;

@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.dict.validation;
+package cn.knowledgeflow.framework.dict.validation;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

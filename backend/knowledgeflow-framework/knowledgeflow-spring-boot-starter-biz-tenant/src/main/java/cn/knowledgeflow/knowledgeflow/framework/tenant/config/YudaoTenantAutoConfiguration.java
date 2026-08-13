@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.tenant.config;
+package cn.knowledgeflow.framework.tenant.config;
 
 import cn.knowledgeflow.framework.common.biz.system.tenant.TenantCommonApi;
 import cn.knowledgeflow.framework.common.enums.WebFilterOrderEnum;

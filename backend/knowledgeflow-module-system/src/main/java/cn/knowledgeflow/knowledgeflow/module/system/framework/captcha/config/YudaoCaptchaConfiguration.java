@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.framework.captcha.config;
+package cn.knowledgeflow.module.system.framework.captcha.config;
 
 import cn.knowledgeflow.module.system.framework.captcha.core.RedisCaptchaServiceImpl;
 import com.anji.captcha.config.AjCaptchaAutoConfiguration;

@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.signature.core.aop;
+package cn.knowledgeflow.framework.signature.core.aop;
 
 import cn.hutool.core.lang.Assert;
 import cn.hutool.core.map.MapUtil;

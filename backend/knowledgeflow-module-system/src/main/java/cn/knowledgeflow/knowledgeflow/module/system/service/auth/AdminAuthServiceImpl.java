@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.service.auth;
+package cn.knowledgeflow.module.system.service.auth;
 
 import cn.hutool.core.util.ObjectUtil;
 import cn.knowledgeflow.framework.common.enums.CommonStatusEnum;

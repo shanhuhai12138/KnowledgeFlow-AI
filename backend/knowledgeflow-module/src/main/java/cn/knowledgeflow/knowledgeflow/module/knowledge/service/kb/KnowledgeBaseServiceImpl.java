@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.knowledge.service.kb;
+package cn.knowledgeflow.module.knowledge.service.kb;
 
 import cn.knowledgeflow.framework.common.pojo.PageResult;
 import cn.knowledgeflow.framework.common.util.object.BeanUtils;

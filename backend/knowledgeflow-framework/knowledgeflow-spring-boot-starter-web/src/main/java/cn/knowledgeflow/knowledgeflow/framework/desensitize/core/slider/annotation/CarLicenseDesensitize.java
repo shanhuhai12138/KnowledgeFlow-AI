@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.desensitize.core.slider.annotation;
+package cn.knowledgeflow.framework.desensitize.core.slider.annotation;
 
 import cn.knowledgeflow.framework.desensitize.core.base.annotation.DesensitizeBy;
 import cn.knowledgeflow.framework.desensitize.core.slider.handler.CarLicenseDesensitization;

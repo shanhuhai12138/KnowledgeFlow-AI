@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.dal.redis;
+package cn.knowledgeflow.module.system.dal.redis;
 
 import cn.knowledgeflow.module.system.dal.dataobject.oauth2.OAuth2AccessTokenDO;
 

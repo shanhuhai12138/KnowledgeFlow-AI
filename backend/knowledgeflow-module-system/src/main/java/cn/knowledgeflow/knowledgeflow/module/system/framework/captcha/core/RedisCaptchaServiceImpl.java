@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.framework.captcha.core;
+package cn.knowledgeflow.module.system.framework.captcha.core;
 
 import com.anji.captcha.service.CaptchaCacheService;
 import lombok.Setter;

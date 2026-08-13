@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.mybatis.core.query;
+package cn.knowledgeflow.framework.mybatis.core.query;
 
 import cn.knowledgeflow.framework.mybatis.core.util.JdbcUtils;
 import com.baomidou.mybatisplus.annotation.DbType;

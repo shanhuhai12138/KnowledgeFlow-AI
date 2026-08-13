@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.banner.core;
+package cn.knowledgeflow.framework.banner.core;
 
 import cn.hutool.core.thread.ThreadUtil;
 import lombok.extern.slf4j.Slf4j;

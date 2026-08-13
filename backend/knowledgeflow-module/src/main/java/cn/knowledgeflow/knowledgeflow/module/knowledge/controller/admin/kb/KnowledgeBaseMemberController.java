@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.knowledge.controller.admin.kb;
+package cn.knowledgeflow.module.knowledge.controller.admin.kb;
 
 import cn.knowledgeflow.framework.common.pojo.CommonResult;
 import cn.knowledgeflow.framework.common.pojo.PageResult;

@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.framework.justauth.config;
+package cn.knowledgeflow.module.system.framework.justauth.config;
 
 import cn.knowledgeflow.module.system.framework.justauth.core.AuthRequestFactory;
 import com.xkcoding.justauth.autoconfigure.JustAuthProperties;

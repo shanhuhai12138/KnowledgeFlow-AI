@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.apilog.core.annotation;
+package cn.knowledgeflow.framework.apilog.core.annotation;
 
 import cn.knowledgeflow.framework.apilog.core.enums.OperateTypeEnum;
 

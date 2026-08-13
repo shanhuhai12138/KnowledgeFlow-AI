@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.api.file;
+package cn.knowledgeflow.module.infra.api.file;
 
 import cn.knowledgeflow.module.infra.service.file.FileService;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.desensitize.core.handler;
+package cn.knowledgeflow.framework.desensitize.core.handler;
 
 import cn.knowledgeflow.framework.desensitize.core.DesensitizeTest;
 import cn.knowledgeflow.framework.desensitize.core.base.handler.DesensitizationHandler;

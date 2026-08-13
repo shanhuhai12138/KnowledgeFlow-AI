@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.mybatis.core.dataobject;
+package cn.knowledgeflow.framework.mybatis.core.dataobject;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;

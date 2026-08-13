@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.enums.notice;
+package cn.knowledgeflow.module.system.enums.notice;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

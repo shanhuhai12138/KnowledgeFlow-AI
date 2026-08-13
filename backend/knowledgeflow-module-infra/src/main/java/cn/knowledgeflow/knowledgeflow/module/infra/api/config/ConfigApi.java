@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.api.config;
+package cn.knowledgeflow.module.infra.api.config;
 
 /**
  * 参数配置 API 接口

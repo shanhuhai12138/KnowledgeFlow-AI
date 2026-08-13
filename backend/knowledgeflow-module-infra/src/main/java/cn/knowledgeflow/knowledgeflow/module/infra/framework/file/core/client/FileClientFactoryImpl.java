@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.framework.file.core.client;
+package cn.knowledgeflow.module.infra.framework.file.core.client;
 
 import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.ReflectUtil;

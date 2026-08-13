@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.framework.file.core.enums;
+package cn.knowledgeflow.module.infra.framework.file.core.enums;
 
 import cn.hutool.core.util.ArrayUtil;
 import cn.knowledgeflow.module.infra.framework.file.core.client.FileClient;

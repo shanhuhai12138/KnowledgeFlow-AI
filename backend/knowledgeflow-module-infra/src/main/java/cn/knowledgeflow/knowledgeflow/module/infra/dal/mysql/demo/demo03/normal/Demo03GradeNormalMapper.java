@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.dal.mysql.demo.demo03.normal;
+package cn.knowledgeflow.module.infra.dal.mysql.demo.demo03.normal;
 
 import cn.knowledgeflow.framework.mybatis.core.mapper.BaseMapperX;
 import cn.knowledgeflow.module.infra.dal.dataobject.demo.demo03.Demo03GradeDO;

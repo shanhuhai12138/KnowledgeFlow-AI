@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.web.core.util;
+package cn.knowledgeflow.framework.web.core.util;
 
 import cn.hutool.core.util.NumberUtil;
 import cn.knowledgeflow.framework.common.enums.TerminalEnum;

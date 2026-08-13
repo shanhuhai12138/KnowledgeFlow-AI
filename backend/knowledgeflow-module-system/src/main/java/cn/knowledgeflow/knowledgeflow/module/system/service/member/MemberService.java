@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.service.member;
+package cn.knowledgeflow.module.system.service.member;
 
 /**
  * Member Service 接口

@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.controller.app.tenant.vo;
+package cn.knowledgeflow.module.system.controller.app.tenant.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;

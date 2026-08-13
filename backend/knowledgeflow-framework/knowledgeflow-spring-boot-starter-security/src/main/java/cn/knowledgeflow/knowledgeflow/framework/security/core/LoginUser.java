@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.security.core;
+package cn.knowledgeflow.framework.security.core;
 
 import cn.hutool.core.map.MapUtil;
 import cn.knowledgeflow.framework.common.enums.UserTypeEnum;

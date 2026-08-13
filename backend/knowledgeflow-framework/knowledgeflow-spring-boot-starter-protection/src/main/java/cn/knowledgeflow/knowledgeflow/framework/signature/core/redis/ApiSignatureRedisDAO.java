@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.signature.core.redis;
+package cn.knowledgeflow.framework.signature.core.redis;
 
 import lombok.AllArgsConstructor;
 import org.springframework.data.redis.core.StringRedisTemplate;

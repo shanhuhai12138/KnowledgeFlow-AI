@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.translate.core;
+package cn.knowledgeflow.framework.translate.core;
 
 import cn.hutool.core.collection.CollUtil;
 import org.dromara.core.trans.vo.VO;

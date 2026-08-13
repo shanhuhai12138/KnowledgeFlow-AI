@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.util.oauth2;
+package cn.knowledgeflow.module.system.util.oauth2;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.date.LocalDateTimeUtil;

@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.excel.core.convert;
+package cn.knowledgeflow.framework.excel.core.convert;
 
 import cn.hutool.core.collection.ListUtil;
 import cn.idev.excel.metadata.data.ReadCellData;

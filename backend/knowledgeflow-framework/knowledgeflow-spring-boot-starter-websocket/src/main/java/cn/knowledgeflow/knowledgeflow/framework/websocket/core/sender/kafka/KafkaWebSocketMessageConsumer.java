@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.websocket.core.sender.kafka;
+package cn.knowledgeflow.framework.websocket.core.sender.kafka;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;

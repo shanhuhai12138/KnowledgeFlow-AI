@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.idempotent.core.aop;
+package cn.knowledgeflow.framework.idempotent.core.aop;
 
 import cn.knowledgeflow.framework.common.exception.ServiceException;
 import cn.knowledgeflow.framework.common.exception.enums.GlobalErrorCodeConstants;

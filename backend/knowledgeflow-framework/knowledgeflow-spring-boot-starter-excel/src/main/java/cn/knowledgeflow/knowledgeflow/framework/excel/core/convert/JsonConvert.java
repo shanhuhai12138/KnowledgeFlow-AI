@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.excel.core.convert;
+package cn.knowledgeflow.framework.excel.core.convert;
 
 import cn.knowledgeflow.framework.common.util.json.JsonUtils;
 import cn.idev.excel.converters.Converter;

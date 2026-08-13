@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.signature.config;
+package cn.knowledgeflow.framework.signature.config;
 
 import cn.knowledgeflow.framework.redis.config.YudaoRedisAutoConfiguration;
 import cn.knowledgeflow.framework.signature.core.aop.ApiSignatureAspect;

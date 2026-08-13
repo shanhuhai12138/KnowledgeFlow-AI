@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.controller.admin.oauth2.vo.token;
+package cn.knowledgeflow.module.system.controller.admin.oauth2.vo.token;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;

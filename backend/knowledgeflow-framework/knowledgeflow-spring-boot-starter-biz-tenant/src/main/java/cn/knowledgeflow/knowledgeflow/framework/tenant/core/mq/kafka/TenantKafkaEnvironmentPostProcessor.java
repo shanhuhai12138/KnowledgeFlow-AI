@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.tenant.core.mq.kafka;
+package cn.knowledgeflow.framework.tenant.core.mq.kafka;
 
 import cn.hutool.core.util.StrUtil;
 import lombok.extern.slf4j.Slf4j;

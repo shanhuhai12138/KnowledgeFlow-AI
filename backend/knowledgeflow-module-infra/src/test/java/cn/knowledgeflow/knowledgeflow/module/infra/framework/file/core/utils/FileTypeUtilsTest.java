@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.framework.file.core.utils;
+package cn.knowledgeflow.module.infra.framework.file.core.utils;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.mock.web.MockHttpServletResponse;

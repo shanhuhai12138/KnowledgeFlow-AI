@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.service.file;
+package cn.knowledgeflow.module.infra.service.file;
 
 import cn.hutool.core.io.resource.ResourceUtil;
 import cn.hutool.core.util.IdUtil;

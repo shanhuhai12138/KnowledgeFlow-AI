@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.api.dept;
+package cn.knowledgeflow.module.system.api.dept;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.map.MapUtil;

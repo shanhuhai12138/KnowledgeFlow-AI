@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.enums.common;
+package cn.knowledgeflow.module.system.enums.common;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

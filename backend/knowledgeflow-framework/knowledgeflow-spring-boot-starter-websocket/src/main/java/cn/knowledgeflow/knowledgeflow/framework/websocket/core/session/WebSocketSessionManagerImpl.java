@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.websocket.core.session;
+package cn.knowledgeflow.framework.websocket.core.session;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.knowledgeflow.framework.security.core.LoginUser;

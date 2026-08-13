@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.controller.admin.oauth2.vo.open;
+package cn.knowledgeflow.module.system.controller.admin.oauth2.vo.open;
 
 import cn.knowledgeflow.framework.common.core.KeyValue;
 import io.swagger.v3.oas.annotations.media.Schema;

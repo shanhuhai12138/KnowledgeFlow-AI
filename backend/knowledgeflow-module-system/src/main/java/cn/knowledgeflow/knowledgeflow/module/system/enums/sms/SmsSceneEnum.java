@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.enums.sms;
+package cn.knowledgeflow.module.system.enums.sms;
 
 import cn.hutool.core.util.ArrayUtil;
 import cn.knowledgeflow.framework.common.core.ArrayValuable;

@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.controller.admin.oauth2.vo.open;
+package cn.knowledgeflow.module.system.controller.admin.oauth2.vo.open;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;

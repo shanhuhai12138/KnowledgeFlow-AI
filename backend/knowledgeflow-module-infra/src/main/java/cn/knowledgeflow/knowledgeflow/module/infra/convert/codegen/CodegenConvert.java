@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.convert.codegen;
+package cn.knowledgeflow.module.infra.convert.codegen;
 
 import cn.knowledgeflow.framework.common.util.collection.CollectionUtils;
 import cn.knowledgeflow.framework.common.util.object.BeanUtils;

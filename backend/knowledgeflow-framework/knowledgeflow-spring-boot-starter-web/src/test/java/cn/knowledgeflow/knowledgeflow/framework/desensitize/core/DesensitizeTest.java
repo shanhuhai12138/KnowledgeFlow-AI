@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.desensitize.core;
+package cn.knowledgeflow.framework.desensitize.core;
 
 import cn.knowledgeflow.framework.common.util.json.JsonUtils;
 import cn.knowledgeflow.framework.desensitize.core.annotation.Address;

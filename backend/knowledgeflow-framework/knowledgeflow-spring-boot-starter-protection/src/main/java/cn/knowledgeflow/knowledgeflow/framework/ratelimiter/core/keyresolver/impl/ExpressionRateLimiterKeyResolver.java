@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.ratelimiter.core.keyresolver.impl;
+package cn.knowledgeflow.framework.ratelimiter.core.keyresolver.impl;
 
 import cn.hutool.core.util.ArrayUtil;
 import cn.knowledgeflow.framework.ratelimiter.core.annotation.RateLimiter;

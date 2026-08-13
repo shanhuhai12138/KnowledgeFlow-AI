@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.convert.tenant;
+package cn.knowledgeflow.module.system.convert.tenant;
 
 import cn.knowledgeflow.module.system.controller.admin.tenant.vo.tenant.TenantSaveReqVO;
 import cn.knowledgeflow.module.system.controller.admin.user.vo.user.UserSaveReqVO;

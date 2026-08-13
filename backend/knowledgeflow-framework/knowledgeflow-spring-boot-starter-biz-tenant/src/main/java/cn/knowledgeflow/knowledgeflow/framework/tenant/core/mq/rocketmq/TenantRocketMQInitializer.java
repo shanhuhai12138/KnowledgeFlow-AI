@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.tenant.core.mq.rocketmq;
+package cn.knowledgeflow.framework.tenant.core.mq.rocketmq;
 
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.client.impl.consumer.DefaultMQPushConsumerImpl;

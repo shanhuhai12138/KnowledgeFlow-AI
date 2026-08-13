@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.framework.operatelog.core;
+package cn.knowledgeflow.module.system.framework.operatelog.core;
 
 import cn.hutool.core.util.StrUtil;
 import cn.knowledgeflow.framework.dict.core.DictFrameworkUtils;

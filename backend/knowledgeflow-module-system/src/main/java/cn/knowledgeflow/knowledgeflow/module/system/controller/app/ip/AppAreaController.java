@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.controller.app.ip;
+package cn.knowledgeflow.module.system.controller.app.ip;
 
 import cn.hutool.core.lang.Assert;
 import cn.knowledgeflow.framework.common.pojo.CommonResult;

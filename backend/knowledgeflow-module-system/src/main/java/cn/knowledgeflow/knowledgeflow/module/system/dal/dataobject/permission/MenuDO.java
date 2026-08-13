@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.dal.dataobject.permission;
+package cn.knowledgeflow.module.system.dal.dataobject.permission;
 
 import cn.knowledgeflow.framework.common.enums.CommonStatusEnum;
 import cn.knowledgeflow.framework.mybatis.core.dataobject.BaseDO;

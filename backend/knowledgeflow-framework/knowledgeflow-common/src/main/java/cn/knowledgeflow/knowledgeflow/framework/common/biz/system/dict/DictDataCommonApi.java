@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.common.biz.system.dict;
+package cn.knowledgeflow.framework.common.biz.system.dict;
 
 import cn.knowledgeflow.framework.common.biz.system.dict.dto.DictDataRespDTO;
 

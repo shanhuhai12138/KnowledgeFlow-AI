@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.service.db;
+package cn.knowledgeflow.module.infra.service.db;
 
 import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 

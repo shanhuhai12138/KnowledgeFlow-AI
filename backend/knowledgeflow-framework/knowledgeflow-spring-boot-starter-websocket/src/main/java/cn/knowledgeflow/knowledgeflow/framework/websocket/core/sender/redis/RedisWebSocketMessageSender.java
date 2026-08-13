@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.websocket.core.sender.redis;
+package cn.knowledgeflow.framework.websocket.core.sender.redis;
 
 import cn.knowledgeflow.framework.mq.redis.core.RedisMQTemplate;
 import cn.knowledgeflow.framework.websocket.core.sender.AbstractWebSocketMessageSender;

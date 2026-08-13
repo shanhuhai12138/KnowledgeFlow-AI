@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.tenant.core.mq.rocketmq;
+package cn.knowledgeflow.framework.tenant.core.mq.rocketmq;
 
 import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.StrUtil;

@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.tenant.core.redis;
+package cn.knowledgeflow.framework.tenant.core.redis;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;

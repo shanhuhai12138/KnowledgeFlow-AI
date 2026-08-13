@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.mq.message.mail;
+package cn.knowledgeflow.module.system.mq.message.mail;
 
 import lombok.Data;
 

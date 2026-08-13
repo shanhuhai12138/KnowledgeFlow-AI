@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.web.core.filter;
+package cn.knowledgeflow.framework.web.core.filter;
 
 import cn.hutool.core.util.StrUtil;
 import cn.knowledgeflow.framework.common.util.servlet.ServletUtils;

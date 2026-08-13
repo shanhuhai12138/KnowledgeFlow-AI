@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.knowledge.framework.ai;
+package cn.knowledgeflow.module.knowledge.framework.ai;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.apilog.core.enums;
+package cn.knowledgeflow.framework.apilog.core.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

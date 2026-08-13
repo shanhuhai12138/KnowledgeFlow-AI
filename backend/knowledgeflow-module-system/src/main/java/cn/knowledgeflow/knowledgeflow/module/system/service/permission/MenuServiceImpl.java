@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.service.permission;
+package cn.knowledgeflow.module.system.service.permission;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ObjUtil;

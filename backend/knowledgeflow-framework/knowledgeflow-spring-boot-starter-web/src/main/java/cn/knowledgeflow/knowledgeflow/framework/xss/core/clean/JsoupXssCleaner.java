@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.xss.core.clean;
+package cn.knowledgeflow.framework.xss.core.clean;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

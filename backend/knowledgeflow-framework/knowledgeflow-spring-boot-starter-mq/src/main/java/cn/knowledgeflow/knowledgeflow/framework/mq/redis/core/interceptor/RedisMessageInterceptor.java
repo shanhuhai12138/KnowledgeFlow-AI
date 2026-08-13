@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.mq.redis.core.interceptor;
+package cn.knowledgeflow.framework.mq.redis.core.interceptor;
 
 import cn.knowledgeflow.framework.mq.redis.core.message.AbstractRedisMessage;
 

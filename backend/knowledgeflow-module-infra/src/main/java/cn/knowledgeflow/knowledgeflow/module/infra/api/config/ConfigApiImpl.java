@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.api.config;
+package cn.knowledgeflow.module.infra.api.config;
 
 import cn.knowledgeflow.module.infra.dal.dataobject.config.ConfigDO;
 import cn.knowledgeflow.module.infra.service.config.ConfigService;

@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.ip.core.utils;
+package cn.knowledgeflow.framework.ip.core.utils;
 
 
 import cn.knowledgeflow.framework.ip.core.Area;

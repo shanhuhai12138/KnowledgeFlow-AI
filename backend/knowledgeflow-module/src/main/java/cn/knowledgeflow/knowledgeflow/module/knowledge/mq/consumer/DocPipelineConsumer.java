@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.knowledge.mq.consumer;
+package cn.knowledgeflow.module.knowledge.mq.consumer;
 
 import cn.knowledgeflow.framework.tenant.core.aop.TenantIgnore;
 import cn.knowledgeflow.module.knowledge.dal.dataobject.document.DocumentDO;

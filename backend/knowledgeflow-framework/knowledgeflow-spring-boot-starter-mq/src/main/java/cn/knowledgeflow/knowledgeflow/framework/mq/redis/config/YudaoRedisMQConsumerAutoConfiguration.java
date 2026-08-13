@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.mq.redis.config;
+package cn.knowledgeflow.framework.mq.redis.config;
 
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.StrUtil;

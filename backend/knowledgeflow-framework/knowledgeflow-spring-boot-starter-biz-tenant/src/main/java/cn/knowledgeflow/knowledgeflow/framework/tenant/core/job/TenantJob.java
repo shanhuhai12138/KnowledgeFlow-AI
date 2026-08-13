@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.tenant.core.job;
+package cn.knowledgeflow.framework.tenant.core.job;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

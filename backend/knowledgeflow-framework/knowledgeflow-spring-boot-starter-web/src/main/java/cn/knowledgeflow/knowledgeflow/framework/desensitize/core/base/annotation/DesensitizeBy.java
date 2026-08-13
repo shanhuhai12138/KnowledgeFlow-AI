@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.desensitize.core.base.annotation;
+package cn.knowledgeflow.framework.desensitize.core.base.annotation;
 
 import cn.knowledgeflow.framework.desensitize.core.base.handler.DesensitizationHandler;
 import cn.knowledgeflow.framework.desensitize.core.base.serializer.StringDesensitizeSerializer;

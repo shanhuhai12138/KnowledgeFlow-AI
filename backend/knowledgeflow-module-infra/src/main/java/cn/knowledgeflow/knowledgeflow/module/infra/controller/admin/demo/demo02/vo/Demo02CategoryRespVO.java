@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.controller.admin.demo.demo02.vo;
+package cn.knowledgeflow.module.infra.controller.admin.demo.demo02.vo;
 
 import cn.idev.excel.annotation.ExcelIgnoreUnannotated;
 import cn.idev.excel.annotation.ExcelProperty;

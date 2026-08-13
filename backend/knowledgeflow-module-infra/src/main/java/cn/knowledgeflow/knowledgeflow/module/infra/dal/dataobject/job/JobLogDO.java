@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.dal.dataobject.job;
+package cn.knowledgeflow.module.infra.dal.dataobject.job;
 
 import cn.knowledgeflow.framework.mybatis.core.dataobject.BaseDO;
 import cn.knowledgeflow.framework.quartz.core.handler.JobHandler;

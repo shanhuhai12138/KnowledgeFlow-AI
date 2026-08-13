@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.dal.redis.oauth2;
+package cn.knowledgeflow.module.system.dal.redis.oauth2;
 
 import cn.hutool.core.date.LocalDateTimeUtil;
 import cn.knowledgeflow.framework.common.util.collection.CollectionUtils;

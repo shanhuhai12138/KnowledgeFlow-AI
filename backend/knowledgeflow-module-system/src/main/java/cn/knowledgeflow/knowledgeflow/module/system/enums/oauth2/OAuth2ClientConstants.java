@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.enums.oauth2;
+package cn.knowledgeflow.module.system.enums.oauth2;
 
 /**
  * OAuth2.0 客户端的通用枚举

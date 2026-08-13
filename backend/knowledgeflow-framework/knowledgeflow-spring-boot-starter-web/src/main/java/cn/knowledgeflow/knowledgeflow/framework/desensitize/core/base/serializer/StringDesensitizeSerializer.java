@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.desensitize.core.base.serializer;
+package cn.knowledgeflow.framework.desensitize.core.base.serializer;
 
 import cn.hutool.core.annotation.AnnotationUtil;
 import cn.hutool.core.lang.Singleton;

@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.common.util.object;
+package cn.knowledgeflow.framework.common.util.object;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.knowledgeflow.framework.common.pojo.PageResult;

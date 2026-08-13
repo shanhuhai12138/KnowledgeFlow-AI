@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.tenant.core.db;
+package cn.knowledgeflow.framework.tenant.core.db;
 
 import cn.knowledgeflow.framework.tenant.config.TenantProperties;
 import cn.knowledgeflow.framework.tenant.core.aop.TenantIgnore;

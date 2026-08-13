@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.common.biz.infra.logger;
+package cn.knowledgeflow.framework.common.biz.infra.logger;
 
 import cn.knowledgeflow.framework.common.biz.infra.logger.dto.ApiErrorLogCreateReqDTO;
 import org.springframework.scheduling.annotation.Async;

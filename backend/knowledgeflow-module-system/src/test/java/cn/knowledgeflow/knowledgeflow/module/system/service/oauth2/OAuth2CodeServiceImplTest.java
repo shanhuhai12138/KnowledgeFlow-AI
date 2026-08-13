@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.service.oauth2;
+package cn.knowledgeflow.module.system.service.oauth2;
 
 import cn.hutool.core.util.RandomUtil;
 import cn.knowledgeflow.framework.common.enums.UserTypeEnum;

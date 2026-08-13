@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.websocket;
+package cn.knowledgeflow.module.infra.websocket;
 
 import cn.knowledgeflow.framework.common.enums.UserTypeEnum;
 import cn.knowledgeflow.framework.websocket.core.listener.WebSocketMessageListener;

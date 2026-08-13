@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.tenant.config;
+package cn.knowledgeflow.framework.tenant.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

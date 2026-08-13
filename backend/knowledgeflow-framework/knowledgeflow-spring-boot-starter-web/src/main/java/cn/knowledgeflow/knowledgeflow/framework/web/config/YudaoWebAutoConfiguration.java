@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.web.config;
+package cn.knowledgeflow.framework.web.config;
 
 import cn.hutool.core.util.StrUtil;
 import cn.knowledgeflow.framework.common.biz.infra.logger.ApiErrorLogCommonApi;

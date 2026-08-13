@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.controller.admin.oauth2;
+package cn.knowledgeflow.module.system.controller.admin.oauth2;
 
 import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.ArrayUtil;

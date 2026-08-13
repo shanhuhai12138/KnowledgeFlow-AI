@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.controller.admin.demo.demo03.erp.vo;
+package cn.knowledgeflow.module.infra.controller.admin.demo.demo03.erp.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;

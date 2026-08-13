@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.enums.codegen;
+package cn.knowledgeflow.module.infra.enums.codegen;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

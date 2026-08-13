@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.service.dict;
+package cn.knowledgeflow.module.system.service.dict;
 
 import cn.hutool.core.util.StrUtil;
 import cn.knowledgeflow.framework.common.pojo.PageResult;

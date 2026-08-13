@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.common.exception.util;
+package cn.knowledgeflow.framework.common.exception.util;
 
 import cn.knowledgeflow.framework.common.exception.ErrorCode;
 import cn.knowledgeflow.framework.common.exception.ServiceException;

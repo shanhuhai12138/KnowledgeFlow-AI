@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.common.util.monitor;
+package cn.knowledgeflow.framework.common.util.monitor;
 
 import io.opentelemetry.api.trace.Span;
 import io.opentelemetry.api.trace.SpanContext;

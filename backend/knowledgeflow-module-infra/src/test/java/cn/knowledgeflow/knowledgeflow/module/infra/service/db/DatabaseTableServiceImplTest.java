@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.service.db;
+package cn.knowledgeflow.module.infra.service.db;
 
 import cn.knowledgeflow.framework.test.core.ut.BaseDbUnitTest;
 import cn.knowledgeflow.module.infra.dal.dataobject.db.DataSourceConfigDO;

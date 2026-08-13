@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.mybatis.core.enums;
+package cn.knowledgeflow.framework.mybatis.core.enums;
 
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.annotation.DbType;

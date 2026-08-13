@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.dal.dataobject.demo.demo02;
+package cn.knowledgeflow.module.infra.dal.dataobject.demo.demo02;
 
 import cn.knowledgeflow.framework.mybatis.core.dataobject.BaseDO;
 import com.baomidou.mybatisplus.annotation.KeySequence;

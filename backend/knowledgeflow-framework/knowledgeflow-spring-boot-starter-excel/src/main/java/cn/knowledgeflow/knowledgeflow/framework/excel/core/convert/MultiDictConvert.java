@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.excel.core.convert;
+package cn.knowledgeflow.framework.excel.core.convert;
 
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.util.StrUtil;

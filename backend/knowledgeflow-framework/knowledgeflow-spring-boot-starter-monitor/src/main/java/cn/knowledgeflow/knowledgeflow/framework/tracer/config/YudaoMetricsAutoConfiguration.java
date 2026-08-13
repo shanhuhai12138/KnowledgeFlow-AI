@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.tracer.config;
+package cn.knowledgeflow.framework.tracer.config;
 
 import io.micrometer.core.instrument.MeterRegistry;
 import org.springframework.beans.factory.annotation.Value;

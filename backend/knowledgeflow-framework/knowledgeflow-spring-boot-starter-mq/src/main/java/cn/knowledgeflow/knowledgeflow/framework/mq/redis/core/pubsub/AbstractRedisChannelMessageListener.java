@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.mq.redis.core.pubsub;
+package cn.knowledgeflow.framework.mq.redis.core.pubsub;
 
 import cn.hutool.core.util.TypeUtil;
 import cn.knowledgeflow.framework.common.util.json.JsonUtils;

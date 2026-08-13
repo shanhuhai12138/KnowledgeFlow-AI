@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.controller.admin.permission;
+package cn.knowledgeflow.module.system.controller.admin.permission;
 
 import cn.knowledgeflow.framework.common.enums.CommonStatusEnum;
 import cn.knowledgeflow.framework.common.pojo.CommonResult;

@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.tenant.core.mq.rabbitmq;
+package cn.knowledgeflow.framework.tenant.core.mq.rabbitmq;
 
 import cn.knowledgeflow.framework.tenant.core.context.TenantContextHolder;
 import org.apache.kafka.clients.producer.ProducerInterceptor;

@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.service.social;
+package cn.knowledgeflow.module.system.service.social;
 
 import cn.binarywang.wx.miniapp.api.WxMaService;
 import cn.binarywang.wx.miniapp.api.WxMaSubscribeService;

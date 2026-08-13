@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.xss.config;
+package cn.knowledgeflow.framework.xss.config;
 
 import cn.knowledgeflow.framework.common.enums.WebFilterOrderEnum;
 import cn.knowledgeflow.framework.xss.core.clean.JsoupXssCleaner;

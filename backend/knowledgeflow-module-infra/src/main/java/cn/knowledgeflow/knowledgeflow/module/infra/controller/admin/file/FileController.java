@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.controller.admin.file;
+package cn.knowledgeflow.module.infra.controller.admin.file;
 
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.io.IoUtil;

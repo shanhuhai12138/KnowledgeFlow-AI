@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.controller.admin.mail.vo.account;
+package cn.knowledgeflow.module.system.controller.admin.mail.vo.account;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;

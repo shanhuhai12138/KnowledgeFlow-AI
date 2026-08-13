@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.common.biz.system.permission.dto;
+package cn.knowledgeflow.framework.common.biz.system.permission.dto;
 
 import lombok.Data;
 

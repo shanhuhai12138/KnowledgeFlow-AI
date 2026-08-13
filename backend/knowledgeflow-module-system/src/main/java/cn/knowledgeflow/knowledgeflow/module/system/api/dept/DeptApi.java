@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.api.dept;
+package cn.knowledgeflow.module.system.api.dept;
 
 import cn.knowledgeflow.framework.common.util.collection.CollectionUtils;
 import cn.knowledgeflow.module.system.api.dept.dto.DeptRespDTO;

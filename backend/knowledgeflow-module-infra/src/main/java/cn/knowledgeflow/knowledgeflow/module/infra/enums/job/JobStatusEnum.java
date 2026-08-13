@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.enums.job;
+package cn.knowledgeflow.module.infra.enums.job;
 
 import com.google.common.collect.Sets;
 import lombok.AllArgsConstructor;

@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.knowledge.service.aiconfig;
+package cn.knowledgeflow.module.knowledge.service.aiconfig;
 
 import cn.knowledgeflow.framework.security.core.util.SecurityFrameworkUtils;
 import cn.knowledgeflow.module.knowledge.controller.admin.aiconfig.vo.AiConfigRespVO;

@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.api.sms;
+package cn.knowledgeflow.module.system.api.sms;
 
 import cn.knowledgeflow.module.system.api.sms.dto.send.SmsSendSingleToUserReqDTO;
 import cn.knowledgeflow.module.system.service.sms.SmsSendService;

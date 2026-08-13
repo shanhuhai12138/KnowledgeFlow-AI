@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.tenant.core.web;
+package cn.knowledgeflow.framework.tenant.core.web;
 
 import cn.knowledgeflow.framework.tenant.core.context.TenantContextHolder;
 import cn.knowledgeflow.framework.web.core.util.WebFrameworkUtils;

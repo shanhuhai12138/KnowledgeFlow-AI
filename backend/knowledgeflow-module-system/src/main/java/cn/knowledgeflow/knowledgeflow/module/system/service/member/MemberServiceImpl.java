@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.service.member;
+package cn.knowledgeflow.module.system.service.member;
 
 import cn.hutool.core.util.ClassUtil;
 import cn.hutool.core.util.ReflectUtil;

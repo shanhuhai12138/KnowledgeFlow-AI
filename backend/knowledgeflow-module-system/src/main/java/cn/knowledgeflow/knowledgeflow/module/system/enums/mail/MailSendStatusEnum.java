@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.enums.mail;
+package cn.knowledgeflow.module.system.enums.mail;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

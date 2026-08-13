@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.service.codegen.inner;
+package cn.knowledgeflow.module.infra.service.codegen.inner;
 
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.io.IoUtil;

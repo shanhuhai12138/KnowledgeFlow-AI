@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.enums;
+package cn.knowledgeflow.module.system.enums;
 
 /**
  * System 字典类型的枚举类

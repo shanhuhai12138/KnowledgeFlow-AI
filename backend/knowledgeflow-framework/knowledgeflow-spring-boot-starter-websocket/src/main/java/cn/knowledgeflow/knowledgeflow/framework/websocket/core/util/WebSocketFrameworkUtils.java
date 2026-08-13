@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.websocket.core.util;
+package cn.knowledgeflow.framework.websocket.core.util;
 
 import cn.knowledgeflow.framework.security.core.LoginUser;
 import org.springframework.web.socket.WebSocketSession;

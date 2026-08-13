@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.ip.core;
+package cn.knowledgeflow.framework.ip.core;
 
 import cn.knowledgeflow.framework.ip.core.enums.AreaTypeEnum;
 import com.fasterxml.jackson.annotation.JsonBackReference;

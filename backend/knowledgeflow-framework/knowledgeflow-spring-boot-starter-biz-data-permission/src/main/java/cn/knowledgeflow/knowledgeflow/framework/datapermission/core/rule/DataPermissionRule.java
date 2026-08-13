@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.datapermission.core.rule;
+package cn.knowledgeflow.framework.datapermission.core.rule;
 
 import com.baomidou.mybatisplus.core.metadata.TableInfoHelper;
 import net.sf.jsqlparser.expression.Alias;

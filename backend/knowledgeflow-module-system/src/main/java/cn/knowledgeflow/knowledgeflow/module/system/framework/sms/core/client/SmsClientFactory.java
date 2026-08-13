@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.framework.sms.core.client;
+package cn.knowledgeflow.module.system.framework.sms.core.client;
 
 import cn.knowledgeflow.module.system.framework.sms.core.property.SmsChannelProperties;
 

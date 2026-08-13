@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.websocket.core.sender.local;
+package cn.knowledgeflow.framework.websocket.core.sender.local;
 
 import cn.knowledgeflow.framework.websocket.core.sender.AbstractWebSocketMessageSender;
 import cn.knowledgeflow.framework.websocket.core.sender.WebSocketMessageSender;

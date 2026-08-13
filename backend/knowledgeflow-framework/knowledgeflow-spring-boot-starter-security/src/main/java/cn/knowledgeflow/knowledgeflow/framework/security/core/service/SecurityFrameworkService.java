@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.security.core.service;
+package cn.knowledgeflow.framework.security.core.service;
 
 /**
  * Security 框架 Service 接口，定义权限相关的校验操作

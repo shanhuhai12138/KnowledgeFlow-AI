@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.security.config;
+package cn.knowledgeflow.framework.security.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

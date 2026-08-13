@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.datapermission.core.annotation;
+package cn.knowledgeflow.framework.datapermission.core.annotation;
 
 import cn.knowledgeflow.framework.datapermission.core.rule.DataPermissionRule;
 

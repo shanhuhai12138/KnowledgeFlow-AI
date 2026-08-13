@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.datasource.core.enums;
+package cn.knowledgeflow.framework.datasource.core.enums;
 
 /**
  * 对应于多数据源中不同数据源配置

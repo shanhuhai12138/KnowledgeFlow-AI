@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.jackson.config;
+package cn.knowledgeflow.framework.jackson.config;
 
 import cn.knowledgeflow.framework.common.util.json.JsonUtils;
 import cn.knowledgeflow.framework.common.util.json.databind.NumberSerializer;

@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.service.permission;
+package cn.knowledgeflow.module.system.service.permission;
 
 import cn.hutool.extra.spring.SpringUtil;
 import cn.knowledgeflow.framework.common.enums.CommonStatusEnum;

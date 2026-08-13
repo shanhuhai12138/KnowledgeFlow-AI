@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.dal.mysql.job;
+package cn.knowledgeflow.module.infra.dal.mysql.job;
 
 import cn.knowledgeflow.framework.common.pojo.PageResult;
 import cn.knowledgeflow.framework.mybatis.core.mapper.BaseMapperX;

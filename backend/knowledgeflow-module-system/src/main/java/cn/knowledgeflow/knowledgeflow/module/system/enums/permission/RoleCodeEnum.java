@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.enums.permission;
+package cn.knowledgeflow.module.system.enums.permission;
 
 import cn.knowledgeflow.framework.common.util.object.ObjectUtils;
 import lombok.AllArgsConstructor;

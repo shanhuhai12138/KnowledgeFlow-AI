@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.mq.redis.core.job;
+package cn.knowledgeflow.framework.mq.redis.core.job;
 
 import cn.knowledgeflow.framework.mq.redis.core.RedisMQTemplate;
 import cn.knowledgeflow.framework.mq.redis.core.stream.AbstractRedisStreamMessageListener;

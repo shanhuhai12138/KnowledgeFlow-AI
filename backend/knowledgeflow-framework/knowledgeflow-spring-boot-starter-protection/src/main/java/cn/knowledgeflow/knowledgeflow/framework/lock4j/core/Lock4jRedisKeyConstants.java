@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.lock4j.core;
+package cn.knowledgeflow.framework.lock4j.core;
 
 /**
  * Lock4j Redis Key 枚举类

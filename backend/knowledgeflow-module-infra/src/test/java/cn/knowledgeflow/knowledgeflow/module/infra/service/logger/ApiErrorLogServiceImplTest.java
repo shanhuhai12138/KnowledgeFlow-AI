@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.service.logger;
+package cn.knowledgeflow.module.infra.service.logger;
 
 import cn.knowledgeflow.framework.common.enums.UserTypeEnum;
 import cn.knowledgeflow.framework.common.pojo.PageResult;

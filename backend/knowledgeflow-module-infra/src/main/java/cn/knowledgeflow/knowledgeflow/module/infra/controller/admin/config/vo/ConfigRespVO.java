@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.controller.admin.config.vo;
+package cn.knowledgeflow.module.infra.controller.admin.config.vo;
 
 import cn.knowledgeflow.framework.excel.core.annotations.DictFormat;
 import cn.knowledgeflow.framework.excel.core.convert.DictConvert;

@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.common.util.http;
+package cn.knowledgeflow.framework.common.util.http;
 
 import org.junit.jupiter.api.Test;
 

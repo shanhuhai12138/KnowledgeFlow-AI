@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.service.notify;
+package cn.knowledgeflow.module.system.service.notify;
 
 import cn.knowledgeflow.framework.common.pojo.PageResult;
 import cn.knowledgeflow.module.system.controller.admin.notify.vo.message.NotifyMessageMyPageReqVO;

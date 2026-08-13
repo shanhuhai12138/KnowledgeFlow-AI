@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.controller.admin.user.vo.user;
+package cn.knowledgeflow.module.system.controller.admin.user.vo.user;
 
 import cn.idev.excel.annotation.ExcelProperty;
 import cn.knowledgeflow.framework.excel.core.annotations.DictFormat;

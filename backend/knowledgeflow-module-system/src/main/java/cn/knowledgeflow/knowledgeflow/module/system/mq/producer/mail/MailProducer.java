@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.mq.producer.mail;
+package cn.knowledgeflow.module.system.mq.producer.mail;
 
 import cn.knowledgeflow.module.system.mq.message.mail.MailSendMessage;
 import lombok.extern.slf4j.Slf4j;

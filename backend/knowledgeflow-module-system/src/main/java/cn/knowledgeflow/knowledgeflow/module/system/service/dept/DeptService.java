@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.service.dept;
+package cn.knowledgeflow.module.system.service.dept;
 
 import cn.knowledgeflow.framework.common.util.collection.CollectionUtils;
 import cn.knowledgeflow.module.system.controller.admin.dept.vo.dept.DeptListReqVO;

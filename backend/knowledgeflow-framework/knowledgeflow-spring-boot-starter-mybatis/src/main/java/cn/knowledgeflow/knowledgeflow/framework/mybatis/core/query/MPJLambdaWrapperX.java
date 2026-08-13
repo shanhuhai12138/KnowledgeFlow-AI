@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.mybatis.core.query;
+package cn.knowledgeflow.framework.mybatis.core.query;
 
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.ObjectUtil;

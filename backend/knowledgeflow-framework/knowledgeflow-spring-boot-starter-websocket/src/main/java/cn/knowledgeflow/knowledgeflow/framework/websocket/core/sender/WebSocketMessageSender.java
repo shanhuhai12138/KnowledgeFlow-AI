@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.websocket.core.sender;
+package cn.knowledgeflow.framework.websocket.core.sender;
 
 import cn.knowledgeflow.framework.common.util.json.JsonUtils;
 

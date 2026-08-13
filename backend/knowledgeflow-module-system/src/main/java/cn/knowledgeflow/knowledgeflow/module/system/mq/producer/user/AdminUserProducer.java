@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.mq.producer.user;
+package cn.knowledgeflow.module.system.mq.producer.user;
 
 import cn.knowledgeflow.module.system.api.message.user.AdminUserProfileUpdateMessage;
 import lombok.extern.slf4j.Slf4j;

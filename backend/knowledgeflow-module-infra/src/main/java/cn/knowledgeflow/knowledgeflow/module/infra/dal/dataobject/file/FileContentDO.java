@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.dal.dataobject.file;
+package cn.knowledgeflow.module.infra.dal.dataobject.file;
 
 import cn.knowledgeflow.framework.mybatis.core.dataobject.BaseDO;
 import cn.knowledgeflow.framework.tenant.core.aop.TenantIgnore;

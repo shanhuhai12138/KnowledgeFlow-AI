@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.convert.user;
+package cn.knowledgeflow.module.system.convert.user;
 
 import cn.knowledgeflow.framework.common.util.collection.CollectionUtils;
 import cn.knowledgeflow.framework.common.util.collection.MapUtils;

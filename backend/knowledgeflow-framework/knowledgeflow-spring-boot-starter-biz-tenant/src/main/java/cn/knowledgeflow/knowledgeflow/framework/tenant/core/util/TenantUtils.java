@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.tenant.core.util;
+package cn.knowledgeflow.framework.tenant.core.util;
 
 import cn.knowledgeflow.framework.tenant.core.context.TenantContextHolder;
 

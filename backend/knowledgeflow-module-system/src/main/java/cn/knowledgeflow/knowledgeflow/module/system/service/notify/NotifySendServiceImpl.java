@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.service.notify;
+package cn.knowledgeflow.module.system.service.notify;
 
 import cn.knowledgeflow.framework.common.enums.CommonStatusEnum;
 import cn.knowledgeflow.framework.common.enums.UserTypeEnum;

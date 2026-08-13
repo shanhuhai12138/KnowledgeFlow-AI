@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.excel.core.function;
+package cn.knowledgeflow.framework.excel.core.function;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.service.file;
+package cn.knowledgeflow.module.infra.service.file;
 
 import cn.knowledgeflow.framework.common.pojo.PageResult;
 import cn.knowledgeflow.module.infra.controller.admin.file.vo.config.FileConfigPageReqVO;

@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.dal.dataobject.sms;
+package cn.knowledgeflow.module.system.dal.dataobject.sms;
 
 import cn.knowledgeflow.framework.mybatis.core.dataobject.BaseDO;
 import cn.knowledgeflow.framework.tenant.core.aop.TenantIgnore;

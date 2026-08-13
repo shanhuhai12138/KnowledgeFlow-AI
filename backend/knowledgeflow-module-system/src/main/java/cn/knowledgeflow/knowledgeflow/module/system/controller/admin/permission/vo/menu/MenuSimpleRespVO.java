@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.controller.admin.permission.vo.menu;
+package cn.knowledgeflow.module.system.controller.admin.permission.vo.menu;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;

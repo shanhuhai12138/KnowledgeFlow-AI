@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.service.codegen.inner;
+package cn.knowledgeflow.module.infra.service.codegen.inner;
 
 import cn.knowledgeflow.module.infra.dal.dataobject.codegen.CodegenColumnDO;
 import cn.knowledgeflow.module.infra.dal.dataobject.codegen.CodegenTableDO;

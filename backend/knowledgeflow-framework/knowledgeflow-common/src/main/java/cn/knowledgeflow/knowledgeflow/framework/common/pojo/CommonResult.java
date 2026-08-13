@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.common.pojo;
+package cn.knowledgeflow.framework.common.pojo;
 
 import cn.hutool.core.lang.Assert;
 import cn.knowledgeflow.framework.common.exception.ErrorCode;

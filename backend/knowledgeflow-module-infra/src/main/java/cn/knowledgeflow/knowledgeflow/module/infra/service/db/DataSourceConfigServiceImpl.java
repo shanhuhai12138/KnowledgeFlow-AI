@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.service.db;
+package cn.knowledgeflow.module.infra.service.db;
 
 import cn.knowledgeflow.framework.common.util.object.BeanUtils;
 import cn.knowledgeflow.framework.mybatis.core.util.JdbcUtils;

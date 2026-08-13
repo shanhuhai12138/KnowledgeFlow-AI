@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.service.dict;
+package cn.knowledgeflow.module.system.service.dict;
 
 import cn.knowledgeflow.framework.common.pojo.PageResult;
 import cn.knowledgeflow.module.system.controller.admin.dict.vo.type.DictTypePageReqVO;

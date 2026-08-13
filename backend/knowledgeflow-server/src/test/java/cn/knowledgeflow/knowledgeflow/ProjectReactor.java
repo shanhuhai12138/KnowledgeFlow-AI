@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow;
+package cn.knowledgeflow;
 
 import cn.hutool.core.io.FileTypeUtil;
 import cn.hutool.core.io.FileUtil;

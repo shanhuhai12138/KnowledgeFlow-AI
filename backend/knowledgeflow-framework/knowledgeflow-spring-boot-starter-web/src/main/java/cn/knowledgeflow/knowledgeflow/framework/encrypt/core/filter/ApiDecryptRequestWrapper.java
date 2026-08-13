@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.encrypt.core.filter;
+package cn.knowledgeflow.framework.encrypt.core.filter;
 
 import cn.hutool.core.io.IoUtil;
 import cn.hutool.core.util.StrUtil;

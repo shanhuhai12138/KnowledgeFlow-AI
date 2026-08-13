@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.framework.sms.core.client;
+package cn.knowledgeflow.module.system.framework.sms.core.client;
 
 import cn.knowledgeflow.framework.common.core.KeyValue;
 import cn.knowledgeflow.module.system.framework.sms.core.client.dto.SmsReceiveRespDTO;

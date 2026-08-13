@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.controller.admin.redis.vo;
+package cn.knowledgeflow.module.infra.controller.admin.redis.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;

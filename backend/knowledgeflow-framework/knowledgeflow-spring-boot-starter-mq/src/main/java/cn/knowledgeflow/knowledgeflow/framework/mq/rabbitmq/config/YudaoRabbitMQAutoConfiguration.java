@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.mq.rabbitmq.config;
+package cn.knowledgeflow.framework.mq.rabbitmq.config;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;

@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.service.dept;
+package cn.knowledgeflow.module.system.service.dept;
 
 import cn.knowledgeflow.framework.common.pojo.PageResult;
 import cn.knowledgeflow.module.system.controller.admin.dept.vo.post.PostPageReqVO;

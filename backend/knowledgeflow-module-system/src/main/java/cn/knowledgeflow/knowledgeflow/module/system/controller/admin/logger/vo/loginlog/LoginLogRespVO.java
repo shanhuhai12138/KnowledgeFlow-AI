@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.controller.admin.logger.vo.loginlog;
+package cn.knowledgeflow.module.system.controller.admin.logger.vo.loginlog;
 
 import cn.knowledgeflow.framework.excel.core.annotations.DictFormat;
 import cn.knowledgeflow.framework.excel.core.convert.DictConvert;

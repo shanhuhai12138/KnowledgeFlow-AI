@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.mq.redis.core.job;
+package cn.knowledgeflow.framework.mq.redis.core.job;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.knowledgeflow.framework.mq.redis.core.RedisMQTemplate;

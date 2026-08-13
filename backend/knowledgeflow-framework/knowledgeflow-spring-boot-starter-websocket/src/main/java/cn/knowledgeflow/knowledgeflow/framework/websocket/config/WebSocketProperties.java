@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.websocket.config;
+package cn.knowledgeflow.framework.websocket.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

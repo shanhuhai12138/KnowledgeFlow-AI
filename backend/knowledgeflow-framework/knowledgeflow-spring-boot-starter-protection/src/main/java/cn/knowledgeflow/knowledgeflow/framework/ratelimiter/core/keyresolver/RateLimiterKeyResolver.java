@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.ratelimiter.core.keyresolver;
+package cn.knowledgeflow.framework.ratelimiter.core.keyresolver;
 
 import cn.knowledgeflow.framework.ratelimiter.core.annotation.RateLimiter;
 import org.aspectj.lang.JoinPoint;

@@ -1,1 +1,1 @@
-﻿package cn.knowledgeflow.module.system.job;
+package cn.knowledgeflow.module.system.job;

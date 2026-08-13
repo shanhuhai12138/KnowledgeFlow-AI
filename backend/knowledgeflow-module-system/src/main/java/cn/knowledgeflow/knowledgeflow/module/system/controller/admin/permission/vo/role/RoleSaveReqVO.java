@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.controller.admin.permission.vo.role;
+package cn.knowledgeflow.module.system.controller.admin.permission.vo.role;
 
 import cn.knowledgeflow.framework.common.enums.CommonStatusEnum;
 import cn.knowledgeflow.framework.common.validation.InEnum;

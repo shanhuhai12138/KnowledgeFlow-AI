@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.api.dept;
+package cn.knowledgeflow.module.system.api.dept;
 
 import cn.knowledgeflow.framework.common.util.object.BeanUtils;
 import cn.knowledgeflow.module.system.api.dept.dto.PostRespDTO;

@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.controller.admin.tenant.vo.packages;
+package cn.knowledgeflow.module.system.controller.admin.tenant.vo.packages;
 
 import cn.knowledgeflow.framework.common.pojo.PageParam;
 import io.swagger.v3.oas.annotations.media.Schema;

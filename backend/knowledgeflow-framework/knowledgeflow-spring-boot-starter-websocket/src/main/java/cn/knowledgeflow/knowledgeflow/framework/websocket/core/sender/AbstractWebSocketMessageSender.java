@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.websocket.core.sender;
+package cn.knowledgeflow.framework.websocket.core.sender;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;

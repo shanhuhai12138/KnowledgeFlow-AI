@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.knowledge.dal.mysql.kb;
+package cn.knowledgeflow.module.knowledge.dal.mysql.kb;
 
 import cn.knowledgeflow.framework.common.pojo.PageResult;
 import cn.knowledgeflow.framework.mybatis.core.mapper.BaseMapperX;

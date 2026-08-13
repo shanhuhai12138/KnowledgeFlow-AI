@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.controller.admin.user.vo.profile;
+package cn.knowledgeflow.module.system.controller.admin.user.vo.profile;
 
 import cn.knowledgeflow.module.system.controller.admin.dept.vo.dept.DeptSimpleRespVO;
 import cn.knowledgeflow.module.system.controller.admin.dept.vo.post.PostSimpleRespVO;

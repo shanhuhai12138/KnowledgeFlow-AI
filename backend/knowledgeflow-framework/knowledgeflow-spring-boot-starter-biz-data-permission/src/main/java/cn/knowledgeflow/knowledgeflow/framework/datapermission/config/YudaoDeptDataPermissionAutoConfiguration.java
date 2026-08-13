@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.datapermission.config;
+package cn.knowledgeflow.framework.datapermission.config;
 
 import cn.knowledgeflow.framework.common.biz.system.permission.PermissionCommonApi;
 import cn.knowledgeflow.framework.datapermission.core.rule.dept.DeptDataPermissionRule;

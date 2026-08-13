@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.common.util.cache;
+package cn.knowledgeflow.framework.common.util.cache;
 
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;

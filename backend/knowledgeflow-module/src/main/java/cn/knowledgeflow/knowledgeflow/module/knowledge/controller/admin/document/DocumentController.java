@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.knowledge.controller.admin.document;
+package cn.knowledgeflow.module.knowledge.controller.admin.document;
 
 import cn.hutool.core.io.IoUtil;
 import cn.knowledgeflow.framework.common.pojo.CommonResult;

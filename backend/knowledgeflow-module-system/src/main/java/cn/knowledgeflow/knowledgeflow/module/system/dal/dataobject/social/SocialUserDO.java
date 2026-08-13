@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.dal.dataobject.social;
+package cn.knowledgeflow.module.system.dal.dataobject.social;
 
 import cn.knowledgeflow.framework.mybatis.core.dataobject.BaseDO;
 import cn.knowledgeflow.module.system.enums.social.SocialTypeEnum;

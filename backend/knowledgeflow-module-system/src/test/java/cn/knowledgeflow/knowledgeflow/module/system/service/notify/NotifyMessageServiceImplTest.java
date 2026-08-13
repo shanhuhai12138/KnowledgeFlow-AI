@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.service.notify;
+package cn.knowledgeflow.module.system.service.notify;
 
 import cn.hutool.core.map.MapUtil;
 import cn.knowledgeflow.framework.common.enums.UserTypeEnum;

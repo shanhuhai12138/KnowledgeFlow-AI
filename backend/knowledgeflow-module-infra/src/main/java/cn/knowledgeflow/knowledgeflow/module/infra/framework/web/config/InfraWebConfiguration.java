@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.framework.web.config;
+package cn.knowledgeflow.module.infra.framework.web.config;
 
 import cn.knowledgeflow.framework.swagger.config.YudaoSwaggerAutoConfiguration;
 import org.springdoc.core.GroupedOpenApi;

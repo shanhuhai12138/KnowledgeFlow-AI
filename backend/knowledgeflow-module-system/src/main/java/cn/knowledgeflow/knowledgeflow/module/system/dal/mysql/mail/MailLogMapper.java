@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.dal.mysql.mail;
+package cn.knowledgeflow.module.system.dal.mysql.mail;
 
 import cn.hutool.core.util.StrUtil;
 import cn.knowledgeflow.framework.common.pojo.PageResult;

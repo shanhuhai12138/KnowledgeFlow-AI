@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.api.file;
+package cn.knowledgeflow.module.infra.api.file;
 
 import javax.validation.constraints.NotEmpty;
 

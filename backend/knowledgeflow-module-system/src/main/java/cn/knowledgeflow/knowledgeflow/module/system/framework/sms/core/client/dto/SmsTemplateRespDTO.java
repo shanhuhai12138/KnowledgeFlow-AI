@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.framework.sms.core.client.dto;
+package cn.knowledgeflow.module.system.framework.sms.core.client.dto;
 
 import cn.knowledgeflow.module.system.framework.sms.core.enums.SmsTemplateAuditStatusEnum;
 import lombok.Data;

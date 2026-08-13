@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.websocket.message;
+package cn.knowledgeflow.module.infra.websocket.message;
 
 import lombok.Data;
 

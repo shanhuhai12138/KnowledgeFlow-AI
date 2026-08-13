@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.operatelog.config;
+package cn.knowledgeflow.framework.operatelog.config;
 
 import cn.knowledgeflow.framework.operatelog.core.service.LogRecordServiceImpl;
 import com.mzt.logapi.service.ILogRecordService;

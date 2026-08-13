@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.api.logger.dto;
+package cn.knowledgeflow.module.system.api.logger.dto;
 
 import org.dromara.core.trans.anno.Trans;
 import org.dromara.core.trans.constant.TransType;

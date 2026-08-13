@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.service.codegen.inner;
+package cn.knowledgeflow.module.infra.service.codegen.inner;
 
 import cn.hutool.core.io.resource.ResourceUtil;
 import cn.knowledgeflow.module.infra.dal.dataobject.codegen.CodegenColumnDO;

@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.knowledge.controller.admin.cleanup;
+package cn.knowledgeflow.module.knowledge.controller.admin.cleanup;
 
 import cn.knowledgeflow.framework.common.pojo.CommonResult;
 import cn.knowledgeflow.module.knowledge.service.task.KnowledgeCleanupService;

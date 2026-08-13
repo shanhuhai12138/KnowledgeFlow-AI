@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.mq.redis.config;
+package cn.knowledgeflow.framework.mq.redis.config;
 
 import cn.knowledgeflow.framework.mq.redis.core.RedisMQTemplate;
 import cn.knowledgeflow.framework.mq.redis.core.interceptor.RedisMessageInterceptor;

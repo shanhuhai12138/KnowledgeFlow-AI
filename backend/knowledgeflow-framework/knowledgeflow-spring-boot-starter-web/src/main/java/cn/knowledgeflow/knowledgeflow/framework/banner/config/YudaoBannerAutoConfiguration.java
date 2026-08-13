@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.banner.config;
+package cn.knowledgeflow.framework.banner.config;
 
 import cn.knowledgeflow.framework.banner.core.BannerApplicationRunner;
 import org.springframework.boot.autoconfigure.AutoConfiguration;

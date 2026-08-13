@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.common.biz.system.oauth2.dto;
+package cn.knowledgeflow.framework.common.biz.system.oauth2.dto;
 
 import lombok.Data;
 

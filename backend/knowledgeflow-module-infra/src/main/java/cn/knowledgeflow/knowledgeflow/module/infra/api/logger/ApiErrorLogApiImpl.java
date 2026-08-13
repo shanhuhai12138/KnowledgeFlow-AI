@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.api.logger;
+package cn.knowledgeflow.module.infra.api.logger;
 
 import cn.knowledgeflow.framework.common.biz.infra.logger.ApiErrorLogCommonApi;
 import cn.knowledgeflow.framework.common.biz.infra.logger.dto.ApiErrorLogCreateReqDTO;

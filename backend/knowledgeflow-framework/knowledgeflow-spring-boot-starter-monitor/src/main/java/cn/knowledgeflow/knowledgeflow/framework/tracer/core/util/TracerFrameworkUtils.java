@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.tracer.core.util;
+package cn.knowledgeflow.framework.tracer.core.util;
 
 import io.opentelemetry.api.trace.Span;
 import io.opentelemetry.api.trace.StatusCode;

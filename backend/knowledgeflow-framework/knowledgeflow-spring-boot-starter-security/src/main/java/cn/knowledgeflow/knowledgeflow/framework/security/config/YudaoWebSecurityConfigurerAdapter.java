@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.security.config;
+package cn.knowledgeflow.framework.security.config;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.knowledgeflow.framework.security.core.filter.TokenAuthenticationFilter;

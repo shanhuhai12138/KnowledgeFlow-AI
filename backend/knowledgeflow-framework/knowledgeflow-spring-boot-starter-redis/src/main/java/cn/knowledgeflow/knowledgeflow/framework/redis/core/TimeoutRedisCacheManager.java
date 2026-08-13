@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.redis.core;
+package cn.knowledgeflow.framework.redis.core;
 
 import cn.hutool.core.util.NumberUtil;
 import cn.hutool.core.util.StrUtil;

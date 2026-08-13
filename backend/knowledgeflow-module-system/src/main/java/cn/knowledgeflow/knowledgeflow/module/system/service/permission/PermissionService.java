@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.service.permission;
+package cn.knowledgeflow.module.system.service.permission;
 
 import cn.knowledgeflow.framework.common.biz.system.permission.dto.DeptDataPermissionRespDTO;
 

@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.dal.dataobject.file;
+package cn.knowledgeflow.module.infra.dal.dataobject.file;
 
 import cn.hutool.core.util.StrUtil;
 import cn.knowledgeflow.framework.common.util.json.JsonUtils;

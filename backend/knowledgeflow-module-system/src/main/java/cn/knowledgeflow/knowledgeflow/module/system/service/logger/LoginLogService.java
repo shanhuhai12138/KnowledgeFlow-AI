@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.service.logger;
+package cn.knowledgeflow.module.system.service.logger;
 
 import cn.knowledgeflow.framework.common.pojo.PageResult;
 import cn.knowledgeflow.module.system.api.logger.dto.LoginLogCreateReqDTO;

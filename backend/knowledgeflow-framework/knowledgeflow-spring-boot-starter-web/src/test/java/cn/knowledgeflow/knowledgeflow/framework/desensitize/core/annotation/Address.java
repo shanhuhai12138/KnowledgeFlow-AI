@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.desensitize.core.annotation;
+package cn.knowledgeflow.framework.desensitize.core.annotation;
 
 import cn.knowledgeflow.framework.desensitize.core.DesensitizeTest;
 import cn.knowledgeflow.framework.desensitize.core.handler.AddressHandler;

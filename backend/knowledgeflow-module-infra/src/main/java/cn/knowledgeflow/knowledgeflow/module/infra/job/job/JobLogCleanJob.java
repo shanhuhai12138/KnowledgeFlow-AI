@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.job.job;
+package cn.knowledgeflow.module.infra.job.job;
 
 import cn.knowledgeflow.framework.quartz.core.handler.JobHandler;
 import cn.knowledgeflow.framework.tenant.core.aop.TenantIgnore;

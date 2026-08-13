@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.service.file;
+package cn.knowledgeflow.module.infra.service.file;
 
 import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.date.LocalDateTimeUtil;

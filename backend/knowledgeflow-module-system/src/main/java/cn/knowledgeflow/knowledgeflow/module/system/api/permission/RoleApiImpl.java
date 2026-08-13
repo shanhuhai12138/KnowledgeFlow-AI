@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.api.permission;
+package cn.knowledgeflow.module.system.api.permission;
 
 import cn.knowledgeflow.framework.common.util.object.BeanUtils;
 import cn.knowledgeflow.module.system.api.permission.dto.RoleRespDTO;

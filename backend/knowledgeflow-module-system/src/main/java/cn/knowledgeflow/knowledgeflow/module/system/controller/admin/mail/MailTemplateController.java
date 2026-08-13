@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.controller.admin.mail;
+package cn.knowledgeflow.module.system.controller.admin.mail;
 
 import cn.knowledgeflow.framework.common.enums.CommonStatusEnum;
 import cn.knowledgeflow.framework.common.pojo.CommonResult;

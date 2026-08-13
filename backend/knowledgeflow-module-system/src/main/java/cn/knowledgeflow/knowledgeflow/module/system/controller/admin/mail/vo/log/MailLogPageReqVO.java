@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.controller.admin.mail.vo.log;
+package cn.knowledgeflow.module.system.controller.admin.mail.vo.log;
 
 import cn.knowledgeflow.framework.common.pojo.PageParam;
 import io.swagger.v3.oas.annotations.media.Schema;

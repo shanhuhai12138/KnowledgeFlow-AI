@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.service.oauth2;
+package cn.knowledgeflow.module.system.service.oauth2;
 
 import cn.knowledgeflow.framework.common.enums.UserTypeEnum;
 import cn.knowledgeflow.framework.test.core.ut.BaseMockitoUnitTest;

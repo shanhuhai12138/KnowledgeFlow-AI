@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.encrypt.config;
+package cn.knowledgeflow.framework.encrypt.config;
 
 import cn.knowledgeflow.framework.common.enums.WebFilterOrderEnum;
 import cn.knowledgeflow.framework.encrypt.core.filter.ApiEncryptFilter;

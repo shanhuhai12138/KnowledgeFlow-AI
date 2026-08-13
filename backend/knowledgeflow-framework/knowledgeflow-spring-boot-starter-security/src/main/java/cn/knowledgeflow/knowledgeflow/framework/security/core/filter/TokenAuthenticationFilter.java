@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.security.core.filter;
+package cn.knowledgeflow.framework.security.core.filter;
 
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;

@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.dal.mysql.codegen;
+package cn.knowledgeflow.module.infra.dal.mysql.codegen;
 
 import cn.knowledgeflow.framework.mybatis.core.mapper.BaseMapperX;
 import cn.knowledgeflow.framework.mybatis.core.query.LambdaQueryWrapperX;

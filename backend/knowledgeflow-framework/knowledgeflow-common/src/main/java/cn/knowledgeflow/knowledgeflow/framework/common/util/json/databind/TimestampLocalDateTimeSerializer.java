@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.common.util.json.databind;
+package cn.knowledgeflow.framework.common.util.json.databind;
 
 import cn.hutool.core.util.ObjUtil;
 import cn.hutool.core.util.ReflectUtil;

@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.idempotent.core.keyresolver.impl;
+package cn.knowledgeflow.framework.idempotent.core.keyresolver.impl;
 
 import cn.hutool.core.util.ArrayUtil;
 import cn.knowledgeflow.framework.idempotent.core.annotation.Idempotent;

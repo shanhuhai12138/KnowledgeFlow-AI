@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.common.enums;
+package cn.knowledgeflow.framework.common.enums;
 
 import cn.hutool.core.util.ObjUtil;
 import cn.knowledgeflow.framework.common.core.ArrayValuable;

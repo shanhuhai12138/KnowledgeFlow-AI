@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.service.mail;
+package cn.knowledgeflow.module.system.service.mail;
 
 import cn.hutool.core.util.ObjUtil;
 import cn.hutool.core.util.ReUtil;

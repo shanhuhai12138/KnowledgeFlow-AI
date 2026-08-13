@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.service.db;
+package cn.knowledgeflow.module.infra.service.db;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.lang.Assert;

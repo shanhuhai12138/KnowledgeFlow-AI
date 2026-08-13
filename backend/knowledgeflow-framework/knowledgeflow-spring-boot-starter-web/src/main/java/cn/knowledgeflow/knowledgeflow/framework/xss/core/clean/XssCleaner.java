@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.xss.core.clean;
+package cn.knowledgeflow.framework.xss.core.clean;
 
 /**
  * 对 html 文本中的有 Xss 风险的数据进行清理

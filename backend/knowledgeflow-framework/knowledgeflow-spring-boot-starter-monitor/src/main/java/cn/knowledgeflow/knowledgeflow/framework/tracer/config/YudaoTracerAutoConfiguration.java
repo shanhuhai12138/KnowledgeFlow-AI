@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.tracer.config;
+package cn.knowledgeflow.framework.tracer.config;
 
 import cn.knowledgeflow.framework.common.enums.WebFilterOrderEnum;
 import cn.knowledgeflow.framework.tracer.core.aop.BizTraceAspect;

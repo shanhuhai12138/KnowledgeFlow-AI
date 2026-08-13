@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.lock4j.core;
+package cn.knowledgeflow.framework.lock4j.core;
 
 import cn.knowledgeflow.framework.common.exception.ServiceException;
 import cn.knowledgeflow.framework.common.exception.enums.GlobalErrorCodeConstants;

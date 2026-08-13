@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.tenant.core.context;
+package cn.knowledgeflow.framework.tenant.core.context;
 
 import cn.knowledgeflow.framework.common.enums.DocumentEnum;
 import com.alibaba.ttl.TransmittableThreadLocal;

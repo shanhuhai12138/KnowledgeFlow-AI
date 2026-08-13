@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.common.util.date;
+package cn.knowledgeflow.framework.common.util.date;
 
 import cn.hutool.core.date.LocalDateTimeUtil;
 

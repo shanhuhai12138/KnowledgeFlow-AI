@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.desensitize.core.regex.annotation;
+package cn.knowledgeflow.framework.desensitize.core.regex.annotation;
 
 import cn.knowledgeflow.framework.desensitize.core.base.annotation.DesensitizeBy;
 import cn.knowledgeflow.framework.desensitize.core.regex.handler.EmailDesensitizationHandler;

@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.controller.admin.permission.vo.role;
+package cn.knowledgeflow.module.system.controller.admin.permission.vo.role;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;

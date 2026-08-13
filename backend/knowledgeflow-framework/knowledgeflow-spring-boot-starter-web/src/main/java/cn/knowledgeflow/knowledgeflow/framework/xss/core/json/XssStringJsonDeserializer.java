@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.xss.core.json;
+package cn.knowledgeflow.framework.xss.core.json;
 
 import cn.knowledgeflow.framework.common.util.servlet.ServletUtils;
 import cn.knowledgeflow.framework.xss.config.XssProperties;

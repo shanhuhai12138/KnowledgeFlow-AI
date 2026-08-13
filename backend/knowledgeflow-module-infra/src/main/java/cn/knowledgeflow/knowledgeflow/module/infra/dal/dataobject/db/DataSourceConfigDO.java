@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.dal.dataobject.db;
+package cn.knowledgeflow.module.infra.dal.dataobject.db;
 
 import cn.knowledgeflow.framework.mybatis.core.dataobject.BaseDO;
 import cn.knowledgeflow.framework.mybatis.core.type.EncryptTypeHandler;

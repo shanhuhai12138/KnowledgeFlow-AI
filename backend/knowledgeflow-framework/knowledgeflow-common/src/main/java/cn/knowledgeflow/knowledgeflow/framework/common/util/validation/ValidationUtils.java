@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.common.util.validation;
+package cn.knowledgeflow.framework.common.util.validation;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.lang.Assert;

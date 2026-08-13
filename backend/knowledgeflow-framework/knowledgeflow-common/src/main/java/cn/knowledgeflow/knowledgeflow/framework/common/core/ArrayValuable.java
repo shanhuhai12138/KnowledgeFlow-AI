@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.common.core;
+package cn.knowledgeflow.framework.common.core;
 
 /**
  * 可生成 T 数组的接口

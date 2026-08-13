@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.tracer.core.filter;
+package cn.knowledgeflow.framework.tracer.core.filter;
 
 import cn.knowledgeflow.framework.common.util.monitor.TracerUtils;
 import org.springframework.web.filter.OncePerRequestFilter;

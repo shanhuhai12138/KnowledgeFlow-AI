@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.api.dict;
+package cn.knowledgeflow.module.system.api.dict;
 
 import cn.knowledgeflow.framework.common.biz.system.dict.DictDataCommonApi;
 

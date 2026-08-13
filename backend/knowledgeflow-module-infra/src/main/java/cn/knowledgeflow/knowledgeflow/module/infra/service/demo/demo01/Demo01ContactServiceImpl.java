@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.service.demo.demo01;
+package cn.knowledgeflow.module.infra.service.demo.demo01;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.knowledgeflow.framework.common.pojo.PageResult;

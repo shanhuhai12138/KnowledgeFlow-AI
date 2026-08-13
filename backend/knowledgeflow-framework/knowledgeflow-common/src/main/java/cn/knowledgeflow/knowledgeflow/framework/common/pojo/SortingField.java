@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.common.pojo;
+package cn.knowledgeflow.framework.common.pojo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

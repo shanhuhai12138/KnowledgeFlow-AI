@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.test.config;
+package cn.knowledgeflow.framework.test.config;
 
 import com.github.fppt.jedismock.RedisServer;
 import org.springframework.boot.autoconfigure.data.redis.RedisProperties;

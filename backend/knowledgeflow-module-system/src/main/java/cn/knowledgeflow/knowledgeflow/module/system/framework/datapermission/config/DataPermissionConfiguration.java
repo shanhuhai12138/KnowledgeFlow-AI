@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.framework.datapermission.config;
+package cn.knowledgeflow.module.system.framework.datapermission.config;
 
 import cn.knowledgeflow.module.system.dal.dataobject.dept.DeptDO;
 import cn.knowledgeflow.module.system.dal.dataobject.user.AdminUserDO;

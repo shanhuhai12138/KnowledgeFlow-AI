@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.framework.sms.core.client.impl;
+package cn.knowledgeflow.module.system.framework.sms.core.client.impl;
 
 import cn.knowledgeflow.framework.common.core.KeyValue;
 import cn.knowledgeflow.framework.common.util.http.HttpUtils;

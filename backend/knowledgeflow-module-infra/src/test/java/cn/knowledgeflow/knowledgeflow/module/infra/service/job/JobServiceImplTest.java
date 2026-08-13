@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.service.job;
+package cn.knowledgeflow.module.infra.service.job;
 
 import cn.hutool.extra.spring.SpringUtil;
 import cn.knowledgeflow.framework.common.pojo.PageResult;

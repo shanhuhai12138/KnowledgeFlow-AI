@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.test.core.ut;
+package cn.knowledgeflow.framework.test.core.ut;
 
 import cn.hutool.extra.spring.SpringUtil;
 import cn.knowledgeflow.framework.redis.config.YudaoRedisAutoConfiguration;

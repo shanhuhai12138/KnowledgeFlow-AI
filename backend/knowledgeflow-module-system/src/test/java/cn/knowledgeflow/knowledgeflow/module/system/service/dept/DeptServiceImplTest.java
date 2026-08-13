@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.service.dept;
+package cn.knowledgeflow.module.system.service.dept;
 
 import cn.knowledgeflow.framework.common.enums.CommonStatusEnum;
 import cn.knowledgeflow.framework.common.util.object.ObjectUtils;

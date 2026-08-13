@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.controller.admin.socail;
+package cn.knowledgeflow.module.system.controller.admin.socail;
 
 import cn.knowledgeflow.framework.common.pojo.CommonResult;
 import cn.knowledgeflow.framework.common.pojo.PageResult;

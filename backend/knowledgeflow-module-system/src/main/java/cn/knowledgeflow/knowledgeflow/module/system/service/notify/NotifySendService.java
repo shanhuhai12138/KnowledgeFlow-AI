@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.service.notify;
+package cn.knowledgeflow.module.system.service.notify;
 
 import java.util.List;
 import java.util.Map;

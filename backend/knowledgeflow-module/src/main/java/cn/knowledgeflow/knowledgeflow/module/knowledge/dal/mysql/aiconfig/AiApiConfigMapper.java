@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.knowledge.dal.mysql.aiconfig;
+package cn.knowledgeflow.module.knowledge.dal.mysql.aiconfig;
 
 import cn.knowledgeflow.framework.mybatis.core.mapper.BaseMapperX;
 import cn.knowledgeflow.framework.mybatis.core.query.LambdaQueryWrapperX;

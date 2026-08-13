@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.redis.config;
+package cn.knowledgeflow.framework.redis.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

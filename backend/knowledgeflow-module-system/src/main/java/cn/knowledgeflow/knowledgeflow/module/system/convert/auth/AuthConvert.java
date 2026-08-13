@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.convert.auth;
+package cn.knowledgeflow.module.system.convert.auth;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ObjUtil;

@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.service.permission;
+package cn.knowledgeflow.module.system.service.permission;
 
 import cn.knowledgeflow.framework.common.pojo.PageResult;
 import cn.knowledgeflow.module.system.controller.admin.permission.vo.role.RolePageReqVO;

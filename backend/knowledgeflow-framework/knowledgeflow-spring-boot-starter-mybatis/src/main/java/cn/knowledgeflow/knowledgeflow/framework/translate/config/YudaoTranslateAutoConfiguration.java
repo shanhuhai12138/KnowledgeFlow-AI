@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.translate.config;
+package cn.knowledgeflow.framework.translate.config;
 
 import cn.knowledgeflow.framework.translate.core.TranslateUtils;
 import org.dromara.trans.service.impl.TransService;

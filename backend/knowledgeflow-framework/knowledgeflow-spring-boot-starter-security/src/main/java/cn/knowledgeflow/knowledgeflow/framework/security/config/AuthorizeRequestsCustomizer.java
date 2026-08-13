@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.security.config;
+package cn.knowledgeflow.framework.security.config;
 
 import cn.knowledgeflow.framework.web.config.WebProperties;
 import org.springframework.core.Ordered;

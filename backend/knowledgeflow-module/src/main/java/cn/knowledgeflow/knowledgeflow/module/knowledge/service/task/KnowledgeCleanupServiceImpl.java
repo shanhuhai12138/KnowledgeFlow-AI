@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.knowledge.service.task;
+package cn.knowledgeflow.module.knowledge.service.task;
 
 import cn.knowledgeflow.framework.tenant.core.util.TenantUtils;
 import cn.knowledgeflow.module.knowledge.dal.mysql.document.DocumentMapper;

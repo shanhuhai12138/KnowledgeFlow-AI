@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.controller.admin.user;
+package cn.knowledgeflow.module.system.controller.admin.user;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;

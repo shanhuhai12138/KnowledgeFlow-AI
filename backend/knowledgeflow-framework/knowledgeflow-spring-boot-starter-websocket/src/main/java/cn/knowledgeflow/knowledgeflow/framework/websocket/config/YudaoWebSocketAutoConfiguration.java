@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.websocket.config;
+package cn.knowledgeflow.framework.websocket.config;
 
 import cn.knowledgeflow.framework.mq.redis.config.YudaoRedisMQConsumerAutoConfiguration;
 import cn.knowledgeflow.framework.mq.redis.core.RedisMQTemplate;

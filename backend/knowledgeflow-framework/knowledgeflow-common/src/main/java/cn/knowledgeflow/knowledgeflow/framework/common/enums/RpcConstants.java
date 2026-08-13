@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.common.enums;
+package cn.knowledgeflow.framework.common.enums;
 
 /**
  * RPC 相关的枚举

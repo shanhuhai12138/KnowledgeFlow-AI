@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.controller.admin.dept;
+package cn.knowledgeflow.module.system.controller.admin.dept;
 
 import cn.knowledgeflow.framework.apilog.core.annotation.ApiAccessLog;
 import cn.knowledgeflow.framework.common.enums.CommonStatusEnum;

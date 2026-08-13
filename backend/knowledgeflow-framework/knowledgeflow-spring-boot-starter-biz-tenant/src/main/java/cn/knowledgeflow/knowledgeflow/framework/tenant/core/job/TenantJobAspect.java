@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.tenant.core.job;
+package cn.knowledgeflow.framework.tenant.core.job;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.exceptions.ExceptionUtil;

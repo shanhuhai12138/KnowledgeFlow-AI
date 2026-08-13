@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.security.config;
+package cn.knowledgeflow.framework.security.config;
 
 import cn.knowledgeflow.framework.common.biz.system.oauth2.OAuth2TokenCommonApi;
 import cn.knowledgeflow.framework.common.biz.system.permission.PermissionCommonApi;

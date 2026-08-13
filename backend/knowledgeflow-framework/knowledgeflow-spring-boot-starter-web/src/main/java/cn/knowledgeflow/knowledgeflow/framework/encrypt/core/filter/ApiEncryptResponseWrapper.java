@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.encrypt.core.filter;
+package cn.knowledgeflow.framework.encrypt.core.filter;
 
 import cn.hutool.crypto.asymmetric.AsymmetricEncryptor;
 import cn.hutool.crypto.asymmetric.KeyType;

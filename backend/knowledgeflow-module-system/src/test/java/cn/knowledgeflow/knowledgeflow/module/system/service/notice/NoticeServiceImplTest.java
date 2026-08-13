@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.service.notice;
+package cn.knowledgeflow.module.system.service.notice;
 
 import cn.knowledgeflow.framework.common.enums.CommonStatusEnum;
 import cn.knowledgeflow.framework.common.pojo.PageResult;

@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.datapermission.core.rule;
+package cn.knowledgeflow.framework.datapermission.core.rule;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.datapermission.core.rule.dept;
+package cn.knowledgeflow.framework.datapermission.core.rule.dept;
 
 /**
  * {@link DeptDataPermissionRule} 的自定义配置接口

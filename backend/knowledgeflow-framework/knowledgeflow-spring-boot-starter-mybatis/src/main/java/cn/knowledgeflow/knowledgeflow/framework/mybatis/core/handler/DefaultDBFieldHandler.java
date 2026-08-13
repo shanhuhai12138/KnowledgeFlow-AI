@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.mybatis.core.handler;
+package cn.knowledgeflow.framework.mybatis.core.handler;
 
 import cn.knowledgeflow.framework.mybatis.core.dataobject.BaseDO;
 import cn.knowledgeflow.framework.security.core.util.SecurityFrameworkUtils;

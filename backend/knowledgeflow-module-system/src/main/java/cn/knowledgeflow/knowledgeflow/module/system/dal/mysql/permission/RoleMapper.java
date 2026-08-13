@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.dal.mysql.permission;
+package cn.knowledgeflow.module.system.dal.mysql.permission;
 
 import cn.knowledgeflow.framework.common.pojo.PageResult;
 import cn.knowledgeflow.framework.mybatis.core.dataobject.BaseDO;

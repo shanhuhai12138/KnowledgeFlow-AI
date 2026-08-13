@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.tracer.core.aop;
+package cn.knowledgeflow.framework.tracer.core.aop;
 
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.StrUtil;

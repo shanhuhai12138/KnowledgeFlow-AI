@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.dal.dataobject.oauth2;
+package cn.knowledgeflow.module.system.dal.dataobject.oauth2;
 
 import cn.knowledgeflow.framework.common.enums.UserTypeEnum;
 import cn.knowledgeflow.framework.tenant.core.db.TenantBaseDO;

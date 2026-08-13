@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.enums;
+package cn.knowledgeflow.module.infra.enums;
 
 import cn.knowledgeflow.framework.common.exception.ErrorCode;
 

@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.service.tenant.handler;
+package cn.knowledgeflow.module.system.service.tenant.handler;
 
 import java.util.Set;
 

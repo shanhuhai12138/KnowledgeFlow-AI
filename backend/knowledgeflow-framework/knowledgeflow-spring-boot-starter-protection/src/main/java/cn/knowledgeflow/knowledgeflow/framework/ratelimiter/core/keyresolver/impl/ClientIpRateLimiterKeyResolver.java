@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.ratelimiter.core.keyresolver.impl;
+package cn.knowledgeflow.framework.ratelimiter.core.keyresolver.impl;
 
 import cn.hutool.crypto.SecureUtil;
 import cn.knowledgeflow.framework.common.util.servlet.ServletUtils;

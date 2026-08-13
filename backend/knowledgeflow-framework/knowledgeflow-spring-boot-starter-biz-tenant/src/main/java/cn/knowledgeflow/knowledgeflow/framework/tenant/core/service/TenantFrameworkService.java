@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.tenant.core.service;
+package cn.knowledgeflow.framework.tenant.core.service;
 
 import java.util.List;
 

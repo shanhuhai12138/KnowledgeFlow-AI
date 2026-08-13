@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.service.tenant;
+package cn.knowledgeflow.module.system.service.tenant;
 
 import cn.knowledgeflow.framework.common.pojo.PageResult;
 import cn.knowledgeflow.module.system.controller.admin.tenant.vo.packages.TenantPackagePageReqVO;

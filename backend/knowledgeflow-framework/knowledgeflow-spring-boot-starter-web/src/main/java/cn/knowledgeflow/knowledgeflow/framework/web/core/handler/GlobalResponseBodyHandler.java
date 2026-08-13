@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.web.core.handler;
+package cn.knowledgeflow.framework.web.core.handler;
 
 import cn.knowledgeflow.framework.common.pojo.CommonResult;
 import cn.knowledgeflow.framework.web.core.util.WebFrameworkUtils;

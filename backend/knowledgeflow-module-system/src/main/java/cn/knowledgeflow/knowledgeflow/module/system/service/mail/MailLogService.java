@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.service.mail;
+package cn.knowledgeflow.module.system.service.mail;
 
 import cn.knowledgeflow.framework.common.pojo.PageResult;
 import cn.knowledgeflow.module.system.controller.admin.mail.vo.log.MailLogPageReqVO;

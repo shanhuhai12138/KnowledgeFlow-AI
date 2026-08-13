@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.service.notice;
+package cn.knowledgeflow.module.system.service.notice;
 
 import cn.knowledgeflow.framework.common.pojo.PageResult;
 import cn.knowledgeflow.framework.common.util.object.BeanUtils;

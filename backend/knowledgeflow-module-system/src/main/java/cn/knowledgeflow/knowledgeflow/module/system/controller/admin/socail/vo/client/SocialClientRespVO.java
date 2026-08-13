@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.controller.admin.socail.vo.client;
+package cn.knowledgeflow.module.system.controller.admin.socail.vo.client;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;

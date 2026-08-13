@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.quartz.core.scheduler;
+package cn.knowledgeflow.framework.quartz.core.scheduler;
 
 import cn.knowledgeflow.framework.quartz.core.enums.JobDataKeyEnum;
 import cn.knowledgeflow.framework.quartz.core.handler.JobHandlerInvoker;

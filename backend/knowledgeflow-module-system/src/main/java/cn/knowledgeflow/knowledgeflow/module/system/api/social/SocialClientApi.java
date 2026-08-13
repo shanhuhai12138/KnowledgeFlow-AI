@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.api.social;
+package cn.knowledgeflow.module.system.api.social;
 
 import cn.knowledgeflow.module.system.api.social.dto.*;
 import cn.knowledgeflow.module.system.enums.social.SocialTypeEnum;

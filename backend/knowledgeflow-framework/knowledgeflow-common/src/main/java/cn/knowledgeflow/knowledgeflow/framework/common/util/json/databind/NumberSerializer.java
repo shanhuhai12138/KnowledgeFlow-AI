@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.common.util.json.databind;
+package cn.knowledgeflow.framework.common.util.json.databind;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;

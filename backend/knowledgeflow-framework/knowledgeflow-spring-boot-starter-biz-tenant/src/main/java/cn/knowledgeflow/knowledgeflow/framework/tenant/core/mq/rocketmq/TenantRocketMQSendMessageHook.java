@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.tenant.core.mq.rocketmq;
+package cn.knowledgeflow.framework.tenant.core.mq.rocketmq;
 
 import cn.knowledgeflow.framework.tenant.core.context.TenantContextHolder;
 import org.apache.rocketmq.client.hook.SendMessageContext;

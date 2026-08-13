@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.service.permission;
+package cn.knowledgeflow.module.system.service.permission;
 
 import cn.knowledgeflow.module.system.controller.admin.permission.vo.menu.MenuListReqVO;
 import cn.knowledgeflow.module.system.controller.admin.permission.vo.menu.MenuSaveVO;

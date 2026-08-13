@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.datapermission.core.util;
+package cn.knowledgeflow.framework.datapermission.core.util;
 
 import cn.knowledgeflow.framework.datapermission.core.annotation.DataPermission;
 import cn.knowledgeflow.framework.datapermission.core.aop.DataPermissionContextHolder;

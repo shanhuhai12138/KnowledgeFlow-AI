@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.tenant.core.mq.redis;
+package cn.knowledgeflow.framework.tenant.core.mq.redis;
 
 import cn.hutool.core.util.StrUtil;
 import cn.knowledgeflow.framework.mq.redis.core.interceptor.RedisMessageInterceptor;

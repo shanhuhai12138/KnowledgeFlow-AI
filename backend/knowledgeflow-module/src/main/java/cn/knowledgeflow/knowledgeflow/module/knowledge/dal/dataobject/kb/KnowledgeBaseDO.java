@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.knowledge.dal.dataobject.kb;
+package cn.knowledgeflow.module.knowledge.dal.dataobject.kb;
 
 import cn.knowledgeflow.framework.tenant.core.db.TenantBaseDO;
 import com.baomidou.mybatisplus.annotation.KeySequence;

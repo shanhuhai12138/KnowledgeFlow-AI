@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.controller.admin.dict;
+package cn.knowledgeflow.module.system.controller.admin.dict;
 
 import cn.knowledgeflow.framework.apilog.core.annotation.ApiAccessLog;
 import cn.knowledgeflow.framework.common.pojo.CommonResult;

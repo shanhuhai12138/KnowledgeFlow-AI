@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.service.demo.demo03.normal;
+package cn.knowledgeflow.module.infra.service.demo.demo03.normal;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ObjectUtil;

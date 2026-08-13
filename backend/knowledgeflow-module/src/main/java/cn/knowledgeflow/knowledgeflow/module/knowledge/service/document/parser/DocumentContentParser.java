@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.knowledge.service.document.parser;
+package cn.knowledgeflow.module.knowledge.service.document.parser;
 
 import cn.hutool.core.io.IoUtil;
 import lombok.extern.slf4j.Slf4j;

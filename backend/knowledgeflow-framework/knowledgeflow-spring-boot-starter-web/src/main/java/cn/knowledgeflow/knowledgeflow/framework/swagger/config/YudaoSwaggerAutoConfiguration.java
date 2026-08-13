@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.swagger.config;
+package cn.knowledgeflow.framework.swagger.config;
 
 import com.github.xiaoymin.knife4j.spring.configuration.Knife4jAutoConfiguration;
 import io.swagger.v3.oas.models.Components;

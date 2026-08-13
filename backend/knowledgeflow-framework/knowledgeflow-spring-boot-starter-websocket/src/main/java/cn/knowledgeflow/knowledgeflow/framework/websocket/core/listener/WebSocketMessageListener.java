@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.websocket.core.listener;
+package cn.knowledgeflow.framework.websocket.core.listener;
 
 import cn.knowledgeflow.framework.websocket.core.message.JsonWebSocketMessage;
 import org.springframework.web.socket.WebSocketSession;

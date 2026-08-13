@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.websocket.core.security;
+package cn.knowledgeflow.framework.websocket.core.security;
 
 import cn.knowledgeflow.framework.security.config.AuthorizeRequestsCustomizer;
 import cn.knowledgeflow.framework.websocket.config.WebSocketProperties;

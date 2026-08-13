@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.service.config;
+package cn.knowledgeflow.module.infra.service.config;
 
 import cn.knowledgeflow.framework.common.pojo.PageResult;
 import cn.knowledgeflow.framework.common.util.collection.ArrayUtils;

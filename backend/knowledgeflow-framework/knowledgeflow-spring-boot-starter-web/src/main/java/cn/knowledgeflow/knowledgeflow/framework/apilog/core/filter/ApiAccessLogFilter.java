@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.apilog.core.filter;
+package cn.knowledgeflow.framework.apilog.core.filter;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.date.LocalDateTimeUtil;

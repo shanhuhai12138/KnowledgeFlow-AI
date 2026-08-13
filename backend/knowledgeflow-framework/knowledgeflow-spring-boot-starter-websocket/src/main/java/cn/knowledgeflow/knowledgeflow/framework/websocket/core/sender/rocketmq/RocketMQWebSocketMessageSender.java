@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.websocket.core.sender.rocketmq;
+package cn.knowledgeflow.framework.websocket.core.sender.rocketmq;
 
 import cn.knowledgeflow.framework.websocket.core.sender.AbstractWebSocketMessageSender;
 import cn.knowledgeflow.framework.websocket.core.sender.WebSocketMessageSender;

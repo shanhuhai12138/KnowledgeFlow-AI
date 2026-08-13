@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.ratelimiter.core.aop;
+package cn.knowledgeflow.framework.ratelimiter.core.aop;
 
 import cn.hutool.core.util.StrUtil;
 import cn.knowledgeflow.framework.common.exception.ServiceException;

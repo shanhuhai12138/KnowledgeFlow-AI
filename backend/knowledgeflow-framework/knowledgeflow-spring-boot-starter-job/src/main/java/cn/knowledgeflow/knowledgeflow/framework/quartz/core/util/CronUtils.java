@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.quartz.core.util;
+package cn.knowledgeflow.framework.quartz.core.util;
 
 import cn.hutool.core.date.LocalDateTimeUtil;
 import org.quartz.CronExpression;

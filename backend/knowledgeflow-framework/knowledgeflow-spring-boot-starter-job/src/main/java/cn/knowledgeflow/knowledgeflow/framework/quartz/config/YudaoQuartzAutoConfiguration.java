@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.quartz.config;
+package cn.knowledgeflow.framework.quartz.config;
 
 import cn.knowledgeflow.framework.quartz.core.scheduler.SchedulerManager;
 import lombok.extern.slf4j.Slf4j;

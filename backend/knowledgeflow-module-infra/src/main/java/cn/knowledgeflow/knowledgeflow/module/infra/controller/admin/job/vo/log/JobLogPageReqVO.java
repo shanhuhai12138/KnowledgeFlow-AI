@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.controller.admin.job.vo.log;
+package cn.knowledgeflow.module.infra.controller.admin.job.vo.log;
 
 import cn.knowledgeflow.framework.common.pojo.PageParam;
 import io.swagger.v3.oas.annotations.media.Schema;

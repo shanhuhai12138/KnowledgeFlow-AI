@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.knowledge.dal.dataobject.kb;
+package cn.knowledgeflow.module.knowledge.dal.dataobject.kb;
 
 import cn.knowledgeflow.framework.tenant.core.db.TenantBaseDO;
 import cn.knowledgeflow.module.knowledge.enums.kb.KnowledgeBaseMemberRoleEnum;

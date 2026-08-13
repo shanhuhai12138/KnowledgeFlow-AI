@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.dal.dataobject.dept;
+package cn.knowledgeflow.module.system.dal.dataobject.dept;
 
 import cn.knowledgeflow.framework.mybatis.core.dataobject.BaseDO;
 import cn.knowledgeflow.module.system.dal.dataobject.user.AdminUserDO;

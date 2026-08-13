@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.swagger.config;
+package cn.knowledgeflow.framework.swagger.config;
 
 import com.github.xiaoymin.knife4j.annotations.ApiSupport;
 import com.github.xiaoymin.knife4j.core.conf.ExtensionsConstants;

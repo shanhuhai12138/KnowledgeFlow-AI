@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.dict.config;
+package cn.knowledgeflow.framework.dict.config;
 
 import cn.knowledgeflow.framework.common.biz.system.dict.DictDataCommonApi;
 import cn.knowledgeflow.framework.dict.core.DictFrameworkUtils;

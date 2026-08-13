@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.mq.redis.core.message;
+package cn.knowledgeflow.framework.mq.redis.core.message;
 
 import lombok.Data;
 

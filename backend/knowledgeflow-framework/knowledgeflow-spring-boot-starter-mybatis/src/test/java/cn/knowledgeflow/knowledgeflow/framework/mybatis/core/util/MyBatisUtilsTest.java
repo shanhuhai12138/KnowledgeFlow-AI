@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.mybatis.core.util;
+package cn.knowledgeflow.framework.mybatis.core.util;
 
 import cn.knowledgeflow.framework.common.pojo.PageParam;
 import cn.knowledgeflow.framework.common.pojo.SortingField;

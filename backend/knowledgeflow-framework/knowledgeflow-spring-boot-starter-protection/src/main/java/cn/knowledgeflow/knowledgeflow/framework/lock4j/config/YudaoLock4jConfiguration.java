@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.lock4j.config;
+package cn.knowledgeflow.framework.lock4j.config;
 
 import cn.knowledgeflow.framework.lock4j.core.DefaultLockFailureStrategy;
 import com.baomidou.lock.spring.boot.autoconfigure.LockAutoConfiguration;

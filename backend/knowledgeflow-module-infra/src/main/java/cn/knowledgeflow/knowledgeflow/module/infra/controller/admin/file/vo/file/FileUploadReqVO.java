@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.controller.admin.file.vo.file;
+package cn.knowledgeflow.module.infra.controller.admin.file.vo.file;
 
 import cn.knowledgeflow.module.infra.framework.file.core.utils.FilePathUtils;
 import com.fasterxml.jackson.annotation.JsonIgnore;

@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.test.config;
+package cn.knowledgeflow.framework.test.config;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;

@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.framework.weixin.config;
+package cn.knowledgeflow.module.system.framework.weixin.config;
 
 import cn.binarywang.wx.miniapp.config.WxMaConfig;
 import cn.binarywang.wx.miniapp.config.impl.WxMaDefaultConfigImpl;

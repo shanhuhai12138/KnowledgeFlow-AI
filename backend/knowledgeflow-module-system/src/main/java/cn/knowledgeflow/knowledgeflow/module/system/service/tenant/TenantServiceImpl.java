@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.service.tenant;
+package cn.knowledgeflow.module.system.service.tenant;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.lang.Assert;

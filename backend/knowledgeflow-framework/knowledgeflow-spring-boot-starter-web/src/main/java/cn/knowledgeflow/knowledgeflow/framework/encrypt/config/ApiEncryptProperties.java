@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.encrypt.config;
+package cn.knowledgeflow.framework.encrypt.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

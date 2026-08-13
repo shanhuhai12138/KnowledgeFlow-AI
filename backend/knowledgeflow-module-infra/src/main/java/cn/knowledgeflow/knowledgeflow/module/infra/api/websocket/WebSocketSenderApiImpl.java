@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.api.websocket;
+package cn.knowledgeflow.module.infra.api.websocket;
 
 import cn.knowledgeflow.framework.websocket.core.sender.WebSocketMessageSender;
 import org.springframework.beans.factory.annotation.Autowired;

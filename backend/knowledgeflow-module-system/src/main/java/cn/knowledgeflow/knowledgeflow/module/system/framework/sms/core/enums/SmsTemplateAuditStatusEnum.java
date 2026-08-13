@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.framework.sms.core.enums;
+package cn.knowledgeflow.module.system.framework.sms.core.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.framework.file.core.client.local;
+package cn.knowledgeflow.module.infra.framework.file.core.client.local;
 
 import cn.knowledgeflow.module.infra.framework.file.core.client.FileClientConfig;
 import lombok.Data;

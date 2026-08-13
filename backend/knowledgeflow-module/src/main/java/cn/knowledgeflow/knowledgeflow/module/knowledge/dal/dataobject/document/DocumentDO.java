@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.knowledge.dal.dataobject.document;
+package cn.knowledgeflow.module.knowledge.dal.dataobject.document;
 
 import cn.knowledgeflow.framework.tenant.core.db.TenantBaseDO;
 import cn.knowledgeflow.module.knowledge.enums.document.DocumentStatusEnum;

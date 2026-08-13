@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.controller.admin.redis;
+package cn.knowledgeflow.module.infra.controller.admin.redis;
 
 import cn.knowledgeflow.framework.common.pojo.CommonResult;
 import cn.knowledgeflow.module.infra.controller.admin.redis.vo.RedisMonitorRespVO;

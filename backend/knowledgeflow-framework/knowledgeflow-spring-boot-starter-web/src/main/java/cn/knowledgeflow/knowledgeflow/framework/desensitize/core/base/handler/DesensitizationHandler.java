@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.desensitize.core.base.handler;
+package cn.knowledgeflow.framework.desensitize.core.base.handler;
 
 import cn.hutool.core.util.ReflectUtil;
 

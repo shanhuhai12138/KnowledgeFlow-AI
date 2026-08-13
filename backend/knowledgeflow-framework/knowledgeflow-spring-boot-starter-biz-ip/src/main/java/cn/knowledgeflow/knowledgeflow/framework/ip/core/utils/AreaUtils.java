@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.ip.core.utils;
+package cn.knowledgeflow.framework.ip.core.utils;
 
 import cn.hutool.core.io.resource.ResourceUtil;
 import cn.hutool.core.lang.Assert;

@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.api.websocket;
+package cn.knowledgeflow.module.infra.api.websocket;
 
 import cn.knowledgeflow.framework.common.util.json.JsonUtils;
 

@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.dal.mysql.sms;
+package cn.knowledgeflow.module.system.dal.mysql.sms;
 
 import cn.knowledgeflow.framework.mybatis.core.mapper.BaseMapperX;
 import cn.knowledgeflow.framework.mybatis.core.query.QueryWrapperX;

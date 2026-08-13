@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.service.codegen;
+package cn.knowledgeflow.module.infra.service.codegen;
 
 import cn.knowledgeflow.framework.common.pojo.PageResult;
 import cn.knowledgeflow.module.infra.controller.admin.codegen.vo.CodegenCreateListReqVO;

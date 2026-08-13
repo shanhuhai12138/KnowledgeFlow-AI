@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.websocket.core.sender.rocketmq;
+package cn.knowledgeflow.framework.websocket.core.sender.rocketmq;
 
 import lombok.RequiredArgsConstructor;
 import org.apache.rocketmq.spring.annotation.MessageModel;

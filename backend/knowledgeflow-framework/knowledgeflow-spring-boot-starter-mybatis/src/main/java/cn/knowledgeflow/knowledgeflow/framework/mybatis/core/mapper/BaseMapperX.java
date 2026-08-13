@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.mybatis.core.mapper;
+package cn.knowledgeflow.framework.mybatis.core.mapper;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.knowledgeflow.framework.common.pojo.PageParam;

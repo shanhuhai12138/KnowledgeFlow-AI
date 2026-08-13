@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.knowledge.framework.ai;
+package cn.knowledgeflow.module.knowledge.framework.ai;
 
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;

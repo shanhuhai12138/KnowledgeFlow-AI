@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.controller.admin.job.vo.job;
+package cn.knowledgeflow.module.infra.controller.admin.job.vo.job;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import javax.validation.constraints.NotEmpty;

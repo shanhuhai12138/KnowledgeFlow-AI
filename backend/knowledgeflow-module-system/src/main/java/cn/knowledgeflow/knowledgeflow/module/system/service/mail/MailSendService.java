@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.service.mail;
+package cn.knowledgeflow.module.system.service.mail;
 
 import cn.knowledgeflow.framework.common.enums.UserTypeEnum;
 import cn.knowledgeflow.module.system.mq.message.mail.MailSendMessage;

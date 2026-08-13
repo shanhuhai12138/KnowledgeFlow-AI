@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.encrypt;
+package cn.knowledgeflow.framework.encrypt;
 
 import cn.hutool.core.util.RandomUtil;
 import cn.hutool.core.util.StrUtil;

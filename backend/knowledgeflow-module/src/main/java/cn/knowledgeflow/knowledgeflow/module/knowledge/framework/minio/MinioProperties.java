@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.knowledge.framework.minio;
+package cn.knowledgeflow.module.knowledge.framework.minio;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.common.util.object;
+package cn.knowledgeflow.framework.common.util.object;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.lang.func.Func1;

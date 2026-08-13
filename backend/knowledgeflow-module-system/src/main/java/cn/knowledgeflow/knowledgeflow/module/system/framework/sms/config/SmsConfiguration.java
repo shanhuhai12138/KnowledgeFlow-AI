@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.framework.sms.config;
+package cn.knowledgeflow.module.system.framework.sms.config;
 
 import cn.knowledgeflow.module.system.framework.sms.core.client.SmsClientFactory;
 import cn.knowledgeflow.module.system.framework.sms.core.client.impl.SmsClientFactoryImpl;

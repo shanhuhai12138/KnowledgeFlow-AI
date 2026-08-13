@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.common.util.spring;
+package cn.knowledgeflow.framework.common.util.spring;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.map.MapUtil;

@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.tracer.core.annotation;
+package cn.knowledgeflow.framework.tracer.core.annotation;
 
 import java.lang.annotation.*;
 

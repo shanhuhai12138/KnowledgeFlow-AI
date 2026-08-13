@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.datasource.config;
+package cn.knowledgeflow.framework.datasource.config;
 
 import cn.knowledgeflow.framework.datasource.core.filter.DruidAdRemoveFilter;
 import com.alibaba.druid.spring.boot.autoconfigure.properties.DruidStatProperties;

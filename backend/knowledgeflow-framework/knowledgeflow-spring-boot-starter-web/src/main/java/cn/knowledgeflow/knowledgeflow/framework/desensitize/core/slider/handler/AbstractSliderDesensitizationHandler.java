@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.desensitize.core.slider.handler;
+package cn.knowledgeflow.framework.desensitize.core.slider.handler;
 
 import cn.hutool.core.util.StrUtil;
 import cn.knowledgeflow.framework.common.util.spring.SpringExpressionUtils;

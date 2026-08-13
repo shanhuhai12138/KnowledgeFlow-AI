@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.knowledge.framework.aes;
+package cn.knowledgeflow.module.knowledge.framework.aes;
 
 import lombok.extern.slf4j.Slf4j;
 

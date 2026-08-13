@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.websocket.core.session;
+package cn.knowledgeflow.framework.websocket.core.session;
 
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.WebSocketHandler;

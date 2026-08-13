@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.knowledge.dal.mysql.document;
+package cn.knowledgeflow.module.knowledge.dal.mysql.document;
 
 import cn.knowledgeflow.framework.mybatis.core.mapper.BaseMapperX;
 import cn.knowledgeflow.module.knowledge.dal.dataobject.document.DocumentVersionDO;

@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.tenant.core.mq.rabbitmq;
+package cn.knowledgeflow.framework.tenant.core.mq.rabbitmq;
 
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.BeansException;

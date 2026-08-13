@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.controller.admin.codegen.vo;
+package cn.knowledgeflow.module.infra.controller.admin.codegen.vo;
 
 import cn.knowledgeflow.module.infra.controller.admin.codegen.vo.column.CodegenColumnRespVO;
 import cn.knowledgeflow.module.infra.controller.admin.codegen.vo.table.CodegenTableRespVO;

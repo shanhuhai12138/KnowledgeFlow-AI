@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.ip.core.enums;
+package cn.knowledgeflow.framework.ip.core.enums;
 
 import cn.knowledgeflow.framework.common.core.ArrayValuable;
 import lombok.AllArgsConstructor;

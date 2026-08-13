@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.service.logger;
+package cn.knowledgeflow.module.system.service.logger;
 
 import cn.knowledgeflow.framework.common.pojo.PageResult;
 import cn.knowledgeflow.framework.common.util.object.BeanUtils;

@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.security.core.context;
+package cn.knowledgeflow.framework.security.core.context;
 
 import com.alibaba.ttl.TransmittableThreadLocal;
 import org.springframework.security.core.context.SecurityContext;

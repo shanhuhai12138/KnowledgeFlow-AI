@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.dal.mysql.file;
+package cn.knowledgeflow.module.infra.dal.mysql.file;
 
 import cn.knowledgeflow.module.infra.dal.dataobject.file.FileContentDO;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;

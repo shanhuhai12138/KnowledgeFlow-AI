@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.tenant.core.service;
+package cn.knowledgeflow.framework.tenant.core.service;
 
 import cn.knowledgeflow.framework.common.biz.system.tenant.TenantCommonApi;
 import cn.knowledgeflow.framework.common.exception.ServiceException;

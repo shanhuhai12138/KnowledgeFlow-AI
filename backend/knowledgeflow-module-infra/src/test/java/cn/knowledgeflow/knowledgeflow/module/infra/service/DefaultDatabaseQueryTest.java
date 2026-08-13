@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.service;
+package cn.knowledgeflow.module.infra.service;
 
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.generator.query.DefaultQuery;

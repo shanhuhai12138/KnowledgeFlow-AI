@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.framework.security.config;
+package cn.knowledgeflow.module.infra.framework.security.config;
 
 import cn.knowledgeflow.framework.security.config.AuthorizeRequestsCustomizer;
 import org.springframework.context.annotation.Bean;

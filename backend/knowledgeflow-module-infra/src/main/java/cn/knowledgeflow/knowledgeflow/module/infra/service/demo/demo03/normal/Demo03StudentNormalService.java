@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.service.demo.demo03.normal;
+package cn.knowledgeflow.module.infra.service.demo.demo03.normal;
 
 import cn.knowledgeflow.framework.common.pojo.PageResult;
 import cn.knowledgeflow.module.infra.controller.admin.demo.demo03.normal.vo.Demo03StudentNormalPageReqVO;

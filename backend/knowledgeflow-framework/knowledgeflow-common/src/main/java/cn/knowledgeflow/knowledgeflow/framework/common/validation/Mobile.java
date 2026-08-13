@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.common.validation;
+package cn.knowledgeflow.framework.common.validation;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

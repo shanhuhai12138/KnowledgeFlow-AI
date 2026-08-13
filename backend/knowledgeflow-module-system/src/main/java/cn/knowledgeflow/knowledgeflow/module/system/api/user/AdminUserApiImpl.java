@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.api.user;
+package cn.knowledgeflow.module.system.api.user;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ObjUtil;

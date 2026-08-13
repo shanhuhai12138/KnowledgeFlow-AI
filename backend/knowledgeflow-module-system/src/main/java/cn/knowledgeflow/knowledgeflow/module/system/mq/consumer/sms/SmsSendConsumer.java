@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.mq.consumer.sms;
+package cn.knowledgeflow.module.system.mq.consumer.sms;
 
 import cn.knowledgeflow.module.system.mq.message.sms.SmsSendMessage;
 import cn.knowledgeflow.module.system.service.sms.SmsSendService;

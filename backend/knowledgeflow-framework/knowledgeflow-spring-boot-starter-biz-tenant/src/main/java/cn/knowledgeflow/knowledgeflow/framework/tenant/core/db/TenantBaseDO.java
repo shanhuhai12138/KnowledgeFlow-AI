@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.tenant.core.db;
+package cn.knowledgeflow.framework.tenant.core.db;
 
 import cn.knowledgeflow.framework.mybatis.core.dataobject.BaseDO;
 import lombok.Data;

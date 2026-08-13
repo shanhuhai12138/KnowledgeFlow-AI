@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.knowledge.service.aiconfig;
+package cn.knowledgeflow.module.knowledge.service.aiconfig;
 
 import cn.knowledgeflow.module.knowledge.controller.admin.aiconfig.vo.AiConfigRespVO;
 import cn.knowledgeflow.module.knowledge.controller.admin.aiconfig.vo.AiConfigSaveReqVO;

@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.common.exception;
+package cn.knowledgeflow.framework.common.exception;
 
 import cn.knowledgeflow.framework.common.exception.enums.GlobalErrorCodeConstants;
 import cn.knowledgeflow.framework.common.exception.enums.ServiceErrorCodeRange;

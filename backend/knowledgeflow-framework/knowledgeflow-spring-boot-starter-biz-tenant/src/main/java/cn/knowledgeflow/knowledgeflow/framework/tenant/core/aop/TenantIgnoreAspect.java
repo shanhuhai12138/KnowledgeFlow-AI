@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.tenant.core.aop;
+package cn.knowledgeflow.framework.tenant.core.aop;
 
 import cn.knowledgeflow.framework.common.util.spring.SpringExpressionUtils;
 import cn.knowledgeflow.framework.tenant.core.context.TenantContextHolder;

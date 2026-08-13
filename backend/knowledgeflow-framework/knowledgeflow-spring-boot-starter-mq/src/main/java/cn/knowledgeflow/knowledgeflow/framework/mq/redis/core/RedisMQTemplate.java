@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.mq.redis.core;
+package cn.knowledgeflow.framework.mq.redis.core;
 
 import cn.knowledgeflow.framework.common.util.json.JsonUtils;
 import cn.knowledgeflow.framework.mq.redis.core.interceptor.RedisMessageInterceptor;

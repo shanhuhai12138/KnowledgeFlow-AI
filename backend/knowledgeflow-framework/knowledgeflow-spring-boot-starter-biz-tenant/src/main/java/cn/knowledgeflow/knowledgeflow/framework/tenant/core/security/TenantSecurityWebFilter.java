@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.tenant.core.security;
+package cn.knowledgeflow.framework.tenant.core.security;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.knowledgeflow.framework.common.exception.enums.GlobalErrorCodeConstants;

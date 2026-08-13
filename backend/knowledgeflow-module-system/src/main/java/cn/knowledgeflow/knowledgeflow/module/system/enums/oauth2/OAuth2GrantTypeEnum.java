@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.enums.oauth2;
+package cn.knowledgeflow.module.system.enums.oauth2;
 
 import cn.hutool.core.util.ArrayUtil;
 import lombok.AllArgsConstructor;

@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.api.mail;
+package cn.knowledgeflow.module.system.api.mail;
 
 import cn.knowledgeflow.module.system.api.mail.dto.MailSendSingleToUserReqDTO;
 import cn.knowledgeflow.module.system.service.mail.MailSendService;

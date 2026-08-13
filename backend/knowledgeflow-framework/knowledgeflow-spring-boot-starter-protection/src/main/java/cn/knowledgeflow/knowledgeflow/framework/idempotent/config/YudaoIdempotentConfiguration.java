@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.idempotent.config;
+package cn.knowledgeflow.framework.idempotent.config;
 
 import cn.knowledgeflow.framework.idempotent.core.aop.IdempotentAspect;
 import cn.knowledgeflow.framework.idempotent.core.keyresolver.impl.DefaultIdempotentKeyResolver;

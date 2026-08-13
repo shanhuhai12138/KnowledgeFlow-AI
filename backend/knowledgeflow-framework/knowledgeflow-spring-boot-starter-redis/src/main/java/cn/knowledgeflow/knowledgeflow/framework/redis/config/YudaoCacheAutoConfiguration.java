@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.redis.config;
+package cn.knowledgeflow.framework.redis.config;
 
 import cn.hutool.core.util.StrUtil;
 import cn.knowledgeflow.framework.redis.core.TimeoutRedisCacheManager;

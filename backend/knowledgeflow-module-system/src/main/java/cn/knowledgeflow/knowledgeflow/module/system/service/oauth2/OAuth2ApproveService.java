@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.service.oauth2;
+package cn.knowledgeflow.module.system.service.oauth2;
 
 import cn.knowledgeflow.module.system.dal.dataobject.oauth2.OAuth2ApproveDO;
 

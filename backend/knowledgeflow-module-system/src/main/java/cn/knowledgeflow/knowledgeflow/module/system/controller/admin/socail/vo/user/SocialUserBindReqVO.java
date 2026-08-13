@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.controller.admin.socail.vo.user;
+package cn.knowledgeflow.module.system.controller.admin.socail.vo.user;
 
 import cn.knowledgeflow.module.system.enums.social.SocialTypeEnum;
 import cn.knowledgeflow.framework.common.validation.InEnum;

@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.dict.core;
+package cn.knowledgeflow.framework.dict.core;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.knowledgeflow.framework.common.biz.system.dict.DictDataCommonApi;

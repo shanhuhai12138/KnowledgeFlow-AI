@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.websocket.core.sender.kafka;
+package cn.knowledgeflow.framework.websocket.core.sender.kafka;
 
 import cn.knowledgeflow.framework.websocket.core.sender.AbstractWebSocketMessageSender;
 import cn.knowledgeflow.framework.websocket.core.sender.WebSocketMessageSender;

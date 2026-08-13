@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.ratelimiter.core.annotation;
+package cn.knowledgeflow.framework.ratelimiter.core.annotation;
 
 import cn.knowledgeflow.framework.common.exception.enums.GlobalErrorCodeConstants;
 import cn.knowledgeflow.framework.idempotent.core.keyresolver.impl.ExpressionIdempotentKeyResolver;

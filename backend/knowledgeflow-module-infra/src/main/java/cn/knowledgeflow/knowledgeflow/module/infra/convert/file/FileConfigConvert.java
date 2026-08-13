@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.convert.file;
+package cn.knowledgeflow.module.infra.convert.file;
 
 import cn.knowledgeflow.module.infra.controller.admin.file.vo.config.FileConfigSaveReqVO;
 import cn.knowledgeflow.module.infra.dal.dataobject.file.FileConfigDO;

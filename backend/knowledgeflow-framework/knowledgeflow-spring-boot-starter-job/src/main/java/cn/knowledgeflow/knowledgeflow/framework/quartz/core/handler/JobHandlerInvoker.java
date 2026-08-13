@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.quartz.core.handler;
+package cn.knowledgeflow.framework.quartz.core.handler;
 
 import cn.hutool.core.date.LocalDateTimeUtil;
 import cn.hutool.core.lang.Assert;

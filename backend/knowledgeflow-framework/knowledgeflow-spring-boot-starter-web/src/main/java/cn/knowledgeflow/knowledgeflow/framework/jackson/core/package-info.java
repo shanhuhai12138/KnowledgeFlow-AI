@@ -1,1 +1,1 @@
-﻿package cn.knowledgeflow.framework.jackson.core;
+package cn.knowledgeflow.framework.jackson.core;

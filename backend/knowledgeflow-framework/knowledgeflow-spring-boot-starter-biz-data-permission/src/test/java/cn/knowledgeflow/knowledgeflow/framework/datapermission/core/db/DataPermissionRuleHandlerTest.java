@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.datapermission.core.db;
+package cn.knowledgeflow.framework.datapermission.core.db;
 
 import cn.knowledgeflow.framework.datapermission.core.rule.DataPermissionRule;
 import cn.knowledgeflow.framework.datapermission.core.rule.DataPermissionRuleFactory;

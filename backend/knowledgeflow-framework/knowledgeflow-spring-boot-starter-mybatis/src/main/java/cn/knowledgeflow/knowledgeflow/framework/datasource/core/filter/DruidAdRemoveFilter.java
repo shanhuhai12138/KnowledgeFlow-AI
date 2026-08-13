@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.datasource.core.filter;
+package cn.knowledgeflow.framework.datasource.core.filter;
 
 import com.alibaba.druid.util.Utils;
 import org.springframework.web.filter.OncePerRequestFilter;

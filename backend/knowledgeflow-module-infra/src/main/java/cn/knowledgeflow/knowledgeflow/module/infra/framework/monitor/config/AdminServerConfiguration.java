@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.framework.monitor.config;
+package cn.knowledgeflow.module.infra.framework.monitor.config;
 
 import de.codecentric.boot.admin.server.config.EnableAdminServer;
 import org.springframework.beans.factory.annotation.Value;

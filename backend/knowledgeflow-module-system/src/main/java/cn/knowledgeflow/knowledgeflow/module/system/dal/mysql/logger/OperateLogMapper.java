@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.dal.mysql.logger;
+package cn.knowledgeflow.module.system.dal.mysql.logger;
 
 import cn.knowledgeflow.framework.common.pojo.PageResult;
 import cn.knowledgeflow.framework.mybatis.core.mapper.BaseMapperX;

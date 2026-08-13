@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.dal.dataobject.mail;
+package cn.knowledgeflow.module.system.dal.dataobject.mail;
 
 import cn.knowledgeflow.framework.common.enums.UserTypeEnum;
 import cn.knowledgeflow.framework.mybatis.core.dataobject.BaseDO;

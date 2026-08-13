@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.framework.sms.config;
+package cn.knowledgeflow.module.system.framework.sms.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

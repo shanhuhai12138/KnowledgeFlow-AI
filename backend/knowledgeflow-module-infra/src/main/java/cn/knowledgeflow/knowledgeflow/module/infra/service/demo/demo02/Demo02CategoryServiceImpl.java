@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.service.demo.demo02;
+package cn.knowledgeflow.module.infra.service.demo.demo02;
 
 import cn.knowledgeflow.framework.common.util.object.BeanUtils;
 import cn.knowledgeflow.module.infra.controller.admin.demo.demo02.vo.Demo02CategoryListReqVO;

@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.dal.mysql.mail;
+package cn.knowledgeflow.module.system.dal.mysql.mail;
 
 import cn.knowledgeflow.framework.common.pojo.PageResult;
 import cn.knowledgeflow.framework.mybatis.core.mapper.BaseMapperX;

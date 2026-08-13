@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.infra.controller.admin.demo.demo03.normal.vo;
+package cn.knowledgeflow.module.infra.controller.admin.demo.demo03.normal.vo;
 
 import cn.knowledgeflow.module.infra.dal.dataobject.demo.demo03.Demo03CourseDO;
 import cn.knowledgeflow.module.infra.dal.dataobject.demo.demo03.Demo03GradeDO;

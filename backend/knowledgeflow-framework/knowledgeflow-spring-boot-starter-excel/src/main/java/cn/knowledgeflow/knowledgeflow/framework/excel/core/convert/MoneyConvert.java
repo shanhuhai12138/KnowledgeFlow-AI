@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.framework.excel.core.convert;
+package cn.knowledgeflow.framework.excel.core.convert;
 
 import cn.idev.excel.converters.Converter;
 import cn.idev.excel.enums.CellDataTypeEnum;

@@ -1,4 +1,4 @@
-﻿package cn.knowledgeflow.module.system.api.social;
+package cn.knowledgeflow.module.system.api.social;
 
 import cn.binarywang.wx.miniapp.bean.WxMaPhoneNumberInfo;
 import cn.hutool.core.collection.CollUtil;
