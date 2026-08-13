@@ -266,6 +266,7 @@ onMounted(loadAll)
           </svg>
           {{ exporting ? '导出中…' : '导出报表' }}
         </button>
+      </div>
     </div>
 
     <!-- 统计卡（深色带 + 数字滚动） -->
