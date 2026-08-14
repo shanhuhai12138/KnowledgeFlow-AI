@@ -59,8 +59,5 @@ export function downloadUrl(id: number) {
 
 /** 获取文档内容（预览）：GET /admin-api/knowledge/document/content?id= */
 export function getContentApi(id: number) {
-  return request.get<unknown, { code: number; data: { content: string; fileType: string } }>(
-    '/admin-api/knowledge/document/content',
-    { params: { id } }
-  )
+  return request.get<unknown, string>('/admin-api/knowledge/document/content', { params: { id } })
 }

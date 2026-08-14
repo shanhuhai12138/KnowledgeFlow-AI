@@ -269,8 +269,8 @@ async function openPreview(d: DocumentItem) {
   previewLoading.value = true
   try {
     const res = await getContentApi(d.id)
-    if (res?.code === 0 && res?.data) {
-      previewContent.value = res.data.content
+    if (res != null && res !== '') {
+      previewContent.value = res
     } else {
       previewError.value = '获取内容失败'
     }
