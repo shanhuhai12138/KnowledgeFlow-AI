@@ -11,7 +11,7 @@ export interface KnowledgeBase {
   isPrivate: boolean
   documentCount: number
   memberCount: number
-  ownerId?: number  // 所有者 ID（用于检测是否为 owner）
+  ownerId?: number  // 所有者 ID
   createdAt: string | number
   updatedAt: string | number
 }
