@@ -122,6 +122,17 @@ const userOptions = ref<Array<{ id: number; username: string; nickname: string }
 const userKeyword = ref('')
 const adding = ref(false)
 
+// 检查用户是否为知识库所有者
+function isOwner(userId: number): boolean {
+  return memberKb.value?.ownerId === userId
+}
+
+// 获取用户显示名称（nickname 优先，附带 username）
+function getUserDisplay(user: { id: number; username: string; nickname: string }): string {
+  const base = user.nickname || user.username
+  return isOwner(user.id) ? `${base} (所有者)` : base
+}
+
 async function loadUserMap() {
   try {
     const data = await getSystemUserPageApi({ pageNo: 1, pageSize: 200 })
@@ -167,6 +178,11 @@ async function loadMembers() {
 async function submitAddMember() {
   if (!memberKb.value || !addUserId.value) {
     ElMessage.warning('请选择用户')
+    return
+  }
+  // 检查是否为所有者
+  if (isOwner(addUserId.value)) {
+    ElMessage.warning('所有者已自动拥有管理权限，无需添加为成员')
     return
   }
   adding.value = true
@@ -353,16 +369,17 @@ onMounted(() => {
         <!-- 添加成员 -->
         <div v-if="addVisible" class="add-member">
           <div class="add-row">
-            <input v-model="userKeyword" class="form-input" placeholder="搜索用户名…" @input="searchUsers" />
+            <input v-model="userKeyword" class="form-input" placeholder="搜索用户名或昵称…" @input="searchUsers" />
             <div class="user-options">
               <button
                 v-for="u in userOptions"
                 :key="u.id"
                 class="user-option"
-                :class="{ selected: addUserId === u.id }"
+                :class="{ selected: addUserId === u.id, owner: isOwner(u.id) }"
                 @click="addUserId = u.id"
               >
-                {{ u.nickname || u.username }} <span class="user-sub">@{{ u.username }}</span>
+                {{ getUserDisplay(u) }}
+                <span class="user-sub">@{{ u.username }}{{ isOwner(u.id) ? ' · 所有者' : '' }}</span>
               </button>
               <div v-if="!userOptions.length" class="user-none">无匹配用户</div>
             </div>
@@ -677,6 +694,13 @@ onMounted(() => {
 .user-option:hover,
 .user-option.selected {
   background: rgba(33, 49, 56, 0.08);
+}
+.user-option.owner {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.user-option.owner:hover {
+  background: none;
 }
 .user-sub {
   color: var(--text-muted);
