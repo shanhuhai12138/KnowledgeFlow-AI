@@ -201,11 +201,43 @@ services:
     networks:
       - knowledgeflow
 
+  # Prometheus 指标采集
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: knowledgeflow-prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+    networks:
+      - knowledgeflow
+
+  # Grafana 可视化
+  grafana:
+    image: grafana/grafana:latest
+    container_name: knowledgeflow-grafana
+    ports:
+      - "3000:3000"
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_PASSWORD:-admin}
+    volumes:
+      - grafana_data:/var/lib/grafana
+    depends_on:
+      - prometheus
+    networks:
+      - knowledgeflow
+
 volumes:
   mysql_data:
   redis_data:
   minio_data:
   qdrant_data:
+  prometheus_data:
+  grafana_data:
 
 networks:
   knowledgeflow:
