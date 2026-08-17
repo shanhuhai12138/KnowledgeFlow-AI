@@ -11,9 +11,9 @@ export interface KnowledgeBase {
   isPrivate: boolean
   documentCount: number
   memberCount: number
-  /** 后端实测两种格式都有：毫秒时间戳(number) 或 ISO 字符串(string)，展示统一用 dayjs */
-  createdAt: number | string
-  updatedAt: number | string
+  ownerId?: number  // 所有者 ID（用于检测是否为 owner）
+  createdAt: string | number
+  updatedAt: string | number
 }
 
 /** 文档 Document */
