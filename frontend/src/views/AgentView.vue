@@ -418,6 +418,15 @@ async function startAgent() {
       () => handleAgentDone(),
     )
 
+    // 初始化空步骤，显示工作流框架
+    workflowSteps.value = [
+      { name: 'retrieve', label: '检索文档', status: 'waiting', output: '' },
+      { name: 'summarize', label: '生成摘要', status: 'waiting', output: '' },
+      { name: 'classify', label: '主题分类', status: 'waiting', output: '' },
+      { name: 'report_gate', label: '人工确认', status: 'waiting', output: '' },
+      { name: 'report', label: '生成报告', status: 'waiting', output: '' },
+    ]
+
   } catch (e: any) {
     error.value = e?.message || '启动失败'
     ElMessage.error(error.value)
@@ -465,6 +474,10 @@ function handleAgentEvent(event: any) {
     // done 事件可能包含报告
     if (event.report && currentRun.value) {
       currentRun.value.report = event.report
+    }
+    // done 时确保步骤已更新（如果后端在 done 事件中包含 steps）
+    if (event.steps && event.steps.length > 0) {
+      updateWorkflowSteps(event.steps)
     }
   }
 }

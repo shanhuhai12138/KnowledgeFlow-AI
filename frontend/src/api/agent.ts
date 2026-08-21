@@ -105,7 +105,10 @@ export function subscribeAgentEvents(
     onEvent(JSON.parse(e.data))
   })
 
-  eventSource.addEventListener('done', () => {
+  eventSource.addEventListener('done', (e: MessageEvent) => {
+    const data = JSON.parse(e.data)
+    // 传递 done 事件数据给 onEvent
+    onEvent({ type: 'done', ...data })
     eventSource.close()
     onDone?.()
   })
