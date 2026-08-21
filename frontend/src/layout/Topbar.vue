@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // 顶栏：面包屑 + 全局搜索 + 深浅色切换 + 通知 + 头像下拉（照任务书 T3.1）
-import { computed, onMounted, ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { ElDropdown, ElDropdownMenu, ElDropdownItem } from 'element-plus'
 import { useThemeStore } from '@/stores/theme'
@@ -11,16 +11,15 @@ const router = useRouter()
 const theme = useThemeStore()
 const auth = useAuthStore()
 
-const title = computed(() => (route.meta.title as string) || '智能问答')
 const searchText = ref('')
 
 // ---------- 导航菜单 ----------
 const menuItems = [
-  { key: 'chat', label: '智能问答', path: '/chat' },
-  { key: 'agent', label: 'Agent 工作流', path: '/agent' },
-  { key: 'documents', label: '文档管理', path: '/documents' },
-  { key: 'kb', label: '知识库', path: '/kb' },
-  { key: 'analytics', label: '分析看板', path: '/analytics' },
+  { key: 'chat', label: '问答', path: '/chat' },
+  { key: 'agent', label: 'Agent', path: '/agent' },
+  { key: 'documents', label: '文档', path: '/documents' },
+  { key: 'kb', label: '库', path: '/kb' },
+  { key: 'analytics', label: '看板', path: '/analytics' },
 ]
 
 function isActive(path: string) {
@@ -112,8 +111,6 @@ function onCommand(cmd: string) {
           {{ item.label }}
         </button>
       </div>
-      <!-- 面包屑 -->
-      <span>首页</span><span class="sep">/</span><span class="cur">{{ title }}</span>
     </nav>
     <div class="topbar-right">
       <div class="search-box">
@@ -187,12 +184,12 @@ function onCommand(cmd: string) {
 <style scoped>
 .topbar {
   position: relative;
-  height: var(--topbar-h);
+  height: 48px;
   border-bottom: 1px solid var(--line);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 32px;
+  padding: 0 24px;
   background: var(--paper);
   position: sticky;
   top: 0;
@@ -388,33 +385,41 @@ function onCommand(cmd: string) {
   display: flex;
   align-items: center;
   gap: 4px;
-  margin-right: 16px;
-  padding-right: 16px;
-  border-right: 1px solid var(--line);
+  margin-right: auto;
 }
 .top-nav-item {
-  padding: 6px 12px;
+  padding: 4px 12px;
   border: none;
   background: none;
   cursor: pointer;
   font-size: 13px;
   color: var(--text-muted);
-  border-radius: 6px;
+  border-radius: 4px;
   transition: all 0.2s;
+  position: relative;
 }
 .top-nav-item:hover {
-  background: color-mix(in oklab, var(--vermillion) 8%, transparent);
   color: var(--ink);
 }
 .top-nav-item.active {
-  background: var(--vermillion);
-  color: #fff;
+  color: var(--vermillion);
   font-weight: 500;
-}\n
+}
+.top-nav-item.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 2px;
+  background: var(--vermillion);
+  border-radius: 1px;
+}
 .topbar-right {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 8px;
 }
 .search-box {
   display: flex;
@@ -423,9 +428,9 @@ function onCommand(cmd: string) {
   background: var(--card);
   border: 1px solid var(--line);
   border-radius: var(--input-radius);
-  padding: 7px 12px;
+  padding: 6px 10px;
   color: var(--text-muted);
-  width: 220px;
+  width: 160px;
   transition: border-color 0.2s;
 }
 .search-box:focus-within {
@@ -437,7 +442,7 @@ function onCommand(cmd: string) {
   background: none;
   outline: none;
   flex: 1;
-  font-size: 13px;
+  font-size: 12px;
   color: var(--ink);
 }
 .search-input::placeholder {
@@ -445,21 +450,34 @@ function onCommand(cmd: string) {
 }
 .btn-icon.plain {
   border: none;
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  background: none;
+  cursor: pointer;
+  color: var(--text-muted);
+  transition: all 0.2s;
+}
+.btn-icon.plain:hover {
+  background: color-mix(in oklab, var(--vermillion) 8%, transparent);
+  color: var(--ink);
 }
 .avatar-btn {
-  width: 34px;
-  height: 34px;
+  width: 32px;
+  height: 32px;
   border-radius: 6px;
   background: var(--btn-solid);
   color: #fff;
   border: none;
   cursor: pointer;
   font-weight: 700;
-  font-size: 14px;
+  font-size: 13px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.2s;
 }
 .avatar-btn:hover {
   background: var(--btn-solid-2);

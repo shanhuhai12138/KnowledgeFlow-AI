@@ -40,7 +40,7 @@
 
   /* 布局尺寸 */
   --sidebar-w: 240px;
-  --topbar-h: 56px;
+  --topbar-h: 48px;
 
   /* ---- Element Plus 令牌桥接（保持生态组件视觉一致） ---- */
   --el-color-primary: var(--vermillion);
