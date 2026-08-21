@@ -2,33 +2,31 @@
   <div class="agent-page">
     <!-- 头部 -->
     <header class="agent-header">
-      <div class="header-left">
-        <h1 class="serif title">Agent 工作流</h1>
-        <p class="subtitle">基于 LangGraph 的智能文档分析，含人工确认节点</p>
+      <div>
+        <h1 class="serif page-title">Agent 工作流</h1>
+        <p class="page-subtitle">基于 LangGraph 的智能文档分析，含人工确认节点</p>
       </div>
-      <div class="header-right">
-        <el-tag :type="statusTagType" class="status-tag">{{ statusText }}</el-tag>
-      </div>
+      <el-tag v-if="currentRun" :type="statusTagType" class="status-tag">{{ statusText }}</el-tag>
     </header>
 
-    <!-- 主内容区 -->
-    <div class="agent-main">
+    <!-- 主内容 -->
+    <div class="agent-layout">
       <!-- 左侧：输入区 -->
-      <aside class="agent-input-panel">
-        <div class="panel-card">
-          <h3 class="panel-title">分析问题</h3>
+      <aside class="agent-sidebar">
+        <div class="card">
+          <h3 class="card-title">分析问题</h3>
           
           <!-- 知识库选择 -->
-          <div class="form-item">
-            <label>知识库</label>
+          <div class="form-group">
+            <label class="form-label">知识库</label>
             <el-select v-model="selectedKbId" placeholder="选择知识库" class="full-width" @change="onKbChange">
               <el-option v-for="kb in kbs" :key="kb.id" :label="kb.name" :value="kb.id" />
             </el-select>
           </div>
 
           <!-- 问题输入 -->
-          <div class="form-item">
-            <label>分析问题</label>
+          <div class="form-group">
+            <label class="form-label">分析问题</label>
             <textarea
               v-model="query"
               class="form-textarea"
@@ -38,23 +36,21 @@
           </div>
 
           <!-- 快捷问题 -->
-          <div class="form-item">
-            <label>快捷问题</label>
+          <div class="form-group">
+            <label class="form-label">快捷问题</label>
             <div class="quick-questions">
               <button
                 v-for="q in QUICK_QUESTIONS"
                 :key="q"
                 class="quick-btn"
                 @click="query = q"
-              >
-                {{ q }}
-              </button>
+              >{{ q }}</button>
             </div>
           </div>
 
           <!-- 启动按钮 -->
           <button
-            class="btn btn-primary btn-full"
+            class="btn btn-primary btn-block"
             :disabled="!canStart || isRunning"
             @click="startAgent"
           >
@@ -64,42 +60,44 @@
             {{ isRunning ? '运行中...' : '启动 Agent 工作流' }}
           </button>
 
-          <!-- 运行状态 -->
-          <div v-if="currentRun" class="run-status">
-            <div class="run-id">
-              运行 ID: <code>{{ currentRun.runId }}</code>
+          <!-- 运行信息 -->
+          <div v-if="currentRun" class="run-info">
+            <div class="run-info-item">
+              <span class="run-info-label">运行 ID</span>
+              <code>{{ currentRun.runId }}</code>
             </div>
-            <div class="run-time">
-              开始时间: {{ formatTime(currentRun.startTime) }}
+            <div class="run-info-item">
+              <span class="run-info-label">开始时间</span>
+              <span>{{ formatTime(currentRun.startTime) }}</span>
             </div>
           </div>
         </div>
 
         <!-- 人工确认区 -->
-        <div v-if="needsApproval" class="panel-card approval-card">
-          <h3 class="panel-title">
-            <el-tag type="warning" size="small" class="mr-2">待确认</el-tag>
+        <div v-if="needsApproval" class="card approval-card">
+          <div class="card-title">
+            <el-tag type="warning" size="small" class="mr-8">待确认</el-tag>
             人工确认
-          </h3>
+          </div>
           <p class="approval-hint">报告生成前需要您的确认</p>
           
           <!-- 摘要预览 -->
           <div class="approval-section">
             <div class="section-label">检索摘要</div>
-            <div class="approval-content">{{ currentRun?.summary || '暂无' }}</div>
+            <div class="section-content">{{ currentRun?.summary || '暂无' }}</div>
           </div>
 
           <!-- 分类预览 -->
           <div class="approval-section">
             <div class="section-label">主题分类</div>
-            <div class="approval-content">{{ currentRun?.classification || '暂无' }}</div>
+            <div class="section-content">{{ currentRun?.classification || '暂无' }}</div>
           </div>
 
           <!-- 倒计时 -->
           <div class="approval-timer">
             <el-progress
               :percentage="approvalProgress"
-              :color="approvalProgress === 100 ? '#f56c6c' : '#409eff'"
+              :color="approvalProgress === 100 ? 'var(--error)' : 'var(--vermillion)'"
               :show-text="false"
             />
             <span class="timer-text">剩余时间: {{ approvalRemainingText }}</span>
@@ -107,27 +105,17 @@
 
           <!-- 确认按钮 -->
           <div class="approval-actions">
-            <button class="btn btn-danger" @click="handleApprove('reject')">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-              </svg>
-              拒绝
-            </button>
-            <button class="btn btn-success" @click="handleApprove('approve')">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="20 6 9 17 4 12"/>
-              </svg>
-              批准生成报告
-            </button>
+            <button class="btn btn-danger" @click="handleApprove('reject')">拒绝</button>
+            <button class="btn btn-success" @click="handleApprove('approve')">批准生成报告</button>
           </div>
         </div>
       </aside>
 
       <!-- 右侧：工作流展示 -->
-      <main class="agent-workflow-panel">
-        <!-- 工作流图 -->
-        <div class="panel-card workflow-card">
-          <h3 class="panel-title">工作流状态</h3>
+      <main class="agent-main">
+        <!-- 工作流步骤 -->
+        <div class="card workflow-card">
+          <h3 class="card-title">工作流状态</h3>
           
           <div class="workflow-steps">
             <div
@@ -154,9 +142,7 @@
                 <div class="step-name">{{ step.label }}</div>
                 <div class="step-status">{{ stepStatusText(step.status) }}</div>
               </div>
-              <div v-if="step.durationMs" class="step-duration">
-                {{ step.durationMs }}ms
-              </div>
+              <div v-if="step.durationMs" class="step-duration">{{ step.durationMs }}ms</div>
             </div>
 
             <!-- 人工确认节点 -->
@@ -191,12 +177,12 @@
         </div>
 
         <!-- 报告展示 -->
-        <div v-if="finalReport" class="panel-card report-card">
-          <h3 class="panel-title">
+        <div v-if="finalReport" class="card report-card">
+          <div class="card-title">
             分析报告
-            <el-tag v-if="isApproved" type="success" size="small" class="ml-2">已批准</el-tag>
-            <el-tag v-else-if="isRejected" type="danger" size="small" class="ml-2">已拒绝</el-tag>
-          </h3>
+            <el-tag v-if="isApproved" type="success" size="small" class="ml-8">已批准</el-tag>
+            <el-tag v-else-if="isRejected" type="danger" size="small" class="ml-8">已拒绝</el-tag>
+          </div>
           <div class="report-content" v-html="renderMarkdown(finalReport)"></div>
           
           <!-- 报告操作 -->
@@ -217,8 +203,8 @@
         </div>
 
         <!-- 错误提示 -->
-        <div v-if="error" class="panel-card error-card">
-          <h3 class="panel-title error-title">运行错误</h3>
+        <div v-if="error" class="card error-card">
+          <h3 class="card-title error-title">运行错误</h3>
           <p class="error-message">{{ error }}</p>
           <button class="btn btn-secondary" @click="error = ''">关闭</button>
         </div>
@@ -358,7 +344,7 @@ async function loadKbs() {
     if (kbs.value.length && !selectedKbId.value) {
       selectedKbId.value = kbs.value[0].id
     }
-  } catch (e) {
+  } catch {
     kbs.value = []
   }
 }
@@ -422,7 +408,7 @@ async function startAgent() {
     // 开始轮询
     pollStop = pollAgentStatus(runId, onStatusUpdate, onStatusComplete)
 
-    // 初始化步骤（根据检索结果动态调整）
+    // 初始化步骤
     workflowSteps.value = [
       { name: 'retrieve', label: '检索文档', status: 'waiting', output: '' },
       { name: 'direct_answer', label: '直接回答', status: 'waiting', output: '' },
@@ -469,7 +455,7 @@ function onStatusUpdate(status: AgentRun) {
   }
 }
 
-def getStepLabel(stepName: string): string {
+function getStepLabel(stepName: string): string {
   const map: Record<string, string> = {
     retrieve: '检索文档',
     summarize: '生成摘要',
@@ -578,6 +564,7 @@ onMounted(() => {
         // 初始化步骤
         workflowSteps.value = [
           { name: 'retrieve', label: '检索文档', status: 'waiting', output: '' },
+          { name: 'direct_answer', label: '直接回答', status: 'waiting', output: '' },
           { name: 'summarize', label: '生成摘要', status: 'waiting', output: '' },
           { name: 'classify', label: '主题分类', status: 'waiting', output: '' },
           { name: 'report_gate', label: '人工确认', status: 'waiting', output: '' },
@@ -601,6 +588,7 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
+/* ========== 页面布局 ========== */
 .agent-page {
   max-width: 1400px;
   margin: 0 auto;
@@ -613,19 +601,19 @@ onUnmounted(() => {
   align-items: flex-start;
   margin-bottom: 24px;
   padding-bottom: 16px;
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--line);
 }
 
-.header-left .title {
+.page-title {
   font-size: 24px;
   font-weight: 600;
   margin: 0 0 4px 0;
-  color: var(--text-primary);
+  color: var(--ink);
 }
 
-.header-left .subtitle {
+.page-subtitle {
   font-size: 14px;
-  color: var(--text-secondary);
+  color: var(--text-muted);
   margin: 0;
 }
 
@@ -634,63 +622,63 @@ onUnmounted(() => {
   padding: 4px 12px;
 }
 
-.agent-main {
+.agent-layout {
   display: grid;
   grid-template-columns: 380px 1fr;
   gap: 24px;
+  align-items: start;
 }
 
-.agent-input-panel {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.panel-card {
-  background: var(--bg-secondary);
-  border-radius: 12px;
+/* ========== 卡片样式 ========== */
+.card {
+  background: var(--card);
+  border-radius: var(--card-radius);
   padding: 20px;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-card);
 }
 
-.panel-title {
-  font-size: 16px;
+.card-title {
+  font-size: 15px;
   font-weight: 600;
   margin: 0 0 16px 0;
-  color: var(--text-primary);
+  color: var(--ink);
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.form-item {
+/* ========== 表单样式 ========== */
+.form-group {
   margin-bottom: 16px;
 }
 
-.form-item label {
+.form-label {
   display: block;
   font-size: 13px;
-  color: var(--text-secondary);
+  color: var(--text-muted);
   margin-bottom: 6px;
 }
 
 .form-textarea {
   width: 100%;
   padding: 10px 12px;
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  background: var(--bg-primary);
-  color: var(--text-primary);
+  border: 1px solid var(--line);
+  border-radius: var(--input-radius);
+  background: var(--paper);
+  color: var(--ink);
   font-size: 14px;
   resize: vertical;
   min-height: 80px;
+  transition: border-color 0.2s;
 }
 
 .form-textarea:focus {
   outline: none;
-  border-color: var(--primary-color);
+  border-color: var(--vermillion);
 }
 
+/* ========== 快捷问题 ========== */
 .quick-questions {
   display: flex;
   flex-wrap: wrap;
@@ -699,27 +687,30 @@ onUnmounted(() => {
 
 .quick-btn {
   padding: 6px 12px;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--line);
   border-radius: 6px;
-  background: var(--bg-primary);
-  color: var(--text-secondary);
+  background: var(--paper-2);
+  color: var(--text-muted);
   font-size: 12px;
   cursor: pointer;
   transition: all 0.2s;
 }
 
 .quick-btn:hover {
-  border-color: var(--primary-color);
-  color: var(--primary-color);
+  border-color: var(--vermillion);
+  color: var(--vermillion);
+  background: var(--card);
 }
 
+/* ========== 按钮样式 ========== */
 .btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   padding: 10px 20px;
-  border: none;
-  border-radius: 8px;
+  border: 1px solid transparent;
+  border-radius: var(--btn-radius);
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
@@ -731,69 +722,141 @@ onUnmounted(() => {
   cursor: not-allowed;
 }
 
+.btn-block {
+  width: 100%;
+}
+
 .btn-primary {
-  background: var(--primary-color);
+  background: var(--btn-solid);
   color: white;
+  border-color: var(--btn-solid);
 }
 
 .btn-primary:hover:not(:disabled) {
-  background: var(--primary-hover);
-}
-
-.btn-full {
-  width: 100%;
-  justify-content: center;
+  background: var(--btn-solid-2);
+  border-color: var(--btn-solid-2);
 }
 
 .btn-secondary {
-  background: var(--bg-primary);
-  color: var(--text-primary);
-  border: 1px solid var(--border-color);
+  background: var(--card);
+  color: var(--ink);
+  border-color: var(--line);
 }
 
 .btn-secondary:hover {
-  border-color: var(--primary-color);
-  color: var(--primary-color);
+  border-color: var(--vermillion);
+  color: var(--vermillion);
 }
 
 .btn-danger {
-  background: #fef0f0;
-  color: #f56c6c;
-  border: 1px solid #fde2e2;
+  background: var(--paper);
+  color: var(--error);
+  border-color: var(--line);
 }
 
 .btn-danger:hover {
-  background: #fde2e2;
+  background: var(--error);
+  color: white;
+  border-color: var(--error);
 }
 
 .btn-success {
-  background: #f0f9ff;
-  color: #409eff;
-  border: 1px solid #d9ecff;
+  background: var(--paper);
+  color: var(--success);
+  border-color: var(--line);
 }
 
 .btn-success:hover {
-  background: #d9ecff;
+  background: var(--success);
+  color: white;
+  border-color: var(--success);
 }
 
-.run-status {
+/* ========== 运行信息 ========== */
+.run-info {
   margin-top: 16px;
   padding: 12px;
-  background: var(--bg-primary);
-  border-radius: 8px;
-  font-size: 12px;
-  color: var(--text-secondary);
+  background: var(--paper);
+  border-radius: var(--input-radius);
+  border: 1px solid var(--line);
 }
 
-.run-status code {
-  font-family: monospace;
-  color: var(--primary-color);
-}
-
-.agent-workflow-panel {
+.run-info-item {
   display: flex;
-  flex-direction: column;
-  gap: 16px;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  margin-bottom: 4px;
+}
+
+.run-info-item:last-child {
+  margin-bottom: 0;
+}
+
+.run-info-label {
+  color: var(--text-muted);
+}
+
+.run-info code {
+  font-family: 'Consolas', 'Monaco', monospace;
+  color: var(--vermillion);
+  font-size: 11px;
+}
+
+/* ========== 人工确认区 ========== */
+.approval-card {
+  margin-top: 16px;
+  border-color: var(--warning);
+}
+
+.approval-hint {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin: 0 0 12px 0;
+}
+
+.approval-section {
+  margin-bottom: 12px;
+}
+
+.section-label {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.section-content {
+  font-size: 13px;
+  color: var(--ink);
+  padding: 8px 12px;
+  background: var(--paper);
+  border-radius: var(--input-radius);
+  border: 1px solid var(--line);
+}
+
+.approval-timer {
+  margin: 16px 0;
+}
+
+.timer-text {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 4px;
+  display: block;
+}
+
+.approval-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.approval-actions .btn {
+  flex: 1;
+}
+
+/* ========== 工作流步骤 ========== */
+.workflow-card {
+  margin-bottom: 16px;
 }
 
 .workflow-steps {
@@ -807,20 +870,20 @@ onUnmounted(() => {
   align-items: center;
   gap: 12px;
   padding: 12px 16px;
-  background: var(--bg-primary);
-  border-radius: 8px;
-  border: 1px solid var(--border-color);
+  background: var(--paper);
+  border-radius: var(--input-radius);
+  border: 1px solid var(--line);
   transition: all 0.2s;
 }
 
 .workflow-step.step-completed {
-  border-color: #67c23a;
-  background: #f0f9ff;
+  border-color: var(--success);
+  background: rgba(31, 122, 77, 0.05);
 }
 
 .workflow-step.step-running {
-  border-color: var(--primary-color);
-  background: #ecf5ff;
+  border-color: var(--vermillion);
+  background: rgba(33, 49, 56, 0.05);
   animation: pulse 1.5s infinite;
 }
 
@@ -848,15 +911,15 @@ onUnmounted(() => {
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background: var(--bg-secondary);
-  border: 2px solid var(--border-color);
+  background: var(--card);
+  border: 2px solid var(--line);
   flex-shrink: 0;
 }
 
 .step-num {
   font-size: 14px;
   font-weight: 600;
-  color: var(--text-secondary);
+  color: var(--text-muted);
 }
 
 .step-icon {
@@ -864,17 +927,17 @@ onUnmounted(() => {
 }
 
 .step-icon.success {
-  color: #67c23a;
+  color: var(--success);
 }
 
 .step-icon.running {
-  color: var(--primary-color);
+  color: var(--vermillion);
   animation: spin 1s linear infinite;
 }
 
 .step-icon.skipped,
 .step-icon.error {
-  color: #909399;
+  color: var(--text-muted);
 }
 
 @keyframes spin {
@@ -886,7 +949,7 @@ onUnmounted(() => {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--border-color);
+  background: var(--line);
 }
 
 .step-info {
@@ -896,18 +959,18 @@ onUnmounted(() => {
 .step-name {
   font-size: 14px;
   font-weight: 500;
-  color: var(--text-primary);
+  color: var(--ink);
 }
 
 .step-status {
   font-size: 12px;
-  color: var(--text-secondary);
+  color: var(--text-muted);
   margin-top: 2px;
 }
 
 .step-duration {
   font-size: 11px;
-  color: var(--text-tertiary);
+  color: var(--text-muted);
 }
 
 .human-tag {
@@ -915,84 +978,41 @@ onUnmounted(() => {
   padding: 2px 8px;
 }
 
+/* ========== 步骤详情 ========== */
 .step-detail {
   margin-top: 16px;
   padding: 16px;
-  background: var(--bg-primary);
-  border-radius: 8px;
-  border: 1px solid var(--border-color);
+  background: var(--paper);
+  border-radius: var(--input-radius);
+  border: 1px solid var(--line);
 }
 
 .step-detail h4 {
   margin: 0 0 8px 0;
   font-size: 14px;
-  color: var(--text-primary);
+  color: var(--ink);
 }
 
 .detail-content {
   font-size: 13px;
-  color: var(--text-secondary);
+  color: var(--text-muted);
   white-space: pre-wrap;
 }
 
-.approval-card {
-  border-color: #e6a23c;
-}
-
-.approval-hint {
-  font-size: 13px;
-  color: var(--text-secondary);
-  margin: 0 0 12px 0;
-}
-
-.approval-section {
-  margin-bottom: 12px;
-}
-
-.section-label {
-  font-size: 12px;
-  color: var(--text-secondary);
-  margin-bottom: 4px;
-}
-
-.approval-content {
-  font-size: 13px;
-  color: var(--text-primary);
-  padding: 8px 12px;
-  background: var(--bg-primary);
-  border-radius: 6px;
-  border: 1px solid var(--border-color);
-}
-
-.approval-timer {
-  margin: 16px 0;
-}
-
-.timer-text {
-  font-size: 12px;
-  color: var(--text-secondary);
-  margin-top: 4px;
-  display: block;
-}
-
-.approval-actions {
-  display: flex;
-  gap: 12px;
-}
-
-.approval-actions .btn {
-  flex: 1;
-}
-
+/* ========== 报告卡片 ========== */
 .report-card {
-  border-color: #67c23a;
+  border-color: var(--success);
 }
 
 .report-content {
   font-size: 14px;
   line-height: 1.6;
-  color: var(--text-primary);
+  color: var(--ink);
   margin-bottom: 16px;
+  padding: 16px;
+  background: var(--paper);
+  border-radius: var(--input-radius);
+  border: 1px solid var(--line);
 }
 
 .report-actions {
@@ -1004,31 +1024,43 @@ onUnmounted(() => {
   flex: 1;
 }
 
+/* ========== 错误卡片 ========== */
 .error-card {
-  border-color: #f56c6c;
+  border-color: var(--error);
 }
 
 .error-title {
-  color: #f56c6c;
+  color: var(--error);
 }
 
 .error-message {
-  color: var(--text-secondary);
+  color: var(--text-muted);
   font-size: 14px;
   margin: 8px 0 16px;
 }
 
-.ml-2 {
-  margin-left: 8px;
-}
-
-.mr-2 {
+/* ========== 工具类 ========== */
+.mr-8 {
   margin-right: 8px;
 }
 
+.ml-8 {
+  margin-left: 8px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+/* ========== 响应式 ========== */
 @media (max-width: 768px) {
-  .agent-main {
+  .agent-layout {
     grid-template-columns: 1fr;
+  }
+  
+  .agent-header {
+    flex-direction: column;
+    gap: 12px;
   }
 }
 </style>
