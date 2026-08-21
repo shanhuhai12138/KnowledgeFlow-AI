@@ -61,6 +61,11 @@ class RunInfo:
         self.finished_at: Optional[str] = None
         # human-in-the-loop：approve/reject 确认值（None=待确认）
         self.approved: Optional[str] = None
+        # 报告内容
+        self.report: Optional[str] = None
+        # 摘要和分类
+        self.summary: Optional[str] = None
+        self.classification: Optional[str] = None
 
 
 class AgentRunStore:
@@ -142,6 +147,7 @@ def _summarize(state: AgentState) -> AgentState:
     content = build_context(state["results"])
     prompt = (f"请对以下知识库内容进行不超过 200 字的摘要，突出关键信息：\n\n{content}")
     summary = sync_chat(llm, [{"role": "user", "content": prompt}])
+    store.get(state["_run_id"]).summary = summary
     timer.finish(f"输入 {len(content)} 字", summary)
     return {"summary": summary}
 
@@ -152,6 +158,7 @@ def _classify(state: AgentState) -> AgentState:
     content = build_context(state["results"])
     prompt = (f"请对以下知识库内容进行主题分类，输出格式：主分类 / 子分类，并给出 1 句依据：\n\n{content}")
     classification = sync_chat(llm, [{"role": "user", "content": prompt}])
+    store.get(state["_run_id"]).classification = classification
     timer.finish(f"输入 {len(content)} 字", classification)
     return {"classification": classification}
 
@@ -171,7 +178,8 @@ def _report(state: AgentState) -> AgentState:
     timer = _step(state["_run_id"], "report")
     llm = get_llm_client(state["_api_key"])
     if not state.get("approved"):
-        store.set_status(state["_run_id"], "rejected")
+        store.get(state["_run_id"]).status = "rejected"
+        store.get(state["_run_id"]).report = "报告生成已取消（人工拒绝）"
         timer.finish("人工拒绝", "报告生成已取消（人工拒绝）", status="skipped")
         return {"report": "报告生成已取消（人工拒绝）"}
     prompt = (
@@ -182,12 +190,14 @@ def _report(state: AgentState) -> AgentState:
         f"【分类】\n{state.get('classification', '')}"
     )
     report = sync_chat(llm, [{"role": "user", "content": prompt}])
+    store.get(state["_run_id"]).report = report
     timer.finish("摘要+分类+检索内容", report)
     return {"report": report}
 
 
 def _not_found(state: AgentState) -> AgentState:
     timer = _step(state["_run_id"], "not_found")
+    store.get(state["_run_id"]).report = "未找到相关内容"
     timer.finish("检索结果为空", "未找到相关内容")
     return {"report": "未找到相关内容", "summary": "", "classification": ""}
 

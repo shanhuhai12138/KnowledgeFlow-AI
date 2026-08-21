@@ -65,6 +65,9 @@ def agent_status(runId: str):
         "currentStep": current_step,
         "steps": run.steps,
         "error": run.error,
+        "report": getattr(run, 'report', None),
+        "summary": getattr(run, 'summary', None),
+        "classification": getattr(run, 'classification', None),
     }
 
 
@@ -102,7 +105,7 @@ def agent_events(runId: str):
                 continue
             if run.status in ("done", "rejected", "error") and run.events.empty():
                 break
-        yield _sse("done", {"runId": run.run_id, "status": run.status})
+        yield _sse("done", {"runId": run.run_id, "status": run.status, "report": getattr(run, 'report', None)})
 
     return StreamingResponse(gen(), media_type="text/event-stream")
 
