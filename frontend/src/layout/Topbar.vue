@@ -14,6 +14,19 @@ const auth = useAuthStore()
 const title = computed(() => (route.meta.title as string) || '智能问答')
 const searchText = ref('')
 
+// ---------- 导航菜单 ----------
+const menuItems = [
+  { key: 'chat', label: '智能问答', path: '/chat' },
+  { key: 'agent', label: 'Agent 工作流', path: '/agent' },
+  { key: 'documents', label: '文档管理', path: '/documents' },
+  { key: 'kb', label: '知识库', path: '/kb' },
+  { key: 'analytics', label: '分析看板', path: '/analytics' },
+]
+
+function isActive(path: string) {
+  return route.path === path || (path === '/chat' && (route.path === '/' || route.path === ''))
+}
+
 // ---------- 通知 ----------
 const notifVisible = ref(false)
 const notifLoading = ref(false)
@@ -87,6 +100,19 @@ function onCommand(cmd: string) {
     <!-- 编辑感渐变装饰线 -->
     <div class="topbar-accent"></div>
     <nav class="breadcrumb">
+      <!-- 顶部导航菜单 -->
+      <div class="top-nav">
+        <button
+          v-for="item in menuItems"
+          :key="item.key"
+          class="top-nav-item"
+          :class="{ active: isActive(item.path) }"
+          @click="router.push(item.path)"
+        >
+          {{ item.label }}
+        </button>
+      </div>
+      <!-- 面包屑 -->
       <span>首页</span><span class="sep">/</span><span class="cur">{{ title }}</span>
     </nav>
     <div class="topbar-right">
@@ -356,6 +382,35 @@ function onCommand(cmd: string) {
   color: var(--ink);
   font-weight: 600;
 }
+
+/* ---------- 顶部导航菜单 ---------- */
+.top-nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-right: 16px;
+  padding-right: 16px;
+  border-right: 1px solid var(--line);
+}
+.top-nav-item {
+  padding: 6px 12px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--text-muted);
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+.top-nav-item:hover {
+  background: color-mix(in oklab, var(--vermillion) 8%, transparent);
+  color: var(--ink);
+}
+.top-nav-item.active {
+  background: var(--vermillion);
+  color: #fff;
+  font-weight: 500;
+}\n
 .topbar-right {
   display: flex;
   align-items: center;
