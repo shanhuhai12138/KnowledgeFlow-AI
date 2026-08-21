@@ -7,9 +7,7 @@
         <p class="subtitle">基于 LangGraph 的智能文档分析，含人工确认节点</p>
       </div>
       <div class="header-right">
-        <el-tag :type="statusTagType" class="status-tag">
-          {{ statusText }}
-        </el-tag>
+        <el-tag :type="statusTagType" class="status-tag">{{ statusText }}</el-tag>
       </div>
     </header>
 
@@ -57,13 +55,13 @@
           <!-- 启动按钮 -->
           <button
             class="btn btn-primary btn-full"
-            :disabled="!canStart"
+            :disabled="!canStart || isRunning"
             @click="startAgent"
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
             </svg>
-            启动 Agent 工作流
+            {{ isRunning ? '运行中...' : '启动 Agent 工作流' }}
           </button>
 
           <!-- 运行状态 -->
@@ -163,18 +161,24 @@
 
             <!-- 人工确认节点 -->
             <div
-              v-if="hasHumanApproval"
+              v-if="needsApproval || isApproved || isRejected"
               class="workflow-step human-step"
-              :class="{ 'step-waiting': isAwaitingApproval, 'step-completed': isApproved }"
+              :class="{ 
+                'step-waiting': needsApproval, 
+                'step-completed': isApproved,
+                'step-skipped': isRejected 
+              }"
             >
               <div class="step-indicator">
-                <el-tag size="small" :type="isAwaitingApproval ? 'warning' : 'success'" class="human-tag">
+                <el-tag size="small" :type="needsApproval ? 'warning' : (isApproved ? 'success' : 'danger')" class="human-tag">
                   人工
                 </el-tag>
               </div>
               <div class="step-info">
                 <div class="step-name">人工确认</div>
-                <div class="step-status">{{ isAwaitingApproval ? '等待确认...' : (isApproved ? '已批准' : '已拒绝') }}</div>
+                <div class="step-status">
+                  {{ needsApproval ? '等待确认...' : (isApproved ? '已批准' : '已拒绝') }}
+                </div>
               </div>
             </div>
           </div>
@@ -191,7 +195,7 @@
           <h3 class="panel-title">
             分析报告
             <el-tag v-if="isApproved" type="success" size="small" class="ml-2">已批准</el-tag>
-            <el-tag v-else type="danger" size="small" class="ml-2">已拒绝</el-tag>
+            <el-tag v-else-if="isRejected" type="danger" size="small" class="ml-2">已拒绝</el-tag>
           </h3>
           <div class="report-content" v-html="renderMarkdown(finalReport)"></div>
           
@@ -230,9 +234,10 @@ import { Check, Loading, Close, Warning } from '@element-plus/icons-vue'
 import MarkdownIt from 'markdown-it'
 import {
   startAgentApi,
+  getAgentStatusApi,
   approveAgentApi,
-  subscribeAgentEvents,
-  type AgentStep,
+  pollAgentStatus,
+  type AgentRun,
 } from '@/api/agent'
 import { getKbPageApi } from '@/api/kb'
 import type { KnowledgeBase } from '@/types'
@@ -250,26 +255,23 @@ const query = ref('')
 const currentRun = ref<{
   runId: string
   status: string
-  currentStep: string | null
-  steps: Array<{ stepName: string; status: string; durationMs: number; inputSummary: string; outputSummary: string }>
-  error: string | null
   startTime: number
   summary?: string
   classification?: string
   report?: string
   approved?: boolean
-  pollInterval?: number
 } | null>(null)
 const workflowSteps = ref<Array<{ name: string; label: string; status: string; durationMs?: number; output?: string }>>([])
 const finalReport = ref('')
 const isApproved = ref(false)
+const isRejected = ref(false)
 const error = ref('')
 
 // 人工确认相关
-const isAwaitingApproval = ref(false)
+const needsApproval = computed(() => currentRun.value?.status === 'awaiting_approval')
 const approvalDeadline = ref(0)
 let approvalTimer: ReturnType<typeof setInterval> | null = null
-let eventSourceClose: (() => void) | null = null
+let pollStop: (() => void) | null = null
 
 const QUICK_QUESTIONS = [
   'Q3 销售目标达成情况如何？',
@@ -280,11 +282,11 @@ const QUICK_QUESTIONS = [
 
 // ---------- 计算属性 ----------
 const canStart = computed(() => {
-  return query.value.trim() && selectedKbId.value
+  return query.value.trim() && selectedKbId.value && !isRunning.value
 })
 
-const needsApproval = computed(() => {
-  return isAwaitingApproval.value && !currentRun.value?.approved
+const isRunning = computed(() => {
+  return currentRun.value?.status === 'running' || currentRun.value?.status === 'awaiting_approval'
 })
 
 const statusTagType = computed(() => {
@@ -313,7 +315,7 @@ const statusText = computed(() => {
 const approvalProgress = computed(() => {
   if (!approvalDeadline.value) return 0
   const remaining = Math.max(0, approvalDeadline.value - Date.now())
-  return Math.round((remaining / 600000) * 100) // 10分钟 = 600000ms
+  return Math.round((remaining / 600000) * 100)
 })
 
 const approvalRemainingText = computed(() => {
@@ -322,10 +324,6 @@ const approvalRemainingText = computed(() => {
   const seconds = Math.ceil(remaining / 1000)
   if (seconds < 60) return `${seconds} 秒`
   return `${Math.floor(seconds / 60)} 分 ${seconds % 60} 秒`
-})
-
-const hasHumanApproval = computed(() => {
-  return workflowSteps.value.some(s => s.name === 'report_gate') || isAwaitingApproval.value
 })
 
 const currentStepDetail = computed(() => {
@@ -370,21 +368,26 @@ function onKbChange() {
 }
 
 function resetRun() {
-  currentRun.value = null
-  workflowSteps.value = []
-  finalReport.value = ''
-  isApproved.value = false
-  isAwaitingApproval.value = false
-  approvalDeadline.value = 0
-  error.value = ''
+  if (pollStop) {
+    pollStop()
+    pollStop = null
+  }
   if (approvalTimer) {
     clearInterval(approvalTimer)
     approvalTimer = null
   }
-  if (eventSourceClose) {
-    eventSourceClose()
-    eventSourceClose = null
-  }
+  
+  currentRun.value = null
+  workflowSteps.value = []
+  finalReport.value = ''
+  isApproved.value = false
+  isRejected.value = false
+  needsApproval.value = false
+  approvalDeadline.value = 0
+  error.value = ''
+  
+  // 清除 localStorage
+  localStorage.removeItem('agent_last_run_id')
 }
 
 async function startAgent() {
@@ -399,26 +402,28 @@ async function startAgent() {
       sessionId: `agent_${Date.now()}`,
     })
 
+    const runId = res.runId
     currentRun.value = {
-      ...res,
+      runId,
+      status: res.status,
       startTime: Date.now(),
-      currentStep: null,
-      steps: [],
-      error: null,
       summary: '',
       classification: '',
       report: '',
-      approved: false,
-    } as any
+    }
 
-    // 只使用 SSE 事件流，不轮询
-    eventSourceClose = subscribeAgentEvents(
-      res.runId,
-      (event) => handleAgentEvent(event),
-      () => handleAgentDone(),
-    )
+    // 持久化 runId
+    localStorage.setItem('agent_last_run_id', runId)
+    localStorage.setItem(`agent_run_${runId}`, JSON.stringify({
+      startTime: Date.now(),
+      query: query.value,
+      kbId: selectedKbId.value,
+    }))
 
-    // 初始化空步骤，显示工作流框架
+    // 开始轮询
+    pollStop = pollAgentStatus(runId, onStatusUpdate, onStatusComplete)
+
+    // 初始化步骤
     workflowSteps.value = [
       { name: 'retrieve', label: '检索文档', status: 'waiting', output: '' },
       { name: 'summarize', label: '生成摘要', status: 'waiting', output: '' },
@@ -433,59 +438,65 @@ async function startAgent() {
   }
 }
 
-function updateWorkflowSteps(steps: AgentStep[]) {
-  const stepMap: Record<string, { label: string; output?: string }> = {
-    retrieve: { label: '检索文档', output: '' },
-    summarize: { label: '生成摘要', output: '' },
-    classify: { label: '主题分类', output: '' },
-    report_gate: { label: '人工确认', output: '' },
-    report: { label: '生成报告', output: '' },
-    not_found: { label: '未找到相关内容', output: '' },
+function onStatusUpdate(status: AgentRun) {
+  if (!currentRun.value) return
+  
+  currentRun.value.status = status.status
+  
+  // 更新步骤
+  if (status.steps && status.steps.length > 0) {
+    workflowSteps.value = status.steps.map(s => ({
+      name: s.stepName,
+      label: getStepLabel(s.stepName),
+      status: s.status,
+      durationMs: s.durationMs,
+      output: s.outputSummary,
+    }))
   }
-
-  workflowSteps.value = steps.map(s => ({
-    name: s.stepName,
-    label: stepMap[s.stepName]?.label || s.stepName,
-    status: s.status,
-    durationMs: s.durationMs,
-    output: s.outputSummary,
-  }))
-
-  const summaryStep = steps.find(s => s.stepName === 'summarize')
-  const classifyStep = steps.find(s => s.stepName === 'classify')
-  if (summaryStep && currentRun.value) currentRun.value.summary = summaryStep.outputSummary
-  if (classifyStep && currentRun.value) currentRun.value.classification = classifyStep.outputSummary
-}
-
-function handleAgentEvent(event: any) {
-  if (event.type === 'step') {
-    updateWorkflowSteps([event.step])
-  } else if (event.type === 'status') {
-    if (currentRun.value) {
-      currentRun.value.status = event.status
-      // 等待人工确认
-      if (event.status === 'awaiting_approval') {
-        isAwaitingApproval.value = true
-        approvalDeadline.value = Date.now() + 600000
-        startApprovalTimer()
-      }
-    }
-  } else if (event.type === 'done') {
-    // done 事件可能包含报告
-    if (event.report && currentRun.value) {
-      currentRun.value.report = event.report
-    }
-    // done 时确保步骤已更新（如果后端在 done 事件中包含 steps）
-    if (event.steps && event.steps.length > 0) {
-      updateWorkflowSteps(event.steps)
-    }
+  
+  // 更新报告数据
+  if (status.summary) currentRun.value.summary = status.summary
+  if (status.classification) currentRun.value.classification = status.classification
+  if (status.report) {
+    currentRun.value.report = status.report
+    finalReport.value = status.report
+  }
+  
+  // 检测到等待确认
+  if (status.status === 'awaiting_approval') {
+    approvalDeadline.value = Date.now() + 600000 // 10 分钟
+    startApprovalTimer()
   }
 }
 
-function handleAgentDone() {
-  // 从 currentRun 获取报告
-  if (currentRun.value?.status === 'done' && currentRun.value.report) {
-    finalReport.value = currentRun.value.report
+function getStepLabel(stepName: string): string {
+  const map: Record<string, string> = {
+    retrieve: '检索文档',
+    summarize: '生成摘要',
+    classify: '主题分类',
+    report_gate: '人工确认',
+    report: '生成报告',
+    not_found: '未找到相关内容',
+  }
+  return map[stepName] || stepName
+}
+
+function onStatusComplete() {
+  if (!currentRun.value) return
+  
+  // 清除持久化
+  localStorage.removeItem('agent_last_run_id')
+  localStorage.removeItem(`agent_run_${currentRun.value.runId}`)
+  
+  // 完成或错误
+  if (currentRun.value.status === 'done') {
+    ElMessage.success('工作流完成')
+  } else if (currentRun.value.status === 'rejected') {
+    isRejected.value = true
+    ElMessage.warning('工作流已拒绝')
+  } else if (currentRun.value.status === 'error') {
+    error.value = currentRun.value.error || '未知错误'
+    ElMessage.error(error.value)
   }
 }
 
@@ -505,23 +516,24 @@ async function handleApprove(decision: 'approve' | 'reject') {
   if (!currentRun.value) return
   
   try {
-    await approveAgentApi(currentRun.value.runId, decision)
-    isApproved.value = decision === 'approve'
-    isAwaitingApproval.value = false
+    const res = await approveAgentApi(currentRun.value.runId, decision)
     
+    if (decision === 'approve') {
+      isApproved.value = true
+      ElMessage.success('已批准，正在生成报告...')
+    } else {
+      isRejected.value = true
+      ElMessage.info('已拒绝')
+    }
+    
+    // 清除定时器
     if (approvalTimer) {
       clearInterval(approvalTimer)
       approvalTimer = null
     }
     
-    if (decision === 'approve') {
-      ElMessage.success('已批准，正在生成报告...')
-    } else {
-      ElMessage.info('已拒绝，报告生成已取消')
-      currentRun.value.status = 'rejected'
-    }
   } catch (e: any) {
-    error.value = e?.message || '确认失败'
+    error.value = e?.message || '操作失败'
     ElMessage.error(error.value)
   }
 }
@@ -532,93 +544,120 @@ function copyReport() {
 }
 
 function downloadReport() {
-  const blob = new Blob([finalReport.value], { type: 'text/markdown;charset=utf-8' })
+  const blob = new Blob([finalReport.value], { type: 'text/markdown' })
   const url = URL.createObjectURL(blob)
   const a = document.createElement('a')
   a.href = url
-  a.download = `agent-report-${Date.now()}.md`
+  a.download = `report_${currentRun.value?.runId || 'unknown'}.md`
   a.click()
   URL.revokeObjectURL(url)
-  ElMessage.success('报告已下载')
 }
 
 // ---------- 生命周期 ----------
-onMounted(async () => {
-  await loadKbs()
+onMounted(() => {
+  loadKbs()
+  
+  // 检查是否有恢复的 runId
+  const savedRunId = localStorage.getItem('agent_last_run_id')
+  if (savedRunId) {
+    const saved = localStorage.getItem(`agent_run_${savedRunId}`)
+    if (saved) {
+      const info = JSON.parse(saved)
+      // 检查是否过期（10 分钟）
+      if (Date.now() - info.startTime < 10 * 60 * 1000) {
+        // 恢复显示
+        currentRun.value = {
+          runId: savedRunId,
+          status: 'running',
+          startTime: info.startTime,
+        }
+        
+        // 继续轮询
+        pollStop = pollAgentStatus(savedRunId, onStatusUpdate, onStatusComplete)
+        
+        // 初始化步骤
+        workflowSteps.value = [
+          { name: 'retrieve', label: '检索文档', status: 'waiting', output: '' },
+          { name: 'summarize', label: '生成摘要', status: 'waiting', output: '' },
+          { name: 'classify', label: '主题分类', status: 'waiting', output: '' },
+          { name: 'report_gate', label: '人工确认', status: 'waiting', output: '' },
+          { name: 'report', label: '生成报告', status: 'waiting', output: '' },
+        ]
+        
+        ElMessage.info('已恢复之前的工作流')
+      } else {
+        // 已过期，清除
+        localStorage.removeItem('agent_last_run_id')
+        localStorage.removeItem(`agent_run_${savedRunId}`)
+      }
+    }
+  }
 })
 
 onUnmounted(() => {
+  if (pollStop) pollStop()
   if (approvalTimer) clearInterval(approvalTimer)
-  if (eventSourceClose) eventSourceClose()
 })
 </script>
 
 <style scoped>
 .agent-page {
-  display: flex;
-  flex-direction: column;
-  height: calc(100vh - var(--topbar-h));
-  overflow: hidden;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 24px;
 }
 
-/* 头部 */
 .agent-header {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  padding: 24px 32px;
-  border-bottom: 1px solid var(--line);
-  background: var(--card);
-  flex-shrink: 0;
+  align-items: flex-start;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .header-left .title {
-  font-size: 28px;
+  font-size: 24px;
+  font-weight: 600;
   margin: 0 0 4px 0;
-  color: var(--ink);
+  color: var(--text-primary);
 }
 
 .header-left .subtitle {
   font-size: 14px;
-  color: var(--text-muted);
+  color: var(--text-secondary);
   margin: 0;
 }
 
 .status-tag {
-  font-size: 13px;
-  padding: 6px 12px;
+  font-size: 12px;
+  padding: 4px 12px;
 }
 
-/* 主内容区 */
 .agent-main {
-  display: flex;
-  flex: 1;
-  overflow: hidden;
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 24px;
 }
 
-/* 左侧输入面板 */
 .agent-input-panel {
-  width: 360px;
-  flex-shrink: 0;
-  overflow-y: auto;
-  padding: 24px;
-  border-right: 1px solid var(--line);
-  background: var(--paper);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .panel-card {
-  background: var(--card);
-  border: 1px solid var(--line);
+  background: var(--bg-secondary);
   border-radius: 12px;
   padding: 20px;
-  margin-bottom: 16px;
+  border: 1px solid var(--border-color);
 }
 
 .panel-title {
   font-size: 16px;
   font-weight: 600;
-  color: var(--ink);
   margin: 0 0 16px 0;
+  color: var(--text-primary);
   display: flex;
   align-items: center;
   gap: 8px;
@@ -631,146 +670,130 @@ onUnmounted(() => {
 .form-item label {
   display: block;
   font-size: 13px;
-  font-weight: 500;
-  color: var(--text);
+  color: var(--text-secondary);
   margin-bottom: 6px;
 }
 
 .form-textarea {
   width: 100%;
-  padding: 12px;
-  border: 1px solid var(--line);
+  padding: 10px 12px;
+  border: 1px solid var(--border-color);
   border-radius: 8px;
-  background: var(--paper-2);
-  color: var(--ink);
+  background: var(--bg-primary);
+  color: var(--text-primary);
   font-size: 14px;
-  line-height: 1.6;
   resize: vertical;
-  font-family: inherit;
+  min-height: 80px;
 }
 
 .form-textarea:focus {
   outline: none;
-  border-color: var(--vermillion);
+  border-color: var(--primary-color);
 }
 
 .quick-questions {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   gap: 8px;
 }
 
 .quick-btn {
-  padding: 10px 12px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--paper-2);
-  color: var(--text);
-  font-size: 13px;
-  text-align: left;
+  padding: 6px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background: var(--bg-primary);
+  color: var(--text-secondary);
+  font-size: 12px;
   cursor: pointer;
   transition: all 0.2s;
 }
 
 .quick-btn:hover {
-  border-color: var(--vermillion);
-  background: var(--card);
-  color: var(--vermillion);
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: var(--primary-color);
+  color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--primary-hover);
 }
 
 .btn-full {
   width: 100%;
-  display: flex;
-  align-items: center;
   justify-content: center;
-  gap: 8px;
-  padding: 14px 24px;
+}
+
+.btn-secondary {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.btn-danger {
+  background: #fef0f0;
+  color: #f56c6c;
+  border: 1px solid #fde2e2;
+}
+
+.btn-danger:hover {
+  background: #fde2e2;
+}
+
+.btn-success {
+  background: #f0f9ff;
+  color: #409eff;
+  border: 1px solid #d9ecff;
+}
+
+.btn-success:hover {
+  background: #d9ecff;
 }
 
 .run-status {
   margin-top: 16px;
   padding: 12px;
-  background: var(--paper-2);
+  background: var(--bg-primary);
   border-radius: 8px;
   font-size: 12px;
-  color: var(--text-muted);
+  color: var(--text-secondary);
 }
 
 .run-status code {
-  background: var(--line);
-  padding: 2px 6px;
-  border-radius: 4px;
-  font-family: 'SFMono-Regular', Consolas, monospace;
+  font-family: monospace;
+  color: var(--primary-color);
 }
 
-/* 人工确认卡片 */
-.approval-card {
-  border-color: var(--warning);
-  background: linear-gradient(135deg, var(--card) 0%, rgba(237, 137, 54, 0.05) 100%);
-}
-
-.approval-hint {
-  font-size: 13px;
-  color: var(--text-muted);
-  margin: 0 0 16px 0;
-}
-
-.approval-section {
-  margin-bottom: 16px;
-}
-
-.section-label {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-bottom: 6px;
-}
-
-.approval-content {
-  padding: 12px;
-  background: var(--paper-2);
-  border-radius: 6px;
-  font-size: 13px;
-  line-height: 1.6;
-  color: var(--text);
-  max-height: 120px;
-  overflow-y: auto;
-}
-
-.approval-timer {
-  margin: 16px 0;
-}
-
-.timer-text {
-  display: block;
-  text-align: center;
-  font-size: 12px;
-  color: var(--text-muted);
-  margin-top: 8px;
-}
-
-.approval-actions {
-  display: flex;
-  gap: 12px;
-  margin-top: 16px;
-}
-
-.approval-actions .btn {
-  flex: 1;
-}
-
-/* 右侧工作流面板 */
 .agent-workflow-panel {
-  flex: 1;
-  overflow-y: auto;
-  padding: 24px;
-  background: var(--paper);
-}
-
-.workflow-card {
-  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .workflow-steps {
@@ -784,101 +807,74 @@ onUnmounted(() => {
   align-items: center;
   gap: 12px;
   padding: 12px 16px;
-  background: var(--paper-2);
-  border: 1px solid var(--line);
+  background: var(--bg-primary);
   border-radius: 8px;
+  border: 1px solid var(--border-color);
   transition: all 0.2s;
 }
 
 .workflow-step.step-completed {
-  border-color: var(--success);
-  background: rgba(31, 122, 77, 0.05);
+  border-color: #67c23a;
+  background: #f0f9ff;
 }
 
 .workflow-step.step-running {
-  border-color: var(--primary);
-  background: rgba(33, 49, 56, 0.05);
+  border-color: var(--primary-color);
+  background: #ecf5ff;
   animation: pulse 1.5s infinite;
 }
 
-.workflow-step.step-skipped {
+.workflow-step.step-waiting {
   opacity: 0.6;
 }
 
-.workflow-step.step-error {
-  border-color: var(--error);
-  background: rgba(229, 62, 62, 0.05);
+.workflow-step.step-skipped {
+  opacity: 0.5;
 }
 
 .workflow-step.human-step {
-  border-color: var(--warning);
-  background: rgba(237, 137, 54, 0.05);
+  border-style: dashed;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
 }
 
 .step-indicator {
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
   border-radius: 50%;
-  background: var(--line);
+  background: var(--bg-secondary);
+  border: 2px solid var(--border-color);
   flex-shrink: 0;
 }
 
 .step-num {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
-  color: var(--text-muted);
+  color: var(--text-secondary);
 }
 
 .step-icon {
-  width: 16px;
-  height: 16px;
+  font-size: 16px;
 }
 
-.step-icon.success { color: var(--success); }
-.step-icon.running { color: var(--primary); animation: spin 1s linear infinite; }
-.step-icon.skipped { color: var(--text-muted); }
-.step-icon.error { color: var(--error); }
-
-.step-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--text-muted);
+.step-icon.success {
+  color: #67c23a;
 }
 
-.step-info {
-  flex: 1;
-  min-width: 0;
+.step-icon.running {
+  color: var(--primary-color);
+  animation: spin 1s linear infinite;
 }
 
-.step-name {
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--ink);
-}
-
-.step-status {
-  font-size: 12px;
-  color: var(--text-muted);
-  margin-top: 2px;
-}
-
-.step-duration {
-  font-size: 12px;
-  color: var(--text-muted);
-  font-family: 'SFMono-Regular', Consolas, monospace;
-}
-
-.human-tag {
-  font-size: 11px;
-}
-
-@keyframes pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(33, 49, 56, 0.1); }
-  50% { box-shadow: 0 0 0 8px rgba(33, 49, 56, 0.05); }
+.step-icon.skipped,
+.step-icon.error {
+  color: #909399;
 }
 
 @keyframes spin {
@@ -886,150 +882,153 @@ onUnmounted(() => {
   to { transform: rotate(360deg); }
 }
 
+.step-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--border-color);
+}
+
+.step-info {
+  flex: 1;
+}
+
+.step-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.step-status {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+.step-duration {
+  font-size: 11px;
+  color: var(--text-tertiary);
+}
+
+.human-tag {
+  font-size: 11px;
+  padding: 2px 8px;
+}
+
 .step-detail {
   margin-top: 16px;
   padding: 16px;
-  background: var(--paper-2);
+  background: var(--bg-primary);
   border-radius: 8px;
-  border: 1px solid var(--line);
+  border: 1px solid var(--border-color);
 }
 
 .step-detail h4 {
-  font-size: 14px;
-  font-weight: 600;
   margin: 0 0 8px 0;
-  color: var(--ink);
-}
-
-.step-detail .detail-content {
-  font-size: 13px;
-  color: var(--text);
-  line-height: 1.6;
-  max-height: 200px;
-  overflow-y: auto;
-}
-
-/* 报告卡片 */
-.report-card {
-  margin-bottom: 16px;
-}
-
-.report-content {
-  padding: 20px;
-  background: var(--paper-2);
-  border-radius: 8px;
-  border: 1px solid var(--line);
   font-size: 14px;
-  line-height: 1.8;
-  color: var(--ink);
+  color: var(--text-primary);
 }
 
-.report-content :deep(h1),
-.report-content :deep(h2),
-.report-content :deep(h3) {
-  margin-top: 24px;
+.detail-content {
+  font-size: 13px;
+  color: var(--text-secondary);
+  white-space: pre-wrap;
+}
+
+.approval-card {
+  border-color: #e6a23c;
+}
+
+.approval-hint {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin: 0 0 12px 0;
+}
+
+.approval-section {
   margin-bottom: 12px;
-  color: var(--ink);
 }
 
-.report-content :deep(p) {
-  margin-bottom: 12px;
-}
-
-.report-content :deep(ul),
-.report-content :deep(ol) {
-  padding-left: 24px;
-  margin-bottom: 12px;
-}
-
-.report-content :deep(li) {
+.section-label {
+  font-size: 12px;
+  color: var(--text-secondary);
   margin-bottom: 4px;
 }
 
-.report-content :deep(code) {
-  background: var(--line);
-  padding: 2px 6px;
-  border-radius: 4px;
+.approval-content {
   font-size: 13px;
-}
-
-.report-content :deep(pre) {
-  background: var(--ink);
-  color: var(--card);
-  padding: 16px;
-  border-radius: 8px;
-  overflow-x: auto;
-  margin: 16px 0;
-}
-
-.report-content :deep(pre code) {
-  background: none;
-  padding: 0;
-  color: inherit;
-}
-
-.report-content :deep(blockquote) {
-  border-left: 3px solid var(--vermillion);
-  padding-left: 16px;
-  color: var(--text-muted);
-  margin: 16px 0;
-}
-
-.report-content :deep(table) {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 16px 0;
-}
-
-.report-content :deep(th),
-.report-content :deep(td) {
-  border: 1px solid var(--line);
+  color: var(--text-primary);
   padding: 8px 12px;
-  text-align: left;
+  background: var(--bg-primary);
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
 }
 
-.report-content :deep(th) {
-  background: var(--line);
-  font-weight: 600;
+.approval-timer {
+  margin: 16px 0;
+}
+
+.timer-text {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-top: 4px;
+  display: block;
+}
+
+.approval-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.approval-actions .btn {
+  flex: 1;
+}
+
+.report-card {
+  border-color: #67c23a;
+}
+
+.report-content {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-primary);
+  margin-bottom: 16px;
 }
 
 .report-actions {
   display: flex;
   gap: 12px;
-  margin-top: 16px;
 }
 
-/* 错误卡片 */
+.report-actions .btn {
+  flex: 1;
+}
+
 .error-card {
-  border-color: var(--error);
-  background: rgba(229, 62, 62, 0.05);
+  border-color: #f56c6c;
 }
 
 .error-title {
-  color: var(--error);
+  color: #f56c6c;
 }
 
 .error-message {
-  color: var(--error);
+  color: var(--text-secondary);
   font-size: 14px;
-  margin: 12px 0;
-  line-height: 1.6;
+  margin: 8px 0 16px;
 }
 
-/* 工具类 */
-.mr-2 { margin-right: 8px; }
-.ml-2 { margin-left: 8px; }
+.ml-2 {
+  margin-left: 8px;
+}
 
-/* 响应式 */
-@media (max-width: 1024px) {
+.mr-2 {
+  margin-right: 8px;
+}
+
+@media (max-width: 768px) {
   .agent-main {
-    flex-direction: column;
-  }
-  
-  .agent-input-panel {
-    width: 100%;
-    border-right: none;
-    border-bottom: 1px solid var(--line);
+    grid-template-columns: 1fr;
   }
 }
 </style>

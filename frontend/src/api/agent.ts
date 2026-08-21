@@ -19,19 +19,15 @@ export interface AgentRun {
   currentStep: string | null
   steps: AgentStep[]
   error: string | null
+  report?: string
+  summary?: string
+  classification?: string
 }
 
 export interface AgentRequest {
   query: string
   kbId: number | string
   sessionId: string
-}
-
-export interface AgentEvent {
-  type: string
-  step?: AgentStep
-  status?: string
-  runId?: string
 }
 
 function buildHeaders() {
@@ -53,7 +49,6 @@ export async function startAgentApi(req: AgentRequest): Promise<AgentStartRespon
     data: req,
     timeout: 10000,
   })
-  // AI 服务直接返回 {runId, status}，不需要解包 .data
   return res as AgentStartResponse
 }
 
@@ -67,7 +62,6 @@ export async function getAgentStatusApi(runId: string): Promise<AgentRun> {
     headers: buildHeaders(),
     timeout: 8000,
   })
-  // AI 服务直接返回响应体，不需要解包 .data
   return res as AgentRun
 }
 
@@ -81,44 +75,34 @@ export async function approveAgentApi(runId: string, decision: 'approve' | 'reje
     headers: buildHeaders(),
     timeout: 10000,
   })
-  // AI 服务直接返回响应体，不需要解包 .data
   return res
 }
 
 /**
- * 订阅 SSE 事件流
+ * 轮询 Agent 状态
+ * @returns 停止轮询的函数
  */
-export function subscribeAgentEvents(
+export function pollAgentStatus(
   runId: string,
-  onEvent: (event: AgentEvent) => void,
-  onDone?: () => void,
+  onStatus: (status: AgentRun) => void,
+  onComplete?: () => void,
 ): () => void {
-  const url = `${import.meta.env.VITE_API_BASE || '/api'}/ai/agent/events?runId=${encodeURIComponent(runId)}`
-
-  const eventSource = new EventSource(url)
-
-  eventSource.addEventListener('step', (e: MessageEvent) => {
-    onEvent(JSON.parse(e.data))
-  })
-
-  eventSource.addEventListener('status', (e: MessageEvent) => {
-    onEvent(JSON.parse(e.data))
-  })
-
-  eventSource.addEventListener('done', (e: MessageEvent) => {
-    const data = JSON.parse(e.data)
-    // 传递 done 事件数据给 onEvent
-    onEvent({ type: 'done', ...data })
-    eventSource.close()
-    onDone?.()
-  })
-
-  eventSource.onerror = () => {
-    eventSource.close()
-  }
-
-  // 返回关闭函数
-  return () => {
-    eventSource.close()
-  }
+  const interval = window.setInterval(async () => {
+    try {
+      const status = await getAgentStatusApi(runId)
+      onStatus(status)
+      
+      // 完成或错误时停止轮询
+      if (['done', 'error', 'rejected'].includes(status.status)) {
+        clearInterval(interval)
+        onComplete?.()
+      }
+    } catch (e) {
+      // 查询失败，继续轮询
+      console.warn('Poll status failed:', e)
+    }
+  }, 2000)
+  
+  // 返回停止函数
+  return () => clearInterval(interval)
 }
