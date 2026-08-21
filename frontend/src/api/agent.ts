@@ -53,7 +53,8 @@ export async function startAgentApi(req: AgentRequest): Promise<AgentStartRespon
     data: req,
     timeout: 10000,
   })
-  return (res as any).data as AgentStartResponse
+  // AI 服务直接返回 {runId, status}，不需要解包 .data
+  return res as AgentStartResponse
 }
 
 /**
@@ -66,7 +67,8 @@ export async function getAgentStatusApi(runId: string): Promise<AgentRun> {
     headers: buildHeaders(),
     timeout: 8000,
   })
-  return (res as any).data as AgentRun
+  // AI 服务直接返回响应体，不需要解包 .data
+  return res as AgentRun
 }
 
 /**
@@ -79,7 +81,8 @@ export async function approveAgentApi(runId: string, decision: 'approve' | 'reje
     headers: buildHeaders(),
     timeout: 10000,
   })
-  return (res as any).data
+  // AI 服务直接返回响应体，不需要解包 .data
+  return res
 }
 
 /**
