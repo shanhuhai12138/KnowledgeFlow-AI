@@ -234,7 +234,6 @@ import { Check, Loading, Close, Warning } from '@element-plus/icons-vue'
 import MarkdownIt from 'markdown-it'
 import {
   startAgentApi,
-  getAgentStatusApi,
   approveAgentApi,
   pollAgentStatus,
   type AgentRun,
@@ -260,6 +259,7 @@ const currentRun = ref<{
   classification?: string
   report?: string
   approved?: boolean
+  error?: string
 } | null>(null)
 const workflowSteps = ref<Array<{ name: string; label: string; status: string; durationMs?: number; output?: string }>>([])
 const finalReport = ref('')
@@ -382,7 +382,6 @@ function resetRun() {
   finalReport.value = ''
   isApproved.value = false
   isRejected.value = false
-  needsApproval.value = false
   approvalDeadline.value = 0
   error.value = ''
   
@@ -516,7 +515,7 @@ async function handleApprove(decision: 'approve' | 'reject') {
   if (!currentRun.value) return
   
   try {
-    const res = await approveAgentApi(currentRun.value.runId, decision)
+    await approveAgentApi(currentRun.value.runId, decision)
     
     if (decision === 'approve') {
       isApproved.value = true
