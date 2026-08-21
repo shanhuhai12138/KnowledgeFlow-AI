@@ -422,9 +422,10 @@ async function startAgent() {
     // 开始轮询
     pollStop = pollAgentStatus(runId, onStatusUpdate, onStatusComplete)
 
-    // 初始化步骤
+    // 初始化步骤（根据检索结果动态调整）
     workflowSteps.value = [
       { name: 'retrieve', label: '检索文档', status: 'waiting', output: '' },
+      { name: 'direct_answer', label: '直接回答', status: 'waiting', output: '' },
       { name: 'summarize', label: '生成摘要', status: 'waiting', output: '' },
       { name: 'classify', label: '主题分类', status: 'waiting', output: '' },
       { name: 'report_gate', label: '人工确认', status: 'waiting', output: '' },
@@ -468,14 +469,14 @@ function onStatusUpdate(status: AgentRun) {
   }
 }
 
-function getStepLabel(stepName: string): string {
+def getStepLabel(stepName: string): string {
   const map: Record<string, string> = {
     retrieve: '检索文档',
     summarize: '生成摘要',
     classify: '主题分类',
     report_gate: '人工确认',
     report: '生成报告',
-    not_found: '未找到相关内容',
+    direct_answer: '直接回答',
   }
   return map[stepName] || stepName
 }

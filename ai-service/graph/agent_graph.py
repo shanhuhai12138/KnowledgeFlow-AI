@@ -182,31 +182,49 @@ def _report(state: AgentState) -> AgentState:
         store.get(state["_run_id"]).report = "报告生成已取消（人工拒绝）"
         timer.finish("人工拒绝", "报告生成已取消（人工拒绝）", status="skipped")
         return {"report": "报告生成已取消（人工拒绝）"}
+    
+    # 如果是 not_found 路径（没有检索结果），直接返回
+    if not state.get("results"):
+        store.get(state["_run_id"]).report = state.get("report", "知识库中没有相关内容")
+        timer.finish("直接回答", state.get("report", ""))
+        return {"report": state.get("report", "")}
+    
+    # 正常路径：生成结构化报告
     prompt = (
-        "你是文档分析报告生成器。请基于以下检索内容、摘要与分类，生成结构化分析报告"
-        "（包含：分析结论、关键要点、引用来源）。\n\n"
+        f"你是知识库问答助手。请基于以下检索内容，回答用户问题。\n\n"
+        f"【用户问题】\n{state['query']}\n\n"
         f"【检索内容】\n{build_context(state['results'])}\n\n"
-        f"【摘要】\n{state.get('summary', '')}\n\n"
-        f"【分类】\n{state.get('classification', '')}"
+        f"请给出准确、简洁的回答，并标注引用来源。"
     )
     report = sync_chat(llm, [{"role": "user", "content": prompt}])
     store.get(state["_run_id"]).report = report
-    timer.finish("摘要+分类+检索内容", report)
+    timer.finish("问答生成", report)
     return {"report": report}
 
 
-def _not_found(state: AgentState) -> AgentState:
-    timer = _step(state["_run_id"], "not_found")
-    store.get(state["_run_id"]).report = "未找到相关内容"
-    timer.finish("检索结果为空", "未找到相关内容")
-    return {"report": "未找到相关内容", "summary": "", "classification": ""}
+def _direct_answer(state: AgentState) -> AgentState:
+    """没有检索结果时，直接用通用知识回答。"""
+    timer = _step(state["_run_id"], "direct_answer")
+    llm = get_llm_client(state["_api_key"])
+    prompt = (
+        f"用户问题：{state['query']}\n\n"
+        "知识库中没有找到相关内容。请基于你的通用知识，给出一个简洁的回答。"
+        "如果问题确实无法回答，请说明"知识库中没有相关信息"。"
+    )
+    report = sync_chat(llm, [{"role": "user", "content": prompt}])
+    store.get(state["_run_id"]).report = report
+    timer.finish("通用知识回答", report)
+    return {"report": report, "summary": "", "classification": ""}
 
 
 # ==================== 图 ====================
 
 
 def _route_after_retrieve(state: AgentState) -> str:
-    return "summarize" if state.get("results") else "not_found"
+    if state.get("results"):
+        return "summarize"
+    # 没有检索结果，直接跳到最后一步（直接回答）
+    return "direct_answer"
 
 
 def build_agent_graph():
@@ -216,15 +234,15 @@ def build_agent_graph():
     g.add_node("classify", _classify)
     g.add_node("report_gate", _report_gate)
     g.add_node("report_node", _report)
-    g.add_node("not_found", _not_found)
+    g.add_node("direct_answer", _direct_answer)
     g.add_edge(START, "retrieve")
     g.add_conditional_edges("retrieve", _route_after_retrieve,
-                            {"summarize": "summarize", "not_found": "not_found"})
+                            {"summarize": "summarize", "direct_answer": "direct_answer"})
     g.add_edge("summarize", "classify")
     g.add_edge("classify", "report_gate")
     g.add_edge("report_gate", "report_node")
     g.add_edge("report_node", END)
-    g.add_edge("not_found", END)
+    g.add_edge("direct_answer", END)
     return g.compile()
 
 
