@@ -16,6 +16,7 @@ const router = createRouter({
       redirect: '/chat',
       children: [
         { path: 'chat', name: 'chat', component: () => import('@/views/ChatView.vue'), meta: { title: '智能问答' } },
+        { path: 'agent', name: 'agent', component: () => import('@/views/AgentView.vue'), meta: { title: 'Agent 工作流' } },
         { path: 'documents', name: 'documents', component: () => import('@/views/DocumentsView.vue'), meta: { title: '文档管理' } },
         { path: 'kb', name: 'kb', component: () => import('@/views/KbView.vue'), meta: { title: '知识库管理' } },
         { path: 'analytics', name: 'analytics', component: () => import('@/views/AnalyticsView.vue'), meta: { title: '分析看板' } },
