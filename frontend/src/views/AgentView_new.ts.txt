@@ -1,0 +1,191 @@
+// ---------- 方法 ----------
+function stepStatusText(status: string): string {
+  const map: Record<string, string> = {
+    running: '运行中',
+    success: '完成',
+    skipped: '已跳过',
+    error: '错误',
+    waiting: '等待中',
+  }
+  return map[status] || status
+}
+
+function formatTime(timestamp: number): string {
+  return new Date(timestamp).toLocaleTimeString('zh-CN')
+}
+
+async function loadKbs() {
+  try {
+    const data = await getKbPageApi({ pageNo: 1, pageSize: 100 })
+    kbs.value = data?.list || []
+    if (kbs.value.length && !selectedKbId.value) {
+      selectedKbId.value = kbs.value[0].id
+    }
+  } catch (e) {
+    kbs.value = []
+  }
+}
+
+function onKbChange() {
+  resetRun()
+}
+
+function resetRun() {
+  currentRun.value = null
+  workflowSteps.value = []
+  finalReport.value = ''
+  isApproved.value = false
+  isAwaitingApproval.value = false
+  approvalDeadline.value = 0
+  error.value = ''
+  if (approvalTimer) {
+    clearInterval(approvalTimer)
+    approvalTimer = null
+  }
+  if (eventSourceClose) {
+    eventSourceClose()
+    eventSourceClose = null
+  }
+}
+
+async function startAgent() {
+  if (!canStart.value) return
+
+  resetRun()
+
+  try {
+    const res = await startAgentApi({
+      query: query.value,
+      kbId: selectedKbId.value!,
+      sessionId: `agent_${Date.now()}`,
+    })
+
+    currentRun.value = {
+      ...res,
+      startTime: Date.now(),
+      currentStep: null,
+      steps: [],
+      error: null,
+      summary: '',
+      classification: '',
+      report: '',
+      approved: false,
+    } as any
+
+    // 只使用 SSE 事件流，不轮询
+    eventSourceClose = subscribeAgentEvents(
+      res.runId,
+      (event) => handleAgentEvent(event),
+      () => handleAgentDone(),
+    )
+
+  } catch (e: any) {
+    error.value = e?.message || '启动失败'
+    ElMessage.error(error.value)
+  }
+}
+
+function updateWorkflowSteps(steps: AgentStep[]) {
+  const stepMap: Record<string, { label: string; output?: string }> = {
+    retrieve: { label: '检索文档', output: '' },
+    summarize: { label: '生成摘要', output: '' },
+    classify: { label: '主题分类', output: '' },
+    report_gate: { label: '人工确认', output: '' },
+    report: { label: '生成报告', output: '' },
+    not_found: { label: '未找到相关内容', output: '' },
+  }
+
+  workflowSteps.value = steps.map(s => ({
+    name: s.stepName,
+    label: stepMap[s.stepName]?.label || s.stepName,
+    status: s.status,
+    durationMs: s.durationMs,
+    output: s.outputSummary,
+  }))
+
+  const summaryStep = steps.find(s => s.stepName === 'summarize')
+  const classifyStep = steps.find(s => s.stepName === 'classify')
+  if (summaryStep && currentRun.value) currentRun.value.summary = summaryStep.outputSummary
+  if (classifyStep && currentRun.value) currentRun.value.classification = classifyStep.outputSummary
+}
+
+function handleAgentEvent(event: any) {
+  if (event.type === 'step') {
+    updateWorkflowSteps([event.step])
+  } else if (event.type === 'status') {
+    if (currentRun.value) {
+      currentRun.value.status = event.status
+      // 等待人工确认
+      if (event.status === 'awaiting_approval') {
+        isAwaitingApproval.value = true
+        approvalDeadline.value = Date.now() + 600000
+        startApprovalTimer()
+      }
+    }
+  } else if (event.type === 'done') {
+    // done 事件可能包含报告
+    if (event.report && currentRun.value) {
+      currentRun.value.report = event.report
+    }
+  }
+}
+
+function handleAgentDone() {
+  // 从 currentRun 获取报告
+  if (currentRun.value?.status === 'done' && currentRun.value.report) {
+    finalReport.value = currentRun.value.report
+  }
+}
+
+function startApprovalTimer() {
+  if (approvalTimer) clearInterval(approvalTimer)
+  approvalTimer = setInterval(() => {
+    if (Date.now() >= approvalDeadline.value) {
+      clearInterval(approvalTimer!)
+      approvalTimer = null
+      ElMessage.warning('人工确认超时，工作流已取消')
+      resetRun()
+    }
+  }, 1000)
+}
+
+async function handleApprove(decision: 'approve' | 'reject') {
+  if (!currentRun.value) return
+
+  try {
+    await approveAgentApi(currentRun.value.runId, decision)
+    isApproved.value = decision === 'approve'
+    isAwaitingApproval.value = false
+
+    if (approvalTimer) {
+      clearInterval(approvalTimer)
+      approvalTimer = null
+    }
+
+    if (decision === 'approve') {
+      ElMessage.success('已批准，正在生成报告...')
+    } else {
+      ElMessage.info('已拒绝，报告生成已取消')
+      currentRun.value.status = 'rejected'
+    }
+  } catch (e: any) {
+    error.value = e?.message || '确认失败'
+    ElMessage.error(error.value)
+  }
+}
+
+function copyReport() {
+  navigator.clipboard.writeText(finalReport.value)
+  ElMessage.success('已复制到剪贴板')
+}
+
+function downloadReport() {
+  const blob = new Blob([finalReport.value], { type: 'text/markdown;charset=utf-8' })
+  const url = URL.createObjectURL(blob)
+  const a = document.createElement('a')
+  a.href = url
+  a.download = `agent-report-${Date.now()}.md`
+  a.click()
+  URL.revokeObjectURL(url)
+  ElMessage.success('报告已下载')
+}

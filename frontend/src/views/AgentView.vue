@@ -230,7 +230,6 @@ import { Check, Loading, Close, Warning } from '@element-plus/icons-vue'
 import MarkdownIt from 'markdown-it'
 import {
   startAgentApi,
-  getAgentStatusApi,
   approveAgentApi,
   subscribeAgentEvents,
   type AgentStep,
@@ -390,75 +389,38 @@ function resetRun() {
 
 async function startAgent() {
   if (!canStart.value) return
-  
+
   resetRun()
-  
+
   try {
     const res = await startAgentApi({
       query: query.value,
       kbId: selectedKbId.value!,
       sessionId: `agent_${Date.now()}`,
     })
-    
+
     currentRun.value = {
       ...res,
       startTime: Date.now(),
       currentStep: null,
       steps: [],
       error: null,
+      summary: '',
+      classification: '',
+      report: '',
+      approved: false,
     } as any
-    
-    pollStatus(res.runId)
-    
+
+    // 只使用 SSE 事件流，不轮询
     eventSourceClose = subscribeAgentEvents(
       res.runId,
       (event) => handleAgentEvent(event),
       () => handleAgentDone(),
     )
-    
+
   } catch (e: any) {
     error.value = e?.message || '启动失败'
     ElMessage.error(error.value)
-  }
-}
-
-function pollStatus(runId: string) {
-  const poll = async () => {
-    if (!currentRun.value || currentRun.value.status === 'done' || currentRun.value.status === 'rejected' || currentRun.value.status === 'error') {
-      return
-    }
-    
-    try {
-      const status = await getAgentStatusApi(runId)
-      currentRun.value = { ...currentRun.value, ...status }
-      
-      updateWorkflowSteps(status.steps)
-      
-      if (status.status === 'awaiting_approval') {
-        isAwaitingApproval.value = true
-        approvalDeadline.value = Date.now() + 600000
-        startApprovalTimer()
-      }
-      
-      if (status.status === 'done' || status.status === 'rejected') {
-        if (status.steps) {
-          updateWorkflowSteps(status.steps)
-        }
-        if (status.error) {
-          error.value = status.error
-        }
-      }
-    } catch (e) {
-      // 静默失败
-    }
-  }
-  
-  poll()
-  const interval = setInterval(poll, 1000)
-  
-  // 存储清除函数
-  if (currentRun.value) {
-    ;(currentRun.value as any).pollInterval = interval
   }
 }
 
@@ -471,7 +433,7 @@ function updateWorkflowSteps(steps: AgentStep[]) {
     report: { label: '生成报告', output: '' },
     not_found: { label: '未找到相关内容', output: '' },
   }
-  
+
   workflowSteps.value = steps.map(s => ({
     name: s.stepName,
     label: stepMap[s.stepName]?.label || s.stepName,
@@ -479,7 +441,7 @@ function updateWorkflowSteps(steps: AgentStep[]) {
     durationMs: s.durationMs,
     output: s.outputSummary,
   }))
-  
+
   const summaryStep = steps.find(s => s.stepName === 'summarize')
   const classifyStep = steps.find(s => s.stepName === 'classify')
   if (summaryStep && currentRun.value) currentRun.value.summary = summaryStep.outputSummary
@@ -492,11 +454,23 @@ function handleAgentEvent(event: any) {
   } else if (event.type === 'status') {
     if (currentRun.value) {
       currentRun.value.status = event.status
+      // 等待人工确认
+      if (event.status === 'awaiting_approval') {
+        isAwaitingApproval.value = true
+        approvalDeadline.value = Date.now() + 600000
+        startApprovalTimer()
+      }
+    }
+  } else if (event.type === 'done') {
+    // done 事件可能包含报告
+    if (event.report && currentRun.value) {
+      currentRun.value.report = event.report
     }
   }
 }
 
 function handleAgentDone() {
+  // 从 currentRun 获取报告
   if (currentRun.value?.status === 'done' && currentRun.value.report) {
     finalReport.value = currentRun.value.report
   }
@@ -563,7 +537,6 @@ onMounted(async () => {
 onUnmounted(() => {
   if (approvalTimer) clearInterval(approvalTimer)
   if (eventSourceClose) eventSourceClose()
-  if (currentRun.value?.pollInterval) clearInterval(currentRun.value.pollInterval)
 })
 </script>
 
