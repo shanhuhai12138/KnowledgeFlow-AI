@@ -209,7 +209,7 @@ def _direct_answer(state: AgentState) -> AgentState:
     prompt = (
         f"用户问题：{state['query']}\n\n"
         "知识库中没有找到相关内容。请基于你的通用知识，给出一个简洁的回答。"
-        "如果问题确实无法回答，请说明"知识库中没有相关信息"。"
+        '如果问题确实无法回答，请说明"知识库中没有相关信息"。'
     )
     report = sync_chat(llm, [{"role": "user", "content": prompt}])
     store.get(state["_run_id"]).report = report
