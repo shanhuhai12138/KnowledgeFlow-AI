@@ -35,3 +35,10 @@ Thumbs.db
 # ---- 鏋勫缓浜х墿 ----
 backend/yudao-ui.bak/
 backend/scripts/
+
+# ---- 开发过程文件 ----
+*DESIGN*.md
+*PLAN*.md
+*ANALYSIS*.md
+*OPTIMIZATION*.md
+*BEAUTIFICATION*.md
