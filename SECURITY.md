@@ -14,7 +14,7 @@
 1. **不要** 在公开 Issue 中报告
 2. 通过以下方式报告:
    - GitHub Security Advisory: [Report a vulnerability](https://github.com/shanhuhai12138/KnowledgeFlow-AI/security/advisories/new)
-   - Email: shanhuhai12138@users.noreply.github.com
+   - Email: 2529602567@qq.com
 
 3. 包含以下信息:
    - 漏洞描述
