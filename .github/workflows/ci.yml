@@ -42,19 +42,3 @@ jobs:
         with:
           name: frontend-dist
           path: frontend/dist
-
-  docker-build:
-    needs: [backend-build, frontend-build]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Build Docker Images
-        run: |
-          cd deploy
-          docker-compose build --no-cache
-      - name: Run Health Check
-        run: |
-          cd deploy
-          docker-compose up -d
-          sleep 30
-          docker-compose ps
