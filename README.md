@@ -1,129 +1,226 @@
-# KnowledgeFlow AI — 企业级知识管理与 RAG 智能问答平台
+# KnowledgeFlow-AI
 
-> 上传文档，即可获得带引用来源的智能问答与自动化 Agent 工作流。
+企业级 RAG 知识库系统 · 智能问答 · Agent 工作流
 
-**定位**：通用知识管理平台 + 内置演示知识库，开箱即演示，换种子数据即可转向任意垂直行业。
-
----
-
-## 特性
-
-- **智能问答（流式 + 引用 + 置信度）**：基于知识库检索的流式回答（SSE），带引用来源卡片与置信度，多轮上下文
-- **Agent 工作流（human-in-the-loop）**：LangGraph 编排「检索 → 摘要 → 分类 → 生成报告」，报告生成前人工确认
-- **多租户知识库**：私有/共享可见性、成员角色管理（ADMIN/EDITOR/VIEWER）、租户隔离
-- **文档异步流水线**：上传 → Redis Streams 驱动 → 解析分块 → 向量化 → 可检索，状态全程可见
-- **分析看板**：文档/查询统计、趋势、热门检索词、文档类型分布
-- **AI 配置界面填 Key**：登录后在「AI 设置」页填入模型 API Key 即可，无需改任何配置文件（AES 加密存储）
-- **一键部署**：Docker Compose 一键启动全部 8 个服务（MySQL / Redis / MinIO / Qdrant / 后端 / AI / Nginx / 前端）
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://www.python.org/)
+[![Vue](https://img.shields.io/badge/Vue-3.x-green.svg)](https://vuejs.org/)
+[![Java](https://img.shields.io/badge/Java-17+-red.svg)](https://java.com/)
+[![Docker](https://img.shields.io/badge/Docker-Compose-black.svg)](https://www.docker.com/)
 
 ---
 
-## 架构
+## 功能特性
 
-```
-┌──────────────────────────────────────────────────────────────┐
-│  Vue 3 前端（Element Plus，编辑社论风）                        │
-│        │  REST / SSE（流式）                                  │
-│        ▼                                                      │
-│  Spring Boot 后端（认证/RBAC、知识库、文档、搜索转发、统计）    │
-│  │        │  HTTP（REST / SSE）                               │
-│  │        ▼                                                   │
-│  Python AI 编排服务（FastAPI + LangGraph）                    │
-│  ├─ 分块 → embedding → 检索 → 流式生成 / Agent 工作流         │
-│  └─ LLM 适配层：DeepSeek / OpenAI 兼容（界面配置 Key）        │
-└──────────────────────────────────────────────────────────────┘
-        ▼
-  Nginx（反代）→ MySQL / Redis / MinIO / Qdrant
-```
-
-**语言分工**：Java 负责业务与权限（纯后端管理），Python 负责 AI 编排（检索/生成/Agent），通过 HTTP 通信。
-
----
-
-## 快速开始
-
-### Docker 一键启动（推荐）
-
-```bash
-cd deploy
-cp .env.example .env          # 修改 LLM_API_KEY 及其他配置
-docker compose up -d --build  # 一键构建并启动全部服务（含种子数据自动灌入）
-```
-
-启动后访问：
-
-| 服务 | 地址 |
-|------|------|
-| 前端 | http://localhost:8080 （账号 `admin / admin123`） |
-| 后端 Knife4j | http://localhost:48080/doc.html |
-| AI 服务 | http://localhost:8000/docs |
-| MinIO / Qdrant 控制台 | http://localhost:9001 / http://localhost:6333/dashboard |
-
-### 本地进程开发
-
-```bash
-# 1. 基础设施
-cd deploy && cp .env.example .env && docker compose up -d   # mysql/redis/minio/qdrant
-
-# 2. 后端（:48080）
-cd backend && mvn install -DskipTests -pl knowledgeflow-server -am
-java -jar knowledgeflow-server/target/knowledgeflow-server.jar
-
-# 3. AI 服务（:8000）
-cd ai-service
-python -m venv .venv && .venv/Scripts/activate
-pip install -r requirements.txt
-uvicorn main:app --host 0.0.0.0 --port 8000
-
-# 4. 前端（:5173）
-cd frontend && npm install && npm run dev
-```
-
-> 首次启动后如需重新灌入演示数据：`python deploy/seed/run_seed.py`（走真实流水线，幂等）。
-
----
-
-## AI 配置
-
-1. 登录后进入**「AI 设置」**页面
-2. 填入模型 API Key（如 DeepSeek）、API 地址与模型名，点击保存
-3. 点击**「测试连接」**验证 —— 未配置 Key 时问答/Agent 会明确提示，不会静默失败
-
-> Key 以 AES 加密存储（`CONFIG_SECRET` 环境变量派生密钥），**永不明文回显**，仅管理员可配置。
+- **智能问答**：基于 RAG 的语义检索，支持多轮对话和来源引用
+- **Agent 工作流**：多步骤分析流程，含人工确认节点
+- **混合检索**：Dense + BM25 + Hybrid 三种检索模式，智能推荐
+- **文档管理**：支持 PDF/DOCX/TXT/MD 格式，自动分块向量化
+- **知识库管理**：多知识库隔离，细粒度权限控制
+- **监控告警**：Prometheus + Grafana 实时监控
+- **CI/CD**：GitHub Actions 自动化构建
 
 ---
 
 ## 技术栈
 
-| 层 | 选型 |
-|----|------|
-| 后端 | Spring Boot 2.7.x + MyBatis-Plus + Spring Security/JWT |
-| AI | FastAPI + LangGraph + Qdrant + OpenAI 兼容客户端（DeepSeek） |
-| 前端 | Vue 3 + Vite + TypeScript + Element Plus + Pinia |
-| 基础设施 | MySQL 8 + Redis 7（Streams）+ MinIO + Qdrant + Nginx（Docker Compose 编排） |
+| 层次 | 技术 |
+|------|------|
+| 前端 | Vue 3 + TypeScript + Element Plus |
+| 后端 | Spring Boot 2.7 + Java 17 |
+| AI 服务 | Python FastAPI + LangGraph |
+| 向量库 | Qdrant |
+| 对象存储 | MinIO |
+| 缓存 | Redis |
+| 数据库 | MySQL 8.0 |
+| 部署 | Docker Compose |
 
 ---
 
-## 文档
+## 快速开始
 
-- [部署指南（新电脑/服务器小白版）](docs/DEPLOY-GUIDE.md)
-- [项目计划书（设计基准：数据模型 / 设计规范 / API 契约）](docs/项目计划书.md)
-- [代码框架与开发任务书（执行指南 T1~T7）](docs/代码框架与开发任务书.md)
-- [验收脚本（docs/verify/）](docs/verify/)：各模块端到端验收，可复跑
+### 环境要求
+
+- Docker 20.10+
+- Docker Compose v2+
+- 8GB+ 内存
+
+### 启动服务
+
+```bash
+# 克隆项目
+git clone https://github.com/shanhuhai12138/KnowledgeFlow-AI.git
+cd KnowledgeFlow-AI
+
+# 启动所有服务
+cd deploy
+docker-compose up -d
+
+# 查看状态
+docker-compose ps
+```
+
+### 访问地址
+
+- 前端：http://localhost:8080
+- 后端 API：http://localhost:48080
+- AI 服务：http://localhost:8000
+- Swagger：http://localhost:8080/swagger-ui.html
+- MinIO：http://localhost:9001（admin/admin123456）
+- Grafana：http://localhost:3001（admin/admin）
+
+### 默认账号
+
+- 管理员：`admin` / `[REDACTED]`
 
 ---
 
-## 致谢
+## 核心功能说明
 
-- RAG 分块器参考：[regent](https://github.com/shanhuhai12138/regent)（中文感知递归分块）
-- 前端视觉：编辑社论风（Editorial）设计体系
+### 智能问答
+
+支持自然语言查询，自动检索相关知识库文档并生成回答。
+
+```bash
+# API 调用示例
+curl -X POST http://localhost:8000/ai/chat \
+  -H "Content-Type: application/json" \
+  -d '{
+    "message": "如何搭建开发环境？",
+    "kbId": 1,
+    "sessionId": "session_001"
+  }'
+```
+
+### Agent 工作流
+
+多步骤文档分析流程，支持人工确认节点。
+
+```bash
+# 启动 Agent 工作流
+curl -X POST http://localhost:8000/ai/agent \
+  -H "Content-Type: application/json" \
+  -d '{
+    "query": "分析 Q3 销售数据",
+    "kbId": 1
+  }'
+```
+
+### 检索模式
+
+系统支持三种检索模式，可根据查询类型自动推荐：
+
+| 模式 | 适用场景 | 示例查询 |
+|------|---------|---------|
+| Dense（向量） | 自然语言、概念匹配 | "如何搭建开发环境？" |
+| BM25（关键词） | 日期、版本、数值查询 | "2026年8月21日的版本号" |
+| Hybrid（混合） | 复杂分析任务 | "分析本月销售数据" |
 
 ---
 
-## 安全提示
+## 项目结构
 
-> 演示环境的默认账号密码（`admin / admin123`）**仅用于本地开发/答辩演示**，生产环境部署前请务必修改所有默认凭证（MySQL、MinIO、CONFIG_SECRET）。
+```
+KnowledgeFlow-AI/
+├── backend/          # Spring Boot 后端
+├── frontend/         # Vue 3 前端
+├── ai-service/       # Python AI 服务
+├── deploy/           # Docker 部署配置
+├── docs/             # 项目文档
+└── scripts/          # 辅助脚本
+```
 
 ---
 
-[MIT License](LICENSE) © 2026 shanhuhai12138
+## 开发指南
+
+### 本地开发
+
+```bash
+# 后端
+cd backend
+mvn spring-boot:run
+
+# 前端
+cd frontend
+npm install
+npm run dev
+
+# AI 服务
+cd ai-service
+pip install -r requirements.txt
+uvicorn main:app --reload --port 8000
+```
+
+### 测试
+
+```bash
+# 后端单元测试
+cd backend
+mvn test
+
+# AI 服务测试
+cd ai-service
+pytest tests/ -v
+```
+
+---
+
+## API 文档
+
+- Swagger UI：http://localhost:8080/swagger-ui.html
+- AI 服务 Docs：http://localhost:8000/docs
+
+---
+
+## 监控与告警
+
+- Prometheus：http://localhost:9090
+- Grafana：http://localhost:3001
+- 告警规则：deploy/prometheus/alerts.yml
+
+---
+
+## 常见问题
+
+### 1. 服务启动失败
+
+```bash
+# 查看日志
+docker-compose logs -f <service-name>
+
+# 重启服务
+docker-compose restart <service-name>
+```
+
+### 2. 文档上传失败
+
+检查 MinIO 存储空间和 AI 服务连接状态。
+
+### 3. 检索结果为空
+
+确认文档已正确分块并向量化，检查 Qdrant 集合状态。
+
+---
+
+## 贡献指南
+
+欢迎提交 Issue 和 Pull Request！
+
+1. Fork 本仓库
+2. 创建特性分支 (`git checkout -b feature/AmazingFeature`)
+3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
+4. 推送到分支 (`git push origin feature/AmazingFeature`)
+5. 创建 Pull Request
+
+---
+
+## 许可证
+
+[MIT License](LICENSE)
+
+---
+
+## 更新日志
+
+详见 [CHANGELOG.md](CHANGELOG.md)
