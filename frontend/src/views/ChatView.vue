@@ -54,6 +54,8 @@ import { uploadDocumentApi } from '@/api/document'
 import { API_BASE } from '@/api/request'
 import type { ChatMessage, ChatSession, KnowledgeBase } from '@/types'
 import { useRouter } from 'vue-router'
+import SearchModeSelector from '@/components/SearchModeSelector.vue'
+import type { SearchMode } from '@/utils/queryClassifier'
 
 const route = useRoute()
 
@@ -205,6 +207,7 @@ function onKbChange(id: number) {
 
 // ---------- 发送与流式 ----------
 const messagesAreaRef = ref<HTMLElement | null>(null)
+const searchMode = ref<SearchMode>('auto')
 
 function scrollToBottom() {
   nextTick(() => {
@@ -249,7 +252,7 @@ function sendMessage(text?: string) {
   scrollToBottom()
 
   chatStream(
-    { sessionId: currentSessionId.value, kbId: currentKbId.value, message: content },
+    { sessionId: currentSessionId.value, kbId: currentKbId.value, message: content, mode: searchMode.value },
     {
       onMeta: () => {},
       onContent: (delta) => {
@@ -540,6 +543,13 @@ async function handleFileUpload(event: Event) {
       <!-- 输入区 -->
       <div class="input-area">
         <div class="input-inner">
+          <!-- 检索模式选择器 -->
+          <SearchModeSelector
+            v-model:query="inputText"
+            v-model:selected-mode="searchMode"
+            @change="searchMode = $event"
+            @query="inputText = $event"
+          />
           <textarea
             v-model="inputText"
             class="form-input input-text"

@@ -13,3 +13,5 @@ langgraph-checkpoint==2.1.2
 langgraph-sdk==0.1.74
 # 本地 embedding 降级方案（无 API Key 时自动启用）
 sentence-transformers>=3.0.0
+# 智能检索依赖
+rank-bm25==0.2.2

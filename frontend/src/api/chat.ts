@@ -2,12 +2,12 @@ import request, { API_BASE } from './request'
 import type { ChatMessage, Source } from '@/types'
 
 /** 检索（无 LLM）：POST /admin-api/api/search */
-export function searchApi(data: { query: string; kbId?: number; topK?: number; threshold?: number }) {
+export function searchApi(data: { query: string; kbId?: number; topK?: number; threshold?: number; mode?: string }) {
   return request.post<unknown, { results: Source[]; tookMs: number }>('/admin-api/api/search', data)
 }
 
 /** 完整问答（一次性）：POST /admin-api/api/chat */
-export function chatApi(data: { sessionId: string; kbId?: number; message: string }) {
+export function chatApi(data: { sessionId: string; kbId?: number; message: string; mode?: string }) {
   return request.post<unknown, ChatMessage>('/admin-api/api/chat', data)
 }
 
@@ -35,7 +35,7 @@ export function listMessagesApi(sessionId: string) {
  * 事件：meta → content×n → sources → done / error
  */
 export async function chatStream(
-  params: { sessionId: string; kbId?: number; message: string },
+  params: { sessionId: string; kbId?: number; message: string; mode?: string },
   handlers: {
     onMeta?: (data: { type: string; sessionId?: string; message?: string }) => void
     onContent: (delta: string) => void
@@ -51,6 +51,7 @@ export async function chatStream(
     message: params.message,
   })
   if (params.kbId) qs.set('kbId', String(params.kbId))
+  if (params.mode) qs.set('mode', params.mode)
 
   const res = await fetch(`${API_BASE}/admin-api/api/chat/stream?${qs.toString()}`, {
     method: 'GET',

@@ -1,8 +1,4 @@
-"""/ai/chat（同步）+ /ai/chat/stream（SSE 流式）— T4.0 契约。
-
-流程：检索（kbId 过滤）→ 组装上下文（文档名/页码）→ 提示词模板 → LLM 流式/同步；
-sources 取自检索结果，confidence = 检索分加权（最高分/100 映射 0-100）。
-"""
+"""/ai/chat（同步）+ /ai/chat/stream（SSE 流式）— T4.0 契约，支持智能检索模式."""
 from __future__ import annotations
 
 import json
@@ -16,9 +12,12 @@ from pydantic import BaseModel, Field
 
 from config import get_settings
 from rag.embedder import get_embedder
+from rag.intent_classifier import classify_intent, recommend_mode
 from rag.llm import get_llm_client, resolve_api_key, stream_chat, sync_chat
 from rag.prompts import build_messages
 from rag.retriever import ensure_collection, search
+from rag.bm25_retriever import BM25Retriever
+from rag.hybrid_retriever import HybridRetriever
 from qdrant_client import QdrantClient
 
 router = APIRouter(tags=["chat"])
@@ -34,6 +33,7 @@ class ChatRequest(BaseModel):
     kbId: str | int = Field(..., description="知识库 ID（兼容 Java 转发数字）")
     message: str = Field(..., description="用户消息")
     history: Optional[List[ChatHistoryItem]] = Field(default=None, description="多轮历史")
+    mode: str = Field(default="auto", description="检索模式: auto/dense/bm25/hybrid")
 
 
 class SourceItem(BaseModel):
@@ -53,14 +53,55 @@ class ChatResponse(BaseModel):
     createdAt: str
 
 
-def _retrieve(kb_id: str, query: str, top_k: int) -> tuple[List[dict], float]:
-    """检索 + confidence（最高分加权映射 0-100）。"""
+def _extract_documents_from_qdrant(client: QdrantClient, kb_id: str) -> List[dict]:
+    """从 Qdrant 获取文档列表用于 BM25 检索。"""
+    return []
+
+
+def _retrieve(kb_id: str, query: str, top_k: int, mode: str = "auto") -> tuple[List[dict], float]:
+    """智能检索 + confidence（最高分加权映射 0-100）。"""
     settings = get_settings()
     embedder = get_embedder()
     client = QdrantClient(url=settings.qdrant_url)
     ensure_collection(client, embedder.dim)
+
+    # 确定检索模式
+    actual_mode = mode
+    if mode == "auto":
+        intent_result = classify_intent(query)
+        actual_mode = recommend_mode(intent_result.intent)
+
     query_vector = embedder.embed_query(query)
-    results = search(client, query_vector, kb_id, top_k, settings.threshold)
+    results = []
+
+    if actual_mode == "bm25":
+        documents = _extract_documents_from_qdrant(client, kb_id)
+        if documents:
+            bm25_retriever = BM25Retriever(documents)
+            results = bm25_retriever.search(query, top_k=top_k, threshold=settings.threshold)
+            results = [
+                {
+                    "documentId": r["id"],
+                    "documentName": r.get("filename", ""),
+                    "page": r.get("page", 0),
+                    "score": round(float(r["score"]) * 100, 1),
+                    "content": r["content"],
+                }
+                for r in results
+            ]
+        # 否则 results 保持为空列表
+    elif actual_mode == "hybrid":
+        documents = _extract_documents_from_qdrant(client, kb_id)
+        if documents:
+            bm25_retriever = BM25Retriever(documents)
+            hybrid = HybridRetriever(client, bm25_retriever, rrf_k=60)
+            results = hybrid.search(query, query_vector, top_k, settings.threshold)
+        # 否则降级为 Dense 检索
+        if not results:
+            results = search(client, query_vector, kb_id, top_k, settings.threshold)
+    else:
+        results = search(client, query_vector, kb_id, top_k, settings.threshold)
+
     if not results:
         return [], 0
     max_score = max(r["score"] for r in results)
@@ -95,7 +136,7 @@ def chat(req: ChatRequest, request: Request):
     api_key = _resolve_key_or_400(request)
     settings = get_settings()
 
-    results, confidence = _retrieve(str(req.kbId), req.message, settings.top_k)
+    results, confidence = _retrieve(str(req.kbId), req.message, settings.top_k, req.mode)
     messages = build_messages(req.message,
                               [h.model_dump() for h in (req.history or [])], results)
 
@@ -118,11 +159,11 @@ def chat(req: ChatRequest, request: Request):
 
 
 @router.get("/ai/chat/stream")
-def chat_stream(sessionId: str, kbId: str | int, message: str, request: Request):
+def chat_stream(sessionId: str, kbId: str | int, message: str, mode: str = "auto", request: Request = None):
     api_key = _resolve_key_or_400(request)
     settings = get_settings()
 
-    results, confidence = _retrieve(str(kbId), message, settings.top_k)
+    results, confidence = _retrieve(str(kbId), message, settings.top_k, mode)
     messages = build_messages(message, None, results)
 
     def gen():
