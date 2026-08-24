@@ -8,7 +8,7 @@
       </span>
       <span class="recommend-reason">{{ intentResult.reason }}</span>
     </div>
-    
+
     <!-- 模式选择按钮 -->
     <div class="mode-buttons">
       <button
@@ -17,11 +17,16 @@
         :class="['mode-btn', { active: selectedMode === mode.value }]"
         @click="$emit('change', mode.value)"
       >
-        <span class="mode-icon">{{ mode.icon }}</span>
+        <svg class="mode-icon" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none">
+          <path v-if="mode.value === 'auto'" stroke-linecap="round" stroke-linejoin="round" d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+          <path v-else-if="mode.value === 'dense'" stroke-linecap="round" stroke-linejoin="round" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 14c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z" />
+          <path v-else-if="mode.value === 'bm25'" stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          <path v-else-if="mode.value === 'hybrid'" stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+        </svg>
         <span class="mode-name">{{ mode.name }}</span>
       </button>
     </div>
-    
+
     <!-- 示例查询 -->
     <div v-if="showExamples && currentExamples.length > 0" class="examples">
       <span class="example-label">示例查询：</span>
@@ -62,10 +67,10 @@ const emit = defineEmits<{
 
 // 模式列表
 const modes = [
-  { value: 'auto' as SearchMode, name: '智能', icon: '🤖' },
-  { value: 'dense' as SearchMode, name: '向量', icon: '📊' },
-  { value: 'bm25' as SearchMode, name: '关键词', icon: '🔍' },
-  { value: 'hybrid' as SearchMode, name: '混合', icon: '⚡' },
+  { value: 'auto' as SearchMode, name: '智能' },
+  { value: 'dense' as SearchMode, name: '向量' },
+  { value: 'bm25' as SearchMode, name: '关键词' },
+  { value: 'hybrid' as SearchMode, name: '混合' },
 ] as const
 
 // 当前意图结果
@@ -127,22 +132,22 @@ function modeDescription(mode: SearchMode): string {
 }
 
 .recommend-mode.mode-auto {
-  background: rgba(33, 49, 56, 0.1);
+  background: rgba(33, 49, 56, 0.08);
   color: var(--vermillion);
 }
 
 .recommend-mode.mode-dense {
-  background: rgba(31, 122, 77, 0.1);
+  background: rgba(31, 122, 77, 0.08);
   color: var(--success);
 }
 
 .recommend-mode.mode-bm25 {
-  background: rgba(165, 131, 62, 0.1);
+  background: rgba(165, 131, 62, 0.08);
   color: var(--warning);
 }
 
 .recommend-mode.mode-hybrid {
-  background: rgba(176, 71, 47, 0.1);
+  background: rgba(176, 71, 47, 0.08);
   color: var(--error);
 }
 
@@ -160,10 +165,9 @@ function modeDescription(mode: SearchMode): string {
 
 .mode-btn {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 4px;
-  padding: 8px 16px;
+  gap: 6px;
+  padding: 6px 12px;
   border: 1px solid var(--line);
   border-radius: var(--input-radius);
   background: var(--paper);
@@ -176,7 +180,6 @@ function modeDescription(mode: SearchMode): string {
 .mode-btn:hover {
   border-color: var(--vermillion);
   background: rgba(33, 49, 56, 0.05);
-  transform: translateY(-1px);
 }
 
 .mode-btn.active {
@@ -186,7 +189,9 @@ function modeDescription(mode: SearchMode): string {
 }
 
 .mode-icon {
-  font-size: 18px;
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
 }
 
 .mode-name {
