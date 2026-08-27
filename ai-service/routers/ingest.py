@@ -12,7 +12,7 @@ from pydantic import BaseModel, Field
 from config import get_settings
 from rag.chunker import RecursiveChineseSplitter
 from rag.embedder import get_embedder
-from rag.retriever import (delete_by_document, ensure_collection, upsert_chunks)
+from rag.retriever import (delete_by_document, ensure_collection, invalidate_doc_cache, upsert_chunks)
 from qdrant_client import QdrantClient
 from qdrant_client.models import PointStruct
 
@@ -48,6 +48,7 @@ def delete_document(document_id: str):
     client = QdrantClient(url=settings.qdrant_url)
     try:
         delete_by_document(client, document_id)
+        invalidate_doc_cache()  # 文档删除后立即失效 BM25 文档缓存
     except Exception as e:
         # collection 不存在等场景视为已清理
         raise HTTPException(status_code=404, detail=f"删除失败：{e}")
@@ -94,5 +95,6 @@ def ingest(req: IngestRequest):
         for i, c in enumerate(chunks)
     ]
     upsert_chunks(client, points)
+    invalidate_doc_cache(str(req.kbId))  # 新文档入库后立即失效该 KB 的 BM25 缓存
 
     return IngestResponse(documentId=req.documentId, chunkCount=len(chunks), vectorCount=len(points))

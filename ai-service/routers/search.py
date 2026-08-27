@@ -10,7 +10,7 @@ from pydantic import BaseModel, Field
 from config import get_settings
 from rag.embedder import get_embedder
 from rag.intent_classifier import classify_intent, recommend_mode
-from rag.retriever import ensure_collection, search
+from rag.retriever import ensure_collection, extract_documents_by_kb, search
 from rag.bm25_retriever import BM25Retriever
 from rag.hybrid_retriever import HybridRetriever
 from qdrant_client import QdrantClient
@@ -35,6 +35,10 @@ class SearchResult(BaseModel):
     page: int
     score: float
     content: str
+    # 混合检索附加字段（dense/bm25 模式下为 null）
+    rrfScore: Optional[float] = None
+    denseScore: Optional[float] = None
+    sparseScore: Optional[float] = None
 
 
 class IntentInfo(BaseModel):
@@ -55,11 +59,8 @@ class SearchResponse(BaseModel):
 
 
 def _extract_documents_from_qdrant(client: QdrantClient, kb_id: str) -> List[dict]:
-    """从 Qdrant 获取文档列表用于 BM25 检索。
-    
-    注意：这里简化处理，实际项目中可能需要缓存文档元数据。
-    """
-    return []
+    """从 Qdrant 拉取该知识库全部分块，供 BM25 / Hybrid 检索使用（带 TTL 缓存）。"""
+    return extract_documents_by_kb(client, str(kb_id))
 
 
 @router.post("/ai/search", response_model=SearchResponse)
@@ -105,11 +106,22 @@ def search_endpoint(req: SearchRequest):
             ]
         # 否则 results 保持为空列表
     elif mode == "hybrid":
-        # 混合检索（需要文档库）
+        # 混合检索（Dense + BM25，RRF 融合；文档库为空时自动降级 Dense）
         documents = _extract_documents_from_qdrant(client, str(req.kbId))
         if documents:
             bm25_retriever = BM25Retriever(documents)
-            hybrid = HybridRetriever(client, bm25_retriever, rrf_k=60)
+
+            class _QdrantDense:
+                """把项目 dense_search() 适配成 HybridRetriever 需要的 .search(vector, top_k, threshold) 接口。"""
+
+                def __init__(self, qdrant: QdrantClient, kb: str):
+                    self._client = qdrant
+                    self._kb = kb
+
+                def search(self, vector, top_k, threshold):
+                    return search(self._client, vector, self._kb, top_k, threshold)
+
+            hybrid = HybridRetriever(_QdrantDense(client, str(req.kbId)), bm25_retriever, rrf_k=60)
             results = hybrid.search(req.query, query_vector, top_k, threshold)
         # 否则降级为 Dense 检索
         if not results:

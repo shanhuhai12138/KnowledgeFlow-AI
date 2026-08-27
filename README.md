@@ -67,7 +67,7 @@ docker-compose ps
 - AI 服务：http://localhost:8000
 - Swagger：http://localhost:8080/swagger-ui.html
 - MinIO：http://localhost:9001（admin/admin123456）
-- Grafana：http://localhost:3001（admin/admin）
+- Grafana：http://localhost:3000（admin/admin）
 
 ### 默认账号
 
@@ -176,7 +176,7 @@ pytest tests/ -v
 ## 监控与告警
 
 - Prometheus：http://localhost:9090
-- Grafana：http://localhost:3001
+- Grafana：http://localhost:3000
 - 监控指标：deploy/prometheus/prometheus.yml
 
 ---
