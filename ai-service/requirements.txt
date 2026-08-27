@@ -15,3 +15,4 @@ langgraph-sdk==0.1.74
 sentence-transformers>=3.0.0
 # 智能检索依赖
 rank-bm25==0.2.2
+jieba==0.42.1

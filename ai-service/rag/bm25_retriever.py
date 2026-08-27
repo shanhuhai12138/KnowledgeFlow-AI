@@ -13,6 +13,12 @@ try:
 except ImportError:
     BM25Okapi = None
 
+try:
+    import jieba
+    _jieba_ready = True
+except ImportError:
+    _jieba_ready = False
+
 
 class BM25Retriever:
     """BM25 关键词检索器。
@@ -44,31 +50,37 @@ class BM25Retriever:
         self.bm25 = BM25Okapi(self.tokenized_docs)
     
     def _tokenize(self, text: str) -> List[str]:
-        """中英文混合分词。
-        
+        """中英文混合分词（jieba 精确模式；未安装时回退正则切分）。
+
         Args:
             text: 输入文本
             
         Returns:
             List[str]: 分词结果
         """
-        tokens: List[str] = []
-        
-        # 提取中文词语（连续汉字）
+        if _jieba_ready:
+            tokens: List[str] = []
+            for w in jieba.cut(text):
+                w = w.strip()
+                if not w:
+                    continue
+                # 保留：中文词(≥1字)、英文词(≥2字符)、数字串
+                if re.match(r'[\u4e00-\u9fff]+$', w) or re.match(r'[a-zA-Z]{2,}$', w) or re.match(r'\d+$', w):
+                    if len(w) >= 2 or re.match(r'[\u4e00-\u9fff]', w):
+                        tokens.append(w.lower() if w.isascii() else w)
+            return tokens
+
+        # ---- 回退：原正则切分（单字中文） ----
+        tokens = []
         zh_words = re.findall(r'[\u4e00-\u9fff]{2,}', text)
         for word in zh_words:
-            tokens.extend(list(word))  # 中文字符单独分词
-        
-        # 提取英文单词（3字符以上）
+            tokens.extend(list(word))
         en_words = re.findall(r'[a-zA-Z]{3,}', text)
         tokens.extend([w.lower() for w in en_words])
-        
-        # 提取数字（2位以上）
         numbers = re.findall(r'\d{2,}', text)
         tokens.extend(numbers)
-        
         return tokens
-    
+
     def search(
         self,
         query: str,
