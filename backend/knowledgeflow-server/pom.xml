@@ -154,6 +154,18 @@
             <artifactId>knowledgeflow-spring-boot-starter-protection</artifactId>
         </dependency>
 
+    
+        <!-- Actuator Web 端点（P0-2）：/actuator/prometheus 由它提供 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+        <!-- Prometheus 指标暴露（P0-2）：覆盖 starter-monitor 中 optional 的声明，确保进入运行时 -->
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-registry-prometheus</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

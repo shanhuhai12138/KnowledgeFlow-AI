@@ -98,3 +98,17 @@ justauth:
     timeout: 24h
 
 debug: false
+
+--- #################### Prometheus 监控端点（P0-2） ####################
+management:
+  endpoints:
+    web:
+      base-path: /actuator
+      exposure:
+        include: health,info,prometheus,metrics
+  endpoint:
+    health:
+      show-details: always
+  metrics:
+    tags:
+      application: knowledgeflow-server
