@@ -8,7 +8,7 @@
 - LangGraph Agent 工作流（检索 → 摘要 → 分类 → 报告，含 human-in-the-loop）
 - 多租户知识库 + 成员角色管理（ADMIN/EDITOR/VIEWER）
 - 分析看板（文档统计、搜索趋势、热门文档、LLM Token 消耗）
-- Docker Compose 一键部署（8 个服务：MySQL/Redis/MinIO/Qdrant/后端/AI/Nginx/前端）
+- Docker Compose 一键部署（10 个服务：MySQL/Redis/MinIO/Qdrant/后端/AI/Nginx/Seed/Prometheus/Grafana）
 - 前端「AI 设置」页：在线配置 LLM API Key（AES 加密存储）
 - 编辑社论风设计体系（Noto Serif SC + Inter，深墨蓝强调色）
 

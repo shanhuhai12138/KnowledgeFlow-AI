@@ -48,7 +48,7 @@ cp .env.example .env      # Windows 用：copy .env.example .env
 ```bash
 cd deploy
 docker compose up -d --build
-docker compose ps         # 等 7 个服务全部 (healthy)
+docker compose ps         # 等 10 个服务全部 (healthy)
 ```
 
 ## 第 5 步：打开系统

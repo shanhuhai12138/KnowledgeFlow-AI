@@ -17,7 +17,7 @@
 - **混合检索**：Dense + BM25 + Hybrid 三种检索模式，智能推荐
 - **文档管理**：支持 PDF/DOCX/TXT/MD 格式，自动分块向量化
 - **知识库管理**：多知识库隔离，细粒度权限控制
-- **监控告警**：Prometheus + Grafana 实时监控
+- **监控**：Prometheus + Grafana 实时监控
 - **CI/CD**：GitHub Actions 自动化构建
 
 ---
@@ -177,7 +177,7 @@ pytest tests/ -v
 
 - Prometheus：http://localhost:9090
 - Grafana：http://localhost:3001
-- 告警规则：deploy/prometheus/alerts.yml
+- 监控指标：deploy/prometheus/prometheus.yml
 
 ---
 
