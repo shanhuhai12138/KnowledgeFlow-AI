@@ -71,7 +71,7 @@ docker-compose ps
 
 ### 默认账号
 
-- 管理员：`admin` / `[REDACTED]`
+- 管理员：`admin` / `admin123`
 
 ---
 
