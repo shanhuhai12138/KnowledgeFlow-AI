@@ -63,3 +63,31 @@ docker compose ps
 
 - 数据全部在 named volumes（mysql_data / qdrant_data / minio_data / redis_data）
 - `docker compose down` 保留数据；`docker compose down -v` **清空全部数据重来**
+
+## 七、版本更新与数据安全（git pull 之后怎么办）
+
+### 数据边界：git 里有 Code，没有 Data
+
+| 位置 | 内容 | 会被推送吗 |
+|---|---|---|
+| git 仓库 | 源码、建表 SQL、演示种子（1 个共享演示库 + 5 篇示例文档）、.env.example | ✅ 会 |
+| Docker 数据卷 | mysql_data（知识库/文档/查询日志）、qdrant_data（向量）、minio_data（上传文件）、redis_data、prometheus_data、grafana_data | ❌ 不会，只在本机 |
+
+你上传的真实文档、向量、查询日志全部在本机 Docker 卷里，git 感知不到；
+别人克隆拿到的是代码 + 空卷，首次启动自动初始化出他们自己的数据世界。
+
+### 更新操作对照表（upstream 更新后如何跟进）
+
+| 上游改了什么 | 你要执行的命令 | 你的数据 |
+|---|---|---|
+| 仅文档 / README | `git pull` | 无损 |
+| Python / Java / Vue 代码 | `git pull` → `docker compose build ai-service backend frontend` → `docker compose up -d` | 无损，数据照旧 |
+| compose / nginx / prometheus 配置 | `git pull` → `docker compose up -d`（自动重建受影响容器） | 无损 |
+| SQL 建表脚本（01~06-*.sql） | 先 `git pull`；无破坏性变更时重启即生效；**有新表/新列时**手工执行增量 SQL（进容器 mysql 执行） | ⚠️ 切勿直接 `down -v` |
+| `.env` 的 CONFIG_SECRET 变更 | 重启后需在「AI 设置」页重新填一次 LLM Key（旧密文解不开） | 仅 AI Key 需重配 |
+
+### 三条纪律
+
+1. **更新前备份**（可选但推荐）：`docker run --rm -v knowledgeflow_mysql_data:/data -v %cd%:/backup mysql:8 tar czf /backup/mysql-backup.tgz /data`
+2. **永远不要在生产数据上 `docker compose down -v`**——它清空全部卷，等于恢复出厂；这是"重置演示环境"用的
+3. **保持 `05-demo-kb.sql` 为纯演示内容**——演示知识库（id=1）是给大家的公共起点，个人测试数据请上传到自建知识库，避免误提交真实内容进种子文件
