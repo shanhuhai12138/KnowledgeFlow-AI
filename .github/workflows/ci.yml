@@ -1,4 +1,4 @@
-﻿name: CI/CD Pipeline
+name: CI/CD Pipeline
 
 on:
   push:
@@ -51,7 +51,7 @@ jobs:
         with:
           python-version: '3.11'
       - name: Install Dependencies
-        run: pip install -r ai-service/requirements.txt
+        run: pip install -r ai-service/requirements.txt pytest
       - name: Run Tests
         run: cd ai-service && pytest tests -v
 

@@ -5,3 +5,4 @@ __pycache__/
 *.pyc
 server.log
 server-nokey.log
+.pytest_cache/
