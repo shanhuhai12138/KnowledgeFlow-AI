@@ -187,6 +187,8 @@ services:
 
   # 一次性种子灌入：走真实 /ai/ingest 将 5 篇演示文档向量化（Qdrant 空时自动执行，幂等）
   seed:
+    # 复用 ai-service 镜像（同一次 build 产物，避免重复构建）
+    image: knowledgeflow-ai-service:latest
     build:
       context: ../ai-service
     container_name: knowledgeflow-seed

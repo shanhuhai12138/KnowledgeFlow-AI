@@ -5,14 +5,10 @@ uvicorn[standard]==0.34.0
 qdrant-client==1.12.1
 openai==1.59.7
 pydantic-settings==2.7.1
-# RAG 检索与 Agent 工作流
-langchain==0.3.14
-langchain-core==0.3.63
+# Agent 工作流
 langgraph==0.2.62
 langgraph-checkpoint==2.1.2
 langgraph-sdk==0.1.74
-# 本地 embedding 降级方案（无 API Key 时自动启用）
-sentence-transformers>=3.0.0
 # 智能检索依赖
 rank-bm25==0.2.2
 jieba==0.42.1
