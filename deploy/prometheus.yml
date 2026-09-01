@@ -8,3 +8,9 @@ scrape_configs:
       - targets: ['backend:48080']
         labels:
           service: knowledgeflow-backend
+  - job_name: 'knowledgeflow-ai'
+    metrics_path: '/metrics'
+    static_configs:
+      - targets: ['ai-service:8000']
+        labels:
+          service: knowledgeflow-ai

@@ -42,3 +42,30 @@ jobs:
         with:
           name: frontend-dist
           path: frontend/dist
+  ai-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Dependencies
+        run: pip install -r ai-service/requirements.txt
+      - name: Run Tests
+        run: cd ai-service && pytest tests -v
+
+  frontend-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - name: Install Dependencies
+        run: cd frontend && npm ci
+      - name: Run Tests
+        run: cd frontend && npx vitest run

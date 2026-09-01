@@ -5,3 +5,8 @@ server-nokey.log
 __pycache__
 *.pyc
 .git
+.pytest_cache
+tests
+Dockerfile.bak
+Dockerfile.orig
+*.log
