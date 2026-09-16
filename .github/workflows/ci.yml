@@ -30,9 +30,12 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: maven
+      - name: Install Parent & Framework Modules (skip tests)
+        # 干净环境先安装父 POM 与依赖模块（跳过框架层遗留测试），再单跑领域模块测试
+        run: cd backend && mvn install -q -DskipTests -pl knowledgeflow-module -am
       - name: Run Domain Module Tests
         # 领域模块单测（权限 11 + 枚举 9）；框架层遗留测试不在 CI 范围
-        run: cd backend && mvn test -pl knowledgeflow-module
+        run: cd backend && mvn surefire:test -pl knowledgeflow-module
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v4
         with:
