@@ -14,7 +14,7 @@ from qdrant_client import QdrantClient
 from config import get_settings
 from graph.state import AgentState, StepRecord
 from rag.embedder import get_embedder
-from rag.llm import sync_chat
+from rag.llm import get_llm_client, sync_chat
 from rag.prompts import build_context
 from rag.retriever import ensure_collection, search
 
