@@ -23,6 +23,12 @@
 
 ---
 
+## 架构总览
+
+![架构总览](docs/screenshots/architecture.png)
+
+*三条核心链路：①上传 → Redis Streams 异步管道 → 解析向量化入库（琥珀）②提问 → 双路检索 RRF 融合 → SSE 流式回答（蓝）③Agent 六节点工作流含人工确认门控。*
+
 ## 技术栈
 
 | 层次 | 技术 |
