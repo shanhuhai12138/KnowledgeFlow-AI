@@ -15,7 +15,7 @@ from rag.embedder import get_embedder
 from rag.intent_classifier import classify_intent, recommend_mode
 from rag.llm import get_llm_client, resolve_api_key, stream_chat, sync_chat
 from rag.prompts import build_messages
-from rag.retriever import ensure_collection, search
+from rag.retriever import ensure_collection, extract_documents_by_kb, search
 from rag.bm25_retriever import BM25Retriever
 from rag.hybrid_retriever import HybridRetriever
 from qdrant_client import QdrantClient
@@ -54,8 +54,8 @@ class ChatResponse(BaseModel):
 
 
 def _extract_documents_from_qdrant(client: QdrantClient, kb_id: str) -> List[dict]:
-    """从 Qdrant 获取文档列表用于 BM25 检索。"""
-    return []
+    """从 Qdrant 获取文档列表用于 BM25 / Hybrid 检索（TTL 缓存；与 search.py 共用同一提取层）。"""
+    return extract_documents_by_kb(client, str(kb_id))
 
 
 def _retrieve(kb_id: str, query: str, top_k: int, mode: str = "auto") -> tuple[List[dict], float]:
@@ -94,7 +94,18 @@ def _retrieve(kb_id: str, query: str, top_k: int, mode: str = "auto") -> tuple[L
         documents = _extract_documents_from_qdrant(client, kb_id)
         if documents:
             bm25_retriever = BM25Retriever(documents)
-            hybrid = HybridRetriever(client, bm25_retriever, rrf_k=60)
+
+            class _QdrantDense:
+                """把项目 dense search() 适配成 HybridRetriever 需要的 .search 接口（与 search.py 一致）。"""
+
+                def __init__(self, qdrant: QdrantClient, kb: str):
+                    self._client = qdrant
+                    self._kb = kb
+
+                def search(self, vector, top_k, threshold):
+                    return search(self._client, vector, self._kb, top_k, threshold)
+
+            hybrid = HybridRetriever(_QdrantDense(client, kb_id), bm25_retriever, rrf_k=60)
             results = hybrid.search(query, query_vector, top_k, settings.threshold)
         # 否则降级为 Dense 检索
         if not results:
