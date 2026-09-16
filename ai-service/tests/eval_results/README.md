@@ -33,6 +33,7 @@ python tests/eval_retrieval.py --self-test
 | 2026-08（历史档案） | 8a4fed2 之前 | regex-baseline（当时实机） | online /ai/search，bm25 单模式 | bm25 MRR@5 **0.626**（jieba 升级前基线；与上行的 +0.024/约 +4% 即简历口径来源） |
 | 2026-09-16 | feat/eval-pipeline | [offline-regex-replay](2026-09-16_offline-regex-baseline.json) | offline BM25，regex 分词（5 篇整文档语料） | Recall@5 1.0 / **MRR@5 0.618** / noise 2/2 |
 | 2026-09-16 | feat/eval-pipeline | [offline-jieba-replay](2026-09-16_offline-jieba.json) | offline BM25，jieba 分词（5 篇整文档语料） | Recall@5 1.0 / **MRR@5 0.648** / noise 1/2 |
+| 2026-09-16 | refactor/agent-graph (4e3f0fb) | [online-local-hash-v2dataset](2026-09-16_online-local-hash.json) | online /ai/search 三模式，local hash 嵌入，数据集 v2 | dense 94.4%/0.801/70ms；bm25 94.4%/0.650/128ms；hybrid **100%**/0.574/108ms；noise 2/2——dense/bm25 与历史档案一致 |
 
 ## 口径说明（重要，面试可讲）
 
