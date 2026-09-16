@@ -16,7 +16,7 @@
 - **Agent 工作流**：LangGraph 多节点图（检索 → 摘要 → 分类 → 人工确认 → 报告，检索无结果走直接回答分支），步骤级可观测（SSE 事件流 + 每步耗时）
 - **混合检索**：Dense + BM25(jieba) 双路召回、RRF 融合；意图识别自动推荐检索模式
 - **文档管理**：PDF/DOCX/TXT/MD 解析分块，Redis Streams 异步管道（ack / 重试 / 死信 / 幂等）
-- **知识库管理**：多知识库隔离（kbId 过滤 + 框架级租户字段），成员角色管理（ADMIN/EDITOR/VIEWER）
+- **知识库管理**：多知识库隔离（kbId 过滤 + 框架级租户字段），知识库级三级权限校验（所有者/ADMIN/EDITOR/VIEWER，service 层强制）
 - **检索质量评测**：20+2 条标注集，Recall@5 / MRR@5 / 延迟 / 负样本误触四指标，一键重跑
 - **监控**：轻量业务指标（/metrics 请求计数）+ Prometheus + Grafana
 - **CI**：GitHub Actions（Python 单测 + 评测指标自检 + 前端测试 + 后端构建）
@@ -244,11 +244,11 @@ docker-compose restart <service-name>
 
 本项目是个人独立开发的全栈演示系统，诚实标注当前边界：
 
-- **租户与权限**：租户隔离依赖脚手架框架层（TenantLineHandler 自动过滤）；知识库级成员角色尚未在 service 层强制校验（当前仅全局 Key 配置有 super_admin 校验）→ Roadmap：成员角色 service 层强制
+- **租户与权限**：知识库级三级权限校验（view/edit/manage，service 层强制，11 个单测覆盖）+ 框架级租户过滤（TenantLineHandler 自动注入）；全局 Key 配置限 super_admin（@PreAuthorize）
 - **Agent 运行时**：run 状态为进程内存存储，重启丢失；HITL 为线程轮询而非 checkpointer → Roadmap：MemorySaver → SqliteSaver 持久化（见 docs/interview-langgraph-hitl.md）
 - **监控深度**：仅请求计数与 uptime，无延迟直方图/业务维度 → Roadmap：prometheus-client 直方图
 - **评测规模**：20+2 条标注集，小而可复现；不宣称大规模基准
-- **Java 测试**：后端 CI 仅构建不跑单测（现有 3 个枚举测试）→ Roadmap：领域层单测补齐
+- **Java 测试**：领域模块 20 个单测（权限校验 11 + 枚举 9）；CI 跑领域模块测试，框架层遗留测试（脚手架自带 HttpUtilsTest 有 1 处失败）不在本项目范围
 
 ## 与脚手架的关系
 
