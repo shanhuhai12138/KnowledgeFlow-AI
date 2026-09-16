@@ -56,6 +56,18 @@ jobs:
         # python -m pytest：把 ai-service 加进 sys.path，pytest 控制台命令不会加，rag 包会导入失败
         run: cd ai-service && python -m pytest tests -v
 
+  eval-self-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Eval scorer self-test
+        # 评测脚本指标计算自检（mock 固定结果，无需服务/依赖）
+        run: python ai-service/tests/eval_retrieval.py --self-test
+
   frontend-tests:
     runs-on: ubuntu-latest
     steps:

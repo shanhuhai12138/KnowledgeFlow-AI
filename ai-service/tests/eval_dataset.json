@@ -1,0 +1,28 @@
+{
+  "version": 2,
+  "description": "检索评测标注集：20 条正例（8 语义 + 5 关键词 + 5 分析）+ 2 条负样本。gold 为应被召回的 documentId，对应 deploy/seed/run_seed.py 的 DOCS 契约（9001-9005），与 deploy/seed/mysql-init/05-demo-kb.sql 一致。",
+  "kbId": "1",
+  "topK": 5,
+  "queries": [
+    { "id": "q01", "scenario": "semantic",   "query": "新人入职第一天应该做什么准备", "gold": ["9001"] },
+    { "id": "q02", "scenario": "semantic",   "query": "团队怎么保证代码合并的质量", "gold": ["9002"] },
+    { "id": "q03", "scenario": "semantic",   "query": "这段时间团队做了哪些东西", "gold": ["9005"] },
+    { "id": "q04", "scenario": "semantic",   "query": "系统里各个数据分别存在什么地方", "gold": ["9003"] },
+    { "id": "q05", "scenario": "semantic",   "query": "上传的文档半天没出现在知识库里怎么办", "gold": ["9004"] },
+    { "id": "q06", "scenario": "semantic",   "query": "服务之间怎么传递消息的", "gold": ["9003"] },
+    { "id": "q07", "scenario": "semantic",   "query": "前端页面显示的都是乱码如何解决", "gold": ["9004"] },
+    { "id": "q08", "scenario": "semantic",   "query": "项目接下来有什么打算和计划", "gold": ["9005"] },
+    { "id": "q09", "scenario": "keyword",    "query": "Knife4j 接口文档地址是什么", "gold": ["9001"] },
+    { "id": "q10", "scenario": "keyword",    "query": "Redis 连不上怎么排查", "gold": ["9004"] },
+    { "id": "q11", "scenario": "keyword",    "query": "数据库建表用什么字符集", "gold": ["9004"] },
+    { "id": "q12", "scenario": "keyword",    "query": "doc-pipeline 是用来干什么的", "gold": ["9003"] },
+    { "id": "q13", "scenario": "keyword",    "query": "登录默认账号密码是什么", "gold": ["9001"] },
+    { "id": "q14", "scenario": "analytical", "query": "为什么不用 RabbitMQ 而用 Redis Streams", "gold": ["9003"] },
+    { "id": "q15", "scenario": "analytical", "query": "扫描版 PDF 能不能处理", "gold": ["9005"] },
+    { "id": "q16", "scenario": "analytical", "query": "消费者吞吐量上不去的原因可能是什么", "gold": ["9005"] },
+    { "id": "q17", "scenario": "analytical", "query": "OCR 能力规划在哪个季度落地", "gold": ["9005"] },
+    { "id": "q18", "scenario": "analytical", "query": "tenant-id 请求头是干什么的", "gold": ["9001", "9003"] },
+    { "id": "q19", "scenario": "negative",   "query": "今天天气怎么样", "gold": [] },
+    { "id": "q20", "scenario": "negative",   "query": "怎么写一篇网络小说", "gold": [] }
+  ]
+}
