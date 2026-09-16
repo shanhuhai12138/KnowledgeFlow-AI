@@ -1,6 +1,6 @@
 # KnowledgeFlow-AI
 
-企业级 RAG 知识库系统 · 智能问答 · Agent 工作流
+全栈 RAG 知识库与 Agent 工作流系统 · 智能问答 · 检索质量评测
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://www.python.org/)
@@ -13,12 +13,13 @@
 ## 功能特性
 
 - **智能问答**：基于 RAG 的语义检索，支持多轮对话和来源引用
-- **Agent 工作流**：多步骤分析流程，含人工确认节点
-- **混合检索**：Dense + BM25 + Hybrid 三种检索模式，智能推荐
-- **文档管理**：支持 PDF/DOCX/TXT/MD 格式，自动分块向量化
-- **知识库管理**：多知识库隔离，细粒度权限控制
-- **监控**：Prometheus + Grafana 实时监控
-- **CI/CD**：GitHub Actions 自动化构建
+- **Agent 工作流**：LangGraph 多节点图（检索 → 摘要 → 分类 → 人工确认 → 报告，检索无结果走直接回答分支），步骤级可观测（SSE 事件流 + 每步耗时）
+- **混合检索**：Dense + BM25(jieba) 双路召回、RRF 融合；意图识别自动推荐检索模式
+- **文档管理**：PDF/DOCX/TXT/MD 解析分块，Redis Streams 异步管道（ack / 重试 / 死信 / 幂等）
+- **知识库管理**：多知识库隔离（kbId 过滤 + 框架级租户字段），成员角色管理（ADMIN/EDITOR/VIEWER）
+- **检索质量评测**：20+2 条标注集，Recall@5 / MRR@5 / 延迟 / 负样本误触四指标，一键重跑
+- **监控**：轻量业务指标（/metrics 请求计数）+ Prometheus + Grafana
+- **CI**：GitHub Actions（Python 单测 + 评测指标自检 + 前端测试 + 后端构建）
 
 ---
 
@@ -118,6 +119,30 @@ curl -X POST http://localhost:8000/ai/agent \
 
 ---
 
+### 检索质量评测（可复现）
+
+所有对外指标数字均有存档出处，可一键重跑：
+
+```bash
+cd ai-service
+# 在线评测（docker compose up + seed 灌入后）
+python tests/eval_retrieval.py --output tests/eval_results/my_run.json
+# 离线重放 BM25（无需服务）：--tokenizer regex 为 jieba 升级前基线
+python tests/eval_retrieval.py --offline --tokenizer regex
+```
+
+最近一次存档（2026-09-16，local hash 嵌入，详见 `ai-service/tests/eval_results/README.md`）：
+
+| 模式 | Recall@5 | MRR@5 |
+|------|---------|-------|
+| Dense | 94.4% | 0.801 |
+| BM25 | 94.4% | 0.650 |
+| Hybrid（RRF） | **100%** | 0.574 |
+
+jieba 分词升级收益（离线基线重放对比）：MRR@5 0.618 → 0.648，负样本误触 2/2 → 1/2。
+
+---
+
 ## 项目结构
 
 ```
@@ -212,6 +237,22 @@ docker-compose restart <service-name>
 3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
 4. 推送到分支 (`git push origin feature/AmazingFeature`)
 5. 创建 Pull Request
+
+---
+
+## 能力边界与 Roadmap
+
+本项目是个人独立开发的全栈演示系统，诚实标注当前边界：
+
+- **租户与权限**：租户隔离依赖脚手架框架层（TenantLineHandler 自动过滤）；知识库级成员角色尚未在 service 层强制校验（当前仅全局 Key 配置有 super_admin 校验）→ Roadmap：成员角色 service 层强制
+- **Agent 运行时**：run 状态为进程内存存储，重启丢失；HITL 为线程轮询而非 checkpointer → Roadmap：MemorySaver → SqliteSaver 持久化（见 docs/interview-langgraph-hitl.md）
+- **监控深度**：仅请求计数与 uptime，无延迟直方图/业务维度 → Roadmap：prometheus-client 直方图
+- **评测规模**：20+2 条标注集，小而可复现；不宣称大规模基准
+- **Java 测试**：后端 CI 仅构建不跑单测（现有 3 个枚举测试）→ Roadmap：领域层单测补齐
+
+## 与脚手架的关系
+
+后端基于芋道（ruoyi/yudao 系）开源脚手架二次开发，品牌已全面替换；知识库领域模块（56 个 Java 类）为二次开发产出，其中 CRUD 骨架来自代码生成器，文档管道 / 成员 / 统计 / AI 转发为自研逻辑。
 
 ---
 
