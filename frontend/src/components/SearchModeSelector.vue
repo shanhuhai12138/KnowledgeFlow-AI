@@ -10,8 +10,8 @@
       <span class="header-text">智能推荐检索模式，可根据查询类型手动切换</span>
     </div>
 
-    <!-- 智能推荐展示：已撤下展示（前端分类器与后端口径不一致，且 auto 模式由后端意图分类驱动）；代码保留 -->
-    <div v-if="false && showRecommendation && intentResult" class="recommendation recommendation--inline">
+    <!-- 智能推荐展示（前端分类器已同步后端强关键词加权逻辑） -->
+    <div v-if="showRecommendation && intentResult" class="recommendation">
       <span class="recommend-label">推荐模式</span>
       <span class="recommend-mode" :class="`mode-${intentResult.recommendedMode}`">
         {{ modeDescription(intentResult.recommendedMode) }}
@@ -53,8 +53,8 @@
       </button>
     </div>
 
-    <!-- 示例查询：随推荐展示一并撤下 -->
-    <div v-if="false && showExamples && selectedMode !== 'auto' && currentExamples.length > 0" class="examples">
+    <!-- 示例查询（仅选中具体模式后展示） -->
+    <div v-if="showExamples && selectedMode !== 'auto' && currentExamples.length > 0" class="examples">
       <span class="example-label">示例查询：</span>
       <button
         v-for="example in currentExamples"

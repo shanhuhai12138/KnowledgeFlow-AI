@@ -18,8 +18,11 @@ export interface IntentResult {
 /** 正则模式定义 */
 const PATTERNS: Record<QueryIntent, RegExp[]> = {
   keyword: [
-    /\d{4}[.\/\-]\d{1,2}[.\/\-]\d{1,2}/,      // 日期
-    /版本[vV]?\d+/,                             // 版本号
+    /\d{4}[.\/\-]\d{1,2}[.\/\-]\d{1,2}/,      // 日期（数字分隔）
+    /\d{1,2}月\d{1,2}日/,                           // 中文日期（8月21日）
+    /\d{4}年/,                                       // 含年份（2026年）
+    /版本号|版本[vV]?\d+/,                      // 版本号（含「版本号」词本身）
+    /[A-Za-z]{2,}\d+[A-Za-z]*/,                 // 术语+数字（Knife4j / BGE-M3 / v2）
     /\d+年第\d+季度/,                           // 季度
     /\d+[万千万亿]+/,                           // 大数值
     /\d{6,}/,                                    // 长数字
@@ -28,12 +31,12 @@ const PATTERNS: Record<QueryIntent, RegExp[]> = {
   semantic: [
     /如何.{2,}/,                                 // 如何...
     /为什么.{2,}/,                               // 为什么...
-    /什么.{2,}/,                                 // 什么...
+    /^什么.{2,}|什么是/,                        // 什么...（句首或「什么是」，避免「…的是什么」误报）
     /介绍.{2,}/,                                 // 介绍...
     /.{2,}情况.{0,}/,                           // 分析...情况
   ],
   analytical: [
-    /.{2,}分析.{2,}/,                           // 分析...
+    /分析.{2,}|.{2,}分析.{2,}/,                 // 分析（含句首「分析…」）
     /.{2,}生成.{2,}/,                           // 生成...
     /.{2,}总结.{2,}/,                           // 总结...
     /.{2,}报告.{2,}/,                           // 报告...
@@ -85,10 +88,14 @@ export function classifyQuery(query: string): IntentResult {
     mixed: 0,
   }
 
+  // 强关键词信号（日期/版本号/季度/大数值）权重 ×2：对冲语义类弱正则误报
+  // 如「…的版本号是什么」中「什么」会误触 semantic 的 /什么.{2,}/
+  const strongKeyword = PATTERNS.keyword.slice(0, 4)
   for (const [intent, patterns] of Object.entries(PATTERNS) as [QueryIntent, RegExp[]][]) {
+    const weight = intent === 'keyword' && patterns === strongKeyword ? 2 : 1
     for (const pattern of patterns) {
       if (pattern.test(query)) {
-        scores[intent]++
+        scores[intent] += weight
       }
     }
   }
