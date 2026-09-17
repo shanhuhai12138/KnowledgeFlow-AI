@@ -108,6 +108,12 @@ class BM25Retriever:
         
         # 计算 BM25 分数
         scores = self.bm25.get_scores(query_tokens)
+
+        # 归一化到 0-1：BM25 原始分无上界，上层直接 ×100 当置信度
+        # 会出现 250% 之类的荒唐值。以本库最高分为基准线性缩放。
+        max_score = float(scores.max()) if len(scores) else 0.0
+        if max_score > 0:
+            scores = scores / max_score
         
         # 获取 Top-K
         results: List[dict] = []

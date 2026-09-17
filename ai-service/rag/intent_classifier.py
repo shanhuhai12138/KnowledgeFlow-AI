@@ -89,12 +89,18 @@ def classify_intent(query: str, use_llm: bool = False) -> IntentResult:
     
     # 统计各模式匹配数
     scores: dict[QueryIntent, int] = {intent: 0 for intent in QueryIntent}
-    
-    # 正则匹配
+
+    # 强关键词信号（日期/版本号/季度/大数值）：命中一次权重 2，
+    # 用于对冲语义类的弱正则误报——如「…的版本号是什么」中
+    # 「什么」会误触 SEMANTIC 的 r'什么.{2,}'，导致日期查询被推成 dense。
+    strong_keyword = _PATTERNS[QueryIntent.KEYWORD][:4]
+
+    # 正则匹配（强关键词命中权重 ×2）
     for intent, patterns in _PATTERNS.items():
+        weight = 2 if (intent is QueryIntent.KEYWORD and patterns is strong_keyword) else 1
         for pattern in patterns:
             if re.search(pattern, query):
-                scores[intent] += 1
+                scores[intent] += weight
     
     # 提取关键词
     keywords = _extract_keywords(query)

@@ -553,7 +553,7 @@ async function handleFileUpload(event: Event) {
           <textarea
             v-model="inputText"
             class="form-input input-text"
-            rows="3"
+            rows="2"
             placeholder="请输入您的问题… (Enter 发送，Shift+Enter 换行)"
             @keydown="onInputKeydown"
           ></textarea>
@@ -985,9 +985,11 @@ async function handleFileUpload(event: Event) {
 /* ---- 输入区 ---- */
 .input-area {
   border-top: 1px solid var(--line);
-  padding: 24px 32px;
+  padding: 16px 32px;
   background: var(--paper);
   flex-shrink: 0;
+  max-height: 38vh;
+  overflow-y: auto;
 }
 .input-inner {
   max-width: 800px;

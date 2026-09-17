@@ -10,8 +10,8 @@
       <span class="header-text">智能推荐检索模式，可根据查询类型手动切换</span>
     </div>
 
-    <!-- 智能推荐展示 -->
-    <div v-if="showRecommendation && intentResult" class="recommendation">
+    <!-- 智能推荐展示（内联紧凑版：不再独立成行撑高输入区） -->
+    <div v-if="showRecommendation && intentResult" class="recommendation recommendation--inline">
       <span class="recommend-label">推荐模式</span>
       <span class="recommend-mode" :class="`mode-${intentResult.recommendedMode}`">
         {{ modeDescription(intentResult.recommendedMode) }}
@@ -53,8 +53,8 @@
       </button>
     </div>
 
-    <!-- 示例查询 -->
-    <div v-if="showExamples && currentExamples.length > 0" class="examples">
+    <!-- 示例查询（仅选中模式后展示，避免默认撑高） -->
+    <div v-if="showExamples && selectedMode !== 'auto' && currentExamples.length > 0" class="examples">
       <span class="example-label">示例查询：</span>
       <button
         v-for="example in currentExamples"
@@ -168,11 +168,24 @@ function modeDescription(mode: SearchMode): string {
   align-items: center;
   gap: 6px;
   padding: 6px 10px;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   background: var(--paper-2);
   border-radius: var(--input-radius);
   font-size: 12px;
   color: var(--text-muted);
+  flex-wrap: wrap;
+}
+
+/* 内联推荐：跟在 header 文案后同一行，字号缩小 */
+.recommendation--inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 8px;
+  margin: 0;
+  font-size: 11.5px;
+  background: transparent;
+  border: none;
 }
 
 .header-icon {
