@@ -36,9 +36,9 @@ class Settings(BaseSettings):
     chunk_size: int = 1000
     chunk_overlap: int = 200
 
-    # 检索
+    # 检索（threshold 经评测标定：0.0-0.15 为 local hash 向量的无损过滤区，见 tests/eval_results/README.md）
     top_k: int = 5
-    threshold: float = 0.0
+    threshold: float = 0.1
 
     # LLM（T4.3 问答；DeepSeek OpenAI 兼容；模型/Key 见 .env：LLM_API_KEY / LLM_MODEL）
     llm_model: str = "deepseek-chat"

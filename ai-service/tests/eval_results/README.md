@@ -35,6 +35,18 @@ python tests/eval_retrieval.py --self-test
 | 2026-09-16 | feat/eval-pipeline | [offline-jieba-replay](2026-09-16_offline-jieba.json) | offline BM25，jieba 分词（5 篇整文档语料） | Recall@5 1.0 / **MRR@5 0.648** / noise 1/2 |
 | 2026-09-16 | refactor/agent-graph (4e3f0fb) | [online-local-hash-v2dataset](2026-09-16_online-local-hash.json) | online /ai/search 三模式，local hash 嵌入，数据集 v2 | dense 94.4%/0.801/70ms；bm25 94.4%/0.650/128ms；hybrid **100%**/0.574/108ms；noise 2/2——dense/bm25 与历史档案一致 |
 
+## threshold 标定记录（2026-09-18 课堂实测）
+
+扫描 0.0/0.05/0.10/0.15/0.20/0.25/0.30/0.50/0.70 九档（dense，18 正例）：
+
+- 0.00-0.15：Recall@5 稳定 94.4%（无损过滤平台期）
+- 0.20：88.9%（开始误杀）→ 0.30：22.2% → 0.50+：0%
+- 负样本（天气/写小说/写诗）在 th=0.5 时结果数归零，但该阈值下正例已全灭——**全局阈值无法同时满足路由与召回**
+- 决策：默认 threshold=0.1（吃无损过滤收益）；负样本路由改用相对判据（roadmap：top1 归一化分低于阈值视为无有效结果，或 LLM 判材料相关性）
+- 教训：阈值最优值随 embedding provider 变化，切换模型必须重测（脚本现成）
+
+---
+
 ## 口径说明（重要，面试可讲）
 
 1. **金标契约已对齐仓库种子**：数据集 v2 的 gold 是 9001-9005（与 `deploy/seed/run_seed.py` 和 `05-demo-kb.sql` 一致）。历史档案的 9011-9015 是当时实机数据库的 ID，**clone 仓库按现行种子部署的人无法复现旧 ID**——这正是 v2 数据集存在的原因。
